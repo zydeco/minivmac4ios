@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ScreenView.h"
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet ScreenView *screenView;
 
 @end
 

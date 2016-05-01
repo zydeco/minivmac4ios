@@ -24,6 +24,7 @@
 		28CE8EC31CD4C3B200FE25A8 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EB31CD4C3B200FE25A8 /* VIAEMDEV.c */; };
 		28CE8ECC1CD4CDC500FE25A8 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */; };
+		28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */; };
 		28F676C21CD15E0B00FC6FA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C11CD15E0B00FC6FA6 /* main.m */; };
 		28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */; };
 		28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C71CD15E0B00FC6FA6 /* ViewController.m */; };
@@ -77,6 +78,8 @@
 		28CE8ECF1CD4D5B900FE25A8 /* INTLCHAR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INTLCHAR.h; sourceTree = "<group>"; };
 		28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenView.h; sourceTree = "<group>"; };
 		28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
+		28D5A3FB1CD6868E001A33F6 /* TouchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchScreen.h; sourceTree = "<group>"; };
+		28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchScreen.m; sourceTree = "<group>"; };
 		28F676BD1CD15E0B00FC6FA6 /* Mini vMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mini vMac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F676C11CD15E0B00FC6FA6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28F676C31CD15E0B00FC6FA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
 				28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */,
 				28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */,
+				28D5A3FB1CD6868E001A33F6 /* TouchScreen.h */,
+				28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */,
 				28F676C61CD15E0B00FC6FA6 /* ViewController.h */,
 				28F676C71CD15E0B00FC6FA6 /* ViewController.m */,
 				28F676C91CD15E0B00FC6FA6 /* Main.storyboard */,
@@ -285,6 +290,7 @@
 				28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */,
 				28CE8EBB1CD4C3B200FE25A8 /* PROGMAIN.c in Sources */,
 				28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */,
+				28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */,
 				28CE8EC21CD4C3B200FE25A8 /* SONYEMDV.c in Sources */,
 				28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */,
 				28CE8EBE1CD4C3B200FE25A8 /* SCCEMDEV.c in Sources */,

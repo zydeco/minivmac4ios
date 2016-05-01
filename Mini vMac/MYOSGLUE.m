@@ -853,9 +853,16 @@ LOCALFUNC blnr InitLocationDat(void) {
 
 #pragma mark - Mouse
 
-LOCALFUNC blnr MyMoveMouse(si4b h, si4b v) {
-    // TODO: move mouse
-    return trueblnr;
+GLOBALPROC SetMouseButton(blnr down) {
+    MyMouseButtonSet(down);
+}
+
+GLOBALPROC SetMouseLoc(ui4r h, ui4r v) {
+    MyMousePositionSet(h, v);
+}
+
+GLOBALPROC SetMouseDelta(ui4r dh, ui4r dv) {
+    MyMousePositionSetDelta(dh, dv);
 }
 
 #pragma mark - video out
@@ -1549,6 +1556,10 @@ LOCALPROC EnterSpeedStopped(void) {
 #if MySoundEnabled
     MySound_Stop();
 #endif
+}
+
+GLOBALFUNC blnr GetSpeedStopped(void) {
+    return CurSpeedStopped;
 }
 
 GLOBALPROC SetSpeedStopped(blnr stopped) {

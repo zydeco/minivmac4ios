@@ -10,6 +10,9 @@
 
 @interface ScreenView : UIView
 
+@property (nonatomic, readonly) CGRect screenBounds;
+@property (nonatomic, readonly) CGSize screenSize;
+
 + (instancetype)sharedScreenView;
 - (void)updateScreen:(CGImageRef)screenImage;
 

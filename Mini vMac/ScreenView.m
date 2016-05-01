@@ -15,15 +15,25 @@ static ScreenView *sharedScreenView = nil;
 {
     CGImageRef screenImage;
     CGRect screenBounds;
+    CGSize screenSize;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     sharedScreenView = self;
+    
 }
 
 + (instancetype)sharedScreenView {
     return sharedScreenView;
+}
+
+- (CGRect)screenBounds {
+    return screenBounds;
+}
+
+- (CGSize)screenSize {
+    return screenSize;
 }
 
 - (void)updateScreen:(CGImageRef)newScreenImage {
@@ -33,7 +43,7 @@ static ScreenView *sharedScreenView = nil;
 }
 
 - (void)layoutSubviews {
-    CGSize screenSize = CGSizeMake(vMacScreenWidth, vMacScreenHeight);
+    screenSize = CGSizeMake(vMacScreenWidth, vMacScreenHeight);
     CGRect viewBounds = self.bounds;
     CGFloat screenScale = MAX(screenSize.width / viewBounds.size.width, screenSize.height / viewBounds.size.height);
     screenBounds = CGRectMake(0, 0, screenSize.width / screenScale, screenSize.height / screenScale);
