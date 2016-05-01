@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */; };
+		28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */; };
+		28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */; };
+		28CE8EB81CD4C3B200FE25A8 /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9A1CD4C3B200FE25A8 /* M68KITAB.c */; };
+		28CE8EB91CD4C3B200FE25A8 /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9C1CD4C3B200FE25A8 /* MINEM68K.c */; };
+		28CE8EBA1CD4C3B200FE25A8 /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9E1CD4C3B200FE25A8 /* MOUSEMDV.c */; };
+		28CE8EBB1CD4C3B200FE25A8 /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA11CD4C3B200FE25A8 /* PROGMAIN.c */; };
+		28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA31CD4C3B200FE25A8 /* ROMEMDEV.c */; };
+		28CE8EBD1CD4C3B200FE25A8 /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA51CD4C3B200FE25A8 /* RTCEMDEV.c */; };
+		28CE8EBE1CD4C3B200FE25A8 /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA71CD4C3B200FE25A8 /* SCCEMDEV.c */; };
+		28CE8EBF1CD4C3B200FE25A8 /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA91CD4C3B200FE25A8 /* SCRNEMDV.c */; };
+		28CE8EC01CD4C3B200FE25A8 /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EAC1CD4C3B200FE25A8 /* SCSIEMDV.c */; };
+		28CE8EC11CD4C3B200FE25A8 /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EAE1CD4C3B200FE25A8 /* SNDEMDEV.c */; };
+		28CE8EC21CD4C3B200FE25A8 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EB01CD4C3B200FE25A8 /* SONYEMDV.c */; };
+		28CE8EC31CD4C3B200FE25A8 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EB31CD4C3B200FE25A8 /* VIAEMDEV.c */; };
+		28CE8ECC1CD4CDC500FE25A8 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */; };
 		28F676C21CD15E0B00FC6FA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C11CD15E0B00FC6FA6 /* main.m */; };
 		28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */; };
 		28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C71CD15E0B00FC6FA6 /* ViewController.m */; };
@@ -16,6 +33,50 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28CE8E881CD4C33E00FE25A8 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
+		28CE8E891CD4C33E00FE25A8 /* CNFGRAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGRAPI.h; sourceTree = "<group>"; };
+		28CE8E8A1CD4C33E00FE25A8 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
+		28CE8E8F1CD4C3B200FE25A8 /* COMOSGLU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMOSGLU.h; sourceTree = "<group>"; };
+		28CE8E911CD4C3B200FE25A8 /* DATE2SEC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DATE2SEC.h; sourceTree = "<group>"; };
+		28CE8E921CD4C3B200FE25A8 /* ENDIANAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENDIANAC.h; sourceTree = "<group>"; };
+		28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GLOBGLUE.c; sourceTree = "<group>"; };
+		28CE8E941CD4C3B200FE25A8 /* GLOBGLUE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLOBGLUE.h; sourceTree = "<group>"; };
+		28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IWMEMDEV.c; sourceTree = "<group>"; };
+		28CE8E971CD4C3B200FE25A8 /* IWMEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IWMEMDEV.h; sourceTree = "<group>"; };
+		28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = KBRDEMDV.c; sourceTree = "<group>"; };
+		28CE8E991CD4C3B200FE25A8 /* KBRDEMDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBRDEMDV.h; sourceTree = "<group>"; };
+		28CE8E9A1CD4C3B200FE25A8 /* M68KITAB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = M68KITAB.c; sourceTree = "<group>"; };
+		28CE8E9B1CD4C3B200FE25A8 /* M68KITAB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M68KITAB.h; sourceTree = "<group>"; };
+		28CE8E9C1CD4C3B200FE25A8 /* MINEM68K.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MINEM68K.c; sourceTree = "<group>"; };
+		28CE8E9D1CD4C3B200FE25A8 /* MINEM68K.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MINEM68K.h; sourceTree = "<group>"; };
+		28CE8E9E1CD4C3B200FE25A8 /* MOUSEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MOUSEMDV.c; sourceTree = "<group>"; };
+		28CE8E9F1CD4C3B200FE25A8 /* MOUSEMDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOUSEMDV.h; sourceTree = "<group>"; };
+		28CE8EA01CD4C3B200FE25A8 /* MYOSGLUE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYOSGLUE.h; sourceTree = "<group>"; };
+		28CE8EA11CD4C3B200FE25A8 /* PROGMAIN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PROGMAIN.c; sourceTree = "<group>"; };
+		28CE8EA21CD4C3B200FE25A8 /* PROGMAIN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PROGMAIN.h; sourceTree = "<group>"; };
+		28CE8EA31CD4C3B200FE25A8 /* ROMEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ROMEMDEV.c; sourceTree = "<group>"; };
+		28CE8EA41CD4C3B200FE25A8 /* ROMEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROMEMDEV.h; sourceTree = "<group>"; };
+		28CE8EA51CD4C3B200FE25A8 /* RTCEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RTCEMDEV.c; sourceTree = "<group>"; };
+		28CE8EA61CD4C3B200FE25A8 /* RTCEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCEMDEV.h; sourceTree = "<group>"; };
+		28CE8EA71CD4C3B200FE25A8 /* SCCEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCCEMDEV.c; sourceTree = "<group>"; };
+		28CE8EA81CD4C3B200FE25A8 /* SCCEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCCEMDEV.h; sourceTree = "<group>"; };
+		28CE8EA91CD4C3B200FE25A8 /* SCRNEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCRNEMDV.c; sourceTree = "<group>"; };
+		28CE8EAA1CD4C3B200FE25A8 /* SCRNEMDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRNEMDV.h; sourceTree = "<group>"; };
+		28CE8EAB1CD4C3B200FE25A8 /* SCRNMAPR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRNMAPR.h; sourceTree = "<group>"; };
+		28CE8EAC1CD4C3B200FE25A8 /* SCSIEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCSIEMDV.c; sourceTree = "<group>"; };
+		28CE8EAD1CD4C3B200FE25A8 /* SCSIEMDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSIEMDV.h; sourceTree = "<group>"; };
+		28CE8EAE1CD4C3B200FE25A8 /* SNDEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SNDEMDEV.c; sourceTree = "<group>"; };
+		28CE8EAF1CD4C3B200FE25A8 /* SNDEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNDEMDEV.h; sourceTree = "<group>"; };
+		28CE8EB01CD4C3B200FE25A8 /* SONYEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SONYEMDV.c; sourceTree = "<group>"; };
+		28CE8EB11CD4C3B200FE25A8 /* SONYEMDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SONYEMDV.h; sourceTree = "<group>"; };
+		28CE8EB21CD4C3B200FE25A8 /* SYSDEPNS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSDEPNS.h; sourceTree = "<group>"; };
+		28CE8EB31CD4C3B200FE25A8 /* VIAEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VIAEMDEV.c; sourceTree = "<group>"; };
+		28CE8EB41CD4C3B200FE25A8 /* VIAEMDEV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIAEMDEV.h; sourceTree = "<group>"; };
+		28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYOSGLUE.m; sourceTree = "<group>"; };
+		28CE8ECD1CD4D1A100FE25A8 /* STRCONST.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STRCONST.h; sourceTree = "<group>"; };
+		28CE8ECF1CD4D5B900FE25A8 /* INTLCHAR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INTLCHAR.h; sourceTree = "<group>"; };
+		28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenView.h; sourceTree = "<group>"; };
+		28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
 		28F676BD1CD15E0B00FC6FA6 /* Mini vMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mini vMac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F676C11CD15E0B00FC6FA6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28F676C31CD15E0B00FC6FA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -39,6 +100,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28CE8E871CD4C33E00FE25A8 /* mnvm_cfg */ = {
+			isa = PBXGroup;
+			children = (
+				28CE8E881CD4C33E00FE25A8 /* CNFGGLOB.h */,
+				28CE8E891CD4C33E00FE25A8 /* CNFGRAPI.h */,
+				28CE8E8A1CD4C33E00FE25A8 /* EMCONFIG.h */,
+			);
+			path = mnvm_cfg;
+			sourceTree = "<group>";
+		};
+		28CE8E8E1CD4C3B200FE25A8 /* mnvm_core */ = {
+			isa = PBXGroup;
+			children = (
+				28CE8ECF1CD4D5B900FE25A8 /* INTLCHAR.h */,
+				28CE8ECD1CD4D1A100FE25A8 /* STRCONST.h */,
+				28CE8E8F1CD4C3B200FE25A8 /* COMOSGLU.h */,
+				28CE8E911CD4C3B200FE25A8 /* DATE2SEC.h */,
+				28CE8E921CD4C3B200FE25A8 /* ENDIANAC.h */,
+				28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */,
+				28CE8E941CD4C3B200FE25A8 /* GLOBGLUE.h */,
+				28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */,
+				28CE8E971CD4C3B200FE25A8 /* IWMEMDEV.h */,
+				28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */,
+				28CE8E991CD4C3B200FE25A8 /* KBRDEMDV.h */,
+				28CE8E9A1CD4C3B200FE25A8 /* M68KITAB.c */,
+				28CE8E9B1CD4C3B200FE25A8 /* M68KITAB.h */,
+				28CE8E9C1CD4C3B200FE25A8 /* MINEM68K.c */,
+				28CE8E9D1CD4C3B200FE25A8 /* MINEM68K.h */,
+				28CE8E9E1CD4C3B200FE25A8 /* MOUSEMDV.c */,
+				28CE8E9F1CD4C3B200FE25A8 /* MOUSEMDV.h */,
+				28CE8EA01CD4C3B200FE25A8 /* MYOSGLUE.h */,
+				28CE8EA11CD4C3B200FE25A8 /* PROGMAIN.c */,
+				28CE8EA21CD4C3B200FE25A8 /* PROGMAIN.h */,
+				28CE8EA31CD4C3B200FE25A8 /* ROMEMDEV.c */,
+				28CE8EA41CD4C3B200FE25A8 /* ROMEMDEV.h */,
+				28CE8EA51CD4C3B200FE25A8 /* RTCEMDEV.c */,
+				28CE8EA61CD4C3B200FE25A8 /* RTCEMDEV.h */,
+				28CE8EA71CD4C3B200FE25A8 /* SCCEMDEV.c */,
+				28CE8EA81CD4C3B200FE25A8 /* SCCEMDEV.h */,
+				28CE8EA91CD4C3B200FE25A8 /* SCRNEMDV.c */,
+				28CE8EAA1CD4C3B200FE25A8 /* SCRNEMDV.h */,
+				28CE8EAB1CD4C3B200FE25A8 /* SCRNMAPR.h */,
+				28CE8EAC1CD4C3B200FE25A8 /* SCSIEMDV.c */,
+				28CE8EAD1CD4C3B200FE25A8 /* SCSIEMDV.h */,
+				28CE8EAE1CD4C3B200FE25A8 /* SNDEMDEV.c */,
+				28CE8EAF1CD4C3B200FE25A8 /* SNDEMDEV.h */,
+				28CE8EB01CD4C3B200FE25A8 /* SONYEMDV.c */,
+				28CE8EB11CD4C3B200FE25A8 /* SONYEMDV.h */,
+				28CE8EB21CD4C3B200FE25A8 /* SYSDEPNS.h */,
+				28CE8EB31CD4C3B200FE25A8 /* VIAEMDEV.c */,
+				28CE8EB41CD4C3B200FE25A8 /* VIAEMDEV.h */,
+			);
+			path = mnvm_core;
+			sourceTree = "<group>";
+		};
 		28F676B41CD15E0B00FC6FA6 = {
 			isa = PBXGroup;
 			children = (
@@ -60,12 +176,17 @@
 			children = (
 				28F676C31CD15E0B00FC6FA6 /* AppDelegate.h */,
 				28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */,
+				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
+				28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */,
+				28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */,
 				28F676C61CD15E0B00FC6FA6 /* ViewController.h */,
 				28F676C71CD15E0B00FC6FA6 /* ViewController.m */,
 				28F676C91CD15E0B00FC6FA6 /* Main.storyboard */,
 				28F676CC1CD15E0B00FC6FA6 /* Assets.xcassets */,
 				28F676CE1CD15E0B00FC6FA6 /* LaunchScreen.storyboard */,
 				28F676D11CD15E0B00FC6FA6 /* Info.plist */,
+				28CE8E8E1CD4C3B200FE25A8 /* mnvm_core */,
+				28CE8E871CD4C33E00FE25A8 /* mnvm_cfg */,
 				28F676C01CD15E0B00FC6FA6 /* Supporting Files */,
 			);
 			path = "Mini vMac";
@@ -149,8 +270,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28CE8EC01CD4C3B200FE25A8 /* SCSIEMDV.c in Sources */,
+				28CE8EC11CD4C3B200FE25A8 /* SNDEMDEV.c in Sources */,
+				28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */,
+				28CE8EBF1CD4C3B200FE25A8 /* SCRNEMDV.c in Sources */,
+				28CE8EBD1CD4C3B200FE25A8 /* RTCEMDEV.c in Sources */,
+				28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */,
+				28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */,
+				28CE8EB91CD4C3B200FE25A8 /* MINEM68K.c in Sources */,
+				28CE8EBA1CD4C3B200FE25A8 /* MOUSEMDV.c in Sources */,
+				28CE8EC31CD4C3B200FE25A8 /* VIAEMDEV.c in Sources */,
+				28CE8EB81CD4C3B200FE25A8 /* M68KITAB.c in Sources */,
+				28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */,
+				28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */,
+				28CE8EBB1CD4C3B200FE25A8 /* PROGMAIN.c in Sources */,
 				28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */,
+				28CE8EC21CD4C3B200FE25A8 /* SONYEMDV.c in Sources */,
 				28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */,
+				28CE8EBE1CD4C3B200FE25A8 /* SCCEMDEV.c in Sources */,
+				28CE8ECC1CD4CDC500FE25A8 /* MYOSGLUE.m in Sources */,
 				28F676C21CD15E0B00FC6FA6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,7 +405,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.Mini-vMac";
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -278,7 +416,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.Mini-vMac";
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -302,6 +440,7 @@
 				28F676D61CD15E0B00FC6FA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
