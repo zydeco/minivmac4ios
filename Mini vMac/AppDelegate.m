@@ -32,7 +32,7 @@ static AppDelegate *sharedAppDelegate = nil;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sharedAppDelegate = self;
-    [self performSelector:@selector(runEmulator) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(runEmulator) withObject:nil afterDelay:0.1];
     return YES;
 }
 

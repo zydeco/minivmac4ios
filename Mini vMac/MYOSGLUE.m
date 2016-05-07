@@ -1677,9 +1677,10 @@ GLOBALFUNC blnr ExtraTimeNotOver(void) {
 
 GLOBALPROC WaitForNextTick(void) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSDate *nextTickDate = [NSDate dateWithTimeIntervalSinceNow:1 / 60.0];
-label_retry:
-    [[NSRunLoop mainRunLoop] runUntilDate:nextTickDate];
+    NSRunLoop *mainRunLoop = [NSRunLoop mainRunLoop];
+    while (ExtraTimeNotOver()) {
+        [mainRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceReferenceDate:NextTickChangeTime]];
+    }
 
     CheckForSavedTasks();
 
