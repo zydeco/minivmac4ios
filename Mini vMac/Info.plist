@@ -49,5 +49,115 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.archive</string>
+				<string>public.data</string>
+				<string>public.disk-image</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Disk Image</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.apple.disk-image</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>img</string>
+					<string>dsk</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.disk-image</string>
+				<string>public.archive</string>
+				<string>public.data</string>
+				<string>public.disk-image</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Disk Copy 4.2 Image</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.apple.disk-image-dc42</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>dImg</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>dc42</string>
+					<string>diskcopy42</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ROM image</string>
+			<key>UTTypeIdentifier</key>
+			<string>net.namedfork.minivmac.rom</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>rom</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>Disk Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.disk-image</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>Disk Copy 4.2 Disk Image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.disk-image-dc42</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>ROM image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>net.namedfork.minivmac.rom</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -33,6 +33,7 @@
 #include "MYOSGLUE.h"
 #include "STRCONST.h"
 #import "ScreenView.h"
+#import "AppDelegate.h"
 
 #pragma mark - some simple utilities
 
@@ -134,7 +135,7 @@ LOCALPROC Screen_UnInit(void) {
 LOCALVAR NSString *MyDataPath = nil;
 
 LOCALFUNC blnr InitCocoaStuff(void) {
-    MyDataPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    MyDataPath = [AppDelegate sharedInstance].documentsPath;
     if (MyDataPath) {
         [MyDataPath retain];
     }
@@ -763,12 +764,6 @@ GLOBALFUNC tMacErr HTCEimport(tPbuf *r) {
 
     return err;
 }
-#endif
-
-#if EmLocalTalk
-
-#include "BPFILTER.h"
-
 #endif
 
 #pragma mark - time, date, location

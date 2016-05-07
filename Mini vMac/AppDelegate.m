@@ -37,11 +37,64 @@ static AppDelegate *sharedAppDelegate = nil;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    SetSpeedStopped(trueblnr);
+    self.emulatorRunning = NO;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    SetSpeedStopped(falseblnr);
+    self.emulatorRunning = YES;
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+    if (![NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showAlertWithTitle:title message:message];
+        });
+        return;
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    UIViewController *controller = self.window.rootViewController;
+    [controller presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - Files
+
+- (NSString *)documentsPath {
+    static dispatch_once_t onceToken;
+    static NSString *documentsPath;
+    dispatch_once(&onceToken, ^{
+        documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject.stringByStandardizingPath;
+        [[NSFileManager defaultManager] createDirectoryAtPath:documentsPath withIntermediateDirectories:YES attributes:nil error:NULL];
+    });
+    return documentsPath;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    if (url.fileURL) {
+        // opening file
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *fileName = url.path.lastPathComponent;
+        NSString *destinationPath = [self.documentsPath stringByAppendingPathComponent:fileName];
+        NSError *error = NULL;
+        NSInteger tries = 1;
+        while ([fileManager fileExistsAtPath:destinationPath]) {
+            NSString *newFileName;
+            if (fileName.pathExtension.length > 0) {
+                newFileName = [NSString stringWithFormat:@"%@ %d.%@", fileName.stringByDeletingPathExtension, (int)tries, fileName.pathExtension];
+            } else {
+                newFileName = [NSString stringWithFormat:@"%@ %d", fileName, (int)tries];
+            }
+            destinationPath = [self.documentsPath stringByAppendingPathComponent:newFileName];
+            tries++;
+        }
+        [fileManager moveItemAtPath:url.path toPath:destinationPath error:&error];
+        if (error) {
+            [self showAlertWithTitle:fileName message:error.localizedFailureReason];
+        } else {
+            [self showAlertWithTitle:@"File Import" message:[NSString stringWithFormat:@"%@ imported to Documents", destinationPath.lastPathComponent]];
+        }
+    }
+    return YES;
 }
 
 #pragma mark - Emulation
