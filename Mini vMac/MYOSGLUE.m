@@ -292,14 +292,6 @@ LOCALFUNC blnr MacRomanFileNameToNSString(tPbuf i,
             }
         }
 
-#if 0
-        *p1 = 0;
-        *r = [NSString stringWithCString:(char *)p
-                                encoding:NSMacOSRomanStringEncoding];
-        /* only as of OS X 10.4 */
-        free(p);
-#endif
-
         d = [[NSData alloc] initWithBytesNoCopy:p length:L];
 
         *r = [[[NSString alloc]
@@ -426,22 +418,6 @@ GLOBALFUNC tMacErr vSonyGetSize(tDrive Drive_No, ui5r *Sony_Count) {
 LOCALFUNC blnr MyLockFile(FILE *refnum) {
     blnr IsOk = falseblnr;
 
-#if 0
-    struct flock fl;
-    int fd = fileno(refnum);
-    
-    fl.l_start = 0; /* starting offset */
-    fl.l_len = 0; /* len = 0 means until end of file */
-    /* fl.pid_t l_pid; */ /* lock owner, don't need to set */
-    fl.l_type = F_WRLCK; /* lock type: read/write, etc. */
-    fl.l_whence = SEEK_SET; /* type of l_start */
-    if (-1 == fcntl(fd, F_SETLK, &fl)) {
-        MacMsg(kStrImageInUseTitle, kStrImageInUseMessage,
-               falseblnr);
-    } else {
-        IsOk = trueblnr;
-    }
-#else
     int fd = fileno(refnum);
 
     if (-1 == flock(fd, LOCK_EX | LOCK_NB)) {
@@ -460,7 +436,6 @@ LOCALFUNC blnr MyLockFile(FILE *refnum) {
     } else {
         IsOk = trueblnr;
     }
-#endif
 
     return IsOk;
 }
@@ -468,24 +443,8 @@ LOCALFUNC blnr MyLockFile(FILE *refnum) {
 
 #if HaveAdvisoryLocks
 LOCALPROC MyUnlockFile(FILE *refnum) {
-#if 0
-    struct flock fl;
     int fd = fileno(refnum);
-    
-    fl.l_start = 0; /* starting offset */
-    fl.l_len = 0; /* len = 0 means until end of file */
-    /* fl.pid_t l_pid; */ /* lock owner, don't need to set */
-    fl.l_type = F_UNLCK;     /* lock type: read/write, etc. */
-    fl.l_whence = SEEK_SET;   /* type of l_start */
-    if (-1 == fcntl(fd, F_SETLK, &fl)) {
-        /* an error occurred */
-    }
-#else
-    int fd = fileno(refnum);
-
-    if (-1 == flock(fd, LOCK_UN)) {
-    }
-#endif
+    flock(fd, LOCK_UN);
 }
 #endif
 
@@ -797,9 +756,6 @@ LOCALPROC UpdateTrueEmulatedTime(void) {
 #endif
         } else {
             do {
-#if 0 && dbglog_TimeStuff
-                dbglog_writeln("got next tick");
-#endif
                 ++TrueEmulatedTime;
                 TimeDiff -= MyTickDuration;
                 NextTickChangeTime += MyTickDuration;
@@ -1380,15 +1336,7 @@ LOCALFUNC blnr MySound_Init(void) {
         ;
     requestedDesc.mChannelsPerFrame = 1;
     requestedDesc.mSampleRate = SOUND_SAMPLERATE;
-
     requestedDesc.mBitsPerChannel = (1 << kLn2SoundSampSz);
-#if 0
-    requestedDesc.mFormatFlags |= kLinearPCMFormatFlagIsSignedInteger;
-#endif
-#if 0
-    requestedDesc.mFormatFlags |= kLinearPCMFormatFlagIsBigEndian;
-#endif
-
     requestedDesc.mFramesPerPacket = 1;
     requestedDesc.mBytesPerFrame = (requestedDesc.mBitsPerChannel * requestedDesc.mChannelsPerFrame) >> 3;
     requestedDesc.mBytesPerPacket = requestedDesc.mBytesPerFrame * requestedDesc.mFramesPerPacket;
