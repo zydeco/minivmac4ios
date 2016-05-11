@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B611CDE97D600B86C45 /* InsertDiskViewController.m */; };
+		28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B641CDE97E900B86C45 /* SettingsViewController.m */; };
 		28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */; };
 		28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */; };
 		28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */; };
@@ -34,6 +36,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28848B601CDE97D600B86C45 /* InsertDiskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertDiskViewController.h; sourceTree = "<group>"; };
+		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
+		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		28848B641CDE97E900B86C45 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		28CE8E881CD4C33E00FE25A8 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		28CE8E891CD4C33E00FE25A8 /* CNFGRAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGRAPI.h; sourceTree = "<group>"; };
 		28CE8E8A1CD4C33E00FE25A8 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
@@ -186,6 +192,10 @@
 				28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */,
 				28F676C61CD15E0B00FC6FA6 /* ViewController.h */,
 				28F676C71CD15E0B00FC6FA6 /* ViewController.m */,
+				28848B601CDE97D600B86C45 /* InsertDiskViewController.h */,
+				28848B611CDE97D600B86C45 /* InsertDiskViewController.m */,
+				28848B631CDE97E900B86C45 /* SettingsViewController.h */,
+				28848B641CDE97E900B86C45 /* SettingsViewController.m */,
 				28F676C91CD15E0B00FC6FA6 /* Main.storyboard */,
 				28F676CC1CD15E0B00FC6FA6 /* Assets.xcassets */,
 				28F676CE1CD15E0B00FC6FA6 /* LaunchScreen.storyboard */,
@@ -286,9 +296,11 @@
 				28CE8EBA1CD4C3B200FE25A8 /* MOUSEMDV.c in Sources */,
 				28CE8EC31CD4C3B200FE25A8 /* VIAEMDEV.c in Sources */,
 				28CE8EB81CD4C3B200FE25A8 /* M68KITAB.c in Sources */,
+				28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */,
 				28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */,
 				28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */,
 				28CE8EBB1CD4C3B200FE25A8 /* PROGMAIN.c in Sources */,
+				28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */,
 				28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */,
 				28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */,
 				28CE8EC21CD4C3B200FE25A8 /* SONYEMDV.c in Sources */,

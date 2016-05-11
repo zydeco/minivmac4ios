@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "SettingsViewController.h"
+#import "InsertDiskViewController.h"
 #include "CNFGRAPI.h"
 #include "SYSDEPNS.h"
 #include "MYOSGLUE.h"
@@ -17,8 +19,12 @@ IMPORTPROC SetSpeedStopped(blnr stopped);
 IMPORTPROC SetMouseButton(blnr down);
 IMPORTPROC SetMouseLoc(ui4r h, ui4r v);
 IMPORTPROC SetMouseDelta(ui4r dh, ui4r dv);
+IMPORTFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail);
+IMPORTFUNC blnr Sony_IsInserted(NSString *filePath);
 
 static AppDelegate *sharedAppDelegate = nil;
+NSString * const MNVMDidInsertDiskNotification = @"MNVMDidInsertDisk";
+NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 @interface AppDelegate ()
 
@@ -57,7 +63,63 @@ static AppDelegate *sharedAppDelegate = nil;
     [controller presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)showSettings:(id)sender {
+    [self showModalPanel:@"settings" sender:sender];
+}
+
+- (void)showInsertDisk:(id)sender {
+    [self showModalPanel:@"disk" sender:sender];
+}
+
+- (void)showModalPanel:(NSString*)name sender:(id)sender {
+    Class classToShow, otherClass;
+    if ([name isEqualToString:@"settings"]) {
+        classToShow = [SettingsViewController class];
+        otherClass = [InsertDiskViewController class];
+    } else {
+        classToShow = [InsertDiskViewController class];
+        otherClass = [SettingsViewController class];
+    }
+    
+    UIViewController *rootViewController = self.window.rootViewController;
+    UIViewController *presentedViewController = rootViewController.presentedViewController;
+    UIViewController *presentedTopViewController = [presentedViewController isKindOfClass:[UINavigationController class]] ? [(UINavigationController*)presentedViewController topViewController] : nil;
+    
+    if ([presentedTopViewController isKindOfClass:classToShow]) {
+        return;
+    } else if ([presentedTopViewController isKindOfClass:otherClass]) {
+        // flip
+        UIViewController *viewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:name];
+        viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        viewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        UIView *windowSnapshotView = [self.window snapshotViewAfterScreenUpdates:NO];
+        [self.window addSubview:windowSnapshotView];
+        UIView *oldPanelSnapshotView = [presentedViewController.view snapshotViewAfterScreenUpdates:NO];
+        [viewController.view addSubview:oldPanelSnapshotView];
+        [rootViewController dismissViewControllerAnimated:NO completion:^{
+            [rootViewController presentViewController:viewController animated:NO completion:^{
+                UIView *emptyView = [[UIView alloc] initWithFrame:viewController.view.bounds];
+                [windowSnapshotView removeFromSuperview];
+                viewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                [UIView transitionFromView:oldPanelSnapshotView
+                                    toView:emptyView
+                                  duration:0.5
+                                   options:UIViewAnimationOptionTransitionFlipFromRight
+                                completion:^(BOOL finished) {
+                                    [emptyView removeFromSuperview];
+                                }];
+            }];
+        }];
+    } else {
+        [self.window.rootViewController performSegueWithIdentifier:name sender:sender];
+    }
+}
+
 #pragma mark - Files
+
+- (NSArray<NSString *> *)diskImageExtensions {
+    return @[@"dsk", @"img", @"dc42", @"diskcopy42"];
+}
 
 - (NSString *)documentsPath {
     static dispatch_once_t onceToken;
@@ -111,6 +173,8 @@ static AppDelegate *sharedAppDelegate = nil;
     SetSpeedStopped(emulatorRunning);
 }
 
+#pragma mark - Mouse
+
 - (void)setMouseX:(NSInteger)x Y:(NSInteger)y {
     SetMouseLoc(x, y);
 }
@@ -121,6 +185,16 @@ static AppDelegate *sharedAppDelegate = nil;
 
 - (void)setMouseButton:(BOOL)down {
     SetMouseButton(down);
+}
+
+#pragma mark - Disk Drive
+
+- (BOOL)insertDisk:(NSString *)path {
+    return Sony_Insert1(path.stringByStandardizingPath, falseblnr);
+}
+
+- (BOOL)isDiskInserted:(NSString *)path {
+    return Sony_IsInserted(path.stringByStandardizingPath);
 }
 
 @end

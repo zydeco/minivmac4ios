@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "TouchScreen.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -35,6 +36,12 @@
     pointingDeviceView = [[TouchScreen alloc] initWithFrame:self.view.bounds];
     pointingDeviceView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view insertSubview:pointingDeviceView aboveSubview:self.screenView];
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
+    if (motion == UIEventSubtypeMotionShake) {
+        [[AppDelegate sharedInstance] showInsertDisk:self];
+    }
 }
 
 @end

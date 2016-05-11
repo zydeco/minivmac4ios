@@ -451,6 +451,10 @@ LOCALPROC MyUnlockFile(FILE *refnum) {
 LOCALFUNC tMacErr vSonyEject0(tDrive Drive_No, blnr deleteit) {
     FILE *refnum = Drives[Drive_No];
 
+    NSDictionary *userInfo = @{@"path": DriveNames[Drive_No],
+                               @"drive": @(Drive_No),
+                               @"delete": @(deleteit)};
+    [[NSNotificationCenter defaultCenter] postNotificationName:MNVMDidEjectDiskNotification object:[AppDelegate sharedInstance] userInfo:userInfo];
     DiskEjectedNotify(Drive_No);
 
 #if HaveAdvisoryLocks
@@ -524,6 +528,10 @@ LOCALFUNC blnr Sony_Insert0(FILE *refnum, blnr locked, NSString *filePath) {
         MacMsg(kStrTooManyImagesTitle, kStrTooManyImagesMessage,
                falseblnr);
     } else {
+        NSDictionary *userInfo = @{@"path": filePath,
+                                   @"drive": @(Drive_No)};
+        [[NSNotificationCenter defaultCenter] postNotificationName:MNVMDidInsertDiskNotification object:[AppDelegate sharedInstance] userInfo:userInfo];
+
 /* printf("Sony_Insert0 %d\n", (int)Drive_No); */
 
 #if HaveAdvisoryLocks
@@ -548,7 +556,18 @@ LOCALFUNC blnr Sony_Insert0(FILE *refnum, blnr locked, NSString *filePath) {
     return IsOk;
 }
 
-LOCALFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail) {
+GLOBALFUNC blnr Sony_IsInserted(NSString *filePath) {
+#if IncludeSonyGetName
+    for (int i=0; i < NumDrives; i++) {
+        if (vSonyIsInserted(i) && [DriveNames[i] isEqualToString:filePath]) {
+            return trueblnr;
+        }
+    }
+#endif
+    return falseblnr;
+}
+
+GLOBALFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail) {
     /* const char *drivepath = [filePath UTF8String]; */
     const char *drivepath = [filePath fileSystemRepresentation];
     blnr locked = falseblnr;
