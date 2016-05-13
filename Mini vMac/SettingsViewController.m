@@ -17,12 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)showInsertDisk:(id)sender {
@@ -33,70 +27,69 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)changeSpeed:(UISegmentedControl*)sender {
+    if ([sender isKindOfClass:[UISegmentedControl class]]) {
+        EmulationSpeed speedValues[] = {
+            EmulationSpeed1x,
+            EmulationSpeed2x,
+            EmulationSpeed4x,
+            EmulationSpeed8x,
+            EmulationSpeed16x,
+            EmulationSpeedMax};
+        [AppDelegate sharedInstance].emulationSpeed = speedValues[sender.selectedSegmentIndex];
+    }
+}
+
+- (IBAction)changeMouseType:(UISegmentedControl*)sender {
+    if ([sender isKindOfClass:[UISegmentedControl class]]) {
+        [[NSUserDefaults standardUserDefaults] setBool:sender.selectedSegmentIndex == 1 forKey:@"trackpad"];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    if (section == 2) {
+        // keyboard layout
+        return 0;
+    } else {
+        return 1;
+    }
 }
 
-/*
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    switch (section) {
+        case 0: return NSLocalizedString(@"Speed", nil);
+        case 1: return NSLocalizedString(@"Mouse Type", nil);
+        case 2: return NSLocalizedString(@"Keyboard Layout", nil);
+        case 3: return NSLocalizedString(@"About", nil);
+        default: return nil;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    UITableViewCell *cell = nil;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger section = indexPath.section;
+    if (section == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"speed" forIndexPath:indexPath];
+        UISegmentedControl *speedControl = (UISegmentedControl*)[cell viewWithTag:128];
+        EmulationSpeed speed = [AppDelegate sharedInstance].emulationSpeed;
+        speedControl.selectedSegmentIndex = speed == EmulationSpeedMax ? 5 : speed;
+    } else if (section == 1) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"mouse" forIndexPath:indexPath];
+        UISegmentedControl *mouseControl = (UISegmentedControl*)[cell viewWithTag:128];
+        mouseControl.selectedSegmentIndex = [defaults boolForKey:@"trackpad"] ? 1 : 0;
+    } else if (section == 2) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"keyboard" forIndexPath:indexPath];
+    } else if (section == 3) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"about" forIndexPath:indexPath];
+    }
     return cell;
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -21,6 +21,7 @@ IMPORTPROC SetMouseLoc(ui4r h, ui4r v);
 IMPORTPROC SetMouseDelta(ui4r dh, ui4r dv);
 IMPORTFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail);
 IMPORTFUNC blnr Sony_IsInserted(NSString *filePath);
+EXPORTVAR(ui3b,SpeedValue);
 
 static AppDelegate *sharedAppDelegate = nil;
 NSString * const MNVMDidInsertDiskNotification = @"MNVMDidInsertDisk";
@@ -38,6 +39,14 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sharedAppDelegate = self;
+    
+    // TODO: setup settings
+    NSDictionary *defaults = @{@"speedValue": @(WantInitSpeedValue),
+                               @"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
+                               @"frameskip": @(0)
+                               };
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+    
     [self performSelector:@selector(runEmulator) withObject:nil afterDelay:0.1];
     return YES;
 }
@@ -162,6 +171,7 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 #pragma mark - Emulation
 
 - (void)runEmulator {
+    SpeedValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"speedValue"];
     RunEmulator();
 }
 
@@ -171,6 +181,15 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (void)setEmulatorRunning:(BOOL)emulatorRunning {
     SetSpeedStopped(emulatorRunning);
+}
+
+- (EmulationSpeed)emulationSpeed {
+    return SpeedValue;
+}
+
+- (void)setEmulationSpeed:(EmulationSpeed)emulationSpeed {
+    SpeedValue = emulationSpeed;
+    [[NSUserDefaults standardUserDefaults] setInteger:emulationSpeed forKey:@"speedValue"];
 }
 
 #pragma mark - Mouse

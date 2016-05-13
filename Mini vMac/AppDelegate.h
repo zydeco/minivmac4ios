@@ -11,10 +11,21 @@
 extern NSString * const MNVMDidInsertDiskNotification;
 extern NSString * const MNVMDidEjectDiskNotification;
 
+typedef enum : NSUInteger {
+    EmulationSpeedMax = -1,
+    EmulationSpeed1x = 0,
+    EmulationSpeed2x,
+    EmulationSpeed4x,
+    EmulationSpeed8x,
+    EmulationSpeed16x,
+    EmulationSpeed32x
+} EmulationSpeed;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (assign, nonatomic, getter=isEmulatorRunning) BOOL emulatorRunning;
+@property (nonatomic, assign) EmulationSpeed emulationSpeed;
 @property (nonatomic, readonly) NSString *documentsPath;
 @property (nonatomic, readonly) NSArray<NSString*> *diskImageExtensions;
 
