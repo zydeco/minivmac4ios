@@ -14,6 +14,7 @@
 		28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89791CE7315400A98104 /* KBKeyboardView.m */; };
 		28BA89821CE7336500A98104 /* Keyboard Layouts in Resources */ = {isa = PBXBuildFile; fileRef = 28BA89811CE7336500A98104 /* Keyboard Layouts */; };
 		28BA89851CE73E7200A98104 /* TrackPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89841CE73E7200A98104 /* TrackPad.m */; };
+		28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89871CE73FBC00A98104 /* MNVMApplication.m */; };
 		28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */; };
 		28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */; };
 		28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */; };
@@ -54,6 +55,8 @@
 		28BA89811CE7336500A98104 /* Keyboard Layouts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Keyboard Layouts"; sourceTree = "<group>"; };
 		28BA89831CE73E7200A98104 /* TrackPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackPad.h; sourceTree = "<group>"; };
 		28BA89841CE73E7200A98104 /* TrackPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackPad.m; sourceTree = "<group>"; };
+		28BA89861CE73FBC00A98104 /* MNVMApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNVMApplication.h; sourceTree = "<group>"; };
+		28BA89871CE73FBC00A98104 /* MNVMApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNVMApplication.m; sourceTree = "<group>"; };
 		28CE8E881CD4C33E00FE25A8 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		28CE8E891CD4C33E00FE25A8 /* CNFGRAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGRAPI.h; sourceTree = "<group>"; };
 		28CE8E8A1CD4C33E00FE25A8 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 			children = (
 				28F676C31CD15E0B00FC6FA6 /* AppDelegate.h */,
 				28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */,
+				28BA89861CE73FBC00A98104 /* MNVMApplication.h */,
+				28BA89871CE73FBC00A98104 /* MNVMApplication.m */,
 				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
 				28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */,
 				28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */,
@@ -277,6 +282,7 @@
 				TargetAttributes = {
 					28F676BC1CD15E0B00FC6FA6 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = UJXNDZ5TNU;
 					};
 				};
 			};
@@ -331,6 +337,7 @@
 				28CE8EC31CD4C3B200FE25A8 /* VIAEMDEV.c in Sources */,
 				28CE8EB81CD4C3B200FE25A8 /* M68KITAB.c in Sources */,
 				28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */,
+				28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */,
 				28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */,
 				28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */,
 				28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */,
@@ -457,10 +464,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -468,10 +478,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
