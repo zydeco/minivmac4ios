@@ -23,6 +23,16 @@
     keyboardLayouts = [[NSBundle mainBundle] pathsForResourcesOfType:@"nfkeyboardlayout" inDirectory:@"Keyboard Layouts"];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [AppDelegate sharedInstance].emulatorRunning = NO;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AppDelegate sharedInstance].emulatorRunning = YES;
+}
+
 - (void)showInsertDisk:(id)sender {
     [[AppDelegate sharedInstance] showInsertDisk:sender];
 }
