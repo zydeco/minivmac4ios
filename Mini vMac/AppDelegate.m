@@ -50,17 +50,15 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (void)initDefaults {
     // default settings
-    NSString *defaultKeyboardLayout = @"US.nfkeyboardlayout";
-    NSLocale *locale = [NSLocale currentLocale];
-    if ([[locale objectForKey:NSLocaleCountryCode] isEqualToString:@"GB"]) {
-        defaultKeyboardLayout = @"British.nfkeyboardlayout";
-    } else if ([[locale objectForKey:NSLocaleLanguageCode] isEqualToString:@"es"]) {
-        defaultKeyboardLayout = @"Spanish.nfkeyboardlayout";
-    }
+    NSDictionary *layoutForLanguage = @{@"en": @"British.nfkeyboardlayout",
+                                        @"es": @"Spanish.nfkeyboardlayout",
+                                        @"en-US": @"US.nfkeyboardlayout"};
+    NSString *firstLanguage = [NSBundle preferredLocalizationsFromArray:layoutForLanguage.allKeys].firstObject;
     NSDictionary *defaultValues = @{@"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
                                     @"frameskip": @(0),
-                                    @"keyboardLayout": defaultKeyboardLayout
+                                    @"keyboardLayout": layoutForLanguage[firstLanguage]
                                     };
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults registerDefaults:defaultValues];
     [defaults setValue:@(WantInitSpeedValue) forKey:@"speedValue"];
