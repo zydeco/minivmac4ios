@@ -40,7 +40,12 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sharedAppDelegate = self;
-    
+    [self initDefaults];
+    [self performSelector:@selector(runEmulator) withObject:nil afterDelay:0.1];
+    return YES;
+}
+
+- (void)initDefaults {
     // default settings
     NSString *defaultKeyboardLayout = @"US.nfkeyboardlayout";
     NSLocale *locale = [NSLocale currentLocale];
@@ -49,15 +54,22 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
     } else if ([[locale objectForKey:NSLocaleLanguageCode] isEqualToString:@"es"]) {
         defaultKeyboardLayout = @"Spanish.nfkeyboardlayout";
     }
-    NSDictionary *defaults = @{@"speedValue": @(WantInitSpeedValue),
-                               @"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
-                               @"frameskip": @(0),
-                               @"keyboardLayout": defaultKeyboardLayout
-                               };
-    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
-    
-    [self performSelector:@selector(runEmulator) withObject:nil afterDelay:0.1];
-    return YES;
+    NSDictionary *defaultValues = @{@"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
+                                    @"frameskip": @(0),
+                                    @"keyboardLayout": defaultKeyboardLayout
+                                    };
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults registerDefaults:defaultValues];
+    [defaults setValue:@(WantInitSpeedValue) forKey:@"speedValue"];
+    [defaults addObserver:self forKeyPath:@"speedValue" options:0 context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if (object == [NSUserDefaults standardUserDefaults]) {
+        if ([keyPath isEqualToString:@"speedValue"]) {
+            SpeedValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"speedValue"];
+        }
+    }
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -181,6 +193,9 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (void)runEmulator {
     SpeedValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"speedValue"];
+    if (SpeedValue > 3) {
+        SpeedValue = 3;
+    }
     RunEmulator();
 }
 
@@ -190,15 +205,6 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (void)setEmulatorRunning:(BOOL)emulatorRunning {
     SetSpeedStopped(emulatorRunning);
-}
-
-- (EmulationSpeed)emulationSpeed {
-    return SpeedValue;
-}
-
-- (void)setEmulationSpeed:(EmulationSpeed)emulationSpeed {
-    SpeedValue = emulationSpeed;
-    [[NSUserDefaults standardUserDefaults] setInteger:emulationSpeed forKey:@"speedValue"];
 }
 
 #pragma mark - Mouse

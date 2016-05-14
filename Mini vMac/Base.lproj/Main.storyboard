@@ -64,8 +64,6 @@
                                                 <segment title="2x"/>
                                                 <segment title="4x"/>
                                                 <segment title="8x"/>
-                                                <segment title="16x"/>
-                                                <segment title="Max"/>
                                             </segments>
                                             <connections>
                                                 <action selector="changeSpeed:" destination="WUA-f8-k8g" eventType="valueChanged" id="FDr-uw-7bN"/>

@@ -33,14 +33,7 @@
 
 - (IBAction)changeSpeed:(UISegmentedControl*)sender {
     if ([sender isKindOfClass:[UISegmentedControl class]]) {
-        EmulationSpeed speedValues[] = {
-            EmulationSpeed1x,
-            EmulationSpeed2x,
-            EmulationSpeed4x,
-            EmulationSpeed8x,
-            EmulationSpeed16x,
-            EmulationSpeedMax};
-        [AppDelegate sharedInstance].emulationSpeed = speedValues[sender.selectedSegmentIndex];
+        [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"speedValue"];
     }
 }
 
@@ -81,8 +74,7 @@
     if (section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"speed" forIndexPath:indexPath];
         UISegmentedControl *speedControl = (UISegmentedControl*)[cell viewWithTag:128];
-        EmulationSpeed speed = [AppDelegate sharedInstance].emulationSpeed;
-        speedControl.selectedSegmentIndex = speed == EmulationSpeedMax ? 5 : speed;
+        speedControl.selectedSegmentIndex = [defaults integerForKey:@"speedValue"];
     } else if (section == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"mouse" forIndexPath:indexPath];
         UISegmentedControl *mouseControl = (UISegmentedControl*)[cell viewWithTag:128];
