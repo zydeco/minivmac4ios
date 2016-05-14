@@ -17,7 +17,7 @@
 #define EnableMagnify 0
 #define WantInitRunInBackground 0
 #define WantInitNotAutoSlow 0
-#define WantInitSpeedValue 3
+#define WantInitSpeedValue 1
 #define NeedRequestInsertDisk 1
 #define NeedDoMoreCommandsMsg 1
 #define NeedDoAboutMsg 1
