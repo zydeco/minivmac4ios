@@ -13,6 +13,7 @@
 		28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89771CE7315400A98104 /* KBKeyboardLayout.m */; };
 		28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89791CE7315400A98104 /* KBKeyboardView.m */; };
 		28BA89821CE7336500A98104 /* Keyboard Layouts in Resources */ = {isa = PBXBuildFile; fileRef = 28BA89811CE7336500A98104 /* Keyboard Layouts */; };
+		28BA89851CE73E7200A98104 /* TrackPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89841CE73E7200A98104 /* TrackPad.m */; };
 		28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */; };
 		28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */; };
 		28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */; };
@@ -51,6 +52,8 @@
 		28BA89781CE7315400A98104 /* KBKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBKeyboardView.h; sourceTree = "<group>"; };
 		28BA89791CE7315400A98104 /* KBKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBKeyboardView.m; sourceTree = "<group>"; };
 		28BA89811CE7336500A98104 /* Keyboard Layouts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Keyboard Layouts"; sourceTree = "<group>"; };
+		28BA89831CE73E7200A98104 /* TrackPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackPad.h; sourceTree = "<group>"; };
+		28BA89841CE73E7200A98104 /* TrackPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackPad.m; sourceTree = "<group>"; };
 		28CE8E881CD4C33E00FE25A8 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		28CE8E891CD4C33E00FE25A8 /* CNFGRAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGRAPI.h; sourceTree = "<group>"; };
 		28CE8E8A1CD4C33E00FE25A8 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 				28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */,
 				28D5A3FB1CD6868E001A33F6 /* TouchScreen.h */,
 				28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */,
+				28BA89831CE73E7200A98104 /* TrackPad.h */,
+				28BA89841CE73E7200A98104 /* TrackPad.m */,
 				28F676C61CD15E0B00FC6FA6 /* ViewController.h */,
 				28F676C71CD15E0B00FC6FA6 /* ViewController.m */,
 				28848B601CDE97D600B86C45 /* InsertDiskViewController.h */,
@@ -317,6 +322,7 @@
 				28CE8EC11CD4C3B200FE25A8 /* SNDEMDEV.c in Sources */,
 				28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */,
 				28CE8EBF1CD4C3B200FE25A8 /* SCRNEMDV.c in Sources */,
+				28BA89851CE73E7200A98104 /* TrackPad.m in Sources */,
 				28CE8EBD1CD4C3B200FE25A8 /* RTCEMDEV.c in Sources */,
 				28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */,
 				28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */,

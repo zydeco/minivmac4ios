@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "TouchScreen.h"
+#import "TrackPad.h"
 #import "AppDelegate.h"
 #import "KBKeyboardView.h"
 #import "KBKeyboardLayout.h"
@@ -47,7 +48,9 @@
         [pointingDeviceView removeFromSuperview];
         pointingDeviceView = nil;
     }
-    pointingDeviceView = [[TouchScreen alloc] initWithFrame:self.view.bounds];
+    BOOL useTrackPad = [[NSUserDefaults standardUserDefaults] boolForKey:@"trackpad"];
+    Class pointingDeviceClass = useTrackPad ? [TrackPad class] : [TouchScreen class];
+    pointingDeviceView = [[pointingDeviceClass alloc] initWithFrame:self.view.bounds];
     pointingDeviceView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view insertSubview:pointingDeviceView aboveSubview:self.screenView];
 }
