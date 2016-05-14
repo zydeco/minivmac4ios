@@ -14,9 +14,13 @@
 @end
 
 @implementation SettingsViewController
+{
+    NSArray *keyboardLayouts;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    keyboardLayouts = [[NSBundle mainBundle] pathsForResourcesOfType:@"nfkeyboardlayout" inDirectory:@"Keyboard Layouts"];
 }
 
 - (void)showInsertDisk:(id)sender {
@@ -54,8 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 2) {
-        // keyboard layout
-        return 0;
+        return keyboardLayouts.count;
     } else {
         return 1;
     }
@@ -86,10 +89,24 @@
         mouseControl.selectedSegmentIndex = [defaults boolForKey:@"trackpad"] ? 1 : 0;
     } else if (section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"keyboard" forIndexPath:indexPath];
+        NSString *layout = keyboardLayouts[indexPath.row];
+        cell.textLabel.text = layout.lastPathComponent.stringByDeletingPathExtension;
+        BOOL selected = [[defaults stringForKey:@"keyboardLayout"] isEqualToString:layout.lastPathComponent];
+        cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     } else if (section == 3) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"about" forIndexPath:indexPath];
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (indexPath.section == 2) {
+        NSString *layout = keyboardLayouts[indexPath.row];
+        [defaults setValue:layout.lastPathComponent forKey:@"keyboardLayout"];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
