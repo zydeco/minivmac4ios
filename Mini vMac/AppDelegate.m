@@ -28,11 +28,14 @@ static AppDelegate *sharedAppDelegate = nil;
 NSString * const MNVMDidInsertDiskNotification = @"MNVMDidInsertDisk";
 NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
-@interface AppDelegate ()
+@interface AppDelegate () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 @end
 
 @implementation AppDelegate
+{
+    UISwipeGestureRecognizerDirection modalPanePresentationDirection;
+}
 
 + (instancetype)sharedInstance {
     return sharedAppDelegate;
@@ -93,6 +96,8 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
     [controller presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark - Settings / Insert Disk panels
+
 - (void)showSettings:(id)sender {
     [self showModalPanel:@"settings" sender:sender];
 }
@@ -116,6 +121,7 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
     UIViewController *presentedTopViewController = [presentedViewController isKindOfClass:[UINavigationController class]] ? [(UINavigationController*)presentedViewController topViewController] : nil;
     
     if ([presentedTopViewController isKindOfClass:classToShow]) {
+        [presentedViewController dismissViewControllerAnimated:YES completion:nil];
         return;
     } else if ([presentedTopViewController isKindOfClass:otherClass]) {
         // flip
@@ -141,8 +147,49 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
             }];
         }];
     } else {
-        [self.window.rootViewController performSegueWithIdentifier:name sender:sender];
+        UIViewController *viewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:name];
+        viewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        viewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        if ([sender isKindOfClass:[UISwipeGestureRecognizer class]]) {
+            modalPanePresentationDirection = [(UISwipeGestureRecognizer*)sender direction];
+            viewController.transitioningDelegate = self;
+        }
+        [rootViewController presentViewController:viewController animated:YES completion:nil];
     }
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return self;
+}
+
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+    return 0.3;
+}
+
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+    UIView *containerView = [transitionContext containerView];
+    UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
+    
+    [containerView addSubview:toView];
+    switch (modalPanePresentationDirection) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            toView.transform = CGAffineTransformMakeTranslation(containerView.bounds.size.width, 0);
+            break;
+        case UISwipeGestureRecognizerDirectionRight:
+            toView.transform = CGAffineTransformMakeTranslation(-containerView.bounds.size.width, 0);
+            break;
+        case UISwipeGestureRecognizerDirectionDown:
+            toView.transform = CGAffineTransformMakeTranslation(0, -containerView.bounds.size.height);
+            break;
+        default:
+            toView.transform = CGAffineTransformMakeTranslation(0, containerView.bounds.size.height);
+    }
+    
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+        toView.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        [transitionContext completeTransition:finished];
+    }];
 }
 
 #pragma mark - Files
