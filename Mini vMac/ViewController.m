@@ -20,13 +20,22 @@
 @implementation ViewController
 {
     KBKeyboardView *keyboardView;
-    UISwipeGestureRecognizer *showKeyboardGesture, *hideKeyboardGesture;
+    UISwipeGestureRecognizer *showKeyboardGesture, *hideKeyboardGesture, *insertDiskGesture, *showSettingsGesture;
     UIControl *pointingDeviceView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self installKeyboardGestures];
+    insertDiskGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:[AppDelegate sharedInstance] action:@selector(showInsertDisk:)];
+    insertDiskGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    insertDiskGesture.numberOfTouchesRequired = 2;
+    [self.view addGestureRecognizer:insertDiskGesture];
+    
+    showSettingsGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:[AppDelegate sharedInstance] action:@selector(showSettings:)];
+    showSettingsGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    showSettingsGesture.numberOfTouchesRequired = 2;
+    [self.view addGestureRecognizer:showSettingsGesture];
 }
 
 - (BOOL)prefersStatusBarHidden {
