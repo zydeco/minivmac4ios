@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B611CDE97D600B86C45 /* InsertDiskViewController.m */; };
 		28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B641CDE97E900B86C45 /* SettingsViewController.m */; };
+		28BA897E1CE7315400A98104 /* KBKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89751CE7315400A98104 /* KBKey.m */; };
+		28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89771CE7315400A98104 /* KBKeyboardLayout.m */; };
+		28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89791CE7315400A98104 /* KBKeyboardView.m */; };
+		28BA89821CE7336500A98104 /* Keyboard Layouts in Resources */ = {isa = PBXBuildFile; fileRef = 28BA89811CE7336500A98104 /* Keyboard Layouts */; };
 		28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */; };
 		28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */; };
 		28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */; };
@@ -40,6 +44,13 @@
 		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
 		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		28848B641CDE97E900B86C45 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		28BA89741CE7315400A98104 /* KBKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBKey.h; sourceTree = "<group>"; };
+		28BA89751CE7315400A98104 /* KBKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBKey.m; sourceTree = "<group>"; };
+		28BA89761CE7315400A98104 /* KBKeyboardLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBKeyboardLayout.h; sourceTree = "<group>"; };
+		28BA89771CE7315400A98104 /* KBKeyboardLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBKeyboardLayout.m; sourceTree = "<group>"; };
+		28BA89781CE7315400A98104 /* KBKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBKeyboardView.h; sourceTree = "<group>"; };
+		28BA89791CE7315400A98104 /* KBKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBKeyboardView.m; sourceTree = "<group>"; };
+		28BA89811CE7336500A98104 /* Keyboard Layouts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Keyboard Layouts"; sourceTree = "<group>"; };
 		28CE8E881CD4C33E00FE25A8 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		28CE8E891CD4C33E00FE25A8 /* CNFGRAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGRAPI.h; sourceTree = "<group>"; };
 		28CE8E8A1CD4C33E00FE25A8 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
@@ -109,6 +120,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28BA896E1CE7314500A98104 /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				28BA89811CE7336500A98104 /* Keyboard Layouts */,
+				28BA89741CE7315400A98104 /* KBKey.h */,
+				28BA89751CE7315400A98104 /* KBKey.m */,
+				28BA89761CE7315400A98104 /* KBKeyboardLayout.h */,
+				28BA89771CE7315400A98104 /* KBKeyboardLayout.m */,
+				28BA89781CE7315400A98104 /* KBKeyboardView.h */,
+				28BA89791CE7315400A98104 /* KBKeyboardView.m */,
+			);
+			name = Keyboard;
+			sourceTree = "<group>";
+		};
 		28CE8E871CD4C33E00FE25A8 /* mnvm_cfg */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,6 +223,7 @@
 				28848B641CDE97E900B86C45 /* SettingsViewController.m */,
 				28F676C91CD15E0B00FC6FA6 /* Main.storyboard */,
 				28F676CC1CD15E0B00FC6FA6 /* Assets.xcassets */,
+				28BA896E1CE7314500A98104 /* Keyboard */,
 				28F676CE1CD15E0B00FC6FA6 /* LaunchScreen.storyboard */,
 				28F676D11CD15E0B00FC6FA6 /* Info.plist */,
 				28CE8E8E1CD4C3B200FE25A8 /* mnvm_core */,
@@ -274,6 +300,7 @@
 			files = (
 				28F676D01CD15E0B00FC6FA6 /* LaunchScreen.storyboard in Resources */,
 				28F676CD1CD15E0B00FC6FA6 /* Assets.xcassets in Resources */,
+				28BA89821CE7336500A98104 /* Keyboard Layouts in Resources */,
 				28F676CB1CD15E0B00FC6FA6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BA897E1CE7315400A98104 /* KBKey.m in Sources */,
 				28CE8EC01CD4C3B200FE25A8 /* SCSIEMDV.c in Sources */,
 				28CE8EC11CD4C3B200FE25A8 /* SNDEMDEV.c in Sources */,
 				28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */,
@@ -299,12 +327,14 @@
 				28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */,
 				28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */,
 				28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */,
+				28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */,
 				28CE8EBB1CD4C3B200FE25A8 /* PROGMAIN.c in Sources */,
 				28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */,
 				28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */,
 				28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */,
 				28CE8EC21CD4C3B200FE25A8 /* SONYEMDV.c in Sources */,
 				28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */,
+				28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */,
 				28CE8EBE1CD4C3B200FE25A8 /* SCCEMDEV.c in Sources */,
 				28CE8ECC1CD4CDC500FE25A8 /* MYOSGLUE.m in Sources */,
 				28F676C21CD15E0B00FC6FA6 /* main.m in Sources */,

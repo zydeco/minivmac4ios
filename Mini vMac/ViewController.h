@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ScreenView.h"
+#import "KBKeyboardView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <KBKeyboardViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ScreenView *screenView;
+@property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
 
 @end
 

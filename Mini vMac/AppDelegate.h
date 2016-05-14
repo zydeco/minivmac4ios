@@ -38,6 +38,9 @@ typedef enum : NSUInteger {
 - (void)moveMouseX:(NSInteger)x Y:(NSInteger)y;
 - (void)setMouseButton:(BOOL)down;
 
+- (void)keyDown:(int)scancode;
+- (void)keyUp:(int)scancode;
+
 - (BOOL)insertDisk:(NSString*)path;
 - (BOOL)isDiskInserted:(NSString*)path;
 

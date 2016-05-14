@@ -835,7 +835,13 @@ GLOBALPROC SetMouseDelta(ui4r dh, ui4r dv) {
     MyMousePositionSetDelta(dh, dv);
 }
 
-#pragma mark - video out
+#pragma mark - Keyboard
+
+GLOBALPROC SetKeyState(int key, blnr down) {
+    Keyboard_UpdateKeyMap(key, down);
+}
+
+#pragma mark - Video Out
 
 LOCALPROC HaveChangedScreenBuff(ui4r top, ui4r left, ui4r bottom, ui4r right) {
     size_t bitsPerPixel = 1 << vMacScreenDepth;

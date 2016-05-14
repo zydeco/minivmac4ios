@@ -22,6 +22,7 @@ IMPORTPROC SetMouseDelta(ui4r dh, ui4r dv);
 IMPORTFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail);
 IMPORTFUNC blnr Sony_IsInserted(NSString *filePath);
 EXPORTVAR(ui3b,SpeedValue);
+IMPORTPROC SetKeyState(int key, blnr down);
 
 static AppDelegate *sharedAppDelegate = nil;
 NSString * const MNVMDidInsertDiskNotification = @"MNVMDidInsertDisk";
@@ -40,10 +41,18 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sharedAppDelegate = self;
     
-    // TODO: setup settings
+    // default settings
+    NSString *defaultKeyboardLayout = @"US.nfkeyboardlayout";
+    NSLocale *locale = [NSLocale currentLocale];
+    if ([[locale objectForKey:NSLocaleCountryCode] isEqualToString:@"GB"]) {
+        defaultKeyboardLayout = @"British.nfkeyboardlayout";
+    } else if ([[locale objectForKey:NSLocaleLanguageCode] isEqualToString:@"es"]) {
+        defaultKeyboardLayout = @"Spanish.nfkeyboardlayout";
+    }
     NSDictionary *defaults = @{@"speedValue": @(WantInitSpeedValue),
                                @"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
-                               @"frameskip": @(0)
+                               @"frameskip": @(0),
+                               @"keyboardLayout": defaultKeyboardLayout
                                };
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
     
@@ -204,6 +213,27 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (void)setMouseButton:(BOOL)down {
     SetMouseButton(down);
+}
+
+#pragma mark - Keyboard
+
+- (int)translateScanCode:(int)scancode {
+    switch (scancode) {
+        case 54: return 59; // left control
+        case 59: return 70; // arrow left
+        case 60: return 66; // arrow right
+        case 61: return 72; // arrow down
+        case 62: return 77; // arrow up
+        default: return scancode;
+    }
+}
+
+- (void)keyDown:(int)scancode {
+    SetKeyState([self translateScanCode:scancode], true);
+}
+
+- (void)keyUp:(int)scancode {
+    SetKeyState([self translateScanCode:scancode], false);
 }
 
 #pragma mark - Disk Drive
