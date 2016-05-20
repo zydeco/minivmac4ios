@@ -16,12 +16,15 @@ static ScreenView *sharedScreenView = nil;
     CGImageRef screenImage;
     CGRect screenBounds;
     CGSize screenSize;
+    CALayer *videoLayer;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     sharedScreenView = self;
-    
+    videoLayer = [CALayer layer];
+    screenSize = CGSizeMake(vMacScreenWidth, vMacScreenHeight);
+    [self.layer addSublayer:videoLayer];
 }
 
 + (instancetype)sharedScreenView {
@@ -39,29 +42,17 @@ static ScreenView *sharedScreenView = nil;
 - (void)updateScreen:(CGImageRef)newScreenImage {
     CGImageRelease(screenImage);
     screenImage = CGImageRetain(newScreenImage);
-    [self setNeedsDisplay];
+    videoLayer.contents = (__bridge id)screenImage;
 }
 
 - (void)layoutSubviews {
-    screenSize = CGSizeMake(vMacScreenWidth, vMacScreenHeight);
+    [super layoutSubviews];
     CGRect viewBounds = self.bounds;
     CGFloat screenScale = MAX(screenSize.width / viewBounds.size.width, screenSize.height / viewBounds.size.height);
     screenBounds = CGRectMake(0, 0, screenSize.width / screenScale, screenSize.height / screenScale);
     screenBounds.origin.x = (viewBounds.size.width - screenBounds.size.width)/2;
     screenBounds = CGRectIntegral(screenBounds);
-    [self setNeedsDisplay];
-}
-
-- (void)drawRect:(CGRect)rect {
-    // Draw screenImage
-    CGImageRef imageRef = CGImageRetain(screenImage);
-    if (imageRef) {
-        CGContextRef ctx = UIGraphicsGetCurrentContext();
-        CGContextTranslateCTM(ctx, 0, screenBounds.size.height);
-        CGContextScaleCTM(ctx, 1.0, -1.0);
-        CGContextDrawImage(ctx, screenBounds, imageRef);
-        CGImageRelease(imageRef);
-    }
+    videoLayer.frame = screenBounds;
 }
 
 @end
