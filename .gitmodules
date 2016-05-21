@@ -1,0 +1,6 @@
+[submodule "libmfs"]
+	path = libmfs
+	url = https://github.com/zydeco/libmfs.git
+[submodule "libres"]
+	path = libres
+	url = https://github.com/zydeco/libres.git

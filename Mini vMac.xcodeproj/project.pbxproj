@@ -39,7 +39,57 @@
 		28F676CB1CD15E0B00FC6FA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F676C91CD15E0B00FC6FA6 /* Main.storyboard */; };
 		28F676CD1CD15E0B00FC6FA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F676CC1CD15E0B00FC6FA6 /* Assets.xcassets */; };
 		28F676D01CD15E0B00FC6FA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F676CE1CD15E0B00FC6FA6 /* LaunchScreen.storyboard */; };
+		28F6B4521CF07C48002D76D0 /* UIImage+DiskImageIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4511CF07C48002D76D0 /* UIImage+DiskImageIcon.m */; };
+		28F6B4971CF07E00002D76D0 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4611CF07CC9002D76D0 /* block.c */; };
+		28F6B4981CF07E00002D76D0 /* btree.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4631CF07CC9002D76D0 /* btree.c */; };
+		28F6B4991CF07E00002D76D0 /* data.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4661CF07CC9002D76D0 /* data.c */; };
+		28F6B49A1CF07E00002D76D0 /* file.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4681CF07CC9002D76D0 /* file.c */; };
+		28F6B49B1CF07E00002D76D0 /* hfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B46A1CF07CC9002D76D0 /* hfs.c */; };
+		28F6B49C1CF07E00002D76D0 /* low.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B46D1CF07CC9002D76D0 /* low.c */; };
+		28F6B49D1CF07E00002D76D0 /* medium.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B46F1CF07CC9002D76D0 /* medium.c */; };
+		28F6B49E1CF07E00002D76D0 /* memcmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4711CF07CC9002D76D0 /* memcmp.c */; };
+		28F6B49F1CF07E00002D76D0 /* node.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4721CF07CC9002D76D0 /* node.c */; };
+		28F6B4A01CF07E00002D76D0 /* record.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4771CF07CC9002D76D0 /* record.c */; };
+		28F6B4A11CF07E00002D76D0 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4791CF07CC9002D76D0 /* version.c */; };
+		28F6B4A21CF07E00002D76D0 /* volume.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B47B1CF07CC9002D76D0 /* volume.c */; };
+		28F6B4A31CF07E08002D76D0 /* unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4751CF07CC9002D76D0 /* unix.c */; };
+		28F6B4B11CF07ED9002D76D0 /* mfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B45C1CF07CBF002D76D0 /* mfs.c */; };
+		28F6B4BF1CF07F39002D76D0 /* res.c in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4571CF07CB3002D76D0 /* res.c */; };
+		28F6B4C01CF07F5C002D76D0 /* liblibhfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F6B48E1CF07DDD002D76D0 /* liblibhfs.a */; };
+		28F6B4C11CF07F5C002D76D0 /* liblibmfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F6B4A81CF07EC9002D76D0 /* liblibmfs.a */; };
+		28F6B4C21CF07F5C002D76D0 /* liblibres.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F6B4B61CF07F32002D76D0 /* liblibres.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		28F6B48C1CF07DDD002D76D0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F6B4A61CF07EC9002D76D0 /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F6B4B41CF07F32002D76D0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		28848B601CDE97D600B86C45 /* InsertDiskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertDiskViewController.h; sourceTree = "<group>"; };
@@ -113,10 +163,75 @@
 		28F676CC1CD15E0B00FC6FA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28F676CF1CD15E0B00FC6FA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28F676D11CD15E0B00FC6FA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28F6B4501CF07C48002D76D0 /* UIImage+DiskImageIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DiskImageIcon.h"; sourceTree = "<group>"; };
+		28F6B4511CF07C48002D76D0 /* UIImage+DiskImageIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DiskImageIcon.m"; sourceTree = "<group>"; };
+		28F6B4561CF07CB3002D76D0 /* libres_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libres_internal.h; sourceTree = "<group>"; };
+		28F6B4571CF07CB3002D76D0 /* res.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = res.c; sourceTree = "<group>"; };
+		28F6B4581CF07CB3002D76D0 /* res.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = res.h; sourceTree = "<group>"; };
+		28F6B45A1CF07CBF002D76D0 /* appledouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appledouble.h; sourceTree = "<group>"; };
+		28F6B45B1CF07CBF002D76D0 /* fobj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fobj.h; sourceTree = "<group>"; };
+		28F6B45C1CF07CBF002D76D0 /* mfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mfs.c; sourceTree = "<group>"; };
+		28F6B45D1CF07CBF002D76D0 /* mfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mfs.h; sourceTree = "<group>"; };
+		28F6B45F1CF07CC9002D76D0 /* acconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = acconfig.h; sourceTree = "<group>"; };
+		28F6B4601CF07CC9002D76D0 /* apple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apple.h; sourceTree = "<group>"; };
+		28F6B4611CF07CC9002D76D0 /* block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = block.c; sourceTree = "<group>"; };
+		28F6B4621CF07CC9002D76D0 /* block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
+		28F6B4631CF07CC9002D76D0 /* btree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = btree.c; sourceTree = "<group>"; };
+		28F6B4641CF07CC9002D76D0 /* btree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = btree.h; sourceTree = "<group>"; };
+		28F6B4651CF07CC9002D76D0 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		28F6B4661CF07CC9002D76D0 /* data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = data.c; sourceTree = "<group>"; };
+		28F6B4671CF07CC9002D76D0 /* data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data.h; sourceTree = "<group>"; };
+		28F6B4681CF07CC9002D76D0 /* file.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = file.c; sourceTree = "<group>"; };
+		28F6B4691CF07CC9002D76D0 /* file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file.h; sourceTree = "<group>"; };
+		28F6B46A1CF07CC9002D76D0 /* hfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hfs.c; sourceTree = "<group>"; };
+		28F6B46B1CF07CC9002D76D0 /* hfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hfs.h; sourceTree = "<group>"; };
+		28F6B46C1CF07CC9002D76D0 /* libhfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libhfs.h; sourceTree = "<group>"; };
+		28F6B46D1CF07CC9002D76D0 /* low.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = low.c; sourceTree = "<group>"; };
+		28F6B46E1CF07CC9002D76D0 /* low.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = low.h; sourceTree = "<group>"; };
+		28F6B46F1CF07CC9002D76D0 /* medium.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = medium.c; sourceTree = "<group>"; };
+		28F6B4701CF07CC9002D76D0 /* medium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = medium.h; sourceTree = "<group>"; };
+		28F6B4711CF07CC9002D76D0 /* memcmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memcmp.c; sourceTree = "<group>"; };
+		28F6B4721CF07CC9002D76D0 /* node.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = node.c; sourceTree = "<group>"; };
+		28F6B4731CF07CC9002D76D0 /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = node.h; sourceTree = "<group>"; };
+		28F6B4751CF07CC9002D76D0 /* unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unix.c; sourceTree = "<group>"; };
+		28F6B4761CF07CC9002D76D0 /* os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os.h; sourceTree = "<group>"; };
+		28F6B4771CF07CC9002D76D0 /* record.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = record.c; sourceTree = "<group>"; };
+		28F6B4781CF07CC9002D76D0 /* record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = record.h; sourceTree = "<group>"; };
+		28F6B4791CF07CC9002D76D0 /* version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = version.c; sourceTree = "<group>"; };
+		28F6B47A1CF07CC9002D76D0 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		28F6B47B1CF07CC9002D76D0 /* volume.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = volume.c; sourceTree = "<group>"; };
+		28F6B47C1CF07CC9002D76D0 /* volume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = volume.h; sourceTree = "<group>"; };
+		28F6B48E1CF07DDD002D76D0 /* liblibhfs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibhfs.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		28F6B4A81CF07EC9002D76D0 /* liblibmfs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibmfs.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		28F6B4B61CF07F32002D76D0 /* liblibres.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibres.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		28F676BA1CD15E0B00FC6FA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F6B4C01CF07F5C002D76D0 /* liblibhfs.a in Frameworks */,
+				28F6B4C11CF07F5C002D76D0 /* liblibmfs.a in Frameworks */,
+				28F6B4C21CF07F5C002D76D0 /* liblibres.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F6B48B1CF07DDD002D76D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F6B4A51CF07EC9002D76D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F6B4B31CF07F32002D76D0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -207,6 +322,9 @@
 			isa = PBXGroup;
 			children = (
 				28F676BD1CD15E0B00FC6FA6 /* Mini vMac.app */,
+				28F6B48E1CF07DDD002D76D0 /* liblibhfs.a */,
+				28F6B4A81CF07EC9002D76D0 /* liblibmfs.a */,
+				28F6B4B61CF07F32002D76D0 /* liblibres.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,6 +357,8 @@
 				28CE8E8E1CD4C3B200FE25A8 /* mnvm_core */,
 				28CE8E871CD4C33E00FE25A8 /* mnvm_cfg */,
 				28F676C01CD15E0B00FC6FA6 /* Supporting Files */,
+				28F6B4501CF07C48002D76D0 /* UIImage+DiskImageIcon.h */,
+				28F6B4511CF07C48002D76D0 /* UIImage+DiskImageIcon.m */,
 			);
 			path = "Mini vMac";
 			sourceTree = "<group>";
@@ -246,9 +366,80 @@
 		28F676C01CD15E0B00FC6FA6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28F6B4551CF07C9A002D76D0 /* libhfs */,
+				28F6B4541CF07C8D002D76D0 /* libmfs */,
+				28F6B4531CF07C83002D76D0 /* libres */,
 				28F676C11CD15E0B00FC6FA6 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		28F6B4531CF07C83002D76D0 /* libres */ = {
+			isa = PBXGroup;
+			children = (
+				28F6B4561CF07CB3002D76D0 /* libres_internal.h */,
+				28F6B4571CF07CB3002D76D0 /* res.c */,
+				28F6B4581CF07CB3002D76D0 /* res.h */,
+			);
+			name = libres;
+			path = ../libres;
+			sourceTree = "<group>";
+		};
+		28F6B4541CF07C8D002D76D0 /* libmfs */ = {
+			isa = PBXGroup;
+			children = (
+				28F6B45A1CF07CBF002D76D0 /* appledouble.h */,
+				28F6B45B1CF07CBF002D76D0 /* fobj.h */,
+				28F6B45C1CF07CBF002D76D0 /* mfs.c */,
+				28F6B45D1CF07CBF002D76D0 /* mfs.h */,
+			);
+			name = libmfs;
+			path = ../libmfs;
+			sourceTree = "<group>";
+		};
+		28F6B4551CF07C9A002D76D0 /* libhfs */ = {
+			isa = PBXGroup;
+			children = (
+				28F6B45F1CF07CC9002D76D0 /* acconfig.h */,
+				28F6B4601CF07CC9002D76D0 /* apple.h */,
+				28F6B4611CF07CC9002D76D0 /* block.c */,
+				28F6B4621CF07CC9002D76D0 /* block.h */,
+				28F6B4631CF07CC9002D76D0 /* btree.c */,
+				28F6B4641CF07CC9002D76D0 /* btree.h */,
+				28F6B4651CF07CC9002D76D0 /* config.h */,
+				28F6B4661CF07CC9002D76D0 /* data.c */,
+				28F6B4671CF07CC9002D76D0 /* data.h */,
+				28F6B4681CF07CC9002D76D0 /* file.c */,
+				28F6B4691CF07CC9002D76D0 /* file.h */,
+				28F6B46A1CF07CC9002D76D0 /* hfs.c */,
+				28F6B46B1CF07CC9002D76D0 /* hfs.h */,
+				28F6B46C1CF07CC9002D76D0 /* libhfs.h */,
+				28F6B46D1CF07CC9002D76D0 /* low.c */,
+				28F6B46E1CF07CC9002D76D0 /* low.h */,
+				28F6B46F1CF07CC9002D76D0 /* medium.c */,
+				28F6B4701CF07CC9002D76D0 /* medium.h */,
+				28F6B4711CF07CC9002D76D0 /* memcmp.c */,
+				28F6B4721CF07CC9002D76D0 /* node.c */,
+				28F6B4731CF07CC9002D76D0 /* node.h */,
+				28F6B4741CF07CC9002D76D0 /* os */,
+				28F6B4761CF07CC9002D76D0 /* os.h */,
+				28F6B4771CF07CC9002D76D0 /* record.c */,
+				28F6B4781CF07CC9002D76D0 /* record.h */,
+				28F6B4791CF07CC9002D76D0 /* version.c */,
+				28F6B47A1CF07CC9002D76D0 /* version.h */,
+				28F6B47B1CF07CC9002D76D0 /* volume.c */,
+				28F6B47C1CF07CC9002D76D0 /* volume.h */,
+			);
+			name = libhfs;
+			path = ../libhfs;
+			sourceTree = "<group>";
+		};
+		28F6B4741CF07CC9002D76D0 /* os */ = {
+			isa = PBXGroup;
+			children = (
+				28F6B4751CF07CC9002D76D0 /* unix.c */,
+			);
+			path = os;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,6 +462,57 @@
 			productReference = 28F676BD1CD15E0B00FC6FA6 /* Mini vMac.app */;
 			productType = "com.apple.product-type.application";
 		};
+		28F6B48D1CF07DDD002D76D0 /* libhfs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28F6B4941CF07DDD002D76D0 /* Build configuration list for PBXNativeTarget "libhfs" */;
+			buildPhases = (
+				28F6B48A1CF07DDD002D76D0 /* Sources */,
+				28F6B48B1CF07DDD002D76D0 /* Frameworks */,
+				28F6B48C1CF07DDD002D76D0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libhfs;
+			productName = libhfs;
+			productReference = 28F6B48E1CF07DDD002D76D0 /* liblibhfs.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		28F6B4A71CF07EC9002D76D0 /* libmfs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28F6B4AE1CF07EC9002D76D0 /* Build configuration list for PBXNativeTarget "libmfs" */;
+			buildPhases = (
+				28F6B4A41CF07EC9002D76D0 /* Sources */,
+				28F6B4A51CF07EC9002D76D0 /* Frameworks */,
+				28F6B4A61CF07EC9002D76D0 /* Copy Files */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libmfs;
+			productName = libmfs;
+			productReference = 28F6B4A81CF07EC9002D76D0 /* liblibmfs.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		28F6B4B51CF07F32002D76D0 /* libres */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28F6B4BC1CF07F32002D76D0 /* Build configuration list for PBXNativeTarget "libres" */;
+			buildPhases = (
+				28F6B4B21CF07F32002D76D0 /* Sources */,
+				28F6B4B31CF07F32002D76D0 /* Frameworks */,
+				28F6B4B41CF07F32002D76D0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libres;
+			productName = libres;
+			productReference = 28F6B4B61CF07F32002D76D0 /* liblibres.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -283,6 +525,15 @@
 					28F676BC1CD15E0B00FC6FA6 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = UJXNDZ5TNU;
+					};
+					28F6B48D1CF07DDD002D76D0 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					28F6B4A71CF07EC9002D76D0 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					28F6B4B51CF07F32002D76D0 = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -300,6 +551,9 @@
 			projectRoot = "";
 			targets = (
 				28F676BC1CD15E0B00FC6FA6 /* Mini vMac */,
+				28F6B48D1CF07DDD002D76D0 /* libhfs */,
+				28F6B4A71CF07EC9002D76D0 /* libmfs */,
+				28F6B4B51CF07F32002D76D0 /* libres */,
 			);
 		};
 /* End PBXProject section */
@@ -338,6 +592,7 @@
 				28CE8EB81CD4C3B200FE25A8 /* M68KITAB.c in Sources */,
 				28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */,
 				28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */,
+				28F6B4521CF07C48002D76D0 /* UIImage+DiskImageIcon.m in Sources */,
 				28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */,
 				28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */,
 				28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */,
@@ -351,6 +606,42 @@
 				28CE8EBE1CD4C3B200FE25A8 /* SCCEMDEV.c in Sources */,
 				28CE8ECC1CD4CDC500FE25A8 /* MYOSGLUE.m in Sources */,
 				28F676C21CD15E0B00FC6FA6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F6B48A1CF07DDD002D76D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F6B49A1CF07E00002D76D0 /* file.c in Sources */,
+				28F6B4981CF07E00002D76D0 /* btree.c in Sources */,
+				28F6B49E1CF07E00002D76D0 /* memcmp.c in Sources */,
+				28F6B49D1CF07E00002D76D0 /* medium.c in Sources */,
+				28F6B4A11CF07E00002D76D0 /* version.c in Sources */,
+				28F6B49C1CF07E00002D76D0 /* low.c in Sources */,
+				28F6B49F1CF07E00002D76D0 /* node.c in Sources */,
+				28F6B4991CF07E00002D76D0 /* data.c in Sources */,
+				28F6B49B1CF07E00002D76D0 /* hfs.c in Sources */,
+				28F6B4A21CF07E00002D76D0 /* volume.c in Sources */,
+				28F6B4A01CF07E00002D76D0 /* record.c in Sources */,
+				28F6B4A31CF07E08002D76D0 /* unix.c in Sources */,
+				28F6B4971CF07E00002D76D0 /* block.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F6B4A41CF07EC9002D76D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F6B4B11CF07ED9002D76D0 /* mfs.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28F6B4B21CF07F32002D76D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28F6B4BF1CF07F39002D76D0 /* res.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,8 +757,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "-DUSE_LIBRES";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -480,11 +773,77 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = "-DUSE_LIBRES";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		28F6B4951CF07DDD002D76D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = NO;
+				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		28F6B4961CF07DDD002D76D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = NO;
+				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		28F6B4AF1CF07EC9002D76D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)";
+				OTHER_CFLAGS = "-DUSE_LIBRES";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		28F6B4B01CF07EC9002D76D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = NO;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)";
+				OTHER_CFLAGS = "-DUSE_LIBRES";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		28F6B4BD1CF07F32002D76D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		28F6B4BE1CF07F32002D76D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -508,6 +867,30 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		28F6B4941CF07DDD002D76D0 /* Build configuration list for PBXNativeTarget "libhfs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28F6B4951CF07DDD002D76D0 /* Debug */,
+				28F6B4961CF07DDD002D76D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		28F6B4AE1CF07EC9002D76D0 /* Build configuration list for PBXNativeTarget "libmfs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28F6B4AF1CF07EC9002D76D0 /* Debug */,
+				28F6B4B01CF07EC9002D76D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		28F6B4BC1CF07F32002D76D0 /* Build configuration list for PBXNativeTarget "libres" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28F6B4BD1CF07F32002D76D0 /* Debug */,
+				28F6B4BE1CF07F32002D76D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

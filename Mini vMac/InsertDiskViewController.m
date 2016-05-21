@@ -8,6 +8,7 @@
 
 #import "InsertDiskViewController.h"
 #import "AppDelegate.h"
+#import "UIImage+DiskImageIcon.h"
 
 @interface InsertDiskViewController () <UITextFieldDelegate>
 
@@ -420,7 +421,15 @@
     NSDictionary *attributes = [[NSURL fileURLWithPath:filePath] resourceValuesForKeys:@[NSURLTotalFileSizeKey] error:NULL];
     if (attributes && attributes[NSURLTotalFileSizeKey]) {
         BOOL isDiskImage = [[AppDelegate sharedInstance].diskImageExtensions containsObject:fileName.pathExtension.lowercaseString];
-        self.imageView.image = [UIImage imageNamed:isDiskImage ? @"floppy" : @"document"];
+        if (isDiskImage) {
+            UIImage *icon = [UIImage imageWithIconForDiskImage:filePath];
+            if (icon == nil) {
+                icon = [UIImage imageNamed:@"floppy"];
+            }
+            self.imageView.image = icon;
+        } else {
+            self.imageView.image = [UIImage imageNamed:@"document"];
+        }
         NSString *sizeString = [NSByteCountFormatter stringFromByteCount:[attributes[NSURLTotalFileSizeKey] longLongValue] countStyle:NSByteCountFormatterCountStyleBinary];
         self.detailTextLabel.text = sizeString;
     } else {
