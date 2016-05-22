@@ -1,5 +1,3 @@
-//#include <Carbon/Carbon.h>
-//#include <AGL/agl.h>
 #include <unistd.h>
 
 #define MyAppIsBundle 1

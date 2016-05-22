@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>title</key>
+	<string>About</string>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>text</key>
+			<string>Version</string>
+			<key>detailText</key>
+			<string>$version</string>
+		</dict>
+		<dict>
+			<key>text</key>
+			<string>Core</string>
+			<key>detailText</key>
+			<string>kAppVariationStr</string>
+		</dict>
+		<dict>
+			<key>text</key>
+			<string>Maintainer</string>
+			<key>detailText</key>
+			<string>kMaintainerName</string>
+			<key>link</key>
+			<string>https://twitter.com/maczydeco</string>
+		</dict>
+		<dict>
+			<key>text</key>
+			<string>Source Code</string>
+			<key>detailText</key>
+			<string>GitHub</string>
+			<key>link</key>
+			<string>https://github.com/zydeco/minivmac4ios</string>
+		</dict>
+	</array>
+	<key>footer.html</key>
+	<string>Mini vMac for iOS&lt;br/&gt;
+©2008-2016 Jesús A. Álvarez&lt;br/&gt;
+&lt;a href=&quot;https://namedfork.net/minivmac&quot;&gt;namedfork.net/minivmac&lt;/a&gt;&lt;br/&gt;
+&lt;hr/&gt;
+based on Mini vMac&lt;br/&gt;
+©2001-2016 Paul C. Pratt&lt;br/&gt;
+&lt;a href=&quot;http://gryphel.com/c/minivmac&quot;&gt;gryphel.com/c/minivmac&lt;/a&gt;</string>
+</dict>
+</plist>

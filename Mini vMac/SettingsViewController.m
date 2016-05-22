@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
+#import "CNFGRAPI.h"
 
 @interface SettingsViewController ()
 
@@ -16,11 +17,34 @@
 @implementation SettingsViewController
 {
     NSArray *keyboardLayouts;
+    NSString *aboutTitle;
+    NSArray<NSDictionary<NSString*,NSString*>*> *aboutItems;
+    UITextView *footerView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     keyboardLayouts = [[NSBundle mainBundle] pathsForResourcesOfType:@"nfkeyboardlayout" inDirectory:@"Keyboard Layouts"];
+    [self loadCredits];
+}
+
+- (void)loadCredits {
+    NSDictionary *aboutData = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about" ofType:@"plist"]];
+    aboutTitle = aboutData[@"title"];
+    aboutItems = aboutData[@"items"];
+    footerView = [[UITextView alloc] initWithFrame:CGRectZero];
+    NSAttributedString *str = [[NSMutableAttributedString alloc] initWithData:[aboutData[@"footer.html"] dataUsingEncoding:NSUTF8StringEncoding]
+                                                                      options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                                NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                                                           documentAttributes:nil
+                                                                        error:NULL];
+    footerView.attributedText = str;
+    [footerView sizeToFit];
+    footerView.editable = NO;
+    footerView.textAlignment = NSTextAlignmentCenter;
+    footerView.textColor = [UIColor darkGrayColor];
+    footerView.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+    footerView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,6 +86,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 2) {
         return keyboardLayouts.count;
+    } else if (section == 3) {
+        return aboutItems.count;
     } else {
         return 1;
     }
@@ -72,8 +98,24 @@
         case 0: return NSLocalizedString(@"Speed", nil);
         case 1: return NSLocalizedString(@"Mouse Type", nil);
         case 2: return NSLocalizedString(@"Keyboard Layout", nil);
-        case 3: return NSLocalizedString(@"About", nil);
+        case 3: return aboutTitle;
         default: return nil;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == 3) {
+        return footerView;
+    } else {
+        return nil;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 3) {
+        return footerView.bounds.size.height;
+    } else {
+        return 0.0;
     }
 }
 
@@ -97,18 +139,40 @@
         cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     } else if (section == 3) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"about" forIndexPath:indexPath];
+        NSDictionary<NSString*,NSString*> *item = aboutItems[indexPath.row];
+        cell.textLabel.text = item[@"text"];
+        NSString *detailText = item[@"detailText"];
+        if ([detailText isEqualToString:@"$version"]) {
+            NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            NSString *commitString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"GitVersion"];
+            cell.detailTextLabel.text = commitString.length > 0 ? [NSString stringWithFormat:@"%@ (%@)", versionString, commitString] : versionString;
+        } else if ([detailText isEqualToString:@"kAppVariationStr"]) {
+            cell.detailTextLabel.text = @(kAppVariationStr);
+        } else if ([detailText isEqualToString:@"kMaintainerName"]) {
+            cell.detailTextLabel.text = @(kMaintainerName);
+        } else {
+            cell.detailTextLabel.text = detailText;
+        }
+        cell.accessoryType = item[@"link"] == nil ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 2) {
+        // selected keyboard layout
         NSString *layout = keyboardLayouts[indexPath.row];
         [defaults setValue:layout.lastPathComponent forKey:@"keyboardLayout"];
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } if (indexPath.section == 3) {
+        // links in about
+        NSString *linkURL = aboutItems[indexPath.row][@"link"];
+        if (linkURL != nil) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkURL]];
+        }
     }
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
