@@ -34,6 +34,14 @@
 			<key>link</key>
 			<string>https://github.com/zydeco/minivmac4ios</string>
 		</dict>
+		<dict>
+			<key>text</key>
+			<string>License</string>
+			<key>detailText</key>
+			<string>GPL 2</string>
+			<key>link</key>
+			<string>http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</string>
+		</dict>
 	</array>
 	<key>footer.html</key>
 	<string>Mini vMac for iOS&lt;br/&gt;
