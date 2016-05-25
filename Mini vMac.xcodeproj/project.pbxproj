@@ -879,6 +879,7 @@
 				28F6B4961CF07DDD002D76D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28F6B4AE1CF07EC9002D76D0 /* Build configuration list for PBXNativeTarget "libmfs" */ = {
 			isa = XCConfigurationList;
@@ -887,6 +888,7 @@
 				28F6B4B01CF07EC9002D76D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28F6B4BC1CF07F32002D76D0 /* Build configuration list for PBXNativeTarget "libres" */ = {
 			isa = XCConfigurationList;
@@ -895,6 +897,7 @@
 				28F6B4BE1CF07F32002D76D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

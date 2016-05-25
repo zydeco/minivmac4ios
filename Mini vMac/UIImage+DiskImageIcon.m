@@ -10,6 +10,7 @@
 #import "libhfs.h"
 #import "res.h"
 #import "mfs.h"
+#import "AppDelegate.h"
 
 #define kDiskImageHasDC42Header 1 << 0
 #define RSHORT(base, offset) ntohs(*((short *)((base) + (offset))))
@@ -22,10 +23,37 @@
 
 @end
 
+static NSCache<NSString*,UIImage*> *diskImageIconCache = nil;
+
 @implementation UIImage (DiskImageIcon)
 
++ (NSCache<NSString*,UIImage*> *)diskImageIconCache {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        diskImageIconCache = [NSCache new];
+        diskImageIconCache.name = @"net.namedfork.minivmac.icon-cache";
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEjectDisk:) name:MNVMDidEjectDiskNotification object:nil];
+    });
+    return diskImageIconCache;
+}
+
++ (void)_didEjectDisk:(NSNotification*)notification {
+    NSString *path = [notification.userInfo[@"path"] stringByStandardizingPath];
+    // reload icon
+    [diskImageIconCache removeObjectForKey:path];
+    [self imageWithIconForDiskImage:path];
+}
+
 + (UIImage *)imageWithIconForDiskImage:(NSString *)path {
-    return [[DiskImageIconReader new] iconForDiskImage:path];
+    path = path.stringByStandardizingPath;
+    UIImage *icon = [[self diskImageIconCache] objectForKey:path];
+    if (icon == nil) {
+        icon = [[DiskImageIconReader new] iconForDiskImage:path];
+        if (icon != nil) {
+            [diskImageIconCache setObject:icon forKey:path];
+        }
+    }
+    return icon;
 }
 
 @end
