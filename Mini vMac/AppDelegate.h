@@ -33,5 +33,8 @@ extern NSString * const MNVMDidEjectDiskNotification;
 - (BOOL)insertDisk:(NSString*)path;
 - (BOOL)isDiskInserted:(NSString*)path;
 
+- (void)macInterrupt;
+- (void)macReset;
+
 @end
 

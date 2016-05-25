@@ -23,6 +23,8 @@ IMPORTFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail);
 IMPORTFUNC blnr Sony_IsInserted(NSString *filePath);
 EXPORTVAR(ui3b,SpeedValue);
 IMPORTPROC SetKeyState(int key, blnr down);
+IMPORTPROC MacInterrupt();
+IMPORTPROC MacReset();
 
 static AppDelegate *sharedAppDelegate = nil;
 NSString * const MNVMDidInsertDiskNotification = @"MNVMDidInsertDisk";
@@ -264,6 +266,14 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (void)setMouseButton:(BOOL)down {
     SetMouseButton(down);
+}
+
+- (void)macInterrupt {
+    MacInterrupt();
+}
+
+-(void)macReset {
+    MacReset();
 }
 
 #pragma mark - Keyboard

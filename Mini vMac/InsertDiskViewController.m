@@ -77,12 +77,23 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - Button Actions
+
 - (void)showSettings:(id)sender {
     [[AppDelegate sharedInstance] showSettings:sender];
 }
 
 - (void)dismiss:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)macInterrupt:(id)sender {
+    [self dismiss:sender];
+    [[AppDelegate sharedInstance] macInterrupt];
+}
+
+- (void)macReset:(id)sender {
+    [[AppDelegate sharedInstance] macReset];
 }
 
 #pragma mark - Table view data source

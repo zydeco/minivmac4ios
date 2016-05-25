@@ -12,5 +12,7 @@
 
 - (IBAction)showSettings:(id)sender;
 - (IBAction)dismiss:(id)sender;
+- (IBAction)macInterrupt:(id)sender;
+- (IBAction)macReset:(id)sender;
 
 @end

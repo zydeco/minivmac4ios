@@ -230,6 +230,18 @@
                                 <action selector="showSettings:" destination="mbX-kA-h6M" id="dIs-rf-PeS"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="klq-lo-Wrl"/>
+                        <barButtonItem image="Interrupt" id="YFW-lp-dCD">
+                            <connections>
+                                <action selector="macInterrupt:" destination="mbX-kA-h6M" id="zmC-N7-nZp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="bwn-1m-FZJ"/>
+                        <barButtonItem image="Reset" id="l5C-8z-pWj">
+                            <connections>
+                                <action selector="macReset:" destination="mbX-kA-h6M" id="n8H-fa-LkM"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Insert Disk" id="hjJ-Yt-wg8">
                         <barButtonItem key="backBarButtonItem" title="Disk" id="pie-Ez-AWv"/>
@@ -267,6 +279,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Interrupt" width="30" height="30"/>
+        <image name="Reset" width="30" height="30"/>
         <image name="Settings" width="30" height="30"/>
         <image name="floppy30" width="30" height="30"/>
     </resources>

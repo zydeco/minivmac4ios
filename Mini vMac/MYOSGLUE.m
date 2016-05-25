@@ -1687,3 +1687,11 @@ GLOBALPROC RunEmulator(void) {
     }
     UnInitOSGLU();
 }
+
+GLOBALPROC MacInterrupt(void) {
+    WantMacInterrupt = trueblnr;
+}
+
+GLOBALPROC MacReset(void) {
+    WantMacReset = trueblnr;
+}
