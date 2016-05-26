@@ -11,6 +11,5 @@
 @interface UIImage (DiskImageIcon)
 
 + (UIImage *)imageWithIconForDiskImage:(NSString *)path;
-+ (NSCache<NSString*,UIImage*> *)diskImageIconCache;
 
 @end

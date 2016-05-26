@@ -214,13 +214,8 @@ static uint8_t maskReplacement[][128] = {
     RFILE *rfile = res_open_funcs(rsrcFork, mfs_fkseek, mfs_fkread);
 
     // get icon
-    CGImageRef iconImage = [self appIconForResourceFile:rfile creator:ntohl(rec->flUsrWds.creator)];
-    UIImage *icon = nil;
-    if (iconImage) {
-        icon = [UIImage imageWithCGImage:iconImage];
-        CGImageRelease(iconImage);
-    }
-
+    UIImage *icon = [self appIconForResourceFile:rfile creator:ntohl(rec->flUsrWds.creator)];
+    
     // close stuff
     res_close(rfile);
     mfs_fkclose(rsrcFork);
@@ -282,12 +277,8 @@ static uint8_t maskReplacement[][128] = {
         hfs_umount(vol);
         return nil;
     }
-    CGImageRef iconImage = [self appIconForResourceFile:rfile creator:ntohl(*(uint32_t *)ent.u.file.creator)];
-    if (iconImage) {
-        icon = [UIImage imageWithCGImage:iconImage];
-        CGImageRelease(iconImage);
-    }
-
+    icon = [self appIconForResourceFile:rfile creator:ntohl(*(uint32_t *)ent.u.file.creator)];
+    
     // close stuff
     res_close(rfile);
     hfs_close(hfile);
@@ -431,15 +422,10 @@ static uint8_t maskReplacement[][128] = {
         }
         return nil;
     }
+    
     // read icon family
     NSDictionary *iconFamily = [self iconFamilyID:-16455 inResourceFile:rfile];
-
-    // create image
-    CGImageRef iconImage = [self iconImageFromFamily:iconFamily];
-    if (iconImage) {
-        icon = [UIImage imageWithCGImage:iconImage];
-        CGImageRelease(iconImage);
-    }
+    icon = [self iconImageFromFamily:iconFamily];
 
     res_close(rfile);
     if (hfile) {
@@ -459,7 +445,7 @@ static uint8_t maskReplacement[][128] = {
 
 #pragma mark - Resource Access
 
-- (CGImageRef)appIconForResourceFile:(RFILE *)rfile creator:(OSType)creator {
+- (UIImage*)appIconForResourceFile:(RFILE *)rfile creator:(OSType)creator {
     // load bundle
     size_t numBundles;
     ResAttr *bundles = res_list(rfile, 'BNDL', NULL, 0, 0, &numBundles, NULL);
@@ -481,7 +467,7 @@ static uint8_t maskReplacement[][128] = {
     }
 
     // read bundle
-    int iconID = [self iconFamilyIDForType:'APPL' inBundle:bundle inResourceFile:rfile];
+    NSInteger iconID = [self iconFamilyIDForType:'APPL' inBundle:bundle inResourceFile:rfile];
     free(bundle);
     if (iconID == NSNotFound) {
         return nil;
@@ -524,7 +510,7 @@ static uint8_t maskReplacement[][128] = {
     return iconFamily;
 }
 
-- (int)iconFamilyIDForType:(OSType)type inBundle:(void *)bndl inResourceFile:(RFILE *)rfile {
+- (NSInteger)iconFamilyIDForType:(OSType)type inBundle:(void *)bndl inResourceFile:(RFILE *)rfile {
     short numIconFamilies = RSHORT(bndl, 0x0C) + 1;
     short *iconFamily = (short *)(bndl + 0x0E);
     short numFileRefs = RSHORT(bndl, (numIconFamilies * 4) + 0x12) + 1;
@@ -559,7 +545,7 @@ static uint8_t maskReplacement[][128] = {
     return NSNotFound;
 }
 
-- (CGImageRef)iconImageFromFamily:(NSDictionary *)iconFamily {
+- (UIImage*)iconImageFromFamily:(NSDictionary *)iconFamily {
     NSData *iconData, *iconMask;
     if ((iconMask = [iconFamily objectForKey:@"IMK#"])) {
         // has large mask, find best large icon
@@ -585,7 +571,7 @@ static uint8_t maskReplacement[][128] = {
     return NULL;
 }
 
-- (CGImageRef)iconImageWithData:(NSData *)iconData mask:(NSData *)iconMask size:(int)size depth:(int)depth {
+- (UIImage*)iconImageWithData:(NSData *)iconData mask:(NSData *)iconMask size:(int)size depth:(int)depth {
     if (iconData == nil || iconMask == nil) {
         return NULL;
     }
@@ -657,10 +643,12 @@ static uint8_t maskReplacement[][128] = {
     // create image
     CGDataProviderRef provider = CGDataProviderCreateWithCFData(pixels);
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGImageRef image = CGImageCreate(size, size, 8, 32, size * 4, colorSpace, kCGImageAlphaFirst | kCGBitmapByteOrder32Big, provider, NULL, false, kCGRenderingIntentDefault);
+    CGImageRef cgImage = CGImageCreate(size, size, 8, 32, size * 4, colorSpace, kCGImageAlphaFirst | kCGBitmapByteOrder32Big, provider, NULL, false, kCGRenderingIntentDefault);
     CGDataProviderRelease(provider);
     CGColorSpaceRelease(colorSpace);
     CFRelease(pixels);
+    UIImage *image = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
     return image;
 }
 
