@@ -90,10 +90,15 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
         });
         return;
     }
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-    UIViewController *controller = self.window.rootViewController;
-    [controller presentViewController:alert animated:YES completion:nil];
+    if ([UIAlertController class]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        UIViewController *controller = self.window.rootViewController;
+        [controller presentViewController:alert animated:YES completion:nil];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+    }
 }
 
 #pragma mark - Settings / Insert Disk panels
@@ -150,7 +155,7 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
         UIViewController *viewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:name];
         viewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         viewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        if ([sender isKindOfClass:[UISwipeGestureRecognizer class]]) {
+        if ([sender isKindOfClass:[UISwipeGestureRecognizer class]] && [UIDevice currentDevice].systemVersion.integerValue >= 8) {
             modalPanePresentationDirection = [(UISwipeGestureRecognizer*)sender direction];
             viewController.transitioningDelegate = self;
         }

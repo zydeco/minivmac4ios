@@ -59,6 +59,7 @@
 		28F6B4C11CF07F5C002D76D0 /* liblibmfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F6B4A81CF07EC9002D76D0 /* liblibmfs.a */; };
 		28F6B4C21CF07F5C002D76D0 /* liblibres.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F6B4B61CF07F32002D76D0 /* liblibres.a */; };
 		28F6B4CA1CF1FA7A002D76D0 /* about.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28F6B4C91CF1FA7A002D76D0 /* about.plist */; };
+		28F6B4CF1CF77099002D76D0 /* compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4CE1CF77099002D76D0 /* compat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -206,6 +207,7 @@
 		28F6B4A81CF07EC9002D76D0 /* liblibmfs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibmfs.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F6B4B61CF07F32002D76D0 /* liblibres.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibres.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F6B4C91CF1FA7A002D76D0 /* about.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = about.plist; sourceTree = "<group>"; };
+		28F6B4CE1CF77099002D76D0 /* compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = compat.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +364,7 @@
 				28F6B4501CF07C48002D76D0 /* UIImage+DiskImageIcon.h */,
 				28F6B4511CF07C48002D76D0 /* UIImage+DiskImageIcon.m */,
 				28F6B4C91CF1FA7A002D76D0 /* about.plist */,
+				28F6B4CE1CF77099002D76D0 /* compat.m */,
 			);
 			path = "Mini vMac";
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				28F676B91CD15E0B00FC6FA6 /* Sources */,
 				28F676BA1CD15E0B00FC6FA6 /* Frameworks */,
 				28F676BB1CD15E0B00FC6FA6 /* Resources */,
+				28F6B4CD1CF76D88002D76D0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -612,6 +616,7 @@
 				28CE8EB81CD4C3B200FE25A8 /* M68KITAB.c in Sources */,
 				28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */,
 				28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */,
+				28F6B4CF1CF77099002D76D0 /* compat.m in Sources */,
 				28F6B4521CF07C48002D76D0 /* UIImage+DiskImageIcon.m in Sources */,
 				28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */,
 				28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */,
@@ -724,7 +729,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -763,7 +768,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -779,6 +784,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "-DUSE_LIBRES";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
@@ -795,6 +801,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "-DUSE_LIBRES";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;

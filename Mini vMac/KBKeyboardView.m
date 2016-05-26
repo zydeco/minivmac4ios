@@ -122,7 +122,7 @@
             fontScale *= [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? 0.6 : 0.65;
         }
         key.label = label;
-        key.titleLabel.font = [UIFont systemFontOfSize:fontSize * fontScale weight:UIFontWeightRegular];
+        key.titleLabel.font = [UIFont systemFontOfSize:fontSize * fontScale weight:&UIFontWeightRegular ? UIFontWeightRegular : 1.0];
         [keyPlane addObject:key];
     }];
     return keyPlane;

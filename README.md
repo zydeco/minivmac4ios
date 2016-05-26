@@ -11,7 +11,7 @@
 
 ## Requirements
 
-* iOS 9 or later
+* iOS 7 or later
 * Mac Plus ROM image
 * Disk images with Mac software
 * A Mac with Xcode 7 (required to build)

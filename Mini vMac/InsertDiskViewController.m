@@ -104,7 +104,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case 0: return diskImages.count + (self.editing ? 1 : 0);
+        case 0: return diskImages.count + (self.editing && [UIAlertController class] ? 1 : 0);
         case 1: return otherFiles.count;
         default: return 0;
     }
@@ -188,7 +188,12 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self askDeleteFile:[self fileAtIndexPath:indexPath]];
+        NSString *filePath = [self fileAtIndexPath:indexPath];
+        if ([UIAlertController class]) {
+            [self askDeleteFile:filePath];
+        } else {
+            [self deleteFile:filePath];
+        }
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         [self createDiskImage];
     }
@@ -199,7 +204,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-    return (action == @selector(share:) || action == @selector(rename:) || action == @selector(delete:));
+    return (action == @selector(share:) || ([UIAlertController class] && (action == @selector(rename:) || action == @selector(delete:))));
 }
 
 - (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
@@ -217,19 +222,23 @@
 
 #pragma mark - File Actions
 
+- (void)deleteFile:(NSString*)filePath {
+    NSError *error = nil;
+    if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
+        NSIndexPath *indexPath = [self indexPathForFile:filePath];
+        [self loadDirectoryContents];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else {
+        [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not delete file", nil) message:error.localizedDescription];
+    }
+}
+
 - (void)askDeleteFile:(NSString*)filePath {
     NSString *fileName = filePath.lastPathComponent;
     NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete %@? This operation cannot be undone.", nil), fileName];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete File", nil) message:message preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        NSError *error = nil;
-        if ([[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
-            NSIndexPath *indexPath = [self indexPathForFile:filePath];
-            [self loadDirectoryContents];
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        } else {
-            [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not delete file", nil) message:error.localizedDescription];
-        }
+        [self deleteFile:filePath];
     }]];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
@@ -451,9 +460,11 @@
 
 - (void)share:(id)sender {
     UIActivityViewController *avc = [[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:self.filePath]] applicationActivities:nil];
-    avc.modalPresentationStyle = UIModalPresentationPopover;
-    avc.popoverPresentationController.sourceView = self.imageView;
-    avc.popoverPresentationController.sourceRect = self.imageView.bounds;
+    if ([avc respondsToSelector:@selector(popoverPresentationController)]) {
+        avc.modalPresentationStyle = UIModalPresentationPopover;
+        avc.popoverPresentationController.sourceView = self.imageView;
+        avc.popoverPresentationController.sourceRect = self.imageView.bounds;
+    }
     [self.controller presentViewController:avc animated:YES completion:nil];
 }
 

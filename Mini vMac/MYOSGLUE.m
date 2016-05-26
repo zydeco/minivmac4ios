@@ -1548,13 +1548,19 @@ LOCALPROC MacMsgDisplayOn() {
     if (SavedBriefMsg != nullpr) {
         NSString *title = NSStringCreateFromSubstCStr(SavedBriefMsg, falseblnr);
         NSString *message = NSStringCreateFromSubstCStr(SavedLongMsg, falseblnr);
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        blnr wasStopped = CurSpeedStopped;
-        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            SetSpeedStopped(wasStopped);
-        }]];
-        SetSpeedStopped(trueblnr);
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        if ([UIAlertController class]) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+            blnr wasStopped = CurSpeedStopped;
+            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                SetSpeedStopped(wasStopped);
+            }]];
+            SetSpeedStopped(trueblnr);
+            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+        } else {
+            // fallback for iOS 7
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
         SavedBriefMsg = nullpr;
         SavedLongMsg = nullpr;
     }
