@@ -576,6 +576,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		28F6B4CD1CF76D88002D76D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string $GIT_VERSION";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		28F676B91CD15E0B00FC6FA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
