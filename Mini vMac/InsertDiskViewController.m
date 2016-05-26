@@ -62,7 +62,7 @@
 
 - (void)loadDirectoryContents {
     NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:basePath error:NULL];
-    diskImages = [allFiles pathsMatchingExtensions:[AppDelegate sharedInstance].diskImageExtensions];
+    diskImages = [allFiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%@ containsObject: pathExtension.lowercaseString", [AppDelegate sharedInstance].diskImageExtensions]];
     otherFiles = [allFiles filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSString* _Nonnull name, NSDictionary<NSString *,id> * _Nullable bindings) {
         BOOL isDiskImage = [diskImages containsObject:name];
         BOOL isDirectory;
