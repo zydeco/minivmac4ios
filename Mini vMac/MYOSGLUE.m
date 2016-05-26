@@ -103,14 +103,17 @@ LOCALFUNC blnr FindNamedChildFilePath(NSString *parentPath, char *ChildName, NSS
     BOOL isDirectory;
     if ([fm fileExistsAtPath:parentPath isDirectory:&isDirectory] && isDirectory) {
         NSString *searchString = @(ChildName).lowercaseString;
-        *childPath = NULL;
+        __block NSString *foundName = nil;
         [[fm contentsOfDirectoryAtPath:parentPath error:NULL] enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj.lowercaseString isEqualToString:searchString]) {
                 *stop = YES;
-                *childPath = [parentPath stringByAppendingPathComponent:obj];
+                foundName = obj;
             }
         }];
-        return *childPath != NULL;
+        if (foundName) {
+            *childPath = [parentPath stringByAppendingPathComponent:foundName];
+        }
+        return foundName != nil;
     } else {
         return falseblnr;
     }
