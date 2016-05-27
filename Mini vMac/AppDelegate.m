@@ -21,6 +21,7 @@ IMPORTPROC SetMouseLoc(ui4r h, ui4r v);
 IMPORTPROC SetMouseDelta(ui4r dh, ui4r dv);
 IMPORTFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail);
 IMPORTFUNC blnr Sony_IsInserted(NSString *filePath);
+IMPORTFUNC blnr AnyDiskInserted(void);
 EXPORTVAR(ui3b,SpeedValue);
 IMPORTPROC SetKeyState(int key, blnr down);
 IMPORTPROC MacInterrupt();
@@ -77,6 +78,9 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     self.emulatorRunning = NO;
+    if (AnyDiskInserted() == falseblnr) {
+        exit(0);
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
