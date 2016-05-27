@@ -1,0 +1,8 @@
+Package: net.namedfork.minivmac
+Name: Mini vMac
+Architecture: iphoneos-arm
+Description: Mini vMac Mac emulator
+Depends: firmware (>= 7.0)
+Homepage: https://namedfork.net/minivmac
+Maintainer: Jesus A. Alvarez <zydeco@namedfork.net>
+Author: Jesus A. Alvarez <zydeco@namedfork.net>
