@@ -199,6 +199,16 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
 
 #pragma mark - Files
 
+- (BOOL)isSandboxed {
+    static dispatch_once_t onceToken;
+    static BOOL sandboxed;
+    dispatch_once(&onceToken, ^{
+        NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+        sandboxed = ![bundlePath hasPrefix:@"/Applications/"];
+    });
+    return sandboxed;
+}
+
 - (NSArray<NSString *> *)diskImageExtensions {
     return @[@"dsk", @"img", @"dc42", @"diskcopy42"];
 }
@@ -208,6 +218,10 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
     static NSString *documentsPath;
     dispatch_once(&onceToken, ^{
         documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject.stringByStandardizingPath;
+        if (!self.sandboxed) {
+            documentsPath = [documentsPath stringByAppendingPathComponent:@"Mini vMac"].stringByStandardizingPath;
+        }
+        [[NSFileManager defaultManager] createDirectoryAtPath:documentsPath withIntermediateDirectories:YES attributes:nil error:NULL];
         [[NSFileManager defaultManager] createDirectoryAtPath:documentsPath withIntermediateDirectories:YES attributes:nil error:NULL];
     });
     return documentsPath;

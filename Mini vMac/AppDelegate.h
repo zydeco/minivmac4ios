@@ -17,6 +17,7 @@ extern NSString * const MNVMDidEjectDiskNotification;
 @property (assign, nonatomic, getter=isEmulatorRunning) BOOL emulatorRunning;
 @property (nonatomic, readonly) NSString *documentsPath;
 @property (nonatomic, readonly) NSArray<NSString*> *diskImageExtensions;
+@property (readonly, nonatomic, getter = isSandboxed) BOOL sandboxed;
 
 + (instancetype)sharedInstance;
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
