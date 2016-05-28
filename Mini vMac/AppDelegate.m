@@ -32,12 +32,11 @@ static NSObject<Emulator> *sharedEmulator = nil;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sharedAppDelegate = self;
-    [self initDefaults];
     if (![self loadEmulator:[[NSUserDefaults standardUserDefaults] stringForKey:@"machine"]]) {
         [self loadEmulator:@"MacPlus4M"];
     }
+    [self initDefaults];
     [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
-    
     return YES;
 }
 
