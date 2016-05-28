@@ -26,7 +26,5 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string>Emulator</string>
-	<key>CFBundleIconFile</key>
-	<string>MacII.png</string>
 </dict>
 </plist>

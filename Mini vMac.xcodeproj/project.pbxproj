@@ -45,12 +45,12 @@
 		283423E01CF9C66D0088B634 /* VIA2EMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423591CF9C0F10088B634 /* VIA2EMDV.c */; };
 		283423E11CF9C66D0088B634 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235B1CF9C0F10088B634 /* VIAEMDEV.c */; };
 		283423E21CF9C66D0088B634 /* VIDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235D1CF9C0F10088B634 /* VIDEMDEV.c */; };
-		283423E91CFA32870088B634 /* MacPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E31CFA32800088B634 /* MacPlus.png */; };
-		283423EA1CFA32870088B634 /* MacPlus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E41CFA32800088B634 /* MacPlus@2x.png */; };
-		283423EB1CFA32870088B634 /* MacPlus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E51CFA32800088B634 /* MacPlus@3x.png */; };
-		283423EF1CFA329C0088B634 /* MacII.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EC1CFA329C0088B634 /* MacII.png */; };
-		283423F01CFA329C0088B634 /* MacII@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423ED1CFA329C0088B634 /* MacII@2x.png */; };
-		283423F11CFA329C0088B634 /* MacII@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EE1CFA329C0088B634 /* MacII@3x.png */; };
+		283423E91CFA32870088B634 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E31CFA32800088B634 /* Icon.png */; };
+		283423EA1CFA32870088B634 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E41CFA32800088B634 /* Icon@2x.png */; };
+		283423EB1CFA32870088B634 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E51CFA32800088B634 /* Icon@3x.png */; };
+		283423EF1CFA329C0088B634 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EC1CFA329C0088B634 /* Icon.png */; };
+		283423F01CFA329C0088B634 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423ED1CFA329C0088B634 /* Icon@2x.png */; };
+		283423F11CFA329C0088B634 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EE1CFA329C0088B634 /* Icon@3x.png */; };
 		28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B611CDE97D600B86C45 /* InsertDiskViewController.m */; };
 		28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B641CDE97E900B86C45 /* SettingsViewController.m */; };
 		28BA897E1CE7315400A98104 /* KBKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89751CE7315400A98104 /* KBKey.m */; };
@@ -225,12 +225,12 @@
 		2834239A1CF9C5380088B634 /* CNFGRAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGRAPI.h; sourceTree = "<group>"; };
 		2834239B1CF9C5380088B634 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
 		2834239C1CF9C5380088B634 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		283423E31CFA32800088B634 /* MacPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MacPlus.png; sourceTree = "<group>"; };
-		283423E41CFA32800088B634 /* MacPlus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MacPlus@2x.png"; sourceTree = "<group>"; };
-		283423E51CFA32800088B634 /* MacPlus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MacPlus@3x.png"; sourceTree = "<group>"; };
-		283423EC1CFA329C0088B634 /* MacII.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MacII.png; sourceTree = "<group>"; };
-		283423ED1CFA329C0088B634 /* MacII@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MacII@2x.png"; sourceTree = "<group>"; };
-		283423EE1CFA329C0088B634 /* MacII@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MacII@3x.png"; sourceTree = "<group>"; };
+		283423E31CFA32800088B634 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		283423E41CFA32800088B634 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		283423E51CFA32800088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
+		283423EC1CFA329C0088B634 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		283423ED1CFA329C0088B634 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		283423EE1CFA329C0088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
 		28848B601CDE97D600B86C45 /* InsertDiskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertDiskViewController.h; sourceTree = "<group>"; };
 		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
 		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -362,9 +362,9 @@
 				283422E81CF8F1C80088B634 /* CNFGRAPI.h */,
 				283422E91CF8F1C80088B634 /* EMCONFIG.h */,
 				283422CE1CF8EF8C0088B634 /* Info.plist */,
-				283423E31CFA32800088B634 /* MacPlus.png */,
-				283423E41CFA32800088B634 /* MacPlus@2x.png */,
-				283423E51CFA32800088B634 /* MacPlus@3x.png */,
+				283423E31CFA32800088B634 /* Icon.png */,
+				283423E41CFA32800088B634 /* Icon@2x.png */,
+				283423E51CFA32800088B634 /* Icon@3x.png */,
 			);
 			path = MacPlus4M;
 			sourceTree = "<group>";
@@ -466,9 +466,9 @@
 				2834239A1CF9C5380088B634 /* CNFGRAPI.h */,
 				2834239B1CF9C5380088B634 /* EMCONFIG.h */,
 				2834239C1CF9C5380088B634 /* Info.plist */,
-				283423EC1CFA329C0088B634 /* MacII.png */,
-				283423ED1CFA329C0088B634 /* MacII@2x.png */,
-				283423EE1CFA329C0088B634 /* MacII@3x.png */,
+				283423EC1CFA329C0088B634 /* Icon.png */,
+				283423ED1CFA329C0088B634 /* Icon@2x.png */,
+				283423EE1CFA329C0088B634 /* Icon@3x.png */,
 			);
 			path = MacII;
 			sourceTree = "<group>";
@@ -809,9 +809,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				283423E91CFA32870088B634 /* MacPlus.png in Resources */,
-				283423EA1CFA32870088B634 /* MacPlus@2x.png in Resources */,
-				283423EB1CFA32870088B634 /* MacPlus@3x.png in Resources */,
+				283423E91CFA32870088B634 /* Icon.png in Resources */,
+				283423EA1CFA32870088B634 /* Icon@2x.png in Resources */,
+				283423EB1CFA32870088B634 /* Icon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -819,9 +819,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				283423EF1CFA329C0088B634 /* MacII.png in Resources */,
-				283423F01CFA329C0088B634 /* MacII@2x.png in Resources */,
-				283423F11CFA329C0088B634 /* MacII@3x.png in Resources */,
+				283423EF1CFA329C0088B634 /* Icon.png in Resources */,
+				283423F01CFA329C0088B634 /* Icon@2x.png in Resources */,
+				283423F11CFA329C0088B634 /* Icon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
