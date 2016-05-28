@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Mac Plus 4M</string>
+	<string>Mac Plus</string>
+	<key>CFBundleGetInfoString</key>
+	<string>4M, 512×342</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -24,5 +26,7 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string>Emulator</string>
+	<key>CFBundleIconFile</key>
+	<string>MacPlus.png</string>
 </dict>
 </plist>

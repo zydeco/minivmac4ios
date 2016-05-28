@@ -13,9 +13,18 @@
 
 @end
 
+typedef enum : NSInteger {
+    SettingsSectionSpeed,
+    SettingsSectionMouse,
+    SettingsSectionKeyboard,
+    SettingsSectionMachine,
+    SettingsSectionAbout
+} SettingsSection;
+
 @implementation SettingsViewController
 {
     NSArray *keyboardLayouts;
+    NSArray<NSBundle*> *emulatorBundles;
     NSString *aboutTitle;
     NSArray<NSDictionary<NSString*,NSString*>*> *aboutItems;
     UITextView *footerView;
@@ -24,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     keyboardLayouts = [[NSBundle mainBundle] pathsForResourcesOfType:@"nfkeyboardlayout" inDirectory:@"Keyboard Layouts"];
+    emulatorBundles = [AppDelegate sharedInstance].emulatorBundles;
     [self loadCredits];
 }
 
@@ -79,42 +89,59 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 2) {
-        return keyboardLayouts.count;
-    } else if (section == 3) {
-        return aboutItems.count;
-    } else {
-        return 1;
+    switch (section) {
+        case SettingsSectionKeyboard:
+            return keyboardLayouts.count;
+        case SettingsSectionMachine:
+            return emulatorBundles.count;
+        case SettingsSectionAbout:
+            return aboutItems.count;
+        default:
+            return 1;
     }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
-        case 0: return NSLocalizedString(@"Speed", nil);
-        case 1: return NSLocalizedString(@"Mouse Type", nil);
-        case 2: return NSLocalizedString(@"Keyboard Layout", nil);
-        case 3: return aboutTitle;
-        default: return nil;
+        case SettingsSectionSpeed:
+            return NSLocalizedString(@"Speed", nil);
+        case SettingsSectionMouse:
+            return NSLocalizedString(@"Mouse Type", nil);
+        case SettingsSectionMachine:
+            return NSLocalizedString(@"Emulated Machine", nil);
+        case SettingsSectionKeyboard:
+            return NSLocalizedString(@"Keyboard Layout", nil);
+        case SettingsSectionAbout:
+            return aboutTitle;
+        default:return nil;
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == 3) {
+    if (section == SettingsSectionAbout) {
         return footerView;
     } else {
         return nil;
     }
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == SettingsSectionMachine) {
+        return NSLocalizedString(@"Changing the emulated machine requires to relaunch Mini vMac", nil);
+    } else {
+        return nil;
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 3) {
+    if (section == SettingsSectionAbout) {
         return footerView.bounds.size.height;
     } else {
-        return 0.0;
+        return UITableViewAutomaticDimension;
     }
 }
 
@@ -122,21 +149,31 @@
     UITableViewCell *cell = nil;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger section = indexPath.section;
-    if (section == 0) {
+    if (section == SettingsSectionSpeed) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"speed" forIndexPath:indexPath];
         UISegmentedControl *speedControl = (UISegmentedControl*)[cell viewWithTag:128];
         speedControl.selectedSegmentIndex = [defaults integerForKey:@"speedValue"];
-    } else if (section == 1) {
+    } else if (section == SettingsSectionMouse) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"mouse" forIndexPath:indexPath];
         UISegmentedControl *mouseControl = (UISegmentedControl*)[cell viewWithTag:128];
         mouseControl.selectedSegmentIndex = [defaults boolForKey:@"trackpad"] ? 1 : 0;
-    } else if (section == 2) {
+    } else if (section == SettingsSectionKeyboard) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"keyboard" forIndexPath:indexPath];
         NSString *layout = keyboardLayouts[indexPath.row];
         cell.textLabel.text = layout.lastPathComponent.stringByDeletingPathExtension;
         BOOL selected = [[defaults stringForKey:@"keyboardLayout"] isEqualToString:layout.lastPathComponent];
         cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-    } else if (section == 3) {
+    } else if (section == SettingsSectionMachine) {
+        NSBundle *bundle = emulatorBundles[indexPath.row];
+        NSString *bundleName = bundle.bundlePath.lastPathComponent.stringByDeletingPathExtension;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"machine" forIndexPath:indexPath];
+        cell.textLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        cell.detailTextLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleGetInfoString"];
+        NSString *iconName = [bundle objectForInfoDictionaryKey:@"CFBundleIconFile"];
+        cell.imageView.image = [UIImage imageNamed:iconName inBundle:bundle compatibleWithTraitCollection:nil];
+        BOOL selected = [[defaults stringForKey:@"machine"] isEqualToString:bundleName];
+        cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    } else if (section == SettingsSectionAbout) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"about" forIndexPath:indexPath];
         NSDictionary<NSString*,NSString*> *item = aboutItems[indexPath.row];
         cell.textLabel.text = item[@"text"];
@@ -156,12 +193,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 2) {
+    if (indexPath.section == SettingsSectionKeyboard) {
         // selected keyboard layout
         NSString *layout = keyboardLayouts[indexPath.row];
         [defaults setValue:layout.lastPathComponent forKey:@"keyboardLayout"];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-    } if (indexPath.section == 3) {
+    } else if (indexPath.section == SettingsSectionMachine) {
+        // selected emulated machine
+        NSBundle *bundle = emulatorBundles[indexPath.row];
+        NSString *bundleName = bundle.bundlePath.lastPathComponent.stringByDeletingPathExtension;
+        [defaults setValue:bundleName forKey:@"machine"];
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else if (indexPath.section == SettingsSectionAbout) {
         // links in about
         NSString *linkURL = aboutItems[indexPath.row][@"link"];
         if (linkURL != nil) {

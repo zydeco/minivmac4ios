@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDisplayName</key>
 	<string>Mac II</string>
+	<key>CFBundleGetInfoString</key>
+	<string>8M, 1024×768 @ 8-bit, no sound</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -24,5 +26,7 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string>Emulator</string>
+	<key>CFBundleIconFile</key>
+	<string>MacII.png</string>
 </dict>
 </plist>

@@ -17,6 +17,7 @@
 @property (nonatomic, assign) NSInteger speed;
 @property (nonatomic, weak) CALayer *screenLayer;
 
+@property (nonatomic, readonly) NSBundle *bundle;
 @property (nonatomic, readonly) CGSize screenSize;
 @property (nonatomic, readonly) NSString *insertDiskNotification, *ejectDiskNotification;
 @property (nonatomic, readonly) NSInteger initialSpeed;

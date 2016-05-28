@@ -14,7 +14,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, readonly) NSString *documentsPath;
 @property (nonatomic, readonly) NSArray<NSString*> *diskImageExtensions;
-@property (nonatomic, readonly) NSArray<NSBundle*> *availableEmulators;
+@property (nonatomic, readonly) NSArray<NSBundle*> *emulatorBundles;
 @property (readonly, nonatomic, getter = isSandboxed) BOOL sandboxed;
 
 + (instancetype)sharedInstance;

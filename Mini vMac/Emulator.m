@@ -56,6 +56,10 @@ static dispatch_once_t onceToken;
     return WantInitSpeedValue;
 }
 
+- (NSBundle *)bundle {
+    return [NSBundle bundleForClass:self.class];
+}
+
 - (NSInteger)speed {
     return SpeedValue;
 }

@@ -50,7 +50,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
     NSDictionary *defaultValues = @{@"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
                                     @"frameskip": @(0),
                                     @"keyboardLayout": layoutForLanguage[firstLanguage],
-                                    @"machine": @"MacII"
+                                    @"machine": @"MacPlus4M"
                                     };
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -67,7 +67,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
     }
 }
 
-- (NSArray<NSBundle*>*)availableEmulators {
+- (NSArray<NSBundle*>*)emulatorBundles {
     NSString *pluginsPath = [NSBundle mainBundle].builtInPlugInsPath;
     NSArray<NSString*> *names = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:pluginsPath error:NULL];
     NSMutableArray *emulatorBundles = [NSMutableArray arrayWithCapacity:names.count];
@@ -79,7 +79,6 @@ static NSObject<Emulator> *sharedEmulator = nil;
 }
 
 - (BOOL)loadEmulator:(NSString*)name {
-    NSLog(@"Loading %@", name);
     NSString *emulatorBundleName = [name stringByAppendingPathExtension:@"mnvm"];
     NSString *emulatorBundlePath = [[NSBundle mainBundle].builtInPlugInsPath stringByAppendingPathComponent:emulatorBundleName];
     NSBundle *emulatorBundle = [NSBundle bundleWithPath:emulatorBundlePath];
