@@ -169,8 +169,7 @@ typedef enum : NSInteger {
         cell = [tableView dequeueReusableCellWithIdentifier:@"machine" forIndexPath:indexPath];
         cell.textLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
         cell.detailTextLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleGetInfoString"];
-        NSAssert([bundle.bundlePath hasPrefix:[NSBundle mainBundle].bundlePath], @"emulator bundle is in main bundle");
-        NSString *iconName = [[bundle.bundlePath stringByAppendingPathComponent:@"Icon"] substringFromIndex:[NSBundle mainBundle].bundlePath.length+1];
+        NSString *iconName = [NSString stringWithFormat:@"PlugIns/%@.mnvm/Icon", bundleName];
         cell.imageView.image = [UIImage imageNamed:iconName];
         BOOL selected = [[defaults stringForKey:@"machine"] isEqualToString:bundleName];
         cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
