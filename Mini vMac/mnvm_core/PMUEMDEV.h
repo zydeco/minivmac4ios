@@ -1,7 +1,7 @@
 /*
-	MOUSEMDV.h
+	PMUEMDEV.h
 
-	Copyright (C) 2003 Philip Cummins, Paul C. Pratt
+	Copyright (C) 2008 Paul C. Pratt
 
 	You can redistribute this file and/or modify it under the terms
 	of version 2 of the GNU General Public License as published by
@@ -14,11 +14,11 @@
 	license for more details.
 */
 
-#ifdef MOUSEMDV_H
+#ifdef PMUEMDEV_H
 #error "header already included"
 #else
-#define MOUSEMDV_H
+#define PMUEMDEV_H
 #endif
 
-EXPORTPROC Mouse_Update(void);
-EXPORTPROC Mouse_EndTickNotify(void);
+EXPORTPROC PmuToReady_ChangeNtfy(void);
+EXPORTPROC PMU_DoTask(void);

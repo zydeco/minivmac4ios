@@ -66,11 +66,11 @@ typedef si5b si5r;
 #define MySoundEnabled 1
 
 #define MySoundRecenterSilence 0
-#define kLn2SoundSampSz 4
+#define kLn2SoundSampSz 3
 
 #define dbglog_HAVE 0
 
-#define NumDrives 16
+#define NumDrives 6
 #define IncludeSonyRawMode 1
 #define IncludeSonyGetName 1
 #define IncludeSonyNew 0

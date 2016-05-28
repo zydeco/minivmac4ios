@@ -15,10 +15,10 @@
 #define EnableMagnify 0
 #define WantInitRunInBackground 0
 #define WantInitNotAutoSlow 0
-#define WantInitSpeedValue 1
-#define NeedRequestInsertDisk 1
-#define NeedDoMoreCommandsMsg 1
-#define NeedDoAboutMsg 1
+#define WantInitSpeedValue 2
+#define NeedRequestInsertDisk 0
+#define NeedDoMoreCommandsMsg 0
+#define NeedDoAboutMsg 0
 #define UseControlKeys 0
 #define UseActvCode 0
 #define EnableDemoMsg 0
@@ -28,6 +28,6 @@
 #define NeedIntlChars 1
 #define kStrAppName "Mini vMac"
 #define kAppVariationStr "minivmac-3.4.0-ios"
-#define kStrCopyrightYear "2008-2016"
+#define kStrCopyrightYear "2016"
 #define kMaintainerName "Jesús A. Álvarez"
-#define kStrHomePage "http://www.namedfork.net/minivmac/"
+#define kStrHomePage "https://namedfork.net/minivmac"

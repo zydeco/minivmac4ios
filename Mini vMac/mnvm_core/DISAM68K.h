@@ -1,7 +1,7 @@
 /*
-	MOUSEMDV.h
+	DISAM68K.h
 
-	Copyright (C) 2003 Philip Cummins, Paul C. Pratt
+	Copyright (C) 2010 Paul C. Pratt
 
 	You can redistribute this file and/or modify it under the terms
 	of version 2 of the GNU General Public License as published by
@@ -14,11 +14,16 @@
 	license for more details.
 */
 
-#ifdef MOUSEMDV_H
+/*
+	DISAssemble Motorola 68K instructions.
+*/
+
+#ifdef DIS1M68K_H
 #error "header already included"
 #else
-#define MOUSEMDV_H
+#define DIS1M68K_H
 #endif
 
-EXPORTPROC Mouse_Update(void);
-EXPORTPROC Mouse_EndTickNotify(void);
+EXPORTPROC DisasmOneOrSave(ui5r pc);
+
+EXPORTPROC m68k_WantDisasmContext(void);
