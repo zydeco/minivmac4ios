@@ -7,35 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-
-extern NSString * const MNVMDidInsertDiskNotification;
-extern NSString * const MNVMDidEjectDiskNotification;
+#import "EmulatorProtocol.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (assign, nonatomic, getter=isEmulatorRunning) BOOL emulatorRunning;
 @property (nonatomic, readonly) NSString *documentsPath;
 @property (nonatomic, readonly) NSArray<NSString*> *diskImageExtensions;
+@property (nonatomic, readonly) NSArray<NSBundle*> *availableEmulators;
 @property (readonly, nonatomic, getter = isSandboxed) BOOL sandboxed;
 
 + (instancetype)sharedInstance;
++ (id<Emulator>)sharedEmulator;
+
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
 - (IBAction)showInsertDisk:(id)sender;
 - (IBAction)showSettings:(id)sender;
-
-- (void)setMouseX:(NSInteger)x Y:(NSInteger)y;
-- (void)moveMouseX:(NSInteger)x Y:(NSInteger)y;
-- (void)setMouseButton:(BOOL)down;
-
-- (void)keyDown:(int)scancode;
-- (void)keyUp:(int)scancode;
-
-- (BOOL)insertDisk:(NSString*)path;
-- (BOOL)isDiskInserted:(NSString*)path;
-
-- (void)macInterrupt;
-- (void)macReset;
 
 @end
 

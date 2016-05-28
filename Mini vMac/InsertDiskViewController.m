@@ -49,15 +49,15 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(reloadData:) name:MNVMDidInsertDiskNotification object:nil];
-    [nc addObserver:self selector:@selector(reloadData:) name:MNVMDidEjectDiskNotification object:nil];
+    [nc addObserver:self selector:@selector(reloadData:) name:[AppDelegate sharedEmulator].insertDiskNotification object:nil];
+    [nc addObserver:self selector:@selector(reloadData:) name:[AppDelegate sharedEmulator].ejectDiskNotification object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc removeObserver:self name:MNVMDidInsertDiskNotification object:nil];
-    [nc removeObserver:self name:MNVMDidEjectDiskNotification object:nil];
+    [nc removeObserver:self name:[AppDelegate sharedEmulator].insertDiskNotification object:nil];
+    [nc removeObserver:self name:[AppDelegate sharedEmulator].ejectDiskNotification object:nil];
 }
 
 - (void)loadDirectoryContents {
@@ -89,11 +89,11 @@
 
 - (void)macInterrupt:(id)sender {
     [self dismiss:sender];
-    [[AppDelegate sharedInstance] macInterrupt];
+    [[AppDelegate sharedEmulator] interrupt];
 }
 
 - (void)macReset:(id)sender {
-    [[AppDelegate sharedInstance] macReset];
+    [[AppDelegate sharedEmulator] reset];
 }
 
 #pragma mark - Table view data source
@@ -158,7 +158,7 @@
     NSString *filePath = [self fileAtIndexPath:indexPath];
     if (filePath) {
         cell.filePath = filePath;
-        if ([[AppDelegate sharedInstance] isDiskInserted:filePath]) {
+        if ([[AppDelegate sharedEmulator] isDiskInserted:filePath]) {
             cell.userInteractionEnabled = NO;
             cell.textLabel.enabled = NO;
             cell.imageView.alpha = 0.5;
@@ -179,7 +179,7 @@
             return UITableViewCellEditingStyleInsert;
         }
         NSString *filePath = [self fileAtIndexPath:indexPath];
-        BOOL isInserted = [[AppDelegate sharedInstance] isDiskInserted:filePath];
+        BOOL isInserted = [[AppDelegate sharedEmulator] isDiskInserted:filePath];
         return isInserted ? UITableViewCellEditingStyleNone : UITableViewCellEditingStyleDelete;
     } else {
         return UITableViewCellEditingStyleDelete;
@@ -213,9 +213,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *filePath = [self fileAtIndexPath:indexPath];
-    if (filePath && ![[AppDelegate sharedInstance] isDiskInserted:filePath]) {
+    if (filePath && ![[AppDelegate sharedEmulator] isDiskInserted:filePath]) {
         [self dismissViewControllerAnimated:YES completion:^{
-            [[AppDelegate sharedInstance] insertDisk:filePath];
+            [[AppDelegate sharedEmulator] insertDisk:filePath];
         }];
     }
 }

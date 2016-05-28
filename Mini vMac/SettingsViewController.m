@@ -8,7 +8,6 @@
 
 #import "SettingsViewController.h"
 #import "AppDelegate.h"
-#import "CNFGRAPI.h"
 
 @interface SettingsViewController ()
 
@@ -49,12 +48,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [AppDelegate sharedInstance].emulatorRunning = NO;
+    [AppDelegate sharedEmulator].running = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [AppDelegate sharedInstance].emulatorRunning = YES;
+    [AppDelegate sharedEmulator].running = YES;
 }
 
 - (void)showInsertDisk:(id)sender {
@@ -146,10 +145,6 @@
             NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
             NSString *commitString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"GitVersion"];
             cell.detailTextLabel.text = commitString.length > 0 ? [NSString stringWithFormat:@"%@ (%@)", versionString, commitString] : versionString;
-        } else if ([detailText isEqualToString:@"kAppVariationStr"]) {
-            cell.detailTextLabel.text = @(kAppVariationStr);
-        } else if ([detailText isEqualToString:@"kMaintainerName"]) {
-            cell.detailTextLabel.text = @(kMaintainerName);
         } else {
             cell.detailTextLabel.text = detailText;
         }

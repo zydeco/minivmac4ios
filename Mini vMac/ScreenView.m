@@ -7,7 +7,7 @@
 //
 
 #import "ScreenView.h"
-#import "CNFGGLOB.h"
+#import "AppDelegate.h"
 
 static ScreenView *sharedScreenView = nil;
 
@@ -23,7 +23,8 @@ static ScreenView *sharedScreenView = nil;
     [super awakeFromNib];
     sharedScreenView = self;
     videoLayer = [CALayer layer];
-    screenSize = CGSizeMake(vMacScreenWidth, vMacScreenHeight);
+    [AppDelegate sharedEmulator].screenLayer = videoLayer;
+    screenSize = [AppDelegate sharedEmulator].screenSize;
     [self.layer addSublayer:videoLayer];
 }
 
@@ -37,12 +38,6 @@ static ScreenView *sharedScreenView = nil;
 
 - (CGSize)screenSize {
     return screenSize;
-}
-
-- (void)updateScreen:(CGImageRef)newScreenImage {
-    CGImageRelease(screenImage);
-    screenImage = CGImageRetain(newScreenImage);
-    videoLayer.contents = (__bridge id)screenImage;
 }
 
 - (void)layoutSubviews {

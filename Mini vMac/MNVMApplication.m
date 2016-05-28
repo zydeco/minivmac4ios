@@ -65,18 +65,18 @@ static int8_t usb_to_adb_scancode[] = {
     if (scancode == 57) {
         // caps lock
         if (event._isKeyDown && !physicalCapsLocked) {
-            [[AppDelegate sharedInstance] keyDown:scancode];
+            [[AppDelegate sharedEmulator] keyDown:scancode];
             physicalCapsLocked = YES;
         } else if (event._isKeyDown && physicalCapsLocked) {
-            [[AppDelegate sharedInstance] keyUp:scancode];
+            [[AppDelegate sharedEmulator] keyUp:scancode];
             physicalCapsLocked = NO;
         }
-    } else if (scancode >= 0 && [AppDelegate sharedInstance].emulatorRunning) {
+    } else if (scancode >= 0 && [AppDelegate sharedEmulator].running) {
         if (event._isKeyDown) {
             [self _updateCapsLockStatus:event];
-            [[AppDelegate sharedInstance] keyDown:scancode];
+            [[AppDelegate sharedEmulator] keyDown:scancode];
         } else {
-            [[AppDelegate sharedInstance] keyUp:scancode];
+            [[AppDelegate sharedEmulator] keyUp:scancode];
         }
     }
 }
@@ -90,9 +90,9 @@ static int8_t usb_to_adb_scancode[] = {
             if (currentCapsLock != physicalCapsLocked) {
                 physicalCapsLocked = currentCapsLock;
                 if (physicalCapsLocked) {
-                    [[AppDelegate sharedInstance] keyDown:57];
+                    [[AppDelegate sharedEmulator] keyDown:57];
                 } else {
-                    [[AppDelegate sharedInstance] keyUp:57];
+                    [[AppDelegate sharedEmulator] keyUp:57];
                 }
             }
         }

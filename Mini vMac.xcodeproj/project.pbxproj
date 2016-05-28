@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283422D21CF8EF8C0088B634 /* MacPlus4M.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		283422D81CF8F16C0088B634 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */; };
+		283422D91CF8F16C0088B634 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */; };
+		283422DA1CF8F16C0088B634 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */; };
+		283422DB1CF8F16C0088B634 /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9A1CD4C3B200FE25A8 /* M68KITAB.c */; };
+		283422DC1CF8F16C0088B634 /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9C1CD4C3B200FE25A8 /* MINEM68K.c */; };
+		283422DD1CF8F16C0088B634 /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9E1CD4C3B200FE25A8 /* MOUSEMDV.c */; };
+		283422DE1CF8F16C0088B634 /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA11CD4C3B200FE25A8 /* PROGMAIN.c */; };
+		283422DF1CF8F16C0088B634 /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA31CD4C3B200FE25A8 /* ROMEMDEV.c */; };
+		283422E01CF8F16C0088B634 /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA51CD4C3B200FE25A8 /* RTCEMDEV.c */; };
+		283422E11CF8F16C0088B634 /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA71CD4C3B200FE25A8 /* SCCEMDEV.c */; };
+		283422E21CF8F16C0088B634 /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA91CD4C3B200FE25A8 /* SCRNEMDV.c */; };
+		283422E31CF8F16C0088B634 /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EAC1CD4C3B200FE25A8 /* SCSIEMDV.c */; };
+		283422E41CF8F16C0088B634 /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EAE1CD4C3B200FE25A8 /* SNDEMDEV.c */; };
+		283422E51CF8F16C0088B634 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EB01CD4C3B200FE25A8 /* SONYEMDV.c */; };
+		283422E61CF8F16C0088B634 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EB31CD4C3B200FE25A8 /* VIAEMDEV.c */; };
+		283422EE1CF8F2210088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		283422F41CF8F55E0088B634 /* Emulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 283422F21CF8F5400088B634 /* Emulator.m */; };
 		28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B611CDE97D600B86C45 /* InsertDiskViewController.m */; };
 		28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B641CDE97E900B86C45 /* SettingsViewController.m */; };
 		28BA897E1CE7315400A98104 /* KBKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89751CE7315400A98104 /* KBKey.m */; };
@@ -15,22 +33,6 @@
 		28BA89821CE7336500A98104 /* Keyboard Layouts in Resources */ = {isa = PBXBuildFile; fileRef = 28BA89811CE7336500A98104 /* Keyboard Layouts */; };
 		28BA89851CE73E7200A98104 /* TrackPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89841CE73E7200A98104 /* TrackPad.m */; };
 		28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89871CE73FBC00A98104 /* MNVMApplication.m */; };
-		28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E931CD4C3B200FE25A8 /* GLOBGLUE.c */; };
-		28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E961CD4C3B200FE25A8 /* IWMEMDEV.c */; };
-		28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E981CD4C3B200FE25A8 /* KBRDEMDV.c */; };
-		28CE8EB81CD4C3B200FE25A8 /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9A1CD4C3B200FE25A8 /* M68KITAB.c */; };
-		28CE8EB91CD4C3B200FE25A8 /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9C1CD4C3B200FE25A8 /* MINEM68K.c */; };
-		28CE8EBA1CD4C3B200FE25A8 /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8E9E1CD4C3B200FE25A8 /* MOUSEMDV.c */; };
-		28CE8EBB1CD4C3B200FE25A8 /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA11CD4C3B200FE25A8 /* PROGMAIN.c */; };
-		28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA31CD4C3B200FE25A8 /* ROMEMDEV.c */; };
-		28CE8EBD1CD4C3B200FE25A8 /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA51CD4C3B200FE25A8 /* RTCEMDEV.c */; };
-		28CE8EBE1CD4C3B200FE25A8 /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA71CD4C3B200FE25A8 /* SCCEMDEV.c */; };
-		28CE8EBF1CD4C3B200FE25A8 /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EA91CD4C3B200FE25A8 /* SCRNEMDV.c */; };
-		28CE8EC01CD4C3B200FE25A8 /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EAC1CD4C3B200FE25A8 /* SCSIEMDV.c */; };
-		28CE8EC11CD4C3B200FE25A8 /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EAE1CD4C3B200FE25A8 /* SNDEMDEV.c */; };
-		28CE8EC21CD4C3B200FE25A8 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EB01CD4C3B200FE25A8 /* SONYEMDV.c */; };
-		28CE8EC31CD4C3B200FE25A8 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8EB31CD4C3B200FE25A8 /* VIAEMDEV.c */; };
-		28CE8ECC1CD4CDC500FE25A8 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */; };
 		28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */; };
 		28F676C21CD15E0B00FC6FA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C11CD15E0B00FC6FA6 /* main.m */; };
@@ -62,7 +64,28 @@
 		28F6B4CF1CF77099002D76D0 /* compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4CE1CF77099002D76D0 /* compat.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		283422CF1CF8EF8C0088B634 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28F676B51CD15E0B00FC6FA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 283422C91CF8EF8C0088B634;
+			remoteInfo = "minivmac-plus4m";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		283422D61CF8EF8C0088B634 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				283422D21CF8EF8C0088B634 /* MacPlus4M.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F6B48C1CF07DDD002D76D0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -94,6 +117,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacPlus4M.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		283422CE1CF8EF8C0088B634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		283422D71CF8EFD80088B634 /* EmulatorProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmulatorProtocol.h; sourceTree = "<group>"; };
+		283422E71CF8F1C80088B634 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
+		283422E81CF8F1C80088B634 /* CNFGRAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGRAPI.h; sourceTree = "<group>"; };
+		283422E91CF8F1C80088B634 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
+		283422F11CF8F5400088B634 /* Emulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emulator.h; sourceTree = "<group>"; };
+		283422F21CF8F5400088B634 /* Emulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emulator.m; sourceTree = "<group>"; };
 		28848B601CDE97D600B86C45 /* InsertDiskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertDiskViewController.h; sourceTree = "<group>"; };
 		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
 		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -109,9 +140,6 @@
 		28BA89841CE73E7200A98104 /* TrackPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackPad.m; sourceTree = "<group>"; };
 		28BA89861CE73FBC00A98104 /* MNVMApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNVMApplication.h; sourceTree = "<group>"; };
 		28BA89871CE73FBC00A98104 /* MNVMApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNVMApplication.m; sourceTree = "<group>"; };
-		28CE8E881CD4C33E00FE25A8 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
-		28CE8E891CD4C33E00FE25A8 /* CNFGRAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGRAPI.h; sourceTree = "<group>"; };
-		28CE8E8A1CD4C33E00FE25A8 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
 		28CE8E8F1CD4C3B200FE25A8 /* COMOSGLU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COMOSGLU.h; sourceTree = "<group>"; };
 		28CE8E911CD4C3B200FE25A8 /* DATE2SEC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DATE2SEC.h; sourceTree = "<group>"; };
 		28CE8E921CD4C3B200FE25A8 /* ENDIANAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENDIANAC.h; sourceTree = "<group>"; };
@@ -211,6 +239,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		283422C61CF8EF8C0088B634 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F676BA1CD15E0B00FC6FA6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,6 +280,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		283422CB1CF8EF8C0088B634 /* MacPlus4M */ = {
+			isa = PBXGroup;
+			children = (
+				283422E71CF8F1C80088B634 /* CNFGGLOB.h */,
+				283422E81CF8F1C80088B634 /* CNFGRAPI.h */,
+				283422E91CF8F1C80088B634 /* EMCONFIG.h */,
+				283422CE1CF8EF8C0088B634 /* Info.plist */,
+			);
+			path = MacPlus4M;
+			sourceTree = "<group>";
+		};
+		283422EF1CF8F33A0088B634 /* Emulator Bundles */ = {
+			isa = PBXGroup;
+			children = (
+				283422F01CF8F3530088B634 /* Shared */,
+				283422CB1CF8EF8C0088B634 /* MacPlus4M */,
+			);
+			name = "Emulator Bundles";
+			sourceTree = "<group>";
+		};
+		283422F01CF8F3530088B634 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				283422D71CF8EFD80088B634 /* EmulatorProtocol.h */,
+				283422F11CF8F5400088B634 /* Emulator.h */,
+				283422F21CF8F5400088B634 /* Emulator.m */,
+				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
+				28CE8E8E1CD4C3B200FE25A8 /* mnvm_core */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
 		28BA896E1CE7314500A98104 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,16 +324,6 @@
 				28BA89791CE7315400A98104 /* KBKeyboardView.m */,
 			);
 			name = Keyboard;
-			sourceTree = "<group>";
-		};
-		28CE8E871CD4C33E00FE25A8 /* mnvm_cfg */ = {
-			isa = PBXGroup;
-			children = (
-				28CE8E881CD4C33E00FE25A8 /* CNFGGLOB.h */,
-				28CE8E891CD4C33E00FE25A8 /* CNFGRAPI.h */,
-				28CE8E8A1CD4C33E00FE25A8 /* EMCONFIG.h */,
-			);
-			path = mnvm_cfg;
 			sourceTree = "<group>";
 		};
 		28CE8E8E1CD4C3B200FE25A8 /* mnvm_core */ = {
@@ -329,6 +386,7 @@
 				28F6B48E1CF07DDD002D76D0 /* liblibhfs.a */,
 				28F6B4A81CF07EC9002D76D0 /* liblibmfs.a */,
 				28F6B4B61CF07F32002D76D0 /* liblibres.a */,
+				283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -340,7 +398,6 @@
 				28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */,
 				28BA89861CE73FBC00A98104 /* MNVMApplication.h */,
 				28BA89871CE73FBC00A98104 /* MNVMApplication.m */,
-				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
 				28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */,
 				28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */,
 				28D5A3FB1CD6868E001A33F6 /* TouchScreen.h */,
@@ -358,13 +415,12 @@
 				28BA896E1CE7314500A98104 /* Keyboard */,
 				28F676CE1CD15E0B00FC6FA6 /* LaunchScreen.storyboard */,
 				28F676D11CD15E0B00FC6FA6 /* Info.plist */,
-				28CE8E8E1CD4C3B200FE25A8 /* mnvm_core */,
-				28CE8E871CD4C33E00FE25A8 /* mnvm_cfg */,
 				28F676C01CD15E0B00FC6FA6 /* Supporting Files */,
 				28F6B4501CF07C48002D76D0 /* UIImage+DiskImageIcon.h */,
 				28F6B4511CF07C48002D76D0 /* UIImage+DiskImageIcon.m */,
 				28F6B4C91CF1FA7A002D76D0 /* about.plist */,
 				28F6B4CE1CF77099002D76D0 /* compat.m */,
+				283422EF1CF8F33A0088B634 /* Emulator Bundles */,
 			);
 			path = "Mini vMac";
 			sourceTree = "<group>";
@@ -450,7 +506,35 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		283422C71CF8EF8C0088B634 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		283422C91CF8EF8C0088B634 /* MacPlus4M */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 283422D31CF8EF8C0088B634 /* Build configuration list for PBXNativeTarget "MacPlus4M" */;
+			buildPhases = (
+				283422C51CF8EF8C0088B634 /* Sources */,
+				283422C61CF8EF8C0088B634 /* Frameworks */,
+				283422C71CF8EF8C0088B634 /* Headers */,
+				283422C81CF8EF8C0088B634 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacPlus4M;
+			productName = "minivmac-plus4m";
+			productReference = 283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		28F676BC1CD15E0B00FC6FA6 /* Mini vMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28F676D41CD15E0B00FC6FA6 /* Build configuration list for PBXNativeTarget "Mini vMac" */;
@@ -459,10 +543,13 @@
 				28F676BA1CD15E0B00FC6FA6 /* Frameworks */,
 				28F676BB1CD15E0B00FC6FA6 /* Resources */,
 				28F6B4CD1CF76D88002D76D0 /* ShellScript */,
+				283422D61CF8EF8C0088B634 /* Embed Frameworks */,
+				283422F51CF9ACAD0088B634 /* Change PlugIn extensions to mnvm */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				283422D01CF8EF8C0088B634 /* PBXTargetDependency */,
 			);
 			name = "Mini vMac";
 			productName = "Mini vMac";
@@ -529,6 +616,10 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = namedfork;
 				TargetAttributes = {
+					283422C91CF8EF8C0088B634 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = UJXNDZ5TNU;
+					};
 					28F676BC1CD15E0B00FC6FA6 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = UJXNDZ5TNU;
@@ -561,11 +652,19 @@
 				28F6B48D1CF07DDD002D76D0 /* libhfs */,
 				28F6B4A71CF07EC9002D76D0 /* libmfs */,
 				28F6B4B51CF07F32002D76D0 /* libres */,
+				283422C91CF8EF8C0088B634 /* MacPlus4M */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		283422C81CF8EF8C0088B634 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F676BB1CD15E0B00FC6FA6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,6 +680,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		283422F51CF9ACAD0088B634 /* Change PlugIn extensions to mnvm */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Change PlugIn extensions to mnvm";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$BUILT_PRODUCTS_DIR/$PLUGINS_FOLDER_PATH\"\nfor name in *.framework\ndo\n  mv \"$name\" \"${name%.framework}.mnvm\"\ndone\n";
+		};
 		28F6B4CD1CF76D88002D76D0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -597,39 +710,47 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		283422C51CF8EF8C0088B634 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				283422F41CF8F55E0088B634 /* Emulator.m in Sources */,
+				283422D81CF8F16C0088B634 /* GLOBGLUE.c in Sources */,
+				283422E11CF8F16C0088B634 /* SCCEMDEV.c in Sources */,
+				283422E01CF8F16C0088B634 /* RTCEMDEV.c in Sources */,
+				283422DB1CF8F16C0088B634 /* M68KITAB.c in Sources */,
+				283422DF1CF8F16C0088B634 /* ROMEMDEV.c in Sources */,
+				283422DE1CF8F16C0088B634 /* PROGMAIN.c in Sources */,
+				283422D91CF8F16C0088B634 /* IWMEMDEV.c in Sources */,
+				283422E21CF8F16C0088B634 /* SCRNEMDV.c in Sources */,
+				283422E61CF8F16C0088B634 /* VIAEMDEV.c in Sources */,
+				283422DD1CF8F16C0088B634 /* MOUSEMDV.c in Sources */,
+				283422EE1CF8F2210088B634 /* MYOSGLUE.m in Sources */,
+				283422E31CF8F16C0088B634 /* SCSIEMDV.c in Sources */,
+				283422E51CF8F16C0088B634 /* SONYEMDV.c in Sources */,
+				283422DA1CF8F16C0088B634 /* KBRDEMDV.c in Sources */,
+				283422E41CF8F16C0088B634 /* SNDEMDEV.c in Sources */,
+				283422DC1CF8F16C0088B634 /* MINEM68K.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F676B91CD15E0B00FC6FA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				28BA897E1CE7315400A98104 /* KBKey.m in Sources */,
-				28CE8EC01CD4C3B200FE25A8 /* SCSIEMDV.c in Sources */,
-				28CE8EC11CD4C3B200FE25A8 /* SNDEMDEV.c in Sources */,
-				28CE8EB51CD4C3B200FE25A8 /* GLOBGLUE.c in Sources */,
-				28CE8EBF1CD4C3B200FE25A8 /* SCRNEMDV.c in Sources */,
 				28BA89851CE73E7200A98104 /* TrackPad.m in Sources */,
-				28CE8EBD1CD4C3B200FE25A8 /* RTCEMDEV.c in Sources */,
-				28CE8EB61CD4C3B200FE25A8 /* IWMEMDEV.c in Sources */,
 				28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */,
-				28CE8EB91CD4C3B200FE25A8 /* MINEM68K.c in Sources */,
-				28CE8EBA1CD4C3B200FE25A8 /* MOUSEMDV.c in Sources */,
-				28CE8EC31CD4C3B200FE25A8 /* VIAEMDEV.c in Sources */,
-				28CE8EB81CD4C3B200FE25A8 /* M68KITAB.c in Sources */,
 				28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */,
 				28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */,
 				28F6B4CF1CF77099002D76D0 /* compat.m in Sources */,
 				28F6B4521CF07C48002D76D0 /* UIImage+DiskImageIcon.m in Sources */,
-				28CE8EB71CD4C3B200FE25A8 /* KBRDEMDV.c in Sources */,
-				28CE8EBC1CD4C3B200FE25A8 /* ROMEMDEV.c in Sources */,
 				28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */,
-				28CE8EBB1CD4C3B200FE25A8 /* PROGMAIN.c in Sources */,
 				28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */,
 				28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */,
 				28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */,
-				28CE8EC21CD4C3B200FE25A8 /* SONYEMDV.c in Sources */,
 				28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */,
 				28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */,
-				28CE8EBE1CD4C3B200FE25A8 /* SCCEMDEV.c in Sources */,
-				28CE8ECC1CD4CDC500FE25A8 /* MYOSGLUE.m in Sources */,
 				28F676C21CD15E0B00FC6FA6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -672,6 +793,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		283422D01CF8EF8C0088B634 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 283422C91CF8EF8C0088B634 /* MacPlus4M */;
+			targetProxy = 283422CF1CF8EF8C0088B634 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		28F676C91CD15E0B00FC6FA6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -692,6 +821,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		283422D41CF8EF8C0088B634 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/MacPlus4M/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macplus4m;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		283422D51CF8EF8C0088B634 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/MacPlus4M/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macplus4m;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		28F676D21CD15E0B00FC6FA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -877,6 +1052,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		283422D31CF8EF8C0088B634 /* Build configuration list for PBXNativeTarget "MacPlus4M" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				283422D41CF8EF8C0088B634 /* Debug */,
+				283422D51CF8EF8C0088B634 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		28F676B81CD15E0B00FC6FA6 /* Build configuration list for PBXProject "Mini vMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

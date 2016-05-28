@@ -39,7 +39,7 @@
         fabs(previousTouchLoc.x - touchLoc.x) < touchDistanceThreshold &&
         fabs(previousTouchLoc.y - touchLoc.y) < touchDistanceThreshold) {
         drag = YES;
-        [[AppDelegate sharedInstance] setMouseButton:YES];
+        [[AppDelegate sharedEmulator] setMouseButton:YES];
     }
     previousTouchTime = event.timestamp;
     previousTouchLoc = touchLoc;
@@ -56,7 +56,7 @@
     locDiff.x *= accel;
     locDiff.y *= accel;
     click = NO;
-    [[AppDelegate sharedInstance] moveMouseX:locDiff.x Y:locDiff.y];
+    [[AppDelegate sharedEmulator] moveMouseX:locDiff.x Y:locDiff.y];
     previousTouchTime = event.timestamp;
     previousTouchLoc = touchLoc;
 }
@@ -70,7 +70,7 @@
     }
     click = NO;
     if (drag) {
-        [[AppDelegate sharedInstance] setMouseButton:NO];
+        [[AppDelegate sharedEmulator] setMouseButton:NO];
         drag = NO;
     }
     
@@ -82,12 +82,12 @@
     if (drag) {
         return;
     }
-    [[AppDelegate sharedInstance] setMouseButton:YES];
+    [[AppDelegate sharedEmulator] setMouseButton:YES];
     [self performSelector:@selector(mouseUp) withObject:nil afterDelay:2.0/60.0];
 }
 
 - (void)mouseUp {
-    [[AppDelegate sharedInstance] setMouseButton:NO];
+    [[AppDelegate sharedEmulator] setMouseButton:NO];
 }
 
 @end

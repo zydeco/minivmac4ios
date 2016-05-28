@@ -41,11 +41,11 @@
 }
 
 - (void)mouseDown {
-    [[AppDelegate sharedInstance] setMouseButton:YES];
+    [[AppDelegate sharedEmulator] setMouseButton:YES];
 }
 
 - (void)mouseUp {
-    [[AppDelegate sharedInstance] setMouseButton:NO];
+    [[AppDelegate sharedEmulator] setMouseButton:NO];
 }
 
 - (CGPoint)effectiveTouchPointForEvent:(UIEvent *)event {
@@ -61,29 +61,29 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [currentTouches unionSet:touches];
-    if (![AppDelegate sharedInstance].emulatorRunning) return;
+    if (![AppDelegate sharedEmulator].running) return;
     CGPoint touchLoc = [self effectiveTouchPointForEvent:event];
     Point mouseLoc = [self mouseLocForCGPoint:touchLoc];
-    [[AppDelegate sharedInstance] setMouseX:mouseLoc.h Y:mouseLoc.v];
+    [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
     [self performSelector:@selector(mouseDown) withObject:nil afterDelay:mouseButtonDelay];
     previousTouchLoc = touchLoc;
     previousTouchTime = event.timestamp;
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (![AppDelegate sharedInstance].emulatorRunning) return;
+    if (![AppDelegate sharedEmulator].running) return;
     CGPoint touchLoc = [self effectiveTouchPointForEvent:event];
     Point mouseLoc = [self mouseLocForCGPoint:touchLoc];
-    [[AppDelegate sharedInstance] setMouseX:mouseLoc.h Y:mouseLoc.v];
+    [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [currentTouches minusSet:touches];
-    if (![AppDelegate sharedInstance].emulatorRunning) return;
+    if (![AppDelegate sharedEmulator].running) return;
     if (currentTouches.count > 0) return;
     CGPoint touchLoc = [self effectiveTouchPointForEvent:event];
     Point mouseLoc = [self mouseLocForCGPoint:touchLoc];
-    [[AppDelegate sharedInstance] setMouseX:mouseLoc.h Y:mouseLoc.v];
+    [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
     [self performSelector:@selector(mouseUp) withObject:nil afterDelay:mouseButtonDelay];
     previousTouchLoc = touchLoc;
     previousTouchTime = event.timestamp;

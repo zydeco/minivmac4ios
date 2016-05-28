@@ -192,11 +192,11 @@
 }
 
 - (void)keyDown:(int)scancode {
-    [[AppDelegate sharedInstance] keyDown:scancode];
+    [[AppDelegate sharedEmulator] keyDown:scancode];
 }
 
 - (void)keyUp:(int)scancode {
-    [[AppDelegate sharedInstance] keyUp:scancode];
+    [[AppDelegate sharedEmulator] keyUp:scancode];
 }
 
 @end

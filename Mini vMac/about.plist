@@ -14,15 +14,9 @@
 		</dict>
 		<dict>
 			<key>text</key>
-			<string>Core</string>
-			<key>detailText</key>
-			<string>kAppVariationStr</string>
-		</dict>
-		<dict>
-			<key>text</key>
 			<string>Maintainer</string>
 			<key>detailText</key>
-			<string>kMaintainerName</string>
+			<string>Jesús A. Álvarez</string>
 			<key>link</key>
 			<string>https://twitter.com/maczydeco</string>
 		</dict>

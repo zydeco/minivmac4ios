@@ -32,7 +32,7 @@ static NSCache<NSString*,UIImage*> *diskImageIconCache = nil;
     dispatch_once(&onceToken, ^{
         diskImageIconCache = [NSCache new];
         diskImageIconCache.name = @"net.namedfork.minivmac.icon-cache";
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEjectDisk:) name:MNVMDidEjectDiskNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEjectDisk:) name:[AppDelegate sharedEmulator].ejectDiskNotification object:nil];
     });
     return diskImageIconCache;
 }

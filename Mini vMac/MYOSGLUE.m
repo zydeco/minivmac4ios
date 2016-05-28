@@ -32,8 +32,7 @@
 #include "ENDIANAC.h"
 #include "MYOSGLUE.h"
 #include "STRCONST.h"
-#import "ScreenView.h"
-#import "AppDelegate.h"
+#import "Emulator.h"
 
 #pragma mark - some simple utilities
 
@@ -145,7 +144,7 @@ LOCALPROC Screen_UnInit(void) {
 LOCALVAR NSString *MyDataPath = nil;
 
 LOCALFUNC blnr InitCocoaStuff(void) {
-    MyDataPath = [AppDelegate sharedInstance].documentsPath;
+    MyDataPath = [Emulator sharedEmulator].dataPath;
     if (MyDataPath) {
         [MyDataPath retain];
     }
@@ -464,7 +463,7 @@ LOCALFUNC tMacErr vSonyEject0(tDrive Drive_No, blnr deleteit) {
     NSDictionary *userInfo = @{@"path": DriveNames[Drive_No],
                                @"drive": @(Drive_No),
                                @"delete": @(deleteit)};
-    [[NSNotificationCenter defaultCenter] postNotificationName:MNVMDidEjectDiskNotification object:[AppDelegate sharedInstance] userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:[Emulator sharedEmulator].ejectDiskNotification object:[Emulator sharedEmulator] userInfo:userInfo];
     DiskEjectedNotify(Drive_No);
 
 #if HaveAdvisoryLocks
@@ -540,8 +539,8 @@ LOCALFUNC blnr Sony_Insert0(FILE *refnum, blnr locked, NSString *filePath) {
     } else {
         NSDictionary *userInfo = @{@"path": filePath,
                                    @"drive": @(Drive_No)};
-        [[NSNotificationCenter defaultCenter] postNotificationName:MNVMDidInsertDiskNotification object:[AppDelegate sharedInstance] userInfo:userInfo];
-
+        [[NSNotificationCenter defaultCenter] postNotificationName:[Emulator sharedEmulator].insertDiskNotification object:[Emulator sharedEmulator] userInfo:userInfo];
+        
 /* printf("Sony_Insert0 %d\n", (int)Drive_No); */
 
 #if HaveAdvisoryLocks
@@ -859,7 +858,7 @@ LOCALPROC HaveChangedScreenBuff(ui4r top, ui4r left, ui4r bottom, ui4r right) {
     CGBitmapInfo options = 0;
 
     CGImageRef screenImage = CGImageCreate(vMacScreenWidth, vMacScreenHeight, bitsPerComponent, bitsPerPixel, vMacScreenByteWidth, screenColorSpace, options, screenDataProvider, NULL, false, kCGRenderingIntentDefault);
-    [[ScreenView sharedScreenView] updateScreen:screenImage];
+    [[Emulator sharedEmulator] updateScreen:screenImage];
     CGImageRelease(screenImage);
 }
 
@@ -1702,12 +1701,4 @@ GLOBALPROC RunEmulator(void) {
         ProgramMain();
     }
     UnInitOSGLU();
-}
-
-GLOBALPROC MacInterrupt(void) {
-    WantMacInterrupt = trueblnr;
-}
-
-GLOBALPROC MacReset(void) {
-    WantMacReset = trueblnr;
 }

@@ -14,6 +14,5 @@
 @property (nonatomic, readonly) CGSize screenSize;
 
 + (instancetype)sharedScreenView;
-- (void)updateScreen:(CGImageRef)screenImage;
 
 @end

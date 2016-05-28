@@ -9,27 +9,9 @@
 #import "AppDelegate.h"
 #import "SettingsViewController.h"
 #import "InsertDiskViewController.h"
-#include "CNFGRAPI.h"
-#include "SYSDEPNS.h"
-#include "MYOSGLUE.h"
-
-IMPORTPROC RunEmulator(void);
-IMPORTFUNC blnr GetSpeedStopped(void);
-IMPORTPROC SetSpeedStopped(blnr stopped);
-IMPORTPROC SetMouseButton(blnr down);
-IMPORTPROC SetMouseLoc(ui4r h, ui4r v);
-IMPORTPROC SetMouseDelta(ui4r dh, ui4r dv);
-IMPORTFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail);
-IMPORTFUNC blnr Sony_IsInserted(NSString *filePath);
-IMPORTFUNC blnr AnyDiskInserted(void);
-EXPORTVAR(ui3b,SpeedValue);
-IMPORTPROC SetKeyState(int key, blnr down);
-IMPORTPROC MacInterrupt();
-IMPORTPROC MacReset();
 
 static AppDelegate *sharedAppDelegate = nil;
-NSString * const MNVMDidInsertDiskNotification = @"MNVMDidInsertDisk";
-NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
+static NSObject<Emulator> *sharedEmulator = nil;
 
 @interface AppDelegate () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
@@ -44,10 +26,18 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
     return sharedAppDelegate;
 }
 
++ (id<Emulator>)sharedEmulator {
+    return sharedEmulator;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sharedAppDelegate = self;
     [self initDefaults];
-    [self performSelector:@selector(runEmulator) withObject:nil afterDelay:0.1];
+    if (![self loadEmulator:[[NSUserDefaults standardUserDefaults] stringForKey:@"machine"]]) {
+        [self loadEmulator:@"MacPlus4M"];
+    }
+    [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
+    
     return YES;
 }
 
@@ -59,32 +49,54 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
     NSString *firstLanguage = [NSBundle preferredLocalizationsFromArray:layoutForLanguage.allKeys].firstObject;
     NSDictionary *defaultValues = @{@"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
                                     @"frameskip": @(0),
-                                    @"keyboardLayout": layoutForLanguage[firstLanguage]
+                                    @"keyboardLayout": layoutForLanguage[firstLanguage],
+                                    @"machine": @"MacPlus4M"
                                     };
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults registerDefaults:defaultValues];
-    [defaults setValue:@(WantInitSpeedValue) forKey:@"speedValue"];
+    [defaults setValue:@(sharedEmulator.initialSpeed) forKey:@"speedValue"];
     [defaults addObserver:self forKeyPath:@"speedValue" options:0 context:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if (object == [NSUserDefaults standardUserDefaults]) {
         if ([keyPath isEqualToString:@"speedValue"]) {
-            SpeedValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"speedValue"];
+            sharedEmulator.speed = [[NSUserDefaults standardUserDefaults] integerForKey:@"speedValue"];
         }
     }
 }
 
+- (NSArray<NSBundle*>*)availableEmulators {
+    NSString *pluginsPath = [NSBundle mainBundle].builtInPlugInsPath;
+    NSArray<NSString*> *names = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:pluginsPath error:NULL];
+    NSMutableArray *emulatorBundles = [NSMutableArray arrayWithCapacity:names.count];
+    for (NSString *name in [names pathsMatchingExtensions:@[@"mnvm"]]) {
+        NSBundle *bundle = [NSBundle bundleWithPath:[pluginsPath stringByAppendingPathComponent:name]];
+        [emulatorBundles addObject:bundle];
+    }
+    return emulatorBundles;
+}
+
+- (BOOL)loadEmulator:(NSString*)name {
+    NSString *emulatorBundleName = [name stringByAppendingPathExtension:@"mnvm"];
+    NSString *emulatorBundlePath = [[NSBundle mainBundle].builtInPlugInsPath stringByAppendingPathComponent:emulatorBundleName];
+    NSBundle *emulatorBundle = [NSBundle bundleWithPath:emulatorBundlePath];
+    [emulatorBundle load];
+    sharedEmulator = [[emulatorBundle principalClass] new];
+    sharedEmulator.dataPath = self.documentsPath;
+    return sharedEmulator != nil;
+}
+
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    self.emulatorRunning = NO;
-    if (AnyDiskInserted() == falseblnr) {
+    sharedEmulator.running = NO;
+    if (sharedEmulator.anyDiskInserted == NO) {
         exit(0);
     }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    self.emulatorRunning = YES;
+    sharedEmulator.running = YES;
 }
 
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
@@ -257,77 +269,6 @@ NSString * const MNVMDidEjectDiskNotification = @"MNVMDidEjectDisk";
         }
     }
     return YES;
-}
-
-#pragma mark - Emulation
-
-- (void)runEmulator {
-    SpeedValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"speedValue"];
-    if (SpeedValue > 3) {
-        SpeedValue = 3;
-    }
-    RunEmulator();
-}
-
-- (BOOL)isEmulatorRunning {
-    return !GetSpeedStopped();
-}
-
-- (void)setEmulatorRunning:(BOOL)emulatorRunning {
-    SetSpeedStopped(emulatorRunning);
-}
-
-#pragma mark - Mouse
-
-- (void)setMouseX:(NSInteger)x Y:(NSInteger)y {
-    SetMouseLoc(x, y);
-}
-
-- (void)moveMouseX:(NSInteger)x Y:(NSInteger)y {
-    SetMouseDelta(x, y);
-}
-
-- (void)setMouseButton:(BOOL)down {
-    SetMouseButton(down);
-}
-
-- (void)macInterrupt {
-    MacInterrupt();
-}
-
--(void)macReset {
-    MacReset();
-}
-
-#pragma mark - Keyboard
-
-- (int)translateScanCode:(int)scancode {
-    switch (scancode) {
-        case 54: return 59; // left control
-        case 59: return 70; // arrow left
-        case 60: return 66; // arrow right
-        case 61: return 72; // arrow down
-        case 62: return 77; // arrow up
-        default: return scancode;
-    }
-}
-
-- (void)keyDown:(int)scancode {
-    SetKeyState([self translateScanCode:scancode], true);
-}
-
-- (void)keyUp:(int)scancode {
-    SetKeyState([self translateScanCode:scancode], false);
-}
-
-#pragma mark - Disk Drive
-
-- (BOOL)insertDisk:(NSString *)path {
-    return Sony_Insert1(path.stringByStandardizingPath, falseblnr);
-}
-
-- (BOOL)isDiskInserted:(NSString *)path {
-    return Sony_IsInserted(path.stringByStandardizingPath);
 }
 
 @end
