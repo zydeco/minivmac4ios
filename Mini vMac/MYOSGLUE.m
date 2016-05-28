@@ -475,7 +475,6 @@ LOCALFUNC tMacErr vSonyEject0(tDrive Drive_No, blnr deleteit) {
     NSDictionary *userInfo = @{@"path": DriveNames[Drive_No],
                                @"drive": @(Drive_No),
                                @"delete": @(deleteit)};
-    [[NSNotificationCenter defaultCenter] postNotificationName:[Emulator sharedEmulator].ejectDiskNotification object:[Emulator sharedEmulator] userInfo:userInfo];
     DiskEjectedNotify(Drive_No);
 
 #if HaveAdvisoryLocks
@@ -501,6 +500,8 @@ LOCALFUNC tMacErr vSonyEject0(tDrive Drive_No, blnr deleteit) {
         }
     }
 #endif
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:[Emulator sharedEmulator].ejectDiskNotification object:[Emulator sharedEmulator] userInfo:userInfo];
 
     return mnvm_noErr;
 }
