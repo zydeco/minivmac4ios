@@ -119,14 +119,22 @@ LOCALFUNC blnr FindNamedChildFilePath(NSString *parentPath, char *ChildName, NSS
 }
 
 LOCALVAR CGDataProviderRef screenDataProvider = NULL;
-LOCALVAR CGColorSpaceRef screenColorSpace = NULL;
+LOCALVAR CGColorSpaceRef bwColorSpace = NULL;
+LOCALVAR CGColorSpaceRef colorColorSpace = NULL;
 
 LOCALFUNC blnr Screen_Init(void) {
     screenDataProvider = CGDataProviderCreateWithData(NULL, screencomparebuff, vMacScreenNumBytes, NULL);
     CGColorSpaceRef baseColorSpace = CGColorSpaceCreateDeviceRGB();
     uint8_t clut[] = {255, 255, 255, 0, 0, 0};
-    screenColorSpace = CGColorSpaceCreateIndexed(baseColorSpace, 1, clut);
+    bwColorSpace = CGColorSpaceCreateIndexed(baseColorSpace, 1, clut);
+#if 0 != vMacScreenDepth
+    ColorModeWorks = trueblnr;
+#endif
+#if vMacScreenDepth >= 4
+    colorColorSpace = baseColorSpace;
+#else
     CGColorSpaceRelease(baseColorSpace);
+#endif
     return trueblnr;
 }
 
@@ -135,9 +143,13 @@ LOCALPROC Screen_UnInit(void) {
         CGDataProviderRelease(screenDataProvider);
         screenDataProvider = NULL;
     }
-    if (screenColorSpace) {
-        CGColorSpaceRelease(screenColorSpace);
-        screenColorSpace = NULL;
+    if (bwColorSpace) {
+        CGColorSpaceRelease(bwColorSpace);
+        bwColorSpace = NULL;
+    }
+    if (colorColorSpace) {
+        CGColorSpaceRelease(colorColorSpace);
+        colorColorSpace = NULL;
     }
 }
 
@@ -852,14 +864,56 @@ GLOBALPROC SetKeyState(int key, blnr down) {
 
 #pragma mark - Video Out
 
-LOCALPROC HaveChangedScreenBuff(ui4r top, ui4r left, ui4r bottom, ui4r right) {
-    size_t bitsPerPixel = 1 << vMacScreenDepth;
-    size_t bitsPerComponent = vMacScreenDepth <= 4 ? 1 << vMacScreenDepth : vMacScreenDepth == 5 ? 5 : 8;
-    CGBitmapInfo options = 0;
+#if 0 != vMacScreenDepth && vMacScreenDepth < 4
+LOCALPROC UpdateColorTable() {
+    unsigned char *colorTable = malloc(3 * CLUT_size);
+    for (int i=0; i < CLUT_size; i++) {
+        colorTable[3*i + 0] = CLUT_reds[i] >> 8;
+        colorTable[3*i + 1] = CLUT_greens[i] >> 8;
+        colorTable[3*i + 2] = CLUT_blues[i] >> 8;
+    }
+    CGColorSpaceRef baseColorSpace = CGColorSpaceCreateDeviceRGB();
+    if (colorColorSpace != NULL) {
+        CGColorSpaceRelease(colorColorSpace);
+    }
+    colorColorSpace = CGColorSpaceCreateIndexed(baseColorSpace, CLUT_size-1, colorTable);
+    CGColorSpaceRelease(baseColorSpace);
+    free(colorTable);
+}
+#endif
 
-    CGImageRef screenImage = CGImageCreate(vMacScreenWidth, vMacScreenHeight, bitsPerComponent, bitsPerPixel, vMacScreenByteWidth, screenColorSpace, options, screenDataProvider, NULL, false, kCGRenderingIntentDefault);
-    [[Emulator sharedEmulator] updateScreen:screenImage];
-    CGImageRelease(screenImage);
+LOCALPROC HaveChangedScreenBuff(ui4r top, ui4r left, ui4r bottom, ui4r right) {
+    size_t bitsPerPixel = 1;
+    size_t bitsPerComponent = 1;
+    size_t bytesPerRow = vMacScreenMonoByteWidth;
+    CGBitmapInfo options = 0;
+    CGColorSpaceRef colorSpace = bwColorSpace;
+#if vMacScreenDepth != 0
+    if (UseColorMode) {
+        bitsPerPixel = 1 << vMacScreenDepth;
+        bytesPerRow = vMacScreenByteWidth;
+#if vMacScreenDepth < 4
+        bitsPerComponent = 1 << vMacScreenDepth;
+        if (!ColorTransValid) {
+            UpdateColorTable();
+            ColorTransValid = trueblnr;
+        }
+#elif vMacScreenDepth == 4
+        bitsPerComponent = 5;
+        options = kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder16Big;
+#elif vMacScreenDepth == 5
+        bitsPerComponent = 8;
+        options = kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Big;
+#endif
+        colorSpace = colorColorSpace;
+    }
+#endif
+    
+    if (colorSpace) {
+        CGImageRef screenImage = CGImageCreate(vMacScreenWidth, vMacScreenHeight, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace, options, screenDataProvider, NULL, false, kCGRenderingIntentDefault);
+        [[Emulator sharedEmulator] updateScreen:screenImage];
+        CGImageRelease(screenImage);
+    }
 }
 
 LOCALPROC MyDrawChangesAndClear(void) {
