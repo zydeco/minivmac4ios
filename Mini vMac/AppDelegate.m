@@ -89,6 +89,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    [[NSUserDefaults standardUserDefaults] synchronize];
     sharedEmulator.running = NO;
     if (sharedEmulator.anyDiskInserted == NO) {
         exit(0);
