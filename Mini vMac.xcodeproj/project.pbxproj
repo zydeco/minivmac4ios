@@ -1304,6 +1304,7 @@
 				283422D51CF8EF8C0088B634 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		283423931CF9C4CB0088B634 /* Build configuration list for PBXNativeTarget "MacII" */ = {
 			isa = XCConfigurationList;
