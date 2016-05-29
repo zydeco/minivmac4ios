@@ -27,7 +27,6 @@
 @import UIKit;
 @import AudioUnit;
 @import AudioToolbox;
-#include "CNFGRAPI.h"
 #include "SYSDEPNS.h"
 #include "ENDIANAC.h"
 #include "MYOSGLUE.h"
@@ -1526,11 +1525,6 @@ LOCALPROC ReserveAllocAll(void) {
     ReserveAllocOneBlock(&screencomparebuff,
                          vMacScreenNumBytes, 5, trueblnr);
 
-#if UseControlKeys
-    ReserveAllocOneBlock(&CntrlDisplayBuff,
-                         vMacScreenNumBytes, 5, falseblnr);
-#endif
-
 #if MySoundEnabled
     ReserveAllocOneBlock((ui3p *)&TheSoundBuffer,
                          dbhBufferSize, 5, falseblnr);
@@ -1634,16 +1628,10 @@ LOCALFUNC blnr InitOSGLU(void) {
 #endif
                         if (LoadInitialImages())
                             if (LoadMacRom())
-#if UseActvCode
-                                if (ActvCodeInit())
-#endif
-#if EmLocalTalk
-                                    if (InitLocalTalk())
-#endif
-                                        if (InitLocationDat()) {
-                                            InitKeyCodes();
-                                            IsOk = trueblnr;
-                                        }
+                                if (InitLocationDat()) {
+                                    InitKeyCodes();
+                                    IsOk = trueblnr;
+                                }
     }
 
     return IsOk;

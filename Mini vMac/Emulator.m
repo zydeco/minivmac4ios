@@ -7,7 +7,6 @@
 //
 
 #import "Emulator.h"
-#include "CNFGRAPI.h"
 #include "SYSDEPNS.h"
 #include "ENDIANAC.h"
 #include "MYOSGLUE.h"
