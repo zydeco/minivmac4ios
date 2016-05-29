@@ -53,6 +53,27 @@
 		283423F11CFA329C0088B634 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EE1CFA329C0088B634 /* Icon@3x.png */; };
 		28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B611CDE97D600B86C45 /* InsertDiskViewController.m */; };
 		28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B641CDE97E900B86C45 /* SettingsViewController.m */; };
+		289710BA1CFB11BF0089D463 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423551CF9C0F10088B634 /* SONYEMDV.c */; };
+		289710BB1CFB11BF0089D463 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235B1CF9C0F10088B634 /* VIAEMDEV.c */; };
+		289710BC1CFB11BF0089D463 /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423461CF9C0F10088B634 /* ROMEMDEV.c */; };
+		289710BD1CFB11BF0089D463 /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423531CF9C0F10088B634 /* SNDEMDEV.c */; };
+		289710BE1CFB11BF0089D463 /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423511CF9C0F10088B634 /* SCSIEMDV.c */; };
+		289710BF1CFB11BF0089D463 /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234A1CF9C0F10088B634 /* SCCEMDEV.c */; };
+		289710C01CFB11BF0089D463 /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234C1CF9C0F10088B634 /* SCRNEMDV.c */; };
+		289710C11CFB11BF0089D463 /* Emulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 283422F21CF8F5400088B634 /* Emulator.m */; };
+		289710C21CFB11BF0089D463 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423371CF9C0F10088B634 /* IWMEMDEV.c */; };
+		289710C31CFB11BF0089D463 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		289710C41CFB11BF0089D463 /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233F1CF9C0F10088B634 /* MOUSEMDV.c */; };
+		289710C51CFB11BF0089D463 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423341CF9C0F10088B634 /* GLOBGLUE.c */; };
+		289710C61CFB11BF0089D463 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423391CF9C0F10088B634 /* KBRDEMDV.c */; };
+		289710C71CFB11BF0089D463 /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233D1CF9C0F10088B634 /* MINEM68K.c */; };
+		289710C81CFB11BF0089D463 /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233B1CF9C0F10088B634 /* M68KITAB.c */; };
+		289710C91CFB11BF0089D463 /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423441CF9C0F10088B634 /* PROGMAIN.c */; };
+		289710CA1CFB11BF0089D463 /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423481CF9C0F10088B634 /* RTCEMDEV.c */; };
+		289710DC1CFB12240089D463 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710D81CFB121F0089D463 /* Icon.png */; };
+		289710DD1CFB12240089D463 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710D91CFB121F0089D463 /* Icon@2x.png */; };
+		289710DE1CFB12240089D463 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710DA1CFB121F0089D463 /* Icon@3x.png */; };
+		289710DF1CFB12660089D463 /* Mac128K.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289710D41CFB11BF0089D463 /* Mac128K.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28BA897E1CE7315400A98104 /* KBKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89751CE7315400A98104 /* KBKey.m */; };
 		28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89771CE7315400A98104 /* KBKeyboardLayout.m */; };
 		28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89791CE7315400A98104 /* KBKeyboardView.m */; };
@@ -105,6 +126,13 @@
 			remoteGlobalIDString = 2834237D1CF9C4CB0088B634;
 			remoteInfo = MacII;
 		};
+		289710E01CFB126D0089D463 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28F676B51CD15E0B00FC6FA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 289710B81CFB11BF0089D463;
+			remoteInfo = Mac128K;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +142,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				289710DF1CFB12660089D463 /* Mac128K.framework in Embed Frameworks */,
 				283423A31CF9C5880088B634 /* MacII.framework in Embed Frameworks */,
 				283422D21CF8EF8C0088B634 /* MacPlus4M.framework in Embed Frameworks */,
 			);
@@ -234,6 +263,13 @@
 		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		28848B641CDE97E900B86C45 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		289710B71CFB0DC70089D463 /* CNFGGLOB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
+		289710D41CFB11BF0089D463 /* Mac128K.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mac128K.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		289710D61CFB121F0089D463 /* CNFGGLOB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
+		289710D71CFB121F0089D463 /* EMCONFIG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
+		289710D81CFB121F0089D463 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		289710D91CFB121F0089D463 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		289710DA1CFB121F0089D463 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
+		289710DB1CFB121F0089D463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28BA89741CE7315400A98104 /* KBKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBKey.h; sourceTree = "<group>"; };
 		28BA89751CE7315400A98104 /* KBKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBKey.m; sourceTree = "<group>"; };
 		28BA89761CE7315400A98104 /* KBKeyboardLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBKeyboardLayout.h; sourceTree = "<group>"; };
@@ -320,6 +356,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		289710CB1CFB11BF0089D463 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F676BA1CD15E0B00FC6FA6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -373,6 +416,7 @@
 				283422F01CF8F3530088B634 /* Shared */,
 				283422CB1CF8EF8C0088B634 /* MacPlus4M */,
 				283423981CF9C5380088B634 /* MacII */,
+				289710D51CFB11D90089D463 /* Mac128K */,
 			);
 			name = "Emulator Bundles";
 			sourceTree = "<group>";
@@ -471,6 +515,19 @@
 			path = MacII;
 			sourceTree = "<group>";
 		};
+		289710D51CFB11D90089D463 /* Mac128K */ = {
+			isa = PBXGroup;
+			children = (
+				289710D61CFB121F0089D463 /* CNFGGLOB.h */,
+				289710D71CFB121F0089D463 /* EMCONFIG.h */,
+				289710D81CFB121F0089D463 /* Icon.png */,
+				289710D91CFB121F0089D463 /* Icon@2x.png */,
+				289710DA1CFB121F0089D463 /* Icon@3x.png */,
+				289710DB1CFB121F0089D463 /* Info.plist */,
+			);
+			path = Mac128K;
+			sourceTree = "<group>";
+		};
 		28BA896E1CE7314500A98104 /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,6 +559,7 @@
 				28F6B4B61CF07F32002D76D0 /* liblibres.a */,
 				283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */,
 				283423961CF9C4CB0088B634 /* MacII.framework */,
+				289710D41CFB11BF0089D463 /* Mac128K.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -636,6 +694,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		289710CC1CFB11BF0089D463 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -675,6 +740,24 @@
 			productReference = 283423961CF9C4CB0088B634 /* MacII.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		289710B81CFB11BF0089D463 /* Mac128K */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 289710D11CFB11BF0089D463 /* Build configuration list for PBXNativeTarget "Mac128K" */;
+			buildPhases = (
+				289710B91CFB11BF0089D463 /* Sources */,
+				289710CB1CFB11BF0089D463 /* Frameworks */,
+				289710CC1CFB11BF0089D463 /* Headers */,
+				289710CD1CFB11BF0089D463 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mac128K;
+			productName = "minivmac-plus4m";
+			productReference = 289710D41CFB11BF0089D463 /* Mac128K.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		28F676BC1CD15E0B00FC6FA6 /* Mini vMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28F676D41CD15E0B00FC6FA6 /* Build configuration list for PBXNativeTarget "Mini vMac" */;
@@ -689,6 +772,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				289710E11CFB126D0089D463 /* PBXTargetDependency */,
 				283422D01CF8EF8C0088B634 /* PBXTargetDependency */,
 				283423A11CF9C5730088B634 /* PBXTargetDependency */,
 			);
@@ -798,6 +882,7 @@
 				28F6B4B51CF07F32002D76D0 /* libres */,
 				283422C91CF8EF8C0088B634 /* MacPlus4M */,
 				2834237D1CF9C4CB0088B634 /* MacII */,
+				289710B81CFB11BF0089D463 /* Mac128K */,
 			);
 		};
 /* End PBXProject section */
@@ -820,6 +905,16 @@
 				283423EF1CFA329C0088B634 /* Icon.png in Resources */,
 				283423F01CFA329C0088B634 /* Icon@2x.png in Resources */,
 				283423F11CFA329C0088B634 /* Icon@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		289710CD1CFB11BF0089D463 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				289710DC1CFB12240089D463 /* Icon.png in Resources */,
+				289710DE1CFB12240089D463 /* Icon@3x.png in Resources */,
+				289710DD1CFB12240089D463 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,6 +1013,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		289710B91CFB11BF0089D463 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				289710BA1CFB11BF0089D463 /* SONYEMDV.c in Sources */,
+				289710BB1CFB11BF0089D463 /* VIAEMDEV.c in Sources */,
+				289710BC1CFB11BF0089D463 /* ROMEMDEV.c in Sources */,
+				289710BD1CFB11BF0089D463 /* SNDEMDEV.c in Sources */,
+				289710BE1CFB11BF0089D463 /* SCSIEMDV.c in Sources */,
+				289710BF1CFB11BF0089D463 /* SCCEMDEV.c in Sources */,
+				289710C01CFB11BF0089D463 /* SCRNEMDV.c in Sources */,
+				289710C11CFB11BF0089D463 /* Emulator.m in Sources */,
+				289710C21CFB11BF0089D463 /* IWMEMDEV.c in Sources */,
+				289710C31CFB11BF0089D463 /* MYOSGLUE.m in Sources */,
+				289710C41CFB11BF0089D463 /* MOUSEMDV.c in Sources */,
+				289710C51CFB11BF0089D463 /* GLOBGLUE.c in Sources */,
+				289710C61CFB11BF0089D463 /* KBRDEMDV.c in Sources */,
+				289710C71CFB11BF0089D463 /* MINEM68K.c in Sources */,
+				289710C81CFB11BF0089D463 /* M68KITAB.c in Sources */,
+				289710C91CFB11BF0089D463 /* PROGMAIN.c in Sources */,
+				289710CA1CFB11BF0089D463 /* RTCEMDEV.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F676B91CD15E0B00FC6FA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -987,6 +1106,11 @@
 			isa = PBXTargetDependency;
 			target = 2834237D1CF9C4CB0088B634 /* MacII */;
 			targetProxy = 283423A01CF9C5730088B634 /* PBXContainerItemProxy */;
+		};
+		289710E11CFB126D0089D463 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 289710B81CFB11BF0089D463 /* Mac128K */;
+			targetProxy = 289710E01CFB126D0089D463 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1101,6 +1225,56 @@
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macii;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USE_HEADERMAP = NO;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		289710D21CFB11BF0089D463 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.mac128k;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USE_HEADERMAP = NO;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		289710D31CFB11BF0089D463 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.mac128k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
@@ -1309,6 +1483,15 @@
 			buildConfigurations = (
 				283423941CF9C4CB0088B634 /* Debug */,
 				283423951CF9C4CB0088B634 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		289710D11CFB11BF0089D463 /* Build configuration list for PBXNativeTarget "Mac128K" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				289710D21CFB11BF0089D463 /* Debug */,
+				289710D31CFB11BF0089D463 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
