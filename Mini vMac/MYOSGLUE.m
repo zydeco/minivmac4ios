@@ -1704,10 +1704,9 @@ GLOBALFUNC blnr ExtraTimeNotOver(void) {
 GLOBALPROC WaitForNextTick(void) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSRunLoop *mainRunLoop = [NSRunLoop mainRunLoop];
+    NSDate *until = [NSDate distantPast];
 label_retry:
-    while (ExtraTimeNotOver()) {
-        [mainRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceReferenceDate:NextTickChangeTime]];
-    }
+    [mainRunLoop runMode:NSDefaultRunLoopMode beforeDate:until];
 
     CheckForSavedTasks();
 
@@ -1717,6 +1716,12 @@ label_retry:
 
     if (CurSpeedStopped) {
         DoneWithDrawingForTick();
+        until = [NSDate distantFuture];
+        goto label_retry;
+    }
+    
+    if (ExtraTimeNotOver()) {
+        until = [NSDate dateWithTimeIntervalSinceReferenceDate:NextTickChangeTime];
         goto label_retry;
     }
 
