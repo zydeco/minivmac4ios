@@ -1585,11 +1585,11 @@ LOCALPROC EnterSpeedStopped(void) {
 }
 
 GLOBALFUNC blnr GetSpeedStopped(void) {
-    return CurSpeedStopped;
+    return SpeedStopped;
 }
 
 GLOBALPROC SetSpeedStopped(blnr stopped) {
-    CurSpeedStopped = stopped;
+    SpeedStopped = stopped;
 }
 
 LOCALPROC MacMsgDisplayOn() {
@@ -1704,6 +1704,7 @@ GLOBALFUNC blnr ExtraTimeNotOver(void) {
 GLOBALPROC WaitForNextTick(void) {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     NSRunLoop *mainRunLoop = [NSRunLoop mainRunLoop];
+label_retry:
     while (ExtraTimeNotOver()) {
         [mainRunLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceReferenceDate:NextTickChangeTime]];
     }
@@ -1716,6 +1717,7 @@ GLOBALPROC WaitForNextTick(void) {
 
     if (CurSpeedStopped) {
         DoneWithDrawingForTick();
+        goto label_retry;
     }
 
     if (CheckDateTime()) {
