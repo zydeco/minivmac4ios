@@ -171,7 +171,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
         UIViewController *viewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:name];
         viewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         viewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        if ([sender isKindOfClass:[UISwipeGestureRecognizer class]] && [UIDevice currentDevice].systemVersion.integerValue >= 8) {
+        if ([sender isKindOfClass:[UISwipeGestureRecognizer class]] && NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_8_0) {
             modalPanePresentationDirection = [(UISwipeGestureRecognizer*)sender direction];
             viewController.transitioningDelegate = self;
         }
