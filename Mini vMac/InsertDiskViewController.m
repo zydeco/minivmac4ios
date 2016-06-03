@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "UIImage+DiskImageIcon.h"
 
-@interface InsertDiskViewController () <UITextFieldDelegate>
+@interface InsertDiskViewController () <UITextFieldDelegate, UIAlertViewDelegate>
 
 @end
 
@@ -31,6 +31,7 @@
     UIAlertController *createDiskImageController;
     __block __weak UITextField *sizeTextField;
     __block __weak UITextField *nameTextField;
+    NSString *fileToRename;
 }
 
 + (void)initialize {
@@ -204,7 +205,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-    return (action == @selector(share:) || ([UIAlertController class] && (action == @selector(rename:) || action == @selector(delete:))));
+    return (action == @selector(share:) || (action == @selector(rename:) || ([UIAlertController class] && action == @selector(delete:))));
 }
 
 - (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
@@ -246,33 +247,48 @@
 
 - (void)askRenameFile:(NSString*)filePath {
     NSString *fileName = filePath.lastPathComponent;
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:fileName message:NSLocalizedString(@"Enter new name", nil) preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        nameTextField = textField;
-        textField.delegate = self;
-        textField.placeholder = fileName;
-        textField.text = fileName;
-    }];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Rename", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSError *error = nil;
-        NSString *newName = alertController.textFields.firstObject.text;
-        NSString *newPath = [filePath.stringByDeletingLastPathComponent stringByAppendingPathComponent:newName];
-        if ([[NSFileManager defaultManager] moveItemAtPath:filePath toPath:newPath error:&error]) {
-            NSIndexPath *oldIndexPath = [self indexPathForFile:filePath];
-            [self loadDirectoryContents];
-            NSIndexPath *newIndexPath = [self indexPathForFile:newPath];
-            if (newIndexPath == nil) {
-                [self.tableView deleteRowsAtIndexPaths:@[oldIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            } else {
-                [self.tableView moveRowAtIndexPath:oldIndexPath toIndexPath:newIndexPath];
-                [self.tableView reloadRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-            }
+    if ([UIAlertController class]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:fileName message:NSLocalizedString(@"Enter new name", nil) preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            nameTextField = textField;
+            textField.delegate = self;
+            textField.placeholder = fileName;
+            textField.text = fileName;
+        }];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Rename", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSString *newName = alertController.textFields.firstObject.text;
+            [self renameFile:filePath toName:newName];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:fileName message:NSLocalizedString(@"Enter new name", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Rename", nil), nil];
+        alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+        nameTextField = [alertView textFieldAtIndex:0];
+        nameTextField.delegate = self;
+        nameTextField.placeholder = fileName;
+        nameTextField.text = fileName;
+        fileToRename = filePath;
+        [alertView show];
+    }
+}
+
+- (void)renameFile:(NSString*)filePath toName:(NSString*)newName {
+    NSError *error = nil;
+    NSString *newPath = [filePath.stringByDeletingLastPathComponent stringByAppendingPathComponent:newName];
+    if ([[NSFileManager defaultManager] moveItemAtPath:filePath toPath:newPath error:&error]) {
+        NSIndexPath *oldIndexPath = [self indexPathForFile:filePath];
+        [self loadDirectoryContents];
+        NSIndexPath *newIndexPath = [self indexPathForFile:newPath];
+        if (newIndexPath == nil || newIndexPath.section >= self.tableView.numberOfSections) {
+            [self.tableView deleteRowsAtIndexPaths:@[oldIndexPath] withRowAnimation:UITableViewRowAnimationFade];
         } else {
-            [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not rename file", nil) message:error.localizedDescription];
+            [self.tableView moveRowAtIndexPath:oldIndexPath toIndexPath:newIndexPath];
+            [self.tableView reloadRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
         }
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alertController animated:YES completion:nil];
+    } else {
+        [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not rename file", nil) message:error.localizedDescription];
+    }
 }
 
 #pragma mark - Disk Image Creation
@@ -417,6 +433,15 @@
         UITextPosition *beforeExtensionPosition = [textField positionFromPosition:textField.endOfDocument offset:-(textField.text.pathExtension.length + 1)];
         UITextRange *nameWithoutExtensionRange = [textField textRangeFromPosition:textField.beginningOfDocument toPosition:beforeExtensionPosition];
         [textField performSelector:@selector(setSelectedTextRange:) withObject:nameWithoutExtensionRange afterDelay:0.1];
+    }
+}
+
+#pragma mark - Alert Delegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (fileToRename && buttonIndex == alertView.firstOtherButtonIndex) {
+        [self renameFile:fileToRename toName:nameTextField.text];
+        fileToRename = nil;
     }
 }
 
