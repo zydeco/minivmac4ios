@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		283422D21CF8EF8C0088B634 /* MacPlus4M.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		283422EE1CF8F2210088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		283422F41CF8F55E0088B634 /* Emulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 283422F21CF8F5400088B634 /* Emulator.m */; };
+		283422EE1CF8F2210088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
 		283423601CF9C1050088B634 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423341CF9C0F10088B634 /* GLOBGLUE.c */; };
 		283423611CF9C10B0088B634 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423371CF9C0F10088B634 /* IWMEMDEV.c */; };
 		283423631CF9C1320088B634 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423391CF9C0F10088B634 /* KBRDEMDV.c */; };
@@ -25,8 +24,7 @@
 		2834236D1CF9C1320088B634 /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423531CF9C0F10088B634 /* SNDEMDEV.c */; };
 		2834236E1CF9C1320088B634 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423551CF9C0F10088B634 /* SONYEMDV.c */; };
 		2834236F1CF9C1320088B634 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235B1CF9C0F10088B634 /* VIAEMDEV.c */; };
-		283423861CF9C4CB0088B634 /* Emulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 283422F21CF8F5400088B634 /* Emulator.m */; };
-		283423881CF9C4CB0088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		283423881CF9C4CB0088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
 		283423A31CF9C5880088B634 /* MacII.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283423961CF9C4CB0088B634 /* MacII.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		283423D21CF9C66D0088B634 /* ADBEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423231CF9C0F10088B634 /* ADBEMDEV.c */; };
 		283423D31CF9C66D0088B634 /* ASCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423271CF9C0F10088B634 /* ASCEMDEV.c */; };
@@ -60,9 +58,8 @@
 		289710BE1CFB11BF0089D463 /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423511CF9C0F10088B634 /* SCSIEMDV.c */; };
 		289710BF1CFB11BF0089D463 /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234A1CF9C0F10088B634 /* SCCEMDEV.c */; };
 		289710C01CFB11BF0089D463 /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234C1CF9C0F10088B634 /* SCRNEMDV.c */; };
-		289710C11CFB11BF0089D463 /* Emulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 283422F21CF8F5400088B634 /* Emulator.m */; };
 		289710C21CFB11BF0089D463 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423371CF9C0F10088B634 /* IWMEMDEV.c */; };
-		289710C31CFB11BF0089D463 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		289710C31CFB11BF0089D463 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
 		289710C41CFB11BF0089D463 /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233F1CF9C0F10088B634 /* MOUSEMDV.c */; };
 		289710C51CFB11BF0089D463 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423341CF9C0F10088B634 /* GLOBGLUE.c */; };
 		289710C61CFB11BF0089D463 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423391CF9C0F10088B634 /* KBRDEMDV.c */; };
@@ -185,8 +182,6 @@
 		283422D71CF8EFD80088B634 /* EmulatorProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmulatorProtocol.h; sourceTree = "<group>"; };
 		283422E71CF8F1C80088B634 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		283422E91CF8F1C80088B634 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
-		283422F11CF8F5400088B634 /* Emulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emulator.h; sourceTree = "<group>"; };
-		283422F21CF8F5400088B634 /* Emulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emulator.m; sourceTree = "<group>"; };
 		283423221CF9C0F10088B634 /* ACTVCODE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ACTVCODE.h; sourceTree = "<group>"; };
 		283423231CF9C0F10088B634 /* ADBEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = ADBEMDEV.c; sourceTree = "<group>"; };
 		283423241CF9C0F10088B634 /* ADBEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ADBEMDEV.h; sourceTree = "<group>"; };
@@ -426,8 +421,6 @@
 			children = (
 				283423211CF9C0F10088B634 /* mnvm_core */,
 				283422D71CF8EFD80088B634 /* EmulatorProtocol.h */,
-				283422F11CF8F5400088B634 /* Emulator.h */,
-				283422F21CF8F5400088B634 /* Emulator.m */,
 				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
 				289710B71CFB0DC70089D463 /* CNFGGLOB.h */,
 			);
@@ -974,7 +967,6 @@
 				2834236C1CF9C1320088B634 /* SCSIEMDV.c in Sources */,
 				2834236A1CF9C1320088B634 /* SCCEMDEV.c in Sources */,
 				2834236B1CF9C1320088B634 /* SCRNEMDV.c in Sources */,
-				283422F41CF8F55E0088B634 /* Emulator.m in Sources */,
 				283423611CF9C10B0088B634 /* IWMEMDEV.c in Sources */,
 				283422EE1CF8F2210088B634 /* MYOSGLUE.m in Sources */,
 				283423661CF9C1320088B634 /* MOUSEMDV.c in Sources */,
@@ -993,7 +985,6 @@
 			files = (
 				283423DF1CF9C66D0088B634 /* SONYEMDV.c in Sources */,
 				283423DE1CF9C66D0088B634 /* SCSIEMDV.c in Sources */,
-				283423861CF9C4CB0088B634 /* Emulator.m in Sources */,
 				283423DD1CF9C66D0088B634 /* SCRNEMDV.c in Sources */,
 				283423DB1CF9C66D0088B634 /* RTCEMDEV.c in Sources */,
 				283423881CF9C4CB0088B634 /* MYOSGLUE.m in Sources */,
@@ -1024,7 +1015,6 @@
 				289710BE1CFB11BF0089D463 /* SCSIEMDV.c in Sources */,
 				289710BF1CFB11BF0089D463 /* SCCEMDEV.c in Sources */,
 				289710C01CFB11BF0089D463 /* SCRNEMDV.c in Sources */,
-				289710C11CFB11BF0089D463 /* Emulator.m in Sources */,
 				289710C21CFB11BF0089D463 /* IWMEMDEV.c in Sources */,
 				289710C31CFB11BF0089D463 /* MYOSGLUE.m in Sources */,
 				289710C41CFB11BF0089D463 /* MOUSEMDV.c in Sources */,

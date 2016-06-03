@@ -31,7 +31,15 @@
 #include "ENDIANAC.h"
 #include "MYOSGLUE.h"
 #include "STRCONST.h"
-#import "Emulator.h"
+#import "EmulatorProtocol.h"
+
+@interface Emulator : NSObject <Emulator>
+
+- (void)updateScreen:(CGImageRef)screenImage;
+
+@end
+
+static Emulator *sharedEmulator = nil;
 
 #pragma mark - some simple utilities
 
@@ -59,7 +67,7 @@ LOCALFUNC blnr dbglog_open0(void) {
 #if dbglog_ToStdErr
     return trueblnr;
 #else
-    NSString *myLogPath = [MyDataPath stringByAppendingPathComponent:@"dbglog.txt"];
+    NSString *myLogPath = [sharedEmulator.dataPath stringByAppendingPathComponent:@"dbglog.txt"];
     const char *path = [myLogPath fileSystemRepresentation];
 
     dbglog_File = fopen(path, "w");
@@ -150,24 +158,6 @@ LOCALPROC Screen_UnInit(void) {
         CGColorSpaceRelease(colorColorSpace);
         colorColorSpace = NULL;
     }
-}
-
-LOCALVAR NSString *MyDataPath = nil;
-
-LOCALFUNC blnr InitCocoaStuff(void) {
-    MyDataPath = [Emulator sharedEmulator].dataPath;
-    if (MyDataPath) {
-        [MyDataPath retain];
-    }
-
-    Screen_Init();
-    return trueblnr;
-}
-
-LOCALPROC UnInitCocoaStuff(void) {
-    [MyDataPath release];
-    MyDataPath = nil;
-    Screen_UnInit();
 }
 
 #pragma mark - Parameter Buffers
@@ -349,15 +339,13 @@ LOCALFUNC tMacErr CopyBytesToPbuf(const char *x, ui5r L, tPbuf *r) {
 #if IncludeSonyGetName || IncludeHostTextClipExchange
 LOCALFUNC tMacErr NSStringToRomanPbuf(NSString *string, tPbuf *r) {
     tMacErr v = mnvm_miscErr;
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSData *d0 = [string dataUsingEncoding:NSMacOSRomanStringEncoding];
-    const void *s = [d0 bytes];
-    NSUInteger L = [d0 length];
-
-    v = CopyBytesToPbuf(s, (ui5r)L, r);
-
-    [pool release];
-
+    @autoreleasepool {
+        NSData *d0 = [string dataUsingEncoding:NSMacOSRomanStringEncoding];
+        const void *s = [d0 bytes];
+        NSUInteger L = [d0 length];
+        
+        v = CopyBytesToPbuf(s, (ui5r)L, r);
+    }
     return v;
 }
 #endif
@@ -488,13 +476,8 @@ LOCALFUNC tMacErr vSonyEject0(tDrive Drive_No, blnr deleteit) {
         NSString *filePath = DriveNames[Drive_No];
         if (NULL != filePath) {
             if (deleteit) {
-                NSAutoreleasePool *pool =
-                    [[NSAutoreleasePool alloc] init];
-                const char *s = [filePath fileSystemRepresentation];
-                remove(s);
-                [pool release];
+                remove(filePath.fileSystemRepresentation);
             }
-            [filePath release];
             DriveNames[Drive_No] = NULL; /* not really needed */
         }
     }
@@ -530,11 +513,10 @@ GLOBALFUNC tMacErr vSonyGetName(tDrive Drive_No, tPbuf *r) {
     tMacErr v = mnvm_miscErr;
     NSString *filePath = DriveNames[Drive_No];
     if (NULL != filePath) {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-        NSString *s0 = [filePath lastPathComponent];
-        v = NSStringToRomanPbuf(s0, r);
-
-        [pool release];
+        @autoreleasepool {
+            NSString *s0 = [filePath lastPathComponent];
+            v = NSStringToRomanPbuf(s0, r);
+        }
     }
 
     return v;
@@ -563,7 +545,7 @@ LOCALFUNC blnr Sony_Insert0(FILE *refnum, blnr locked, NSString *filePath) {
             DiskInsertNotify(Drive_No, locked);
 
 #if IncludeSonyGetName || IncludeSonyNew
-            DriveNames[Drive_No] = [filePath retain];
+            DriveNames[Drive_No] = filePath.copy;
 #endif
 
             IsOk = trueblnr;
@@ -611,7 +593,7 @@ GLOBALFUNC blnr Sony_Insert1(NSString *filePath, blnr silentfail) {
 LOCALFUNC blnr Sony_Insert2(char *s) {
     NSString *sPath;
 
-    if (!FindNamedChildFilePath(MyDataPath, s, &sPath)) {
+    if (!FindNamedChildFilePath(sharedEmulator.dataPath, s, &sPath)) {
         return falseblnr;
     } else {
         return Sony_Insert1(sPath, trueblnr);
@@ -712,7 +694,7 @@ LOCALFUNC tMacErr LoadMacRomFrom(NSString *parentPath) {
 LOCALFUNC blnr LoadMacRom(void) {
     tMacErr err;
 
-    if (mnvm_fnfErr == (err = LoadMacRomFrom(MyDataPath))) {
+    if (mnvm_fnfErr == (err = LoadMacRomFrom(sharedEmulator.dataPath))) {
     }
 
     if (mnvm_noErr != err) {
@@ -734,19 +716,11 @@ LOCALFUNC blnr LoadMacRom(void) {
 
 #if IncludeHostTextClipExchange
 GLOBALFUNC tMacErr HTCEexport(tPbuf i) {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSData *d = [NSData dataWithBytes:PbufDat[i] length:PbufSize[i]];
-    NSString *ss = [[[NSString alloc]
-        initWithData:d
-            encoding:NSMacOSRomanStringEncoding]
-        autorelease];
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = ss;
-
-    PbufDispose(i);
-
-    [pool release];
-
+    @autoreleasepool {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = [[NSString alloc] initWithBytes:PbufDat[i] length:PbufSize[i] encoding:NSMacOSRomanStringEncoding];
+        PbufDispose(i);
+    }
     return mnvm_noErr;
 }
 #endif
@@ -754,13 +728,12 @@ GLOBALFUNC tMacErr HTCEexport(tPbuf i) {
 #if IncludeHostTextClipExchange
 GLOBALFUNC tMacErr HTCEimport(tPbuf *r) {
     tMacErr err = mnvm_miscErr;
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    if (pasteboard.string != nil) {
-        err = NSStringToRomanPbuf(pasteboard.string, r);
+    @autoreleasepool {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        if (pasteboard.string != nil) {
+            err = NSStringToRomanPbuf(pasteboard.string, r);
+        }
     }
-    [pool release];
-
     return err;
 }
 #endif
@@ -840,26 +813,6 @@ LOCALFUNC blnr InitLocationDat(void) {
     CurMacDelta = (TzOffSet & 0x00FFFFFF) | ((isdst ? 0x80 : 0) << 24);
 
     return trueblnr;
-}
-
-#pragma mark - Mouse
-
-GLOBALPROC SetMouseButton(blnr down) {
-    MyMouseButtonSet(down);
-}
-
-GLOBALPROC SetMouseLoc(ui4r h, ui4r v) {
-    MyMousePositionSet(h, v);
-}
-
-GLOBALPROC SetMouseDelta(ui4r dh, ui4r dv) {
-    MyMousePositionSetDelta(dh, dv);
-}
-
-#pragma mark - Keyboard
-
-GLOBALPROC SetKeyState(int key, blnr down) {
-    Keyboard_UpdateKeyMap(key, down);
 }
 
 #pragma mark - Video Out
@@ -1584,25 +1537,17 @@ LOCALPROC EnterSpeedStopped(void) {
 #endif
 }
 
-GLOBALFUNC blnr GetSpeedStopped(void) {
-    return SpeedStopped;
-}
-
-GLOBALPROC SetSpeedStopped(blnr stopped) {
-    SpeedStopped = stopped;
-}
-
 LOCALPROC MacMsgDisplayOn() {
     if (SavedBriefMsg != nullpr) {
         NSString *title = NSStringCreateFromSubstCStr(SavedBriefMsg, falseblnr);
         NSString *message = NSStringCreateFromSubstCStr(SavedLongMsg, falseblnr);
         if ([UIAlertController class]) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-            blnr wasStopped = CurSpeedStopped;
+            blnr wasStopped = SpeedStopped;
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                SetSpeedStopped(wasStopped);
+                SpeedStopped = wasStopped;
             }]];
-            SetSpeedStopped(trueblnr);
+            SpeedStopped = trueblnr;
             [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
         } else {
             // fallback for iOS 7
@@ -1618,7 +1563,7 @@ LOCALFUNC blnr InitOSGLU(void) {
     blnr IsOk = falseblnr;
     @autoreleasepool {
         if (AllocMyMemory())
-            if (InitCocoaStuff())
+            if (Screen_Init())
 #if dbglog_HAVE
                 if (dbglog_open())
 #endif
@@ -1660,7 +1605,7 @@ LOCALPROC UnInitOSGLU(void) {
 #endif
 
     CheckSavedMacMsg();
-    UnInitCocoaStuff();
+    Screen_UnInit();
 
     UnallocMyMemory();
 }
@@ -1702,53 +1647,180 @@ GLOBALFUNC blnr ExtraTimeNotOver(void) {
 }
 
 GLOBALPROC WaitForNextTick(void) {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSRunLoop *mainRunLoop = [NSRunLoop mainRunLoop];
-    NSDate *until = [NSDate distantPast];
-label_retry:
-    [mainRunLoop runMode:NSDefaultRunLoopMode beforeDate:until];
-
-    CheckForSavedTasks();
-
-    if (ForceMacOff) {
-        goto label_exit;
-    }
-
-    if (CurSpeedStopped) {
-        DoneWithDrawingForTick();
-        until = [NSDate distantFuture];
-        goto label_retry;
-    }
-    
-    if (ExtraTimeNotOver()) {
-        until = [NSDate dateWithTimeIntervalSinceReferenceDate:NextTickChangeTime];
-        goto label_retry;
-    }
-
-    if (CheckDateTime()) {
+    @autoreleasepool {
+        NSRunLoop *mainRunLoop = [NSRunLoop mainRunLoop];
+        NSDate *until = [NSDate distantPast];
+    label_retry:
+        [mainRunLoop runMode:NSDefaultRunLoopMode beforeDate:until];
+        
+        CheckForSavedTasks();
+        
+        if (ForceMacOff) {
+            return;
+        }
+        
+        if (CurSpeedStopped) {
+            DoneWithDrawingForTick();
+            until = [NSDate distantFuture];
+            goto label_retry;
+        }
+        
+        if (ExtraTimeNotOver()) {
+            until = [NSDate dateWithTimeIntervalSinceReferenceDate:NextTickChangeTime];
+            goto label_retry;
+        }
+        
+        if (CheckDateTime()) {
 #if MySoundEnabled
-        MySound_SecondNotify();
+            MySound_SecondNotify();
 #endif
 #if EnableDemoMsg
-        DemoModeSecondNotify();
+            DemoModeSecondNotify();
+#endif
+        }
+        
+        OnTrueTime = TrueEmulatedTime;
+        
+#if dbglog_TimeStuff
+        dbglog_writelnNum("WaitForNextTick, OnTrueTime", OnTrueTime);
 #endif
     }
-
-    OnTrueTime = TrueEmulatedTime;
-
-#if dbglog_TimeStuff
-    dbglog_writelnNum("WaitForNextTick, OnTrueTime", OnTrueTime);
-#endif
-
-label_exit:
-    [pool release];
 }
 
-GLOBALPROC RunEmulator(void) {
-    ZapOSGLUVars();
+#pragma mark - Objective-C Interface
 
+static dispatch_once_t onceToken;
+
+@implementation Emulator
+
+@synthesize dataPath;
+
++ (instancetype)sharedEmulator {
+    dispatch_once(&onceToken, ^{
+        sharedEmulator = [self new];
+    });
+    return sharedEmulator;
+}
+
+- (instancetype)init {
+    if ((self = [super init])) {
+        dispatch_once(&onceToken, ^{
+            sharedEmulator = self;
+        });
+    }
+    return self;
+}
+
+- (void)run {
+    ZapOSGLUVars();
+    
     if (InitOSGLU()) {
         ProgramMain();
     }
     UnInitOSGLU();
 }
+
+- (NSInteger)initialSpeed {
+    return WantInitSpeedValue;
+}
+
+- (NSBundle *)bundle {
+    return [NSBundle bundleForClass:self.class];
+}
+
+- (NSInteger)speed {
+    return SpeedValue;
+}
+
+- (void)setSpeed:(NSInteger)speed {
+    SpeedValue = speed;
+}
+
+- (BOOL)isRunning {
+    return !SpeedStopped;
+}
+
+- (void)setRunning:(BOOL)running {
+    SpeedStopped = !running;
+}
+
+- (void)interrupt {
+    WantMacInterrupt = trueblnr;
+}
+
+- (void)reset {
+    WantMacReset = trueblnr;
+}
+
+#pragma mark - Screen
+
+@synthesize screenLayer;
+
+- (CGSize)screenSize {
+    return CGSizeMake(vMacScreenWidth, vMacScreenHeight);
+}
+
+- (void)updateScreen:(CGImageRef)screenImage {
+    screenLayer.contents = (__bridge id)screenImage;
+}
+
+#pragma mark - Disk
+
+@synthesize insertDiskNotification, ejectDiskNotification;
+
+- (BOOL)anyDiskInserted {
+    return AnyDiskInserted();
+}
+
+- (BOOL)isDiskInserted:(NSString *)path {
+    return Sony_IsInserted(path);
+}
+
+- (BOOL)insertDisk:(NSString *)path {
+    return Sony_Insert1(path, false);
+}
+
+- (NSString *)insertDiskNotification {
+    return @"didInsertDisk";
+}
+
+- (NSString *)ejectDiskNotification {
+    return @"didEjectDisk";
+}
+
+#pragma mark - Keyboard
+
+- (int)translateScanCode:(int)scancode {
+    switch (scancode) {
+        case 54: return 59; // left control
+        case 59: return 70; // arrow left
+        case 60: return 66; // arrow right
+        case 61: return 72; // arrow down
+        case 62: return 77; // arrow up
+        default: return scancode;
+    }
+}
+
+- (void)keyDown:(int)scancode {
+    Keyboard_UpdateKeyMap([self translateScanCode:scancode], 1);
+}
+
+- (void)keyUp:(int)scancode {
+    Keyboard_UpdateKeyMap([self translateScanCode:scancode], 0);
+}
+
+#pragma mark - Mouse
+
+- (void)setMouseX:(NSInteger)x Y:(NSInteger)y {
+    MyMousePositionSet(x, y);
+}
+
+- (void)moveMouseX:(NSInteger)x Y:(NSInteger)y {
+    MyMousePositionSetDelta(x, y);
+}
+
+- (void)setMouseButton:(BOOL)down {
+    MyMouseButtonSet(down);
+}
+
+@end
