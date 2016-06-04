@@ -88,8 +88,8 @@ typedef uint64_t ui6b;
 #define IncludeHostTextClipExchange 1
 #define IncludeSonyRawMode 1
 #define IncludeSonyGetName 1
-#define IncludeSonyNew 0
-#define IncludeSonyNameNew 0
+#define IncludeSonyNew 1
+#define IncludeSonyNameNew 1
 
 #define EmLocalTalk 0
 

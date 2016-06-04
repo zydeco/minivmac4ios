@@ -39,6 +39,7 @@ EXPORTVAR(ui3p, RAM)
 
 @interface Emulator : NSObject <Emulator>
 
+- (void)makeNewDisk:(NSString*)name size:(NSInteger)size;
 - (void)updateScreen:(CGImageRef)screenImage;
 
 @end
@@ -266,15 +267,13 @@ LOCALFUNC NSString *NSStringCreateFromSubstCStr(char *s,
 }
 
 #if IncludeSonyNameNew
-LOCALFUNC blnr MacRomanFileNameToNSString(tPbuf i,
-                                          NSString **r) {
+LOCALFUNC NSString * MacRomanFileNameToNSString(tPbuf i) {
     ui3p p;
     void *Buffer = PbufDat[i];
     ui5b L = PbufSize[i];
 
     p = (ui3p)malloc(L /* + 1 */);
     if (p != NULL) {
-        NSData *d;
         ui3b *p0 = (ui3b *)Buffer;
         ui3b *p1 = (ui3b *)p;
 
@@ -306,19 +305,10 @@ LOCALFUNC blnr MacRomanFileNameToNSString(tPbuf i,
             }
         }
 
-        d = [[NSData alloc] initWithBytesNoCopy:p length:L];
-
-        *r = [[[NSString alloc]
-            initWithData:d
-                encoding:NSMacOSRomanStringEncoding]
-            autorelease];
-
-        [d release];
-
-        return trueblnr;
+        return [[NSString alloc] initWithBytes:p length:L encoding:NSMacOSRomanStringEncoding];
     }
 
-    return falseblnr;
+    return nil;
 }
 #endif
 
@@ -1643,6 +1633,29 @@ LOCALPROC CheckForSavedTasks(void) {
     if ((nullpr != SavedBriefMsg)) {
         MacMsgDisplayOn();
     }
+    
+#if IncludeSonyNew
+    if (vSonyNewDiskWanted && !SpeedStopped) {
+        SpeedStopped = trueblnr;
+#if IncludeSonyNameNew
+        if (vSonyNewDiskName != NotAPbuf) {
+            NSString *sNewDiskName = MacRomanFileNameToNSString(vSonyNewDiskName);
+            if (sNewDiskName) {
+                [sharedEmulator makeNewDisk:sNewDiskName size:vSonyNewDiskSize];
+            } else {
+                PbufDispose(vSonyNewDiskName);
+                vSonyNewDiskName = NotAPbuf;
+                vSonyNewDiskWanted = falseblnr;
+                SpeedStopped = falseblnr;
+            }
+        } else
+#endif
+        {
+            [sharedEmulator makeNewDisk:NSLocalizedString(@"untitled", nil) size:vSonyNewDiskSize];
+        }
+    }
+#endif
+
 }
 
 GLOBALFUNC blnr ExtraTimeNotOver(void) {
@@ -1696,6 +1709,9 @@ GLOBALPROC WaitForNextTick(void) {
 static dispatch_once_t onceToken;
 
 @implementation Emulator
+{
+    __block __weak UITextField *nameTextField;
+}
 
 @synthesize dataPath;
 
@@ -1804,6 +1820,41 @@ static dispatch_once_t onceToken;
 
 - (NSString *)ejectDiskNotification {
     return @"didEjectDisk";
+}
+
+- (void)makeNewDisk:(NSString*)name size:(NSInteger)size {
+    if ([UIAlertController class]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Export File", nil) message:NSLocalizedString(@"Enter new name", nil) preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            nameTextField = textField;
+            nameTextField.placeholder = name;
+            nameTextField.text = name;
+        }];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self didMakeNewDisk:nil size:0];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Save", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self didMakeNewDisk:nameTextField.text size:size];
+        }]];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+    } else {
+        
+    }
+}
+
+- (void)didMakeNewDisk:(NSString*)fileName size:(NSInteger)size {
+    if (fileName) {
+        NSString *filePath = [self.dataPath stringByAppendingPathComponent:fileName];
+        MakeNewDisk0(size, filePath);
+    }
+#if IncludeSonyNameNew
+    if (vSonyNewDiskName != NotAPbuf) {
+        PbufDispose(vSonyNewDiskName);
+        vSonyNewDiskName = NotAPbuf;
+    }
+#endif
+    vSonyNewDiskWanted = falseblnr;
+    SpeedStopped = falseblnr;
 }
 
 #pragma mark - Keyboard
