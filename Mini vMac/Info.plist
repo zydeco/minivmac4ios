@@ -123,6 +123,7 @@
 				<array>
 					<string>img</string>
 					<string>dsk</string>
+					<string>image</string>
 				</array>
 			</dict>
 		</dict>

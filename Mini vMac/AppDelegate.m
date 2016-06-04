@@ -225,7 +225,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
 }
 
 - (NSArray<NSString *> *)diskImageExtensions {
-    return @[@"dsk", @"img", @"dc42", @"diskcopy42"];
+    return @[@"dsk", @"img", @"dc42", @"diskcopy42", @"image"];
 }
 
 - (NSString *)documentsPath {
