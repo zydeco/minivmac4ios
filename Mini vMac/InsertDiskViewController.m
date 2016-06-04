@@ -18,6 +18,8 @@
 
 @property (nonatomic, weak) InsertDiskViewController *controller;
 @property (nonatomic, strong) NSString *filePath;
+@property (nonatomic, assign) BOOL showExtension;
+
 - (void)share:(id)sender;
 - (void)rename:(id)sender;
 - (void)delete:(id)sender;
@@ -32,6 +34,7 @@
     __block __weak UITextField *sizeTextField;
     __block __weak UITextField *nameTextField;
     NSString *fileToRename;
+    BOOL importing;
 }
 
 + (void)initialize {
@@ -45,6 +48,14 @@
     basePath = [AppDelegate sharedInstance].documentsPath;
     [self loadDirectoryContents];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    importing = [[AppDelegate sharedEmulator].currentApplication isEqualToString:@"ImportFl"];
+    if (importing) {
+        self.title = NSLocalizedString(@"Import File", nil);
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -100,7 +111,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.editing ? 2 : 1;
+    return self.editing || importing ? 2 : 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -158,6 +169,7 @@
     FileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     NSString *filePath = [self fileAtIndexPath:indexPath];
     if (filePath) {
+        cell.showExtension = self.editing || importing;
         cell.filePath = filePath;
         if ([[AppDelegate sharedEmulator] isDiskInserted:filePath]) {
             cell.userInteractionEnabled = NO;
@@ -462,7 +474,7 @@
 - (void)setFilePath:(NSString *)filePath {
     _filePath = filePath;
     NSString *fileName = filePath.lastPathComponent;
-    self.textLabel.text = self.editing ? fileName : fileName.stringByDeletingPathExtension;
+    self.textLabel.text = self.showExtension ? fileName : fileName.stringByDeletingPathExtension;
     NSDictionary *attributes = [[NSURL fileURLWithPath:filePath] resourceValuesForKeys:@[NSURLTotalFileSizeKey] error:NULL];
     if (attributes && attributes[NSURLTotalFileSizeKey]) {
         BOOL isDiskImage = [[AppDelegate sharedInstance].diskImageExtensions containsObject:fileName.pathExtension.lowercaseString];
