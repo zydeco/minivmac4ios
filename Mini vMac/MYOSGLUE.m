@@ -31,7 +31,11 @@
 #include "ENDIANAC.h"
 #include "MYOSGLUE.h"
 #include "STRCONST.h"
+#include "EMCONFIG.h"
 #import "EmulatorProtocol.h"
+
+#define kRAM_Size (kRAMa_Size + kRAMb_Size)
+EXPORTVAR(ui3p, RAM)
 
 @interface Emulator : NSObject <Emulator>
 
@@ -1750,6 +1754,20 @@ static dispatch_once_t onceToken;
 
 - (void)reset {
     WantMacReset = trueblnr;
+}
+
+- (NSData *)RAM {
+    return [NSData dataWithBytesNoCopy:RAM length:kRAM_Size freeWhenDone:NO];
+}
+
+- (NSString *)currentApplication {
+    NSData *curApName = [self.RAM subdataWithRange:NSMakeRange(0x910, 32)];
+    uint8_t curApNameLength = *(uint8_t*)curApName.bytes;
+    if (curApNameLength == 0 || curApNameLength > 31) {
+        return nil;
+    } else {
+        return [[NSString alloc] initWithBytes:curApName.bytes+1 length:curApNameLength encoding:NSMacOSRomanStringEncoding];
+    }
 }
 
 #pragma mark - Screen
