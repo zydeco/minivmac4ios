@@ -47,7 +47,6 @@ static NSObject<Emulator> *sharedEmulator = nil;
                                         @"en-US": @"US.nfkeyboardlayout"};
     NSString *firstLanguage = [NSBundle preferredLocalizationsFromArray:layoutForLanguage.allKeys].firstObject;
     NSDictionary *defaultValues = @{@"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
-                                    @"frameskip": @(0),
                                     @"keyboardLayout": layoutForLanguage[firstLanguage],
                                     @"machine": @"MacPlus4M"
                                     };
