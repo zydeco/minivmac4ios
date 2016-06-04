@@ -37,7 +37,7 @@
 #define kRAM_Size (kRAMa_Size + kRAMb_Size)
 EXPORTVAR(ui3p, RAM)
 
-@interface Emulator : NSObject <Emulator>
+@interface Emulator : NSObject <Emulator, UIAlertViewDelegate>
 
 - (void)makeNewDisk:(NSString*)name size:(NSInteger)size;
 - (void)updateScreen:(CGImageRef)screenImage;
@@ -1838,7 +1838,13 @@ static dispatch_once_t onceToken;
         }]];
         [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
     } else {
-        
+        // iOS 7 fallback
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Export File", nil) message:NSLocalizedString(@"Enter new name", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Save", nil), nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        nameTextField = [alert textFieldAtIndex:0];
+        nameTextField.placeholder = name;
+        nameTextField.text = name;
+        [alert show];
     }
 }
 
@@ -1855,6 +1861,16 @@ static dispatch_once_t onceToken;
 #endif
     vSonyNewDiskWanted = falseblnr;
     SpeedStopped = falseblnr;
+}
+
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (nameTextField) {
+        NSString *fileName = nil;
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            fileName = nameTextField.text;
+        }
+        [self didMakeNewDisk:fileName size:vSonyNewDiskSize];
+    }
 }
 
 #pragma mark - Keyboard
