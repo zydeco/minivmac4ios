@@ -138,6 +138,9 @@ static uint8_t maskReplacement[][128] = {
     [fh seekToFileOffset:1024];
     NSData *checkHeader = [fh readDataOfLength:128];
     [fh closeFile];
+    if (checkHeader == nil || checkHeader.length != 128) {
+        return nil;
+    }
     const unsigned char *chb = [checkHeader bytes];
 
     // determine type from header
