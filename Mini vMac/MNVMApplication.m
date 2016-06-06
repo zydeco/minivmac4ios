@@ -110,7 +110,8 @@ static int8_t usb_to_adb_scancode[] = {
             handleKeyboardEvents = NO;
         }
     });
-    if ([event isKindOfClass:keyboardEventClass] && handleKeyboardEvents) {
+    BOOL emulatorIsFrontmost = [AppDelegate sharedEmulator].running && [AppDelegate sharedInstance].window.rootViewController.presentedViewController == nil;
+    if ([event isKindOfClass:keyboardEventClass] && handleKeyboardEvents && emulatorIsFrontmost) {
         [self handleKeyboardEvent:(UIPhysicalKeyboardEvent*)event];
     }
 }
