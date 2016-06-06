@@ -25,6 +25,7 @@ typedef enum : NSInteger {
 {
     NSArray *keyboardLayouts;
     NSArray<NSBundle*> *emulatorBundles;
+    NSBundle *selectedEmulatorBundle;
     NSString *aboutTitle;
     NSArray<NSDictionary<NSString*,NSString*>*> *aboutItems;
     UITextView *footerView;
@@ -33,8 +34,19 @@ typedef enum : NSInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     keyboardLayouts = [[NSBundle mainBundle] pathsForResourcesOfType:@"nfkeyboardlayout" inDirectory:@"Keyboard Layouts"];
-    emulatorBundles = [AppDelegate sharedInstance].emulatorBundles;
+    [self loadEmulatorBundles];
     [self loadCredits];
+}
+
+- (void)loadEmulatorBundles {
+    emulatorBundles = [AppDelegate sharedInstance].emulatorBundles;
+    NSString *selectedBundleName = [[NSUserDefaults standardUserDefaults] stringForKey:@"machine"];
+    for (NSBundle *bundle in emulatorBundles) {
+        NSString *bundleName = bundle.bundlePath.lastPathComponent.stringByDeletingPathExtension;
+        if ([selectedBundleName isEqualToString:bundleName]) {
+            selectedEmulatorBundle = bundle;
+        }
+    }
 }
 
 - (void)loadCredits {
@@ -76,13 +88,26 @@ typedef enum : NSInteger {
 
 - (IBAction)changeSpeed:(UISegmentedControl*)sender {
     if ([sender isKindOfClass:[UISegmentedControl class]]) {
-        [[NSUserDefaults standardUserDefaults] setInteger:sender.selectedSegmentIndex forKey:@"speedValue"];
+        EmulatorSpeed speedValue = sender.selectedSegmentIndex == sender.numberOfSegments - 1 ? EmulatorSpeedAllOut : sender.selectedSegmentIndex;
+        [[NSUserDefaults standardUserDefaults] setInteger:speedValue forKey:@"speedValue"];
     }
 }
 
 - (IBAction)changeMouseType:(UISegmentedControl*)sender {
     if ([sender isKindOfClass:[UISegmentedControl class]]) {
         [[NSUserDefaults standardUserDefaults] setBool:sender.selectedSegmentIndex == 1 forKey:@"trackpad"];
+    }
+}
+
+- (void)changeRunInBackground:(UISwitch*)sender {
+    if ([sender isKindOfClass:[UISwitch class]]) {
+        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:@"runInBackground"];
+    }
+}
+
+- (void)changeAutoSlow:(UISwitch*)sender {
+    if ([sender isKindOfClass:[UISwitch class]]) {
+        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:@"autoSlow"];
     }
 }
 
@@ -94,6 +119,11 @@ typedef enum : NSInteger {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
+        case SettingsSectionSpeed: {
+            NSDictionary *capabilities = [selectedEmulatorBundle objectForInfoDictionaryKey:@"MNVMCapabilities"];
+            BOOL hasAutoSlow = [capabilities[@"AutoSlow"] boolValue];
+            return hasAutoSlow ? 3 : 2;
+        }
         case SettingsSectionKeyboard:
             return keyboardLayouts.count;
         case SettingsSectionMachine:
@@ -130,7 +160,9 @@ typedef enum : NSInteger {
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    if (section == SettingsSectionMachine) {
+    if (section == SettingsSectionSpeed) {
+        return NSLocalizedString(@"Faster speeds and running in background drain the battery faster", nil);
+    } else if (section == SettingsSectionMachine) {
         return NSLocalizedString(@"Changing the emulated machine requires to relaunch Mini vMac", nil);
     } else {
         return nil;
@@ -150,9 +182,18 @@ typedef enum : NSInteger {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger section = indexPath.section;
     if (section == SettingsSectionSpeed) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"speed" forIndexPath:indexPath];
-        UISegmentedControl *speedControl = (UISegmentedControl*)[cell viewWithTag:128];
-        speedControl.selectedSegmentIndex = [defaults integerForKey:@"speedValue"];
+        if (indexPath.row == 0) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"speed" forIndexPath:indexPath];
+            UISegmentedControl *speedControl = (UISegmentedControl*)[cell viewWithTag:128];
+            EmulatorSpeed speedValue = [defaults integerForKey:@"speedValue"];
+            speedControl.selectedSegmentIndex = speedValue == EmulatorSpeedAllOut ? speedControl.numberOfSegments - 1 : speedValue;
+        } else if (indexPath.row == 1) {
+            cell = [self switchCellForTableView:tableView indexPath:indexPath action:@selector(changeRunInBackground:) on:[defaults boolForKey:@"runInBackground"]];
+            cell.textLabel.text = NSLocalizedString(@"Run in background", nil);
+        } else if (indexPath.row == 2) {
+            cell = [self switchCellForTableView:tableView indexPath:indexPath action:@selector(changeAutoSlow:) on:[defaults boolForKey:@"autoSlow"]];
+            cell.textLabel.text = NSLocalizedString(@"AutoSlow", nil);
+        }
     } else if (section == SettingsSectionMouse) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"mouse" forIndexPath:indexPath];
         UISegmentedControl *mouseControl = (UISegmentedControl*)[cell viewWithTag:128];
@@ -171,8 +212,7 @@ typedef enum : NSInteger {
         cell.detailTextLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleGetInfoString"];
         NSString *iconName = [NSString stringWithFormat:@"PlugIns/%@.mnvm/Icon", bundleName];
         cell.imageView.image = [UIImage imageNamed:iconName];
-        BOOL selected = [[defaults stringForKey:@"machine"] isEqualToString:bundleName];
-        cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        cell.accessoryType = bundle == selectedEmulatorBundle ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     } else if (section == SettingsSectionAbout) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"about" forIndexPath:indexPath];
         NSDictionary<NSString*,NSString*> *item = aboutItems[indexPath.row];
@@ -203,6 +243,8 @@ typedef enum : NSInteger {
         NSBundle *bundle = emulatorBundles[indexPath.row];
         NSString *bundleName = bundle.bundlePath.lastPathComponent.stringByDeletingPathExtension;
         [defaults setValue:bundleName forKey:@"machine"];
+        selectedEmulatorBundle = bundle;
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:SettingsSectionSpeed] withRowAnimation:UITableViewRowAnimationAutomatic];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else if (indexPath.section == SettingsSectionAbout) {
         // links in about
@@ -211,6 +253,20 @@ typedef enum : NSInteger {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkURL]];
         }
     }
+}
+
+- (UITableViewCell*)switchCellForTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath action:(SEL)action on:(BOOL)on {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"toggle" forIndexPath:indexPath];
+    UISwitch *cellSwitch = (UISwitch*)cell.accessoryView;
+    if (cellSwitch == nil) {
+        cellSwitch = [UISwitch new];
+        cell.accessoryView = cellSwitch;
+    } else {
+        [cellSwitch removeTarget:nil action:nil forControlEvents:UIControlEventAllEvents];
+    }
+    cellSwitch.on = on;
+    [cellSwitch addTarget:self action:action forControlEvents:UIControlEventValueChanged];
+    return cell;
 }
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright © 2016 namedfork. All rights reserved.
 //
 
+@import AVFoundation;
 #import "AppDelegate.h"
 #import "SettingsViewController.h"
 #import "InsertDiskViewController.h"
@@ -36,6 +37,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
         [self loadEmulator:@"MacPlus4M"];
     }
     [self initDefaults];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:NULL];
     [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
     return YES;
 }
@@ -48,7 +50,10 @@ static NSObject<Emulator> *sharedEmulator = nil;
     NSString *firstLanguage = [NSBundle preferredLocalizationsFromArray:layoutForLanguage.allKeys].firstObject;
     NSDictionary *defaultValues = @{@"trackpad": @([UIDevice currentDevice].userInterfaceIdiom != UIUserInterfaceIdiomPad),
                                     @"keyboardLayout": layoutForLanguage[firstLanguage],
-                                    @"machine": @"MacPlus4M"
+                                    @"machine": @"MacPlus4M",
+                                    @"speedValue": @(sharedEmulator.initialSpeed),
+                                    @"runInBackground": @NO,
+                                    @"autoSlow": @(sharedEmulator.initialAutoSlow)
                                     };
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -59,8 +64,11 @@ static NSObject<Emulator> *sharedEmulator = nil;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if (object == [NSUserDefaults standardUserDefaults]) {
+        NSUserDefaults *defaults = object;
         if ([keyPath isEqualToString:@"speedValue"]) {
-            sharedEmulator.speed = [[NSUserDefaults standardUserDefaults] integerForKey:@"speedValue"];
+            sharedEmulator.speed = [defaults integerForKey:@"speedValue"];
+        } else if ([keyPath isEqualToString:@"autoSlow"]) {
+            sharedEmulator.autoSlow = [defaults integerForKey:@"autoSlow"];
         }
     }
 }
@@ -87,15 +95,26 @@ static NSObject<Emulator> *sharedEmulator = nil;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    sharedEmulator.running = NO;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    if ([defaults boolForKey:@"runInBackground"]) {
+        // slow down to 1x when in background
+        sharedEmulator.speed = EmulatorSpeed1x;
+    } else {
+        sharedEmulator.running = NO;
+    }
     if (sharedEmulator.anyDiskInserted == NO) {
         exit(0);
     }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    sharedEmulator.running = YES;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (sharedEmulator.running) {
+        sharedEmulator.speed = [defaults integerForKey:@"speedValue"];
+    } else {
+        sharedEmulator.running = YES;
+    }
 }
 
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {

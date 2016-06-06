@@ -1757,12 +1757,38 @@ static dispatch_once_t onceToken;
     return [NSBundle bundleForClass:self.class];
 }
 
-- (NSInteger)speed {
+- (EmulatorSpeed)speed {
     return SpeedValue;
 }
 
-- (void)setSpeed:(NSInteger)speed {
+- (void)setSpeed:(EmulatorSpeed)speed {
     SpeedValue = speed;
+}
+
+#if EnableAutoSlow
+- (BOOL)autoSlow {
+    return !WantNotAutoSlow;
+}
+
+- (void)setAutoSlow:(BOOL)autoSlow {
+    WantNotAutoSlow = !autoSlow;
+}
+#else
+- (BOOL)autoSlow {
+    return NO;
+}
+
+- (void)setAutoSlow:(BOOL)autoSlow {
+    
+}
+#endif
+
+- (BOOL)autoSlowSupported {
+    return EnableAutoSlow;
+}
+
+- (BOOL)initialAutoSlow {
+    return !WantInitNotAutoSlow;
 }
 
 - (BOOL)isRunning {
@@ -1803,7 +1829,9 @@ static dispatch_once_t onceToken;
 }
 
 - (void)updateScreen:(CGImageRef)screenImage {
-    screenLayer.contents = (__bridge id)screenImage;
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        screenLayer.contents = (__bridge id)screenImage;
+    }
 }
 
 #pragma mark - Disk
