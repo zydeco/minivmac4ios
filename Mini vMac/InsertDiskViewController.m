@@ -523,13 +523,15 @@
     _filePath = filePath;
     NSString *fileName = filePath.lastPathComponent;
     self.textLabel.text = self.showExtension ? fileName : fileName.stringByDeletingPathExtension;
-    NSDictionary *attributes = [[NSURL fileURLWithPath:filePath] resourceValuesForKeys:@[NSURLTotalFileSizeKey] error:NULL];
+    NSDictionary *attributes = [[NSURL fileURLWithPath:filePath] resourceValuesForKeys:@[NSURLTotalFileSizeKey, NSURLFileSizeKey] error:NULL];
     if (attributes && attributes[NSURLTotalFileSizeKey]) {
         BOOL isDiskImage = [[AppDelegate sharedInstance].diskImageExtensions containsObject:fileName.pathExtension.lowercaseString];
         if (isDiskImage) {
             UIImage *icon = [UIImage imageWithIconForDiskImage:filePath];
             if (icon == nil) {
-                icon = [UIImage imageNamed:@"floppy"];
+                NSInteger fileSize = [attributes[NSURLTotalFileSizeKey] integerValue];
+                NSInteger numBlocks = fileSize / 512;
+                icon = [UIImage imageNamed:numBlocks == 800 || numBlocks == 1600 ? @"floppy" : @"floppyV"];
             }
             self.imageView.image = icon;
         } else {
