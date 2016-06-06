@@ -90,6 +90,11 @@
     [self.tableView reloadData];
 }
 
+- (IBAction)refresh:(id)sender {
+    [self reloadData:sender];
+    [self.refreshControl endRefreshing];
+}
+
 #pragma mark - Button Actions
 
 - (void)showSettings:(id)sender {
