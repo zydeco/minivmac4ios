@@ -16,4 +16,9 @@
 
 #define kROM_Size 0x00020000
 
+#ifdef PLIST_PREPROCESSOR
+#define MNVMBundleDisplayName Mac Plus
+#define MNVMBundleGetInfoString 4M, 512×342
+#else
 #include "../CNFGGLOB.h"
+#endif

@@ -178,7 +178,6 @@
 
 /* Begin PBXFileReference section */
 		283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacPlus4M.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		283422CE1CF8EF8C0088B634 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		283422D71CF8EFD80088B634 /* EmulatorProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmulatorProtocol.h; sourceTree = "<group>"; };
 		283422E71CF8F1C80088B634 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		283422E91CF8F1C80088B634 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
@@ -246,13 +245,13 @@
 		283423961CF9C4CB0088B634 /* MacII.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacII.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		283423991CF9C5380088B634 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		2834239B1CF9C5380088B634 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
-		2834239C1CF9C5380088B634 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		283423E31CFA32800088B634 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		283423E41CFA32800088B634 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		283423E51CFA32800088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
 		283423EC1CFA329C0088B634 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		283423ED1CFA329C0088B634 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		283423EE1CFA329C0088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
+		285A8C901D05AFD3002993DE /* PlugIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlugIn-Info.plist"; sourceTree = "<group>"; };
 		28848B601CDE97D600B86C45 /* InsertDiskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertDiskViewController.h; sourceTree = "<group>"; };
 		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
 		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -264,7 +263,6 @@
 		289710D81CFB121F0089D463 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		289710D91CFB121F0089D463 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		289710DA1CFB121F0089D463 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
-		289710DB1CFB121F0089D463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28BA89741CE7315400A98104 /* KBKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBKey.h; sourceTree = "<group>"; };
 		28BA89751CE7315400A98104 /* KBKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBKey.m; sourceTree = "<group>"; };
 		28BA89761CE7315400A98104 /* KBKeyboardLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBKeyboardLayout.h; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 			children = (
 				283422E71CF8F1C80088B634 /* CNFGGLOB.h */,
 				283422E91CF8F1C80088B634 /* EMCONFIG.h */,
-				283422CE1CF8EF8C0088B634 /* Info.plist */,
 				283423E31CFA32800088B634 /* Icon.png */,
 				283423E41CFA32800088B634 /* Icon@2x.png */,
 				283423E51CFA32800088B634 /* Icon@3x.png */,
@@ -423,6 +420,7 @@
 				283422D71CF8EFD80088B634 /* EmulatorProtocol.h */,
 				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
 				289710B71CFB0DC70089D463 /* CNFGGLOB.h */,
+				285A8C901D05AFD3002993DE /* PlugIn-Info.plist */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -500,7 +498,6 @@
 			children = (
 				283423991CF9C5380088B634 /* CNFGGLOB.h */,
 				2834239B1CF9C5380088B634 /* EMCONFIG.h */,
-				2834239C1CF9C5380088B634 /* Info.plist */,
 				283423EC1CFA329C0088B634 /* Icon.png */,
 				283423ED1CFA329C0088B634 /* Icon@2x.png */,
 				283423EE1CFA329C0088B634 /* Icon@3x.png */,
@@ -516,7 +513,6 @@
 				289710D81CFB121F0089D463 /* Icon.png */,
 				289710D91CFB121F0089D463 /* Icon@2x.png */,
 				289710DA1CFB121F0089D463 /* Icon@3x.png */,
-				289710DB1CFB121F0089D463 /* Info.plist */,
 			);
 			path = Mac128K;
 			sourceTree = "<group>";
@@ -1134,7 +1130,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
@@ -1159,7 +1158,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
@@ -1184,7 +1186,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
@@ -1209,7 +1214,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
@@ -1234,7 +1242,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
@@ -1259,7 +1270,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREPROCESS = YES;
+				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
