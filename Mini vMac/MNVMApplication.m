@@ -101,7 +101,16 @@ static int8_t usb_to_adb_scancode[] = {
 
 - (void)handleKeyUIEvent:(UIEvent *)event {
     [super handleKeyUIEvent:event];
-    if ([event isKindOfClass:keyboardEventClass]) {
+    static dispatch_once_t onceToken;
+    static BOOL handleKeyboardEvents = YES;
+    dispatch_once(&onceToken, ^{
+        if ([NSProcessInfo instancesRespondToSelector:@selector(operatingSystemVersion)]) {
+            handleKeyboardEvents = [NSProcessInfo processInfo].operatingSystemVersion.majorVersion >= 9;
+        } else {
+            handleKeyboardEvents = NO;
+        }
+    });
+    if ([event isKindOfClass:keyboardEventClass] && handleKeyboardEvents) {
         [self handleKeyboardEvent:(UIPhysicalKeyboardEvent*)event];
     }
 }
