@@ -13,6 +13,7 @@
 
 static AppDelegate *sharedAppDelegate = nil;
 static NSObject<Emulator> *sharedEmulator = nil;
+NSString *DocumentsChangedNotification = @"documentsChanged";
 
 @interface AppDelegate () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
@@ -286,6 +287,8 @@ static NSObject<Emulator> *sharedEmulator = nil;
         if (error) {
             [self showAlertWithTitle:fileName message:error.localizedFailureReason];
         } else {
+            NSDictionary *userInfo = @{@"path": destinationPath};
+            [[NSNotificationCenter defaultCenter] postNotificationName:DocumentsChangedNotification object:self userInfo:userInfo];
             [self showAlertWithTitle:@"File Import" message:[NSString stringWithFormat:@"%@ imported to Documents", destinationPath.lastPathComponent]];
         }
     }

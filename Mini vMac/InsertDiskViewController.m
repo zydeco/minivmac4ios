@@ -64,6 +64,7 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(reloadData:) name:[AppDelegate sharedEmulator].insertDiskNotification object:nil];
     [nc addObserver:self selector:@selector(reloadData:) name:[AppDelegate sharedEmulator].ejectDiskNotification object:nil];
+    [nc addObserver:self selector:@selector(reloadData:) name:DocumentsChangedNotification object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -71,6 +72,7 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver:self name:[AppDelegate sharedEmulator].insertDiskNotification object:nil];
     [nc removeObserver:self name:[AppDelegate sharedEmulator].ejectDiskNotification object:nil];
+    [nc removeObserver:self name:DocumentsChangedNotification object:nil];
 }
 
 - (void)loadDirectoryContents {

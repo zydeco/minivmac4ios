@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "EmulatorProtocol.h"
 
+extern NSString *DocumentsChangedNotification;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
