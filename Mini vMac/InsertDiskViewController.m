@@ -424,37 +424,58 @@
         return;
     }
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Creating Disk Image", nil) message:@"\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:alertController animated:true completion:^{
-        UIView *alertView = alertController.view;
-        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        activityView.color = [UIColor blackColor];
-        activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-        activityView.center = CGPointMake(alertView.bounds.size.width / 2.0, alertView.bounds.size.height / 2.0 + 32.0);
-        [alertView addSubview:activityView];
-        [activityView startAnimating];
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-            int error = 0;
-            if (ftruncate(fd, size)) {
-                error = errno;
-            }
-            close(fd);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [activityView stopAnimating];
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicatorView.color = [UIColor blackColor];
+    if ([UIAlertController class]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Creating Disk Image", nil) message:@"\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:alertController animated:true completion:^{
+            UIView *alertView = alertController.view;
+            activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            activityIndicatorView.center = CGPointMake(alertView.bounds.size.width / 2.0, alertView.bounds.size.height / 2.0 + 32.0);
+            [alertView addSubview:activityIndicatorView];
+            [activityIndicatorView startAnimating];
+            [self _writeNewDiskImage:fd size:size activityIndicator:activityIndicatorView progressAlert:alertController];
+        }];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Creating Disk Image", nil) message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+        [alertView addSubview:activityIndicatorView];
+        [activityIndicatorView startAnimating];
+        [alertView setValue:activityIndicatorView forKey:@"accessoryView"];
+        [alertView show];
+        [self _writeNewDiskImage:fd size:size activityIndicator:activityIndicatorView progressAlert:alertView];
+    }
+}
+
+- (void)_writeNewDiskImage:(int)fd size:(off_t)size activityIndicator:(UIActivityIndicatorView*)activityIndicatorView progressAlert:(id)progressAlert {
+    long queue = NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_8_0 ? QOS_CLASS_USER_INITIATED : DISPATCH_QUEUE_PRIORITY_HIGH;
+    dispatch_async(dispatch_get_global_queue(queue, 0), ^{
+        int error = 0;
+        if (ftruncate(fd, size)) {
+            error = errno;
+        }
+        close(fd);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [activityIndicatorView stopAnimating];
+            if ([progressAlert isKindOfClass:[UIAlertController class]]) {
                 [self dismissViewControllerAnimated:YES completion:^{
                     if (error) {
                         [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not create disk image", nil) message:[[NSString alloc] initWithUTF8String:strerror(error)]];
                     }
                 }];
-                [self.tableView beginUpdates];
-                [self loadDirectoryContents];
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-                [self.tableView endUpdates];
-            });
+            } else if ([progressAlert isKindOfClass:[UIAlertView class]]) {
+                UIAlertView *alert = progressAlert;
+                [alert dismissWithClickedButtonIndex:0 animated:NO];
+                if (error) {
+                    [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not create disk image", nil) message:[[NSString alloc] initWithUTF8String:strerror(error)]];
+                }
+            }
+            [self.tableView beginUpdates];
+            [self loadDirectoryContents];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
         });
-    }];
+    });
 }
-
 #pragma mark - Text Field Delegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
