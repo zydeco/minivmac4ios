@@ -128,6 +128,9 @@ static NSObject<Emulator> *sharedEmulator = nil;
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         UIViewController *controller = self.window.rootViewController;
+        while (controller.presentedViewController) {
+            controller = controller.presentedViewController;
+        }
         [controller presentViewController:alert animated:YES completion:nil];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];

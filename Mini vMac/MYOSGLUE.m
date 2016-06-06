@@ -1555,6 +1555,8 @@ LOCALPROC MacMsgDisplayOn() {
         } else {
             // fallback for iOS 7
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            alertView.delegate = sharedEmulator;
+            SpeedStopped = trueblnr;
             [alertView show];
         }
         SavedBriefMsg = nullpr;
@@ -1906,6 +1908,9 @@ static dispatch_once_t onceToken;
             fileName = nameTextField.text;
         }
         [self didMakeNewDisk:fileName size:vSonyNewDiskSize];
+    }
+    if (SpeedStopped) {
+        SpeedStopped = falseblnr;
     }
 }
 

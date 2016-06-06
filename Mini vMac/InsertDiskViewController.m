@@ -31,6 +31,7 @@
     NSString *basePath;
     NSArray<NSString*> *diskImages, *otherFiles;
     UIAlertController *createDiskImageController;
+    UIAlertView *createDiskImageAlert;
     __block __weak UITextField *sizeTextField;
     __block __weak UITextField *nameTextField;
     NSString *fileToRename;
@@ -116,7 +117,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case 0: return diskImages.count + (self.editing && [UIAlertController class] ? 1 : 0);
+        case 0: return diskImages.count + (self.editing ? 1 : 0);
         case 1: return otherFiles.count;
         default: return 0;
     }
@@ -308,49 +309,66 @@
 #pragma mark - Disk Image Creation
 
 - (void)createDiskImage {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Create Disk Image", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = NSLocalizedString(@"name", nil);
-        [textField addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventAllEditingEvents];
-    }];
-    
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = NSLocalizedString(@"size", nil);
-        textField.keyboardType = UIKeyboardTypeDecimalPad;
-        UILabel *unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60.0, 32.0)];
-        textField.rightViewMode = UITextFieldViewModeAlways;
-        textField.rightView = unitLabel;
-        unitLabel.textAlignment = NSTextAlignmentRight;
-        UISegmentedControl *unitsControl = [[UISegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 80.0, 16.0)];
-        NSArray *units = @[NSLocalizedString(@"KB", nil), NSLocalizedString(@"MB", nil)];
-        [units enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL * _Nonnull stop) {
-            [unitsControl insertSegmentWithTitle:title atIndex:idx animated:NO];
+    if ([UIAlertController class]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Create Disk Image", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = NSLocalizedString(@"name", nil);
+            [textField addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventAllEditingEvents];
         }];
-        unitsControl.selectedSegmentIndex = 0;
-        textField.rightView = unitsControl;
-        sizeTextField = textField;
-        textField.delegate = self;
-        [textField addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventAllEditingEvents];
-        [unitsControl addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventValueChanged];
-        unitLabel.text = [unitsControl titleForSegmentAtIndex:unitsControl.selectedSegmentIndex];
+        
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            [self _configureNewDiskSizeField:textField];
+        }];
+        
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+        UIAlertAction *createAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Create", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSString *name = [self _newDiskImageName];
+            off_t size = [self _newDiskImageSize];
+            createDiskImageController = nil;
+            [self createDiskImageWithName:name size:size];
+        }];
+        [alertController addAction:createAction];
+        createAction.enabled = NO;
+        [self presentViewController:alertController animated:YES completion:nil];
+        createDiskImageController = alertController;
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Create Disk Image", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Create", nil), nil];
+        alertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
+        nameTextField = [alertView textFieldAtIndex:0];
+        nameTextField.delegate = self;
+        nameTextField.placeholder = NSLocalizedString(@"name", nil);
+        [nameTextField addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventAllEditingEvents];
+        [self _configureNewDiskSizeField:[alertView textFieldAtIndex:1]];
+        createDiskImageAlert = alertView;
+        [alertView show];
+    }
+}
+
+- (void)_configureNewDiskSizeField:(UITextField*)textField {
+    textField.secureTextEntry = NO;
+    textField.placeholder = NSLocalizedString(@"size", nil);
+    textField.keyboardType = UIKeyboardTypeDecimalPad;
+    UILabel *unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60.0, 32.0)];
+    textField.rightViewMode = UITextFieldViewModeAlways;
+    textField.rightView = unitLabel;
+    unitLabel.textAlignment = NSTextAlignmentRight;
+    UISegmentedControl *unitsControl = [[UISegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 80.0, 16.0)];
+    NSArray *units = @[NSLocalizedString(@"KB", nil), NSLocalizedString(@"MB", nil)];
+    [units enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL * _Nonnull stop) {
+        [unitsControl insertSegmentWithTitle:title atIndex:idx animated:NO];
     }];
-    
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
-    UIAlertAction *createAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Create", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSString *name = [self _newDiskImageName];
-        off_t size = [self _newDiskImageSize];
-        createDiskImageController = nil;
-        [self createDiskImageWithName:name size:size];
-    }];
-    [alertController addAction:createAction];
-    createAction.enabled = NO;
-    [self presentViewController:alertController animated:YES completion:nil];
-    createDiskImageController = alertController;
+    unitsControl.selectedSegmentIndex = 0;
+    textField.rightView = unitsControl;
+    sizeTextField = textField;
+    textField.delegate = self;
+    [textField addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventAllEditingEvents];
+    [unitsControl addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventValueChanged];
+    unitLabel.text = [unitsControl titleForSegmentAtIndex:unitsControl.selectedSegmentIndex];
 }
 
 - (BOOL)validateCreateDiskImageInput:(id)sender {
     BOOL valid = NO;
-    if (self.presentedViewController == createDiskImageController) {
+    if (self.presentedViewController == createDiskImageController || createDiskImageAlert.visible) {
         NSString *name = [self _newDiskImageName];
         BOOL nameIsValid = (name.length > 0) && ![name hasPrefix:@"."] && ![name containsString:@"/"] && ![name containsString:@"*"];
         
@@ -358,23 +376,34 @@
         BOOL sizeIsValid = (size >= 400 * 1024) && (size <= 2LL * 1024 * 1024 * 1024);
         
         valid = nameIsValid && sizeIsValid;
-        UIAlertAction *createAction = createDiskImageController.actions[1];
-        createAction.enabled = valid;
+        if (createDiskImageController != nil) {
+            UIAlertAction *createAction = createDiskImageController.actions[1];
+            createAction.enabled = valid;
+        } else if (sender == sizeTextField.rightView) {
+            // fake edit event to call alertViewShouldEnableFirstOtherButton
+            [sizeTextField sendActionsForControlEvents:UIControlEventEditingChanged];
+        }
     }
     return valid;
 }
 
 - (NSString*)_newDiskImageName {
-    return createDiskImageController ? createDiskImageController.textFields[0].text : nil;
+    if (createDiskImageController != nil) {
+        return createDiskImageController.textFields[0].text;
+    } else if (createDiskImageAlert.visible) {
+        return nameTextField.text;
+    } else {
+        return nil;
+    }
 }
 
 - (off_t)_newDiskImageSize {
-    if (createDiskImageController == nil) {
+    if (createDiskImageController == nil && !createDiskImageAlert.visible) {
         return 0;
     }
-    UISegmentedControl *unitsControl = (UISegmentedControl*)createDiskImageController.textFields[1].rightView;
+    UISegmentedControl *unitsControl = (UISegmentedControl*)sizeTextField.rightView;
     off_t unitsMultiplier = (unitsControl.selectedSegmentIndex == 0) ? 1024 : 1024 * 1024;
-    off_t size = createDiskImageController.textFields[1].text.floatValue * unitsMultiplier;
+    off_t size = sizeTextField.text.floatValue * unitsMultiplier;
     return size;
 }
 
@@ -452,11 +481,23 @@
 
 #pragma mark - Alert Delegate
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (fileToRename && buttonIndex == alertView.firstOtherButtonIndex) {
         [self renameFile:fileToRename toName:nameTextField.text];
         fileToRename = nil;
+    } else if (createDiskImageAlert != nil) {
+        NSString *name = [self _newDiskImageName];
+        off_t size = [self _newDiskImageSize];
+        createDiskImageAlert = nil;
+        [self createDiskImageWithName:name size:size];
     }
+}
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
+    if (alertView == createDiskImageAlert) {
+        return [self validateCreateDiskImageInput:alertView];
+    }
+    return YES;
 }
 
 @end
