@@ -36,6 +36,8 @@
 
 #define kRAM_Size (kRAMa_Size + kRAMb_Size)
 EXPORTVAR(ui3p, RAM)
+EXPORTVAR(ui3p, VidROM)
+EXPORTVAR(ui3p, VidMem)
 
 @interface Emulator : NSObject <Emulator, UIAlertViewDelegate>
 
@@ -1512,6 +1514,13 @@ LOCALFUNC blnr AllocMyMemory(void) {
 LOCALPROC UnallocMyMemory(void) {
     if (nullpr != ReserveAllocBigBlock) {
         free((char *)ReserveAllocBigBlock);
+        RAM = nullpr;
+#if EmVidCard
+        VidROM = nullpr;
+#endif
+#if IncludeVidMem
+        VidMem = nullpr;
+#endif
     }
 }
 
@@ -1772,12 +1781,11 @@ static dispatch_once_t onceToken;
     WantMacReset = trueblnr;
 }
 
-- (NSData *)RAM {
-    return [NSData dataWithBytesNoCopy:RAM length:kRAM_Size freeWhenDone:NO];
-}
-
 - (NSString *)currentApplication {
-    NSData *curApName = [self.RAM subdataWithRange:NSMakeRange(0x910, 32)];
+    if (RAM == nullpr) {
+        return nil;
+    }
+    NSData *curApName = [NSData dataWithBytes:RAM + 0x910 length:32];
     uint8_t curApNameLength = *(uint8_t*)curApName.bytes;
     if (curApNameLength == 0 || curApNameLength > 31) {
         return nil;

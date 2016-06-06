@@ -22,7 +22,6 @@
 @property (nonatomic, readonly) NSString *insertDiskNotification, *ejectDiskNotification;
 @property (nonatomic, readonly) NSInteger initialSpeed;
 
-@property (nonatomic, readonly) NSData *RAM;
 @property (nonatomic, readonly) BOOL anyDiskInserted;
 @property (nonatomic, readonly) NSString *currentApplication;
 
