@@ -4,9 +4,9 @@
 
 * Emulates Mac Plus, Mac II or Mac 128K
 * Full simulated keyboard (including all Mac keys)
-* Full sound output (except on Mac II)
+* Full sound output
 * Uses external keyboard if available
-* Regulable emulation speed (up to 8x)
+* Regulable emulation speed
 * Easy(ish) to import/export disk images
 
 ## Requirements
