@@ -4,7 +4,7 @@
 #define WantInitNotAutoSlow 0
 #define EnableAutoSlow 0
 
-#define MySoundEnabled 0
+#define MySoundEnabled 1
 #define MySoundRecenterSilence 0
 #define kLn2SoundSampSz 3
 
@@ -18,7 +18,7 @@
 
 #ifdef PLIST_PREPROCESSOR
 #define MNVMBundleDisplayName Mac II
-#define MNVMBundleGetInfoString 8M, 1024×768, no sound
+#define MNVMBundleGetInfoString 8M, 1024×768
 #else
 #include "../CNFGGLOB.h"
 #endif
