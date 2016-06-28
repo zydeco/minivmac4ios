@@ -10,15 +10,15 @@
 
 #define NumDrives 8
 
-#define vMacScreenHeight 768
-#define vMacScreenWidth 1024
+#define vMacScreenHeight 480
+#define vMacScreenWidth 640
 #define vMacScreenDepth 3
 
 #define kROM_Size 0x00040000
 
 #ifdef PLIST_PREPROCESSOR
-#define MNVMBundleDisplayName Mac II (1024×768)
-#define MNVMBundleGetInfoString 8M, 1024×768
+#define MNVMBundleDisplayName Mac II (640×480)
+#define MNVMBundleGetInfoString 8M, 640×480
 #else
 #include "../CNFGGLOB.h"
 #endif
