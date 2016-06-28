@@ -25,6 +25,8 @@ typedef enum : NSInteger {
 {
     NSArray *keyboardLayouts;
     NSArray<NSBundle*> *emulatorBundles;
+    NSMutableArray *machineList; // NSString (header) or NSBundle (emulator bundle)
+    NSMutableSet<NSBundle*> *groupedEmulatorBundles;
     NSBundle *selectedEmulatorBundle;
     NSString *aboutTitle;
     NSArray<NSDictionary<NSString*,NSString*>*> *aboutItems;
@@ -40,12 +42,29 @@ typedef enum : NSInteger {
 
 - (void)loadEmulatorBundles {
     emulatorBundles = [AppDelegate sharedInstance].emulatorBundles;
+    NSMutableDictionary<NSString*,NSMutableArray<NSBundle*>*> *bundlesByName = [NSMutableDictionary dictionaryWithCapacity:emulatorBundles.count];
     NSString *selectedBundleName = [[NSUserDefaults standardUserDefaults] stringForKey:@"machine"];
     for (NSBundle *bundle in emulatorBundles) {
         NSString *bundleName = bundle.bundlePath.lastPathComponent.stringByDeletingPathExtension;
         if ([selectedBundleName isEqualToString:bundleName]) {
             selectedEmulatorBundle = bundle;
         }
+        NSString *displayName = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        if (bundlesByName[displayName] == nil) {
+            bundlesByName[displayName] = [NSMutableArray arrayWithCapacity:1];
+        }
+        [bundlesByName[displayName] addObject:bundle];
+    }
+    NSArray *sortedNames = [bundlesByName.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    machineList = [NSMutableArray arrayWithCapacity:emulatorBundles.count];
+    groupedEmulatorBundles = [NSMutableSet setWithCapacity:emulatorBundles.count];
+    for (NSString *name in sortedNames) {
+        NSArray<NSBundle*>* bundles = bundlesByName[name];
+        if (bundles.count > 1) {
+            [machineList addObject:name];
+            [groupedEmulatorBundles addObjectsFromArray:bundles];
+        }
+        [machineList addObjectsFromArray:bundles];
     }
 }
 
@@ -127,7 +146,7 @@ typedef enum : NSInteger {
         case SettingsSectionKeyboard:
             return keyboardLayouts.count;
         case SettingsSectionMachine:
-            return emulatorBundles.count;
+            return machineList.count;
         case SettingsSectionAbout:
             return aboutItems.count;
         default:
@@ -205,14 +224,33 @@ typedef enum : NSInteger {
         BOOL selected = [[defaults stringForKey:@"keyboardLayout"] isEqualToString:layout.lastPathComponent];
         cell.accessoryType = selected ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     } else if (section == SettingsSectionMachine) {
-        NSBundle *bundle = emulatorBundles[indexPath.row];
+        id item = machineList[indexPath.row];
+        BOOL rowIsHeader = [item isKindOfClass:[NSString class]];
+        BOOL rowHasHeader = [groupedEmulatorBundles containsObject:item];
+        NSBundle *bundle = rowIsHeader ? machineList[indexPath.row + 1] : item;
         NSString *bundleName = bundle.bundlePath.lastPathComponent.stringByDeletingPathExtension;
         cell = [tableView dequeueReusableCellWithIdentifier:@"machine" forIndexPath:indexPath];
-        cell.textLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-        cell.detailTextLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleGetInfoString"];
-        NSString *iconName = [NSString stringWithFormat:@"PlugIns/%@.mnvm/Icon", bundleName];
-        cell.imageView.image = [UIImage imageNamed:iconName];
-        cell.accessoryType = bundle == selectedEmulatorBundle ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        if (rowIsHeader) {
+            cell.textLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+            cell.detailTextLabel.text = NSLocalizedString(@"multiple configurations available", nil);
+        } else if (rowHasHeader) {
+            cell.textLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleGetInfoString"];
+            cell.detailTextLabel.text = nil;
+        } else {
+            cell.textLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+            cell.detailTextLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleGetInfoString"];
+        }
+        
+        if (rowHasHeader) {
+            cell.imageView.image = nil;
+            cell.indentationLevel = 1;
+        } else {
+            NSString *iconName = [NSString stringWithFormat:@"PlugIns/%@.mnvm/Icon", bundleName];
+            cell.imageView.image = [UIImage imageNamed:iconName];
+            cell.indentationLevel = 0;
+        }
+        cell.accessoryType = (item == selectedEmulatorBundle) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+        cell.selectionStyle = rowIsHeader ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
     } else if (section == SettingsSectionAbout) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"about" forIndexPath:indexPath];
         NSDictionary<NSString*,NSString*> *item = aboutItems[indexPath.row];
@@ -240,12 +278,20 @@ typedef enum : NSInteger {
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else if (indexPath.section == SettingsSectionMachine) {
         // selected emulated machine
-        NSBundle *bundle = emulatorBundles[indexPath.row];
+        NSBundle *bundle = machineList[indexPath.row];
+        if (bundle == selectedEmulatorBundle || ![bundle isKindOfClass:[NSBundle class]]) {
+            return;
+        }
         NSString *bundleName = bundle.bundlePath.lastPathComponent.stringByDeletingPathExtension;
         [defaults setValue:bundleName forKey:@"machine"];
+        NSUInteger lastSelectedIndex = [machineList indexOfObject:selectedEmulatorBundle];
+        if (lastSelectedIndex != NSNotFound) {
+            [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:lastSelectedIndex inSection:SettingsSectionMachine]].accessoryType = UITableViewCellAccessoryNone;
+        }
+        UITableViewCell *currentCell = [tableView cellForRowAtIndexPath:indexPath];
+        currentCell.accessoryType = UITableViewCellAccessoryCheckmark;
         selectedEmulatorBundle = bundle;
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:SettingsSectionSpeed] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else if (indexPath.section == SettingsSectionAbout) {
         // links in about
         NSString *linkURL = aboutItems[indexPath.row][@"link"];

@@ -17,7 +17,7 @@
 #define kROM_Size 0x00040000
 
 #ifdef PLIST_PREPROCESSOR
-#define MNVMBundleDisplayName Mac II (640×480)
+#define MNVMBundleDisplayName Mac II
 #define MNVMBundleGetInfoString 8M, 640×480
 #else
 #include "../CNFGGLOB.h"
