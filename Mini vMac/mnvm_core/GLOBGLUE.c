@@ -1261,7 +1261,20 @@ GLOBALFUNC ui5b MMDV_Access(ATTep p, ui5b Data,
 	switch (p->MMDV) {
 		case kMMDV_VIA1:
 			if (! ByteSize) {
-				ReportAbnormal("access VIA1 word");
+#if (CurEmMd == kEmMd_II) || (CurEmMd == kEmMd_IIx)
+				if (WriteMem && (addr == 0xF40006)) {
+					/* for weirdness on shutdown in System 6 */
+#if 0
+					VIA1_Access((Data >> 8) & 0x00FF, WriteMem,
+							(addr >> 9) & kVIA1_Mask);
+					VIA1_Access((Data) & 0x00FF, WriteMem,
+							(addr >> 9) & kVIA1_Mask);
+#endif
+				} else
+#endif
+				{
+					ReportAbnormal("access VIA1 word");
+				}
 			} else if ((addr & 1) != 0) {
 				ReportAbnormal("access VIA1 odd");
 			} else {

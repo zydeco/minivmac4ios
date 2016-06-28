@@ -21,8 +21,4 @@
 #endif
 
 EXPORTFUNC ui5b ASC_Access(ui5b Data, blnr WriteMem, CPTR addr);
-
-#if MySoundEnabled
-EXPORTPROC MacSound_SubTick(int SubTick);
-#endif
-EXPORTPROC ASC_Update(void);
+EXPORTPROC ASC_SubTick(int SubTick);

@@ -35,42 +35,148 @@ LOCALVAR ui3r SoundReg803 = 0;
 LOCALVAR ui3r SoundReg804 = 0;
 LOCALVAR ui3r SoundReg805 = 0;
 LOCALVAR ui3r SoundReg_Volume = 0; /* 0x806 */
-LOCALVAR ui3r SoundReg807 = 0;
-
-LOCALVAR ui4r ASC_InputIndex = 0;
+/* LOCALVAR ui3r SoundReg807 = 0; */
 
 LOCALVAR ui3b ASC_SampBuff[0x800];
 
 struct ASC_ChanR {
-	ui3b freq[0x800];
-	ui5r phase;
+	ui3b freq[4];
+	ui3b phase[4];
 };
 typedef struct ASC_ChanR ASC_ChanR;
 
 LOCALVAR ASC_ChanR ASC_ChanA[4];
 
+LOCALVAR ui4b ASC_FIFO_Out = 0;
+LOCALVAR ui4b ASC_FIFO_InA = 0;
+LOCALVAR ui4b ASC_FIFO_InB = 0;
+LOCALVAR blnr ASC_Playing = falseblnr;
+
 #define ASC_dolog (dbglog_HAVE && 0)
+
+#ifdef ASC_interrupt_PulseNtfy
+IMPORTPROC ASC_interrupt_PulseNtfy(void);
+#endif
+
+LOCALPROC ASC_RecalcStatus(void)
+{
+	if ((1 == SoundReg801) && ASC_Playing) {
+		if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x200) {
+			SoundReg804 &= ~ 0x01;
+		} else {
+			SoundReg804 |= 0x01;
+		}
+		if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x400) {
+			SoundReg804 |= 0x02;
+		} else {
+			SoundReg804 &= ~ 0x02;
+		}
+		if (0 != (SoundReg802 & 2)) {
+			if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) >= 0x200) {
+				SoundReg804 &= ~ 0x04;
+			} else {
+				SoundReg804 |= 0x04;
+			}
+			if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) >= 0x400) {
+				SoundReg804 |= 0x08;
+			} else {
+				SoundReg804 &= ~ 0x08;
+			}
+		}
+	}
+}
+
+LOCALPROC ASC_ClearFIFO(void)
+{
+	ASC_FIFO_Out = 0;
+	ASC_FIFO_InA = 0;
+	ASC_FIFO_InB = 0;
+	ASC_Playing = falseblnr;
+	ASC_RecalcStatus();
+}
 
 GLOBALFUNC ui5b ASC_Access(ui5b Data, blnr WriteMem, CPTR addr)
 {
 	if (addr < 0x800) {
 		if (WriteMem) {
-			if ((1 == SoundReg801) && (2 == SoundReg802)) {
-				if ((2 * 370) == (ASC_InputIndex & 0x3FF)) {
-					SoundReg804 |= 0x08;
-				} else {
-					ui4r j = (addr & 0x400) | (ASC_InputIndex & 0x3FF);
-					++ASC_InputIndex;
-					ASC_SampBuff[j] = Data;
-#if ASC_dolog && 0
-					dbglog_AddrAccess("ASC_Access SampBuff.wrap",
-						Data, WriteMem, j);
+			if (1 == SoundReg801) {
+				if (0 == (addr & 0x400)) {
+					if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x400)
+					{
+#if 0 /* seems to happen in tetris */
+						ReportAbnormal("ASC - Channel A Overflow");
 #endif
-#if 1
-					if ((2 * 370) == (ASC_InputIndex & 0x3FF)) {
-						SoundReg804 |= 0x08;
+						SoundReg804 |= 0x02;
+					} else {
+
+					ASC_SampBuff[ASC_FIFO_InA & 0x3FF] = Data;
+
+					++ASC_FIFO_InA;
+					if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x200)
+					{
+						if (0 != (SoundReg804 & 0x01)) {
+							/* happens normally */
+							SoundReg804 &= ~ 0x01;
+						}
+					} else {
+#if 0 /* doesn't seem to be necessary, but doesn't hurt either */
+						SoundReg804 |= 0x01;
+#endif
 					}
+					if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x400)
+					{
+						SoundReg804 |= 0x02;
+#if ASC_dolog
+						dbglog_WriteNote("ASC : setting full flag A");
 #endif
+					} else {
+						if (0 != (SoundReg804 & 0x02)) {
+							ReportAbnormal("ASC_Access : "
+								"full flag A not already clear");
+							SoundReg804 &= ~ 0x02;
+						}
+					}
+
+					}
+				} else {
+					if (0 == (SoundReg802 & 2)) {
+						ReportAbnormal("ASC - Channel B for Mono");
+					}
+					if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) >= 0x400)
+					{
+						ReportAbnormal("ASC - Channel B Overflow");
+						SoundReg804 |= 0x08;
+					} else {
+
+					ASC_SampBuff[0x400 + (ASC_FIFO_InB & 0x3FF)] = Data;
+
+					++ASC_FIFO_InB;
+					if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) >= 0x200)
+					{
+						if (0 != (SoundReg804 & 0x04)) {
+							/* happens normally */
+							SoundReg804 &= ~ 0x04;
+						}
+					} else {
+#if 0 /* doesn't seem to be necessary, but doesn't hurt either */
+						SoundReg804 |= 0x04;
+#endif
+					}
+					if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) >= 0x400)
+					{
+						SoundReg804 |= 0x08;
+#if ASC_dolog
+						dbglog_WriteNote("ASC : setting full flag B");
+#endif
+					} else {
+						if (0 != (SoundReg804 & 0x08)) {
+							ReportAbnormal("ASC_Access : "
+								"full flag B not already clear");
+							SoundReg804 &= ~ 0x08;
+						}
+					}
+
+					}
 				}
 #if ASC_dolog && 0
 				dbglog_writeCStr("ASC_InputIndex =");
@@ -85,7 +191,7 @@ GLOBALFUNC ui5b ASC_Access(ui5b Data, blnr WriteMem, CPTR addr)
 		}
 
 #if ASC_dolog && 1
-#if 1
+#if 0
 		if (((addr & 0x1FF) >= 0x04)
 			&& ((addr & 0x1FF) < (0x200 - 0x04)))
 		{
@@ -99,47 +205,177 @@ GLOBALFUNC ui5b ASC_Access(ui5b Data, blnr WriteMem, CPTR addr)
 #endif
 	} else if (addr < 0x810) {
 		switch (addr) {
-			case 0x800: /* CONTROL */
+			case 0x800: /* VERSION */
 				if (WriteMem) {
+					ReportAbnormal("ASC - writing VERSION");
 				} else {
 					Data = 0;
 				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (VERSION)",
+					Data, WriteMem, addr);
+#endif
 				break;
 			case 0x801: /* ENABLE */
 				if (WriteMem) {
+					if (1 == Data) {
+						if (1 != SoundReg801) {
+							ASC_ClearFIFO();
+						}
+					} else {
+						if (Data > 2) {
+							ReportAbnormal("ASC - unexpected ENABLE");
+						}
+					}
 					SoundReg801 = Data;
 				} else {
 					Data = SoundReg801;
+					/* happens in LodeRunner */
 				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (ENABLE)",
+					Data, WriteMem, addr);
+#endif
 				break;
-			case 0x802: /* MODE */
+			case 0x802: /* CONTROL */
 				if (WriteMem) {
+#if 1
+					if (0 != SoundReg801) {
+						if (SoundReg802 == Data) {
+							/*
+								this happens normally,
+								such as in Lunar Phantom
+							*/
+						} else {
+							if (1 == SoundReg801) {
+/*
+	happens in dark castle, if play other sound first,
+	such as by changing beep sound in sound control panel.
+*/
+								ASC_ClearFIFO();
+							}
+
+#if 0
+							ReportAbnormal(
+								"ASC - changing CONTROL while ENABLEd");
+#endif
+						}
+					}
+#endif
+					if (0 != (Data & ~ 2)) {
+						ReportAbnormal(
+							"ASC - unexpected CONTROL value");
+					}
 					SoundReg802 = Data;
 				} else {
 					Data = SoundReg802;
+					ReportAbnormal(
+						"ASC - reading CONTROL value");
 				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (CONTROL)",
+					Data, WriteMem, addr);
+#endif
 				break;
 			case 0x803:
 				if (WriteMem) {
+					if (0 != (Data & ~ 0x80)) {
+						ReportAbnormal(
+							"ASC - unexpected FIFO MODE");
+					}
+					if (0 != (Data & 0x80)) {
+						if (0 != (SoundReg803 & 0x80)) {
+							ReportAbnormal(
+								"ASC - set clear FIFO again");
+						} else
+						if (1 != SoundReg801) {
+#if 0 /* happens in system 6, such as with Lunar Phantom */
+							ReportAbnormal(
+								"ASC - clear FIFO when not FIFO mode");
+#endif
+						} else
+						{
+							ASC_ClearFIFO();
+							/*
+								ASC_interrupt_PulseNtfy();
+									Doesn't seem to be needed,
+									but doesn't hurt either.
+							*/
+						}
+					}
 					SoundReg803 = Data;
 				} else {
 					Data = SoundReg803;
 				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (FIFO MODE)",
+					Data, WriteMem, addr);
+#endif
 				break;
 			case 0x804:
 				if (WriteMem) {
+#if 0
+					if ((0 != SoundReg804) && (0 != Data)) {
+						ReportAbnormal(
+							"ASC - set FIFO IRQ STATUS when not 0");
+					}
+#endif
 					SoundReg804 = Data;
+					if (0 != SoundReg804) {
+						ASC_interrupt_PulseNtfy();
+						/*
+							Generating this interrupt seems
+							to be the point of writing to
+							this register.
+						*/
+					}
+#if ASC_dolog && 1
+					dbglog_AddrAccess(
+						"ASC_Access Control (FIFO IRQ STATUS)",
+						Data, WriteMem, addr);
+#endif
 				} else {
 					Data = SoundReg804;
-					SoundReg804 = 0;
+#if 0
+					if (1 != SoundReg801) {
+						/* no, ok, part of normal interrupt handling */
+						ReportAbnormal(
+							"ASC - read STATUS when not FIFO");
+					}
+#endif
+					/* SoundReg804 = 0; */
+					SoundReg804 &= ~ 0x01;
+					SoundReg804 &= ~ 0x04;
+						/*
+							In lunar phantom, observe checking
+							full flag before first write, but
+							status was read previous.
+						*/
+#if ASC_dolog && 1
+#if 0
+					if (0 != Data)
+#endif
+					{
+						dbglog_AddrAccess(
+							"ASC_Access Control (FIFO IRQ STATUS)",
+							Data, WriteMem, addr);
+					}
+#endif
 				}
 				break;
 			case 0x805:
 				if (WriteMem) {
 					SoundReg805 = Data;
+					/* cleared in LodeRunner */
 				} else {
 					Data = SoundReg805;
+					ReportAbnormal(
+						"ASC - readingWAVE CONTROL register");
 				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (WAVE CONTROL)",
+					Data, WriteMem, addr);
+#endif
 				break;
 			case 0x806: /* VOLUME */
 				if (WriteMem) {
@@ -151,27 +387,65 @@ GLOBALFUNC ui5b ASC_Access(ui5b Data, blnr WriteMem, CPTR addr)
 					Data = SoundReg_Volume << 5;
 					ReportAbnormal("ASC - reading volume register");
 				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (VOLUME)",
+					Data, WriteMem, addr);
+#endif
 				break;
-			case 0x807: /* CHAN */
+			case 0x807: /* CLOCK RATE */
 				if (WriteMem) {
-					SoundReg807 = Data;
+					/* SoundReg807 = Data; */
+					if (0 != Data) {
+						ReportAbnormal("ASC - nonstandard CLOCK RATE");
+					}
 				} else {
-					Data = SoundReg807;
+					/* Data = SoundReg807; */
+					ReportAbnormal("ASC - reading CLOCK RATE");
 				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (CLOCK RATE)",
+					Data, WriteMem, addr);
+#endif
+				break;
+			case 0x808: /* CONTROL */
+				if (WriteMem) {
+					ReportAbnormal("ASC - write to 808");
+				} else {
+					/* happens on boot System 7.5.5 */
+					Data = 0;
+				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (CONTROL)",
+					Data, WriteMem, addr);
+#endif
+				break;
+			case 0x80A: /* ? */
+				if (WriteMem) {
+					ReportAbnormal("ASC - write to 80A");
+				} else {
+					/*
+						happens in system 6, Lunar Phantom,
+							soon after new game.
+					*/
+					Data = 0;
+				}
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (80A)",
+					Data, WriteMem, addr);
+#endif
 				break;
 			default:
 				if (WriteMem) {
 				} else {
 					Data = 0;
 				}
+				ReportAbnormal("ASC - unknown ASC reg");
+#if ASC_dolog && 1
+				dbglog_AddrAccess("ASC_Access Control (?)",
+					Data, WriteMem, addr);
+#endif
 				break;
 		}
-#if ASC_dolog && 1
-		if (addr != 0x804) {
-			dbglog_AddrAccess("ASC_Access Control",
-				Data, WriteMem, addr);
-		}
-#endif
 	} else if (addr < 0x830) {
 		ui3r b = addr & 3;
 		ui3r chan = ((addr - 0x810) >> 3) & 3;
@@ -184,7 +458,7 @@ GLOBALFUNC ui5b ASC_Access(ui5b Data, blnr WriteMem, CPTR addr)
 				Data = ASC_ChanA[chan].freq[b];
 			}
 #if ASC_dolog && 1
-			dbglog_AddrAccess("ASC_Access Control",
+			dbglog_AddrAccess("ASC_Access Control (frequency)",
 				Data, WriteMem, addr);
 #endif
 #if ASC_dolog && 0
@@ -195,8 +469,14 @@ GLOBALFUNC ui5b ASC_Access(ui5b Data, blnr WriteMem, CPTR addr)
 			dbglog_writeReturn();
 #endif
 		} else {
+
+			if (WriteMem) {
+				ASC_ChanA[chan].phase[b] = Data;
+			} else {
+				Data = ASC_ChanA[chan].phase[b];
+			}
 #if ASC_dolog && 1
-			dbglog_AddrAccess("ASC_Access Control *** unknown reg",
+			dbglog_AddrAccess("ASC_Access Control (phase)",
 				Data, WriteMem, addr);
 #endif
 		}
@@ -249,57 +529,155 @@ LOCALVAR const ui3r SubTick_n[kNumSubTicks] = {
 	23,  23,  23,  23,  23,  23,  23,  24
 };
 
-#if MySoundEnabled
-LOCALVAR ui5b SoundPhase = 0;
-#endif
-
-#ifdef ASC_interrupt_PulseNtfy
-IMPORTPROC ASC_interrupt_PulseNtfy(void);
-#endif
-
-#if MySoundEnabled
-GLOBALPROC MacSound_SubTick(int SubTick)
+GLOBALPROC ASC_SubTick(int SubTick)
 {
 	ui4r actL;
+#if MySoundEnabled
 	tpSoundSamp p;
+#endif
 	ui4r i;
-	ui4r j = 0;
 	ui4r n = SubTick_n[SubTick];
 	ui3b SoundVolume = SoundReg_Volume;
 
+#if MySoundEnabled
 label_retry:
 	p = MySound_BeginWrite(n, &actL);
+#else
+	actL = n;
+#endif
 	if (actL > 0) {
 
 		if (1 == SoundReg801) {
-			ui5b StartOffset = SubTick_offset[SubTick] + j;
-			ui3p addr = ASC_SampBuff + (2 * StartOffset);
+			ui3p addr;
 
-			if (2 == SoundReg802) {
-				addr += /* 0x400 */ 1;
+			if (0 != (SoundReg802 & 2)) {
+
+			if (! ASC_Playing) {
+				if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x200) {
+					if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) >= 0x200)
+					{
+						SoundReg804 &= ~ 0x01;
+						SoundReg804 &= ~ 0x04;
+						ASC_Playing = trueblnr;
+#if ASC_dolog
+						dbglog_WriteNote("ASC : start stereo playing");
+#endif
+					} else {
+						if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) == 0)
+						if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out))
+							>= 370)
+						{
+#if ASC_dolog
+							dbglog_WriteNote("ASC : switch to mono");
+#endif
+							SoundReg802 &= ~ 2;
+							/*
+								cludge to get Tetris to work,
+								may not actually work on real machine.
+							*/
+						}
+					}
+				}
 			}
 
 			for (i = 0; i < actL; i++) {
-				/* Copy sound data, high byte of each word */
+				if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) == 0) {
+					ASC_Playing = falseblnr;
+				}
+				if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) == 0) {
+					ASC_Playing = falseblnr;
+				}
+				if (! ASC_Playing) {
+#if MySoundEnabled
+					*p++ = 0x80;
+#endif
+				} else
+				{
+
+				addr = ASC_SampBuff + (ASC_FIFO_Out & 0x3FF);
+
 #if ASC_dolog && 1
 				dbglog_StartLine();
 				dbglog_writeCStr("out sound ");
 				dbglog_writeCStr("[");
-				dbglog_writeHex(StartOffset + i);
+				dbglog_writeHex(ASC_FIFO_Out);
 				dbglog_writeCStr("]");
 				dbglog_writeCStr(" = ");
 				dbglog_writeHex(*addr);
+				dbglog_writeCStr(" , ");
+				dbglog_writeHex(addr[0x400]);
 				dbglog_writeReturn();
 #endif
-				*p++ = *addr
+#if MySoundEnabled
+				*p++ = ((addr[0] + addr[0x400])
+#if 4 == kLn2SoundSampSz
+					<< 8
+#endif
+					) >> 1;
+#endif
+
+				ASC_FIFO_Out += 1;
+
+				}
+			}
+
+			} else {
+
+			/* mono */
+
+			if (! ASC_Playing) {
+				if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x200)
+				{
+					SoundReg804 &= ~ 0x01;
+					ASC_Playing = trueblnr;
+#if ASC_dolog
+					dbglog_WriteNote("ASC : start mono playing");
+#endif
+				}
+			}
+
+			for (i = 0; i < actL; i++) {
+				if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) == 0) {
+					ASC_Playing = falseblnr;
+				}
+				if (! ASC_Playing) {
+#if MySoundEnabled
+					*p++ = 0x80;
+#endif
+				} else
+				{
+
+				addr = ASC_SampBuff + (ASC_FIFO_Out & 0x3FF);
+
+#if ASC_dolog && 1
+				dbglog_StartLine();
+				dbglog_writeCStr("out sound ");
+				dbglog_writeCStr("[");
+				dbglog_writeHex(ASC_FIFO_Out);
+				dbglog_writeCStr("]");
+				dbglog_writeCStr(" = ");
+				dbglog_writeHex(*addr);
+				dbglog_writeCStr(", in buff: ");
+				dbglog_writeHex((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out));
+				dbglog_writeReturn();
+#endif
+
+#if MySoundEnabled
+				*p++ = (addr[0])
 #if 4 == kLn2SoundSampSz
 					<< 8
 #endif
 					;
+#endif
 
 				/* Move the address on */
-				*addr = 0x80;
-				addr += 2;
+				/* *addr = 0x80; */
+				/* addr += 2; */
+				ASC_FIFO_Out += 1;
+
+				}
+			}
+
 			}
 		} else if (2 == SoundReg801) {
 			ui4r v;
@@ -311,7 +689,11 @@ label_retry:
 			ui5r freq1 = do_get_mem_long(ASC_ChanA[1].freq);
 			ui5r freq2 = do_get_mem_long(ASC_ChanA[2].freq);
 			ui5r freq3 = do_get_mem_long(ASC_ChanA[3].freq);
-#if ASC_dolog && 0
+			ui5r phase0 = do_get_mem_long(ASC_ChanA[0].phase);
+			ui5r phase1 = do_get_mem_long(ASC_ChanA[1].phase);
+			ui5r phase2 = do_get_mem_long(ASC_ChanA[2].phase);
+			ui5r phase3 = do_get_mem_long(ASC_ChanA[3].phase);
+#if ASC_dolog && 1
 			dbglog_writeCStr("freq0=");
 			dbglog_writeNum(freq0);
 			dbglog_writeCStr(", freq1=");
@@ -324,21 +706,21 @@ label_retry:
 #endif
 			for (i = 0; i < actL; i++) {
 
-				ASC_ChanA[0].phase += freq0;
-				ASC_ChanA[1].phase += freq1;
-				ASC_ChanA[2].phase += freq2;
-				ASC_ChanA[3].phase += freq3;
+				phase0 += freq0;
+				phase1 += freq1;
+				phase2 += freq2;
+				phase3 += freq3;
 
 #if 1
-				i0 = ((ASC_ChanA[0].phase + 0x4000) >> 15) & 0x1FF;
-				i1 = ((ASC_ChanA[1].phase + 0x4000) >> 15) & 0x1FF;
-				i2 = ((ASC_ChanA[2].phase + 0x4000) >> 15) & 0x1FF;
-				i3 = ((ASC_ChanA[3].phase + 0x4000) >> 15) & 0x1FF;
+				i0 = ((phase0 + 0x4000) >> 15) & 0x1FF;
+				i1 = ((phase1 + 0x4000) >> 15) & 0x1FF;
+				i2 = ((phase2 + 0x4000) >> 15) & 0x1FF;
+				i3 = ((phase3 + 0x4000) >> 15) & 0x1FF;
 #else
-				i0 = ((ASC_ChanA[0].phase + 0x8000) >> 16) & 0x1FF;
-				i1 = ((ASC_ChanA[1].phase + 0x8000) >> 16) & 0x1FF;
-				i2 = ((ASC_ChanA[2].phase + 0x8000) >> 16) & 0x1FF;
-				i3 = ((ASC_ChanA[3].phase + 0x8000) >> 16) & 0x1FF;
+				i0 = ((phase0 + 0x8000) >> 16) & 0x1FF;
+				i1 = ((phase1 + 0x8000) >> 16) & 0x1FF;
+				i2 = ((phase2 + 0x8000) >> 16) & 0x1FF;
+				i3 = ((phase3 + 0x8000) >> 16) & 0x1FF;
 #endif
 
 				v = ASC_SampBuff[i0]
@@ -360,18 +742,25 @@ label_retry:
 				dbglog_writeReturn();
 #endif
 
+#if MySoundEnabled
 				*p++ = (v >> 2);
-
-				++SoundPhase;
-				SoundPhase &= 0x1FF;
+#endif
 			}
+
+			do_put_mem_long(ASC_ChanA[0].phase, phase0);
+			do_put_mem_long(ASC_ChanA[1].phase, phase1);
+			do_put_mem_long(ASC_ChanA[2].phase, phase2);
+			do_put_mem_long(ASC_ChanA[3].phase, phase3);
 		} else {
+#if MySoundEnabled
 			for (i = 0; i < actL; i++) {
 				*p++ = kCenterSound;
 			}
+#endif
 		}
 
 
+#if MySoundEnabled
 		if (SoundVolume < 7) {
 			/*
 				Usually have volume at 7, so this
@@ -389,26 +778,72 @@ label_retry:
 
 		MySound_EndWrite(actL);
 		n -= actL;
-		j += actL;
 		if (n > 0) {
 			goto label_retry;
 		}
-	}
-}
 #endif
+	}
 
-GLOBALPROC ASC_Update(void)
-{
-	if (1 == SoundReg801) {
-		ASC_InputIndex = 0;
-		SoundReg804 |= 0x04;
-#ifdef ASC_interrupt_PulseNtfy
-		ASC_interrupt_PulseNtfy();
+#if 1
+	if ((1 == SoundReg801) && ASC_Playing) {
+		if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x200) {
+			if (0 != (SoundReg804 & 0x01)) {
+				ReportAbnormal("half flag A not already clear");
+				SoundReg804 &= ~ 0x01;
+			}
+		} else {
+			if (0 != (SoundReg804 & 0x01)) {
+				/* happens in lode runner */
+			} else {
+#if ASC_dolog
+				dbglog_WriteNote("setting half flag A");
 #endif
-#if ASC_dolog && 1
-		dbglog_StartLine();
-		dbglog_writeCStr("called ASC_interrupt_PulseNtfy");
-		dbglog_writeReturn();
+				ASC_interrupt_PulseNtfy();
+				SoundReg804 |= 0x01;
+			}
+		}
+		if (((ui4b)(ASC_FIFO_InA - ASC_FIFO_Out)) >= 0x400) {
+			if (0 == (SoundReg804 & 0x02)) {
+				ReportAbnormal("full flag A not already set");
+				SoundReg804 |= 0x02;
+			}
+		} else {
+			if (0 != (SoundReg804 & 0x02)) {
+				/* ReportAbnormal("full flag A not already clear"); */
+				SoundReg804 &= ~ 0x02;
+			}
+		}
+		if (0 != (SoundReg802 & 2)) {
+			if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) >= 0x200) {
+				if (0 != (SoundReg804 & 0x04)) {
+					ReportAbnormal("half flag B not already clear");
+					SoundReg804 &= ~ 0x04;
+				}
+			} else {
+				if (0 != (SoundReg804 & 0x04)) {
+					/* happens in Lunar Phantom */
+				} else {
+#if ASC_dolog
+					dbglog_WriteNote("setting half flag B");
 #endif
+					ASC_interrupt_PulseNtfy();
+					SoundReg804 |= 0x04;
+				}
+			}
+			if (((ui4b)(ASC_FIFO_InB - ASC_FIFO_Out)) >= 0x400) {
+				if (0 == (SoundReg804 & 0x08)) {
+					ReportAbnormal("full flag B not already set");
+					SoundReg804 |= 0x08;
+				}
+			} else {
+				if (0 != (SoundReg804 & 0x08)) {
+					/*
+						ReportAbnormal("full flag B not already clear");
+					*/
+					SoundReg804 &= ~ 0x08;
+				}
+			}
+		}
 	}
+#endif
 }

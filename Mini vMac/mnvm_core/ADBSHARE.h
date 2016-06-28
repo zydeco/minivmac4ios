@@ -141,6 +141,11 @@ LOCALFUNC blnr CheckForADBkeyEvt(ui3b *NextADBkeyevt)
 	if (! FindKeyEvent(&i, &KeyDown)) {
 		return falseblnr;
 	} else {
+#if dbglog_HAVE && 0
+		if (KeyDown) {
+			dbglog_WriteNote("Got a KeyDown");
+		}
+#endif
 		switch (i) {
 			case MKC_Control:
 				i = 0x36;

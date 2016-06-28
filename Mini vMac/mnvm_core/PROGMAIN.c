@@ -109,10 +109,14 @@ LOCALPROC SubTickNotify(int SubTick)
 	dbglog_writeNum(SubTick);
 	dbglog_writeReturn();
 #endif
+#if EmASC
+	ASC_SubTick(SubTick);
+#else
 #if MySoundEnabled && (CurEmMd != kEmMd_PB100)
 	MacSound_SubTick(SubTick);
 #else
 	UnusedParam(SubTick);
+#endif
 #endif
 }
 
@@ -174,9 +178,6 @@ LOCALPROC SixtiethSecondNotify(void)
 #endif
 #if EmVidCard
 	Vid_Update();
-#endif
-#if EmASC
-	ASC_Update();
 #endif
 
 	SubTickTaskStart();
