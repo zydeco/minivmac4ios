@@ -1744,11 +1744,14 @@ static dispatch_once_t onceToken;
 
 - (void)run {
     ZapOSGLUVars();
-    
     if (InitOSGLU()) {
         ProgramMain();
     }
     UnInitOSGLU();
+    if (ForceMacOff) {
+        ForceMacOff = falseblnr;
+        [self performSelector:_cmd withObject:nil afterDelay:0.5];
+    }
 }
 
 - (NSInteger)initialSpeed {
