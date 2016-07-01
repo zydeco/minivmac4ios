@@ -24,7 +24,11 @@ static ScreenView *sharedScreenView = nil;
     sharedScreenView = self;
     videoLayer = [CALayer layer];
     [AppDelegate sharedEmulator].screenLayer = videoLayer;
-    screenSize = [AppDelegate sharedEmulator].screenSize;
+    if ([AppDelegate sharedEmulator]) {
+        screenSize = [AppDelegate sharedEmulator].screenSize;
+    } else {
+        screenSize = CGSizeMake(1, 1);
+    }
     [self.layer addSublayer:videoLayer];
 }
 
