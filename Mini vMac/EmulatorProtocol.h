@@ -32,7 +32,7 @@ typedef enum : NSInteger {
 
 @property (nonatomic, readonly) NSBundle *bundle;
 @property (nonatomic, readonly) CGSize screenSize;
-@property (nonatomic, readonly) NSString *insertDiskNotification, *ejectDiskNotification;
+@property (nonatomic, readonly) NSString *insertDiskNotification, *ejectDiskNotification, *shutdownNotification;
 @property (nonatomic, readonly) NSInteger initialSpeed;
 
 @property (nonatomic, readonly) BOOL anyDiskInserted;

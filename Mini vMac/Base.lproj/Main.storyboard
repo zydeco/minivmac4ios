@@ -23,7 +23,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="70W-4V-tYr" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Xn1-gS-YTJ"/>
                             <constraint firstItem="70W-4V-tYr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ddo-cc-64n"/>

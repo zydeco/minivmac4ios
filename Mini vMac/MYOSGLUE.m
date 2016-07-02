@@ -705,6 +705,7 @@ LOCALFUNC blnr LoadMacRom(void) {
         }
 
         SpeedStopped = trueblnr;
+        return falseblnr;
     }
 
     return trueblnr; /* keep launching Mini vMac, regardless */
@@ -1750,7 +1751,7 @@ static dispatch_once_t onceToken;
     UnInitOSGLU();
     if (ForceMacOff) {
         ForceMacOff = falseblnr;
-        [self performSelector:_cmd withObject:nil afterDelay:0.5];
+        [[NSNotificationCenter defaultCenter] postNotificationName:self.shutdownNotification object:self];
     }
 }
 
@@ -1823,6 +1824,10 @@ static dispatch_once_t onceToken;
     } else {
         return [[NSString alloc] initWithBytes:curApName.bytes+1 length:curApNameLength encoding:NSMacOSRomanStringEncoding];
     }
+}
+
+- (NSString *)shutdownNotification {
+    return @"didShutDown";
 }
 
 #pragma mark - Screen

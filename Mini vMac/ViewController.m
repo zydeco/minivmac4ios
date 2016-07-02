@@ -36,6 +36,8 @@
     showSettingsGesture.direction = UISwipeGestureRecognizerDirectionRight;
     showSettingsGesture.numberOfTouchesRequired = 2;
     [self.view addGestureRecognizer:showSettingsGesture];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emulatorDidShutDown:) name:[AppDelegate sharedEmulator].shutdownNotification object:nil];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -93,6 +95,33 @@
         [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
             [self setKeyboardVisible:YES animated:YES];
         }];
+    }
+}
+
+- (void)emulatorDidShutDown:(NSNotification*)notification {
+    UILabel *shutdownLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
+    shutdownLabel.text = NSLocalizedString(@"the emulated Mac has shut down\ntap to restart", nil);
+    shutdownLabel.textColor = [UIColor whiteColor];
+    [self.view addSubview:shutdownLabel];
+    shutdownLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [shutdownLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restartEmulator:)]];
+    shutdownLabel.numberOfLines = -1;
+    shutdownLabel.textAlignment = NSTextAlignmentCenter;
+    shutdownLabel.userInteractionEnabled = YES;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.screenView.alpha = 0.5;
+    }];
+    [self hideKeyboard:notification];
+}
+
+- (void)restartEmulator:(UITapGestureRecognizer*)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateRecognized) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.screenView.alpha = 1.0;
+        }];
+        [gestureRecognizer.view removeFromSuperview];
+        id emulator = [AppDelegate sharedEmulator];
+        [emulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
     }
 }
 
