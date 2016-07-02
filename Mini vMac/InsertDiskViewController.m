@@ -531,6 +531,9 @@
 @end
 
 @implementation FileTableViewCell
+{
+    UIImage *defaultIcon;
+}
 
 - (void)prepareForReuse {
     [super prepareForReuse];
@@ -540,31 +543,47 @@
     self.imageView.image = nil;
     self.imageView.alpha = 1.0;
     self.detailTextLabel.text = nil;
+    if (_filePath) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:DidUpdateIconForDiskImageNotification object:_filePath];
+        _filePath = nil;
+    }
 }
 
 - (void)setFilePath:(NSString *)filePath {
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    if (_filePath) {
+        [notificationCenter removeObserver:self name:DidUpdateIconForDiskImageNotification object:_filePath];
+    }
     _filePath = filePath;
+    if (_filePath) {
+        [notificationCenter addObserver:self selector:@selector(didUpdateDiskIcon:) name:DidUpdateIconForDiskImageNotification object:_filePath];
+    }
     NSString *fileName = filePath.lastPathComponent;
     self.textLabel.text = self.showExtension ? fileName : fileName.stringByDeletingPathExtension;
     NSDictionary *attributes = [[NSURL fileURLWithPath:filePath] resourceValuesForKeys:@[NSURLTotalFileSizeKey, NSURLFileSizeKey] error:NULL];
     if (attributes && attributes[NSURLTotalFileSizeKey]) {
         BOOL isDiskImage = [[AppDelegate sharedInstance].diskImageExtensions containsObject:fileName.pathExtension.lowercaseString];
         if (isDiskImage) {
-            UIImage *icon = [UIImage imageWithIconForDiskImage:filePath];
-            if (icon == nil) {
-                NSInteger fileSize = [attributes[NSURLTotalFileSizeKey] integerValue];
-                NSInteger numBlocks = fileSize / 512;
-                icon = [UIImage imageNamed:numBlocks == 800 || numBlocks == 1600 ? @"floppy" : @"floppyV"];
-            }
-            self.imageView.image = icon;
+            NSInteger fileSize = [attributes[NSURLTotalFileSizeKey] integerValue];
+            NSInteger numBlocks = fileSize / 512;
+            defaultIcon = [UIImage imageNamed:numBlocks == 800 || numBlocks == 1600 ? @"floppy" : @"floppyV"];
+            self.imageView.image = [UIImage imageWithIconForDiskImage:filePath] ?: defaultIcon;
         } else {
-            self.imageView.image = [UIImage imageNamed:@"document"];
+            defaultIcon = [UIImage imageNamed:@"document"];
+            self.imageView.image = defaultIcon;
         }
         NSString *sizeString = [NSByteCountFormatter stringFromByteCount:[attributes[NSURLTotalFileSizeKey] longLongValue] countStyle:NSByteCountFormatterCountStyleBinary];
         self.detailTextLabel.text = sizeString;
     } else {
         self.imageView.image = nil;
         self.detailTextLabel.text = nil;
+    }
+}
+
+- (void)didUpdateDiskIcon:(NSNotification*)notification {
+    if ([_filePath isEqual:notification.object]) {
+        UIImage *icon = notification.userInfo[@"icon"];
+        self.imageView.image = icon ?: defaultIcon;
     }
 }
 

@@ -11,6 +11,10 @@
 #import "res.h"
 #import "mfs.h"
 #import "AppDelegate.h"
+#import <sys/xattr.h>
+
+NSString *DidUpdateIconForDiskImageNotification = @"didUpdateIconForDiskImage";
+static const char kDiskImageIconAttributeName[] = "net.namedfork.DiskImageIcon";
 
 #define kDiskImageHasDC42Header 1 << 0
 #define RSHORT(base, offset) ntohs(*((short *)((base) + (offset))))
@@ -23,37 +27,58 @@
 
 @end
 
-static NSCache<NSString*,UIImage*> *diskImageIconCache = nil;
-
 @implementation UIImage (DiskImageIcon)
-
-+ (NSCache<NSString*,UIImage*> *)diskImageIconCache {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        diskImageIconCache = [NSCache new];
-        diskImageIconCache.name = @"net.namedfork.minivmac.icon-cache";
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEjectDisk:) name:[AppDelegate sharedEmulator].ejectDiskNotification object:nil];
-    });
-    return diskImageIconCache;
-}
 
 + (void)_didEjectDisk:(NSNotification*)notification {
     NSString *path = [notification.userInfo[@"path"] stringByStandardizingPath];
-    // reload icon
-    [diskImageIconCache removeObjectForKey:path];
-    [self imageWithIconForDiskImage:path];
+    [self loadIconForDiskImageAndNotify:path];
 }
 
 + (UIImage *)imageWithIconForDiskImage:(NSString *)path {
-    path = path.stringByStandardizingPath;
-    UIImage *icon = [[self diskImageIconCache] objectForKey:path];
-    if (icon == nil) {
-        icon = [[DiskImageIconReader new] iconForDiskImage:path];
-        if (icon != nil) {
-            [diskImageIconCache setObject:icon forKey:path];
-        }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_didEjectDisk:) name:[AppDelegate sharedEmulator].ejectDiskNotification object:nil];
+    });
+    
+    // check attribute
+    ssize_t attrLen = getxattr(path.fileSystemRepresentation, kDiskImageIconAttributeName, NULL, 0, 0, 0);
+    if (attrLen == -1) {
+        [self loadIconForDiskImageAndNotify:path];
+        return nil;
     }
-    return icon;
+    
+    // read data
+    void *attrData = malloc(attrLen);
+    getxattr(path.fileSystemRepresentation, kDiskImageIconAttributeName, attrData, attrLen, 0, 0);
+    return [UIImage imageWithData:[NSData dataWithBytesNoCopy:attrData length:attrLen freeWhenDone:YES]];
+}
+
++ (void)loadIconForDiskImageAndNotify:(NSString *)path {
+    if ([NSThread isMainThread]) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+            [self loadIconForDiskImageAndNotify:path];
+        });
+        return;
+    }
+    
+    // get current value
+    ssize_t attrLen = getxattr(path.fileSystemRepresentation, kDiskImageIconAttributeName, NULL, 0, 0, 0);
+    NSData *previousData = nil;
+    if (attrLen != -1) {
+        void *attrData = malloc(attrLen);
+        getxattr(path.fileSystemRepresentation, kDiskImageIconAttributeName, attrData, attrLen, 0, 0);
+        previousData = [NSData dataWithBytesNoCopy:attrData length:attrLen freeWhenDone:YES];
+    }
+    
+    // load new icon
+    UIImage *icon = [[DiskImageIconReader new] iconForDiskImage:path];
+    NSData *newData = UIImagePNGRepresentation(icon);
+    if (![newData isEqualToData:previousData]) {
+        // save new icon and notify
+        setxattr(path.fileSystemRepresentation, kDiskImageIconAttributeName, newData.bytes, newData.length, 0, 0);
+        NSNotification *newIconNotification = [[NSNotification alloc] initWithName:DidUpdateIconForDiskImageNotification object:path userInfo:icon ? @{@"icon": icon} : nil];
+        [[NSNotificationCenter defaultCenter] performSelectorOnMainThread:@selector(postNotification:) withObject:newIconNotification waitUntilDone:NO];
+    }
 }
 
 @end

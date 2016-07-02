@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *DidUpdateIconForDiskImageNotification;
+
 @interface UIImage (DiskImageIcon)
 
 + (UIImage *)imageWithIconForDiskImage:(NSString *)path;
