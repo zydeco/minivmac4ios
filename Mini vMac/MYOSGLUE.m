@@ -1941,6 +1941,16 @@ static dispatch_once_t onceToken;
 #pragma mark - Mouse
 
 - (void)setMouseX:(NSInteger)x Y:(NSInteger)y {
+    if (x > vMacScreenWidth) {
+        x = vMacScreenWidth;
+    } else if (x < 0) {
+        x = 0;
+    }
+    if (y > vMacScreenHeight) {
+        y = vMacScreenHeight;
+    } else if (y < 0) {
+        y = 0;
+    }
     MyMousePositionSet(x, y);
 }
 
