@@ -2,14 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDisplayName</key>
-    <string>MNVMBundleDisplayName</string>
-	<key>CFBundleGetInfoString</key>
-    <string>MNVMBundleGetInfoString</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>MNVMBundleDisplayName</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string>MNVMBundleGetInfoString</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -26,20 +26,5 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string>Emulator</string>
-	<key>MNVMCapabilities</key>
-	<dict>
-        <key>AutoSlow</key>
-        <integer>EnableAutoSlow</integer>
-        <key>ScreenWidth</key>
-        <integer>vMacScreenWidth</integer>
-        <key>ScreenHeight</key>
-        <integer>vMacScreenHeight</integer>
-        <key>ScreenDepth</key>
-        <integer>vMacScreenDepth</integer>
-        <key>FloppyDrives</key>
-        <integer>NumDrives</integer>
-        <key>Sound</key>
-        <integer>MySoundEnabled</integer>
-	</dict>
 </dict>
 </plist>

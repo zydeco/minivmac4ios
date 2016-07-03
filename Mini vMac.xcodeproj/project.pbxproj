@@ -358,6 +358,7 @@
 		28F6B4B61CF07F32002D76D0 /* liblibres.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibres.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F6B4C91CF1FA7A002D76D0 /* about.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = about.plist; sourceTree = "<group>"; };
 		28F6B4CE1CF77099002D76D0 /* compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = compat.m; sourceTree = "<group>"; };
+		28F875921D29402B001E99EB /* PlugIn-Capabilities.plist.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PlugIn-Capabilities.plist.xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +456,7 @@
 				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
 				289710B71CFB0DC70089D463 /* CNFGGLOB.h */,
 				285A8C901D05AFD3002993DE /* PlugIn-Info.plist */,
+				28F875921D29402B001E99EB /* PlugIn-Capabilities.plist.xml */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -752,6 +754,7 @@
 				283422C61CF8EF8C0088B634 /* Frameworks */,
 				283422C71CF8EF8C0088B634 /* Headers */,
 				283422C81CF8EF8C0088B634 /* Resources */,
+				28F8758E1D2936B5001E99EB /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -770,6 +773,7 @@
 				283423901CF9C4CB0088B634 /* Frameworks */,
 				283423911CF9C4CB0088B634 /* Headers */,
 				283423921CF9C4CB0088B634 /* Resources */,
+				28F8758F1D293FF4001E99EB /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -788,6 +792,7 @@
 				289710CB1CFB11BF0089D463 /* Frameworks */,
 				289710CC1CFB11BF0089D463 /* Headers */,
 				289710CD1CFB11BF0089D463 /* Resources */,
+				28F875901D293FFB001E99EB /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -806,6 +811,7 @@
 				28BDBEAE1D230EEB0072ED5B /* Frameworks */,
 				28BDBEAF1D230EEB0072ED5B /* Headers */,
 				28BDBEB01D230EEB0072ED5B /* Resources */,
+				28F875911D294001001E99EB /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -823,7 +829,7 @@
 				28F676B91CD15E0B00FC6FA6 /* Sources */,
 				28F676BA1CD15E0B00FC6FA6 /* Frameworks */,
 				28F676BB1CD15E0B00FC6FA6 /* Resources */,
-				28F6B4CD1CF76D88002D76D0 /* ShellScript */,
+				28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */,
 				283422D61CF8EF8C0088B634 /* Embed Frameworks */,
 				283422F51CF9ACAD0088B634 /* Change PlugIn extensions to mnvm */,
 			);
@@ -904,6 +910,9 @@
 						DevelopmentTeam = UJXNDZ5TNU;
 					};
 					2834237D1CF9C4CB0088B634 = {
+						DevelopmentTeam = UJXNDZ5TNU;
+					};
+					289710B81CFB11BF0089D463 = {
 						DevelopmentTeam = UJXNDZ5TNU;
 					};
 					28BDBE9A1D230EEB0072ED5B = {
@@ -1019,18 +1028,75 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$BUILT_PRODUCTS_DIR/$PLUGINS_FOLDER_PATH\"\nrm -rf *.mnvm\nfor name in *.framework\ndo\n  mv \"$name\" \"${name%.framework}.mnvm\"\ndone\n";
 		};
-		28F6B4CD1CF76D88002D76D0 /* ShellScript */ = {
+		28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Set Git version in Info.plist";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string $GIT_VERSION";
+		};
+		28F8758E1D2936B5001E99EB /* Add capabilities to Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Add capabilities to Info.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
+		};
+		28F8758F1D293FF4001E99EB /* Add capabilities to Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Add capabilities to Info.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
+		};
+		28F875901D293FFB001E99EB /* Add capabilities to Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Add capabilities to Info.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
+		};
+		28F875911D294001001E99EB /* Add capabilities to Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Add capabilities to Info.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1414,7 +1480,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macii;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-640x480";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
@@ -1442,7 +1508,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macii;
+				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-640x480";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";

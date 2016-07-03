@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MNVMCapabilities</key>
+	<dict>
+		<key>AutoSlow</key>
+		<integer>EnableAutoSlow</integer>
+		<key>ScreenWidth</key>
+		<integer>vMacScreenWidth</integer>
+		<key>ScreenHeight</key>
+		<integer>vMacScreenHeight</integer>
+		<key>ScreenDepth</key>
+		<integer>vMacScreenDepth</integer>
+		<key>FloppyDrives</key>
+		<integer>NumDrives</integer>
+		<key>Sound</key>
+		<integer>MySoundEnabled</integer>
+	</dict>
+</dict>
+</plist>
