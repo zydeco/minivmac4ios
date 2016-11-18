@@ -14,7 +14,6 @@
 * iOS 7 or later
 * ROM image from Mac Plus, Mac II and/or Mac 128K
 * Disk images with Mac software
-* A Mac with Xcode 7 (required to build)
 
 ## Usage
 
@@ -44,7 +43,7 @@ If no icon is found, it will show a standard floppy disk icon.
 Swipe up with two fingers to show the keyboard, and down to hide it.
 
 The emulated keyboard features all the keys on an Apple Extended keyboard
-(except the Power key). The Command, Option , Control and Shift keys are
+(except the Power key). The Command, Option, Control and Shift keys are
 sticky, to make keyboard shortcuts easier to type. You can change the
 appearance of the emulated keyboard in the settings.
 
