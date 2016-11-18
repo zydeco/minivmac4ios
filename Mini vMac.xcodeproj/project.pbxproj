@@ -1040,7 +1040,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string $GIT_VERSION";
+			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string $GIT_VERSION\nchmod 0644 \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info.plist\"";
 		};
 		28F8758E1D2936B5001E99EB /* Add capabilities to Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
