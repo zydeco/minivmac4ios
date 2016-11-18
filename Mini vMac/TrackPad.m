@@ -8,6 +8,7 @@
 
 #import "TrackPad.h"
 #import "AppDelegate.h"
+@import AudioToolbox;
 
 #define TRACKPAD_ACCEL_N 1
 #define TRACKPAD_ACCEL_T 0.2
@@ -21,6 +22,7 @@
     CGPoint previousTouchLoc;
     BOOL shouldClick;
     BOOL isDragging;
+    BOOL supportsForceTouch, didForceClick;
     NSMutableSet *currentTouches;
 }
 
@@ -34,6 +36,15 @@
     return self;
 }
 
+- (void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    @try {
+        supportsForceTouch = (newSuperview.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable);
+    } @catch (NSException *exception) {
+        supportsForceTouch = NO;
+    }
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [currentTouches unionSet:touches];
     if (currentTouches.count == 1) {
@@ -45,11 +56,14 @@
 
 - (void)firstTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint touchLoc = [touch locationInView:self];
+    shouldClick = YES;
     if (!isDragging && (event.timestamp - previousTouchTime < touchTimeThreshold) &&
         fabs(previousTouchLoc.x - touchLoc.x) < touchDistanceThreshold &&
         fabs(previousTouchLoc.y - touchLoc.y) < touchDistanceThreshold) {
         [self startDragging];
     }
+    previousTouchTime = event.timestamp;
+    previousTouchLoc = touchLoc;
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -62,21 +76,34 @@
     NSTimeInterval accel = TRACKPAD_ACCEL_N / (TRACKPAD_ACCEL_T + ((timeDiff * timeDiff)/TRACKPAD_ACCEL_D));
     locDiff.x *= accel;
     locDiff.y *= accel;
-    shouldClick = NO;
-    [[AppDelegate sharedEmulator] moveMouseX:locDiff.x Y:locDiff.y];
+
+    if (!CGPointEqualToPoint(touchLoc, previousTouchLoc)) {
+        shouldClick = NO;
+        [[AppDelegate sharedEmulator] moveMouseX:locDiff.x Y:locDiff.y];
+    }
+    
     previousTouchTime = event.timestamp;
     previousTouchLoc = touchLoc;
+    
+    if (supportsForceTouch) {
+        [self handleForceClick:touch];
+    }
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [currentTouches minusSet:touches];
     if (currentTouches.count > 0) {
         return;
+    } else if (didForceClick) {
+        AudioServicesPlaySystemSound(1519);
+        didForceClick = NO;
+        [self cancelScheduledClick];
+        [self mouseUp];
+        return;
     }
     CGPoint touchLoc = [touches.anyObject locationInView:self];
     if (shouldClick && (event.timestamp - previousTouchTime < touchTimeThreshold)) {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mouseClick) object:nil];
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mouseUp) object:nil];
+        [self cancelScheduledClick];
         [self performSelector:@selector(mouseClick) withObject:nil afterDelay:touchTimeThreshold];
     }
     shouldClick = NO;
@@ -90,7 +117,10 @@
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [currentTouches minusSet:touches];
-    [self stopDragging];
+    isDragging = NO;
+    shouldClick = NO;
+    didForceClick = NO;
+    [self mouseUp];
 }
 
 - (void)startDragging {
@@ -105,12 +135,25 @@
     [[AppDelegate sharedEmulator] setMouseButton:NO];
 }
 
+- (void)handleForceClick:(UITouch *)touch {
+    if (touch.force > 3.0 && !didForceClick) {
+        AudioServicesPlaySystemSound(1519);
+        didForceClick = YES;
+        [self startDragging];
+    }
+}
+
 - (void)mouseClick {
     if (isDragging) {
         return;
     }
     [[AppDelegate sharedEmulator] setMouseButton:YES];
     [self performSelector:@selector(mouseUp) withObject:nil afterDelay:2.0/60.0];
+}
+
+- (void)cancelScheduledClick {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mouseClick) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(mouseUp) object:nil];
 }
 
 - (void)mouseUp {
