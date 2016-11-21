@@ -38,7 +38,7 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         [self loadEmulator:@"MacPlus4M"];
     }
     [self initDefaults];
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:NULL];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:NULL];
     [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
     return YES;
 }
