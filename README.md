@@ -56,6 +56,9 @@ You can choose to use the screen as a touchscreen, where tapping on the screen
 acts a mouse click, or as a trackpad. In trackpad mode, dragging is done by
 tapping twice fast and holding it down.
 
+If you have a jailbroken device and [BTC Mouse & Trackpad](http://www.ringwald.ch/cydia/mouse/),
+Mini vMac will use your bluetooth mouse or trackpad.
+
 ### Settings
 
 Swipe right with two fingers to show the settings dialog, where you can change
