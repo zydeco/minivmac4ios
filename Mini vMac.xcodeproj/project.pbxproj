@@ -274,6 +274,7 @@
 		283423EC1CFA329C0088B634 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		283423ED1CFA329C0088B634 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		283423EE1CFA329C0088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
+		283CA9821DF47AF300B33D5E /* BTCMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCMouse.h; sourceTree = "<group>"; };
 		285A8C901D05AFD3002993DE /* PlugIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlugIn-Info.plist"; sourceTree = "<group>"; };
 		28848B601CDE97D600B86C45 /* InsertDiskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertDiskViewController.h; sourceTree = "<group>"; };
 		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
@@ -628,6 +629,7 @@
 				28F6B4511CF07C48002D76D0 /* UIImage+DiskImageIcon.m */,
 				28F6B4C91CF1FA7A002D76D0 /* about.plist */,
 				28F6B4CE1CF77099002D76D0 /* compat.m */,
+				283CA9821DF47AF300B33D5E /* BTCMouse.h */,
 				283422EF1CF8F33A0088B634 /* Emulator Bundles */,
 			);
 			path = "Mini vMac";

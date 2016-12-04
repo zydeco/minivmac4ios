@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "EmulatorProtocol.h"
+#import "BTCMouse.h"
 
 extern NSString *DocumentsChangedNotification;
 

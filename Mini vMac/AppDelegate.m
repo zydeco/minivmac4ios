@@ -15,7 +15,7 @@ static AppDelegate *sharedAppDelegate = nil;
 static NSObject<Emulator> *sharedEmulator = nil;
 NSString *DocumentsChangedNotification = @"documentsChanged";
 
-@interface AppDelegate () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
+@interface AppDelegate () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, BTCMouseDelegate>
 
 @end
 
@@ -40,6 +40,11 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     [self initDefaults];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:NULL];
     [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
+    
+    if ([application respondsToSelector:@selector(btcMouseSetRawMode:)]) {
+        [application btcMouseSetRawMode:YES];
+        [application btcMouseSetDelegate:self];
+    }
     return YES;
 }
 
@@ -107,6 +112,11 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     if (sharedEmulator.anyDiskInserted == NO) {
         exit(0);
     }
+}
+
+- (void)handleEventWithMove:(CGPoint)move andWheel:(float)wheel andPan:(float)pan andButtons:(int)buttons {
+    [sharedEmulator moveMouseX:move.x/2.0 Y:move.y/2.0];
+    [sharedEmulator setMouseButton:buttons == 1];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

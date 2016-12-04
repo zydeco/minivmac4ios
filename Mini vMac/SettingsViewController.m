@@ -90,6 +90,9 @@ typedef enum : NSInteger {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [AppDelegate sharedEmulator].running = NO;
+    if ([UIApplication instancesRespondToSelector:@selector(btcMouseSetRawMode:)]) {
+        [[UIApplication sharedApplication] btcMouseSetRawMode:NO];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

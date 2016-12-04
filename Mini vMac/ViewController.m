@@ -64,6 +64,9 @@
     pointingDeviceView = [[pointingDeviceClass alloc] initWithFrame:self.view.bounds];
     pointingDeviceView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view insertSubview:pointingDeviceView aboveSubview:self.screenView];
+    if ([UIApplication instancesRespondToSelector:@selector(btcMouseSetRawMode:)]) {
+        [[UIApplication sharedApplication] btcMouseSetRawMode:YES];
+    }
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {

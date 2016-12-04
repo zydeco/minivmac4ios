@@ -65,6 +65,9 @@
     [nc addObserver:self selector:@selector(reloadData:) name:[AppDelegate sharedEmulator].insertDiskNotification object:nil];
     [nc addObserver:self selector:@selector(reloadData:) name:[AppDelegate sharedEmulator].ejectDiskNotification object:nil];
     [nc addObserver:self selector:@selector(reloadData:) name:DocumentsChangedNotification object:nil];
+    if ([UIApplication instancesRespondToSelector:@selector(btcMouseSetRawMode:)]) {
+        [[UIApplication sharedApplication] btcMouseSetRawMode:NO];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
