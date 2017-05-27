@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9C19786155D97B8ED78AB84AFAAA50249126341A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9C19786155D97B8ED78AB84AFAAA50249126341A" : 9223372036854775807,
+    "F2E8D120DACD6BF5E1EFFA012C92CE6FA0E44B4C" : 9223372036854775807,
+    "45D35ABA2A883CFEB6F6014CF9723CDA568B602B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BD01B53B-439A-4223-9E2B-B444D0A3A26A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9C19786155D97B8ED78AB84AFAAA50249126341A" : "minivmac4ios\/",
+    "F2E8D120DACD6BF5E1EFFA012C92CE6FA0E44B4C" : "minivmac4ios\/libres\/",
+    "45D35ABA2A883CFEB6F6014CF9723CDA568B602B" : "minivmac4ios\/libmfs\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Mini vMac",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Mini vMac.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zydeco\/libmfs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "45D35ABA2A883CFEB6F6014CF9723CDA568B602B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/megabitsenmzq\/minivmac4ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9C19786155D97B8ED78AB84AFAAA50249126341A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zydeco\/libres.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F2E8D120DACD6BF5E1EFFA012C92CE6FA0E44B4C"
+    }
+  ]
+}
