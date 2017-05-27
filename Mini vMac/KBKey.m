@@ -26,6 +26,7 @@ const NSUInteger KBKeyEventStickyKey = 1 << 24;
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.dark = NO;
 }
 

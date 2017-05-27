@@ -919,7 +919,7 @@ LOCALFUNC tMacErr Sony_Mount(CPTR p)
 	} else if (get_vm_byte(dvl + kDiskInPlace) == 0x00) {
 		ui5b L = ImageDataSize[i] >> 9; /* block count */
 
-		if ((L == 800)
+		if (L == 800
 #if CurEmMd > kEmMd_128K
 			|| (L == 1600)
 #endif
