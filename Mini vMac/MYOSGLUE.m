@@ -30,7 +30,7 @@
 #include "SYSDEPNS.h"
 #include "ENDIANAC.h"
 #include "MYOSGLUE.h"
-#include "STRCONST.h"
+#include "STRCNENG.h"
 #include "EMCONFIG.h"
 #import "EmulatorProtocol.h"
 

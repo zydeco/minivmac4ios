@@ -218,10 +218,8 @@
 		2834232D1CF9C0F10088B634 /* DISAM68K.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = DISAM68K.c; sourceTree = "<group>"; };
 		2834232E1CF9C0F10088B634 /* DISAM68K.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DISAM68K.h; sourceTree = "<group>"; };
 		2834232F1CF9C0F10088B634 /* ENDIANAC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ENDIANAC.h; sourceTree = "<group>"; };
-		283423301CF9C0F10088B634 /* FB1BPP2I.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FB1BPP2I.h; sourceTree = "<group>"; };
 		283423311CF9C0F10088B634 /* FPCPEMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FPCPEMDV.h; sourceTree = "<group>"; };
 		283423321CF9C0F10088B634 /* FPMATHEM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FPMATHEM.h; sourceTree = "<group>"; };
-		283423331CF9C0F10088B634 /* FPMATHNT.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FPMATHNT.h; sourceTree = "<group>"; };
 		283423341CF9C0F10088B634 /* GLOBGLUE.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = GLOBGLUE.c; sourceTree = "<group>"; };
 		283423351CF9C0F10088B634 /* GLOBGLUE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GLOBGLUE.h; sourceTree = "<group>"; };
 		283423361CF9C0F10088B634 /* INTLCHAR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = INTLCHAR.h; sourceTree = "<group>"; };
@@ -257,7 +255,6 @@
 		283423541CF9C0F10088B634 /* SNDEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SNDEMDEV.h; sourceTree = "<group>"; };
 		283423551CF9C0F10088B634 /* SONYEMDV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = SONYEMDV.c; sourceTree = "<group>"; };
 		283423561CF9C0F10088B634 /* SONYEMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SONYEMDV.h; sourceTree = "<group>"; };
-		283423571CF9C0F10088B634 /* STRCONST.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = STRCONST.h; sourceTree = "<group>"; };
 		283423581CF9C0F10088B634 /* SYSDEPNS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SYSDEPNS.h; sourceTree = "<group>"; };
 		283423591CF9C0F10088B634 /* VIA2EMDV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = VIA2EMDV.c; sourceTree = "<group>"; };
 		2834235A1CF9C0F10088B634 /* VIA2EMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VIA2EMDV.h; sourceTree = "<group>"; };
@@ -301,6 +298,8 @@
 		28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MacII-640x480.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BDBEBA1D230F280072ED5B /* CNFGGLOB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		28BDBEBB1D230F280072ED5B /* EMCONFIG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
+		28C63A5D1F76970000BB02B3 /* HPMCHACK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPMCHACK.h; sourceTree = "<group>"; };
+		28C63A5E1F76979500BB02B3 /* STRCNENG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STRCNENG.h; sourceTree = "<group>"; };
 		28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYOSGLUE.m; sourceTree = "<group>"; };
 		28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenView.h; sourceTree = "<group>"; };
 		28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
@@ -479,12 +478,11 @@
 				2834232D1CF9C0F10088B634 /* DISAM68K.c */,
 				2834232E1CF9C0F10088B634 /* DISAM68K.h */,
 				2834232F1CF9C0F10088B634 /* ENDIANAC.h */,
-				283423301CF9C0F10088B634 /* FB1BPP2I.h */,
 				283423311CF9C0F10088B634 /* FPCPEMDV.h */,
 				283423321CF9C0F10088B634 /* FPMATHEM.h */,
-				283423331CF9C0F10088B634 /* FPMATHNT.h */,
 				283423341CF9C0F10088B634 /* GLOBGLUE.c */,
 				283423351CF9C0F10088B634 /* GLOBGLUE.h */,
+				28C63A5D1F76970000BB02B3 /* HPMCHACK.h */,
 				283423361CF9C0F10088B634 /* INTLCHAR.h */,
 				283423371CF9C0F10088B634 /* IWMEMDEV.c */,
 				283423381CF9C0F10088B634 /* IWMEMDEV.h */,
@@ -518,7 +516,7 @@
 				283423541CF9C0F10088B634 /* SNDEMDEV.h */,
 				283423551CF9C0F10088B634 /* SONYEMDV.c */,
 				283423561CF9C0F10088B634 /* SONYEMDV.h */,
-				283423571CF9C0F10088B634 /* STRCONST.h */,
+				28C63A5E1F76979500BB02B3 /* STRCNENG.h */,
 				283423581CF9C0F10088B634 /* SYSDEPNS.h */,
 				283423591CF9C0F10088B634 /* VIA2EMDV.c */,
 				2834235A1CF9C0F10088B634 /* VIA2EMDV.h */,

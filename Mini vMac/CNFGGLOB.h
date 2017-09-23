@@ -29,8 +29,8 @@ typedef uint32_t ui5b;
 typedef int32_t si5b;
 #define HaveRealsi5b 1
 
-#define HaveRealui6b 0
-#define HaveRealsi6b 0
+#define HaveRealui6b 1
+#define HaveRealsi6b 1
 
 /* --- integer representation types ---- */
 
@@ -62,8 +62,8 @@ typedef uint64_t ui6b;
 
 #define NeedIntlChars 1
 #define kStrAppName "Mini vMac"
-#define kAppVariationStr "minivmac-3.4.0-ios"
-#define kStrCopyrightYear "2016"
+#define kAppVariationStr "minivmac-3.5.8-ios"
+#define kStrCopyrightYear "2017"
 #define kMaintainerName "Jesús A. Álvarez"
 #define kStrHomePage "https://namedfork.net/minivmac"
 #define VarFullScreen 0
