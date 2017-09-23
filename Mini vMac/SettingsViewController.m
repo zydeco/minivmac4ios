@@ -73,11 +73,12 @@ typedef enum : NSInteger {
     aboutTitle = aboutData[@"title"];
     aboutItems = aboutData[@"items"];
     footerView = [[UITextView alloc] initWithFrame:CGRectZero];
-    NSAttributedString *str = [[NSMutableAttributedString alloc] initWithData:[aboutData[@"footer.html"] dataUsingEncoding:NSUTF8StringEncoding]
-                                                                      options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                                                                NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-                                                           documentAttributes:nil
-                                                                        error:NULL];
+    NSString *footerHTML = [aboutData[@"footer.html"] stringByReplacingOccurrencesOfString:@"$mnvmversion" withString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"MNVMVersion"]];
+    NSAttributedString *str = [[NSAttributedString alloc] initWithData:[footerHTML dataUsingEncoding:NSUTF8StringEncoding]
+                                                               options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                                                                         NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+                                                    documentAttributes:nil
+                                                                 error:NULL];
     footerView.attributedText = str;
     [footerView sizeToFit];
     footerView.editable = NO;
