@@ -3,7 +3,7 @@
 //  Mini vMac for iOS
 //
 //  Created by Jesús A. Álvarez on 18/04/2016.
-//  Copyright © 2016 namedfork. All rights reserved.
+//  Copyright © 2016-2017 namedfork. All rights reserved.
 //
 
 #import "TrackPad.h"
