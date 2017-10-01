@@ -1857,7 +1857,7 @@ static dispatch_once_t onceToken;
 }
 
 - (BOOL)insertDisk:(NSString *)path {
-    return Sony_Insert1(path, false);
+    return Sony_Insert1(path.stringByStandardizingPath, false);
 }
 
 - (NSString *)insertDiskNotification {
