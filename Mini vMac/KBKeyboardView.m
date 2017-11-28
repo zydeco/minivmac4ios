@@ -22,16 +22,22 @@
     CGAffineTransform defaultKeyTransform;
     CGFloat fontSize;
     CGSize selectedSize;
+    UIEdgeInsets safeAreaInsets;
 }
 
-- (id)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame safeAreaInsets:(UIEdgeInsets)insets {
     self = [super initWithFrame:frame];
     if (self) {
+        safeAreaInsets = insets;
         self.backgroundColor = [UIColor colorWithRed:0xEB / 255.0 green:0xF0 / 255.0 blue:0xF7 / 255.0 alpha:0.9];
         modifiers = [NSMutableSet setWithCapacity:4];
         keysDown = [NSMutableIndexSet indexSet];
     }
     return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    return [self initWithFrame:frame safeAreaInsets:UIEdgeInsetsZero];
 }
 
 - (void)setLayout:(KBKeyboardLayout *)layout {
@@ -41,7 +47,8 @@
     _layout = layout;
 
     // find preferred size (same width or smaller)
-    CGFloat frameWidth = self.frame.size.width;
+    CGRect safeFrame = UIEdgeInsetsInsetRect(self.frame, safeAreaInsets);
+    CGFloat frameWidth = safeFrame.size.width;
     CGFloat preferredWidth = frameWidth;
     selectedSize = CGSizeZero;
     for (NSValue *key in layout.availableSizes) {
@@ -53,7 +60,7 @@
 
     // try sideways
     if (CGSizeEqualToSize(selectedSize, CGSizeZero)) {
-        preferredWidth = self.frame.size.height;
+        preferredWidth = safeFrame.size.height;
         for (NSValue *key in layout.availableSizes) {
             CGSize size = key.CGSizeValue;
             if (!CGSizeEqualToSize(size, CGSizeZero) && size.width > selectedSize.width && size.width <= preferredWidth) {
@@ -79,11 +86,11 @@
             defaultKeyTransform = CGAffineTransformMakeScale(frameWidth / selectedSize.width, 1.33333);
         } else {
             // iPhone keyboard on bigger phone
-            CGFloat wScale = self.frame.size.width / selectedSize.width;
+            CGFloat wScale = safeFrame.size.width / selectedSize.width;
             defaultKeyTransform = CGAffineTransformMakeScale(wScale, 1.0);
         }
     }
-    self.frame = CGRectMake(0, 0, self.frame.size.width, selectedSize.height * defaultKeyTransform.d);
+    self.frame = CGRectMake(0, 0, safeFrame.size.width + safeAreaInsets.right + safeAreaInsets.left, selectedSize.height * defaultKeyTransform.d + safeAreaInsets.bottom);
 
     // init keyplanes array
     NSUInteger numberOfKeyPlanes = layout.numberOfKeyPlanes;
@@ -99,6 +106,7 @@
     NSMutableArray *keyPlane = [NSMutableArray arrayWithCapacity:64];
     [_layout enumerateKeysForSize:selectedSize plane:plane transform:defaultKeyTransform usingBlock:^(int8_t scancode, CGRect keyFrame, CGFloat fontScale, BOOL dark, BOOL sticky) {
         KBKey *key = nil;
+        keyFrame.origin.x += safeAreaInsets.left;
         if (scancode == VKC_HIDE) {
             key = [[KBHideKey alloc] initWithFrame:keyFrame];
             [key addTarget:self action:@selector(hideKeyboard:) forControlEvents:UIControlEventTouchUpInside];

@@ -207,7 +207,11 @@
     }
     
     if (keyboardView == nil) {
-        keyboardView = [[KBKeyboardView alloc] initWithFrame:self.view.bounds];
+        UIEdgeInsets safeAreaInsets = UIEdgeInsetsZero;
+        if (@available(iOS 11, *)) {
+            safeAreaInsets = self.view.safeAreaInsets;
+        }
+        keyboardView = [[KBKeyboardView alloc] initWithFrame:self.view.bounds safeAreaInsets:safeAreaInsets];
         keyboardView.layout = [self keyboardLayout];
         keyboardView.delegate = self;
     }
