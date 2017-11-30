@@ -17,6 +17,7 @@ typedef enum : NSInteger {
     SettingsSectionSpeed,
     SettingsSectionMouse,
     SettingsSectionKeyboard,
+    SettingsSectionDisplay,
     SettingsSectionMachine,
     SettingsSectionAbout
 } SettingsSection;
@@ -122,6 +123,13 @@ typedef enum : NSInteger {
     }
 }
 
+- (IBAction)changeScreenScaling:(UISegmentedControl*)sender {
+    if ([sender isKindOfClass:[UISegmentedControl class]]) {
+        NSString *filter = @[kCAFilterNearest, kCAFilterLinear, kCAFilterTrilinear][sender.selectedSegmentIndex];
+        [[NSUserDefaults standardUserDefaults] setObject:filter forKey:@"screenFilter"];
+    }
+}
+
 - (void)changeRunInBackground:(UISwitch*)sender {
     if ([sender isKindOfClass:[UISwitch class]]) {
         [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:@"runInBackground"];
@@ -137,7 +145,7 @@ typedef enum : NSInteger {
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -168,6 +176,8 @@ typedef enum : NSInteger {
             return NSLocalizedString(@"Emulated Machine", nil);
         case SettingsSectionKeyboard:
             return NSLocalizedString(@"Keyboard Layout", nil);
+        case SettingsSectionDisplay:
+            return NSLocalizedString(@"Display Scaling", nil);
         case SettingsSectionAbout:
             return aboutTitle;
         default:return nil;
@@ -268,6 +278,17 @@ typedef enum : NSInteger {
             cell.detailTextLabel.text = detailText;
         }
         cell.accessoryType = item[@"link"] == nil ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
+    } else if (section == SettingsSectionDisplay) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"display" forIndexPath:indexPath];
+        UISegmentedControl *filterControl = (UISegmentedControl*)[cell viewWithTag:128];
+        NSString *filter = [defaults stringForKey:@"screenFilter"];
+        if ([filter isEqualToString:kCAFilterNearest]) {
+            filterControl.selectedSegmentIndex = 0;
+        } else if ([filter isEqualToString:kCAFilterTrilinear]) {
+            filterControl.selectedSegmentIndex = 2;
+        } else {
+            filterControl.selectedSegmentIndex = 1;
+        }
     }
     return cell;
 }

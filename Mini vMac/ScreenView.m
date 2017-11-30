@@ -23,6 +23,9 @@ static ScreenView *sharedScreenView = nil;
     [super awakeFromNib];
     sharedScreenView = self;
     videoLayer = [CALayer layer];
+    NSString *screenFilter = [[NSUserDefaults standardUserDefaults] stringForKey:@"screenFilter"];
+    videoLayer.magnificationFilter = screenFilter;
+    videoLayer.minificationFilter = screenFilter;
     [AppDelegate sharedEmulator].screenLayer = videoLayer;
     if ([AppDelegate sharedEmulator]) {
         screenSize = [AppDelegate sharedEmulator].screenSize;
@@ -30,6 +33,7 @@ static ScreenView *sharedScreenView = nil;
         screenSize = CGSizeMake(1, 1);
     }
     [self.layer addSublayer:videoLayer];
+    [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"screenFilter" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 + (instancetype)sharedScreenView {
@@ -54,4 +58,17 @@ static ScreenView *sharedScreenView = nil;
     videoLayer.frame = screenBounds;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([object isEqual:[NSUserDefaults standardUserDefaults]]) {
+        if ([keyPath isEqualToString:@"screenFilter"]) {
+            NSString *value = change[NSKeyValueChangeNewKey];
+            videoLayer.magnificationFilter = value;
+            videoLayer.minificationFilter = value;
+        }
+    }
+}
+
+- (void)dealloc {
+    [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"screenFilter" context:NULL];
+}
 @end
