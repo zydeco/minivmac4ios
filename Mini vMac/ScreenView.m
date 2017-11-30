@@ -56,6 +56,10 @@ static ScreenView *sharedScreenView = nil;
     screenBounds.origin.x = (viewBounds.size.width - screenBounds.size.width)/2;
     screenBounds = CGRectIntegral(screenBounds);
     videoLayer.frame = screenBounds;
+    BOOL scaleIsIntegral = (floor(screenScale) == screenScale);
+    NSString *screenFilter = scaleIsIntegral ? kCAFilterNearest : [[NSUserDefaults standardUserDefaults] stringForKey:@"screenFilter"];
+    videoLayer.magnificationFilter = screenFilter;
+    videoLayer.minificationFilter = screenFilter;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
