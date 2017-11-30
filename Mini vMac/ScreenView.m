@@ -52,6 +52,9 @@ static ScreenView *sharedScreenView = nil;
     [super layoutSubviews];
     CGRect viewBounds = self.bounds;
     CGFloat screenScale = MAX(screenSize.width / viewBounds.size.width, screenSize.height / viewBounds.size.height);
+    if (screenScale > 0.9 && screenScale <= 1.0) {
+        screenScale = 1.0;
+    }
     screenBounds = CGRectMake(0, 0, screenSize.width / screenScale, screenSize.height / screenScale);
     screenBounds.origin.x = (viewBounds.size.width - screenBounds.size.width)/2;
     screenBounds = CGRectIntegral(screenBounds);
