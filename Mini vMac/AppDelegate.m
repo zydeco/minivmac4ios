@@ -304,7 +304,7 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     return [self application:application openURL:url options:options];
 }
 
-- (BOOL)importFileToDocuments:(NSURL *)url {
+- (BOOL)importFileToDocuments:(NSURL *)url copy:(BOOL)copy {
     if (url.fileURL) {
         // opening file
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -322,7 +322,11 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
             destinationPath = [self.documentsPath stringByAppendingPathComponent:newFileName];
             tries++;
         }
-        [fileManager moveItemAtPath:url.path toPath:destinationPath error:&error];
+        if (copy) {
+            [fileManager copyItemAtPath:url.path toPath:destinationPath error:&error];
+        } else {
+            [fileManager moveItemAtPath:url.path toPath:destinationPath error:&error];
+        }
         if (error) {
             [self showAlertWithTitle:fileName message:error.localizedFailureReason];
         } else {
@@ -337,16 +341,22 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
     if (url.fileURL) {
         // opening file
-        if ([url.path.stringByStandardizingPath hasPrefix:self.documentsPath]) {
+        NSString *inboxPath = [self.documentsPath stringByAppendingPathComponent:@"Inbox"];
+        if ([url.path.stringByStandardizingPath hasPrefix:inboxPath]) {
+            // pre-iOS 11 import through inbox
+            [url startAccessingSecurityScopedResource];
+            [self importFileToDocuments:url copy:NO];
+            [url stopAccessingSecurityScopedResource];
+        } else if ([url.path.stringByStandardizingPath hasPrefix:self.documentsPath]) {
             // already in documents - mount
             [sharedEmulator insertDisk:url.path];
         } else if ([options[UIApplicationOpenURLOptionsOpenInPlaceKey] boolValue]) {
             // not in documents - copy
             [url startAccessingSecurityScopedResource];
-            [self importFileToDocuments:url];
+            [self importFileToDocuments:url copy:YES];
             [url stopAccessingSecurityScopedResource];
         } else {
-            return [self importFileToDocuments:url];
+            return [self importFileToDocuments:url copy:NO];
         }
     }
     return YES;
