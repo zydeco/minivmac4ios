@@ -66,9 +66,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2.4</string>
-	<key>MNVMVersion</key>
-	<string>3.5.8</string>
+	<string>2.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -77,6 +75,8 @@
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
+	<key>MNVMVersion</key>
+	<string>3.5.8</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
