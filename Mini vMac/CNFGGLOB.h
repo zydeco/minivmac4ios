@@ -63,7 +63,7 @@ typedef uint64_t ui6b;
 #define NeedIntlChars 1
 #define kStrAppName "Mini vMac"
 #define kAppVariationStr "minivmac-3.5.8-ios"
-#define kStrCopyrightYear "2017"
+#define kStrCopyrightYear "2018"
 #define kMaintainerName "Jesús A. Álvarez"
 #define kStrHomePage "https://namedfork.net/minivmac"
 #define VarFullScreen 0

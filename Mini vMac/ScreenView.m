@@ -3,7 +3,7 @@
 //  Mini vMac
 //
 //  Created by Jesús A. Álvarez on 30/04/2016.
-//  Copyright © 2016-2017 namedfork. All rights reserved.
+//  Copyright © 2016-2018 namedfork. All rights reserved.
 //
 
 #import "ScreenView.h"

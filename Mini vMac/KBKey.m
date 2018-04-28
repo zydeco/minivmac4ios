@@ -3,7 +3,7 @@
 //  BasiliskII
 //
 //  Created by Jesús A. Álvarez on 16/03/2014.
-//  Copyright (c) 2014-2017 namedfork. All rights reserved.
+//  Copyright (c) 2014-2018 namedfork. All rights reserved.
 //
 
 #import "KBKey.h"
