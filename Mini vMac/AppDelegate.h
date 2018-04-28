@@ -16,6 +16,7 @@ extern NSString *DocumentsChangedNotification;
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, readonly) NSString *documentsPath;
+@property (nonatomic, readonly) NSString *userKeyboardLayoutsPath;
 @property (nonatomic, readonly) NSArray<NSString*> *diskImageExtensions;
 @property (nonatomic, readonly) NSArray<NSBundle*> *emulatorBundles;
 @property (readonly, nonatomic, getter = isSandboxed) BOOL sandboxed;

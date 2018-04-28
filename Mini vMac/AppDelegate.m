@@ -45,6 +45,10 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         [application btcMouseSetRawMode:YES];
         [application btcMouseSetDelegate:self];
     }
+    
+    // populate documents directory so it shows up in Files
+    [[NSFileManager defaultManager] createDirectoryAtPath:self.userKeyboardLayoutsPath withIntermediateDirectories:YES attributes:nil error:nil];
+    
     return YES;
 }
 
@@ -278,6 +282,15 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         [[NSFileManager defaultManager] createDirectoryAtPath:documentsPath withIntermediateDirectories:YES attributes:nil error:NULL];
     });
     return documentsPath;
+}
+
+- (NSString *)userKeyboardLayoutsPath {
+    static dispatch_once_t onceToken;
+    static NSString *userKeyboardLayoutsPath;
+    dispatch_once(&onceToken, ^{
+        userKeyboardLayoutsPath = [self.documentsPath stringByAppendingPathComponent:@"Keyboard Layouts"];
+    });
+    return userKeyboardLayoutsPath;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

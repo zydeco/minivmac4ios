@@ -220,7 +220,10 @@
 - (KBKeyboardLayout*)keyboardLayout {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *layoutName = [defaults stringForKey:@"keyboardLayout"];
-    NSString *layoutPath = [[NSBundle mainBundle] pathForResource:layoutName ofType:nil inDirectory:@"Keyboard Layouts"];
+    NSString *layoutPath = [[[AppDelegate sharedInstance] userKeyboardLayoutsPath] stringByAppendingPathComponent:layoutName];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:layoutPath]) {
+        layoutPath = [[NSBundle mainBundle] pathForResource:layoutName ofType:nil inDirectory:@"Keyboard Layouts"];
+    }
     if (layoutPath == nil) {
         NSLog(@"Layout not found: %@", layoutPath);
     }

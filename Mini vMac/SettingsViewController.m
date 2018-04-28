@@ -37,6 +37,11 @@ typedef enum : NSInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     keyboardLayouts = [[NSBundle mainBundle] pathsForResourcesOfType:@"nfkeyboardlayout" inDirectory:@"Keyboard Layouts"];
+    NSString *userKeyboardLayoutsPath = [AppDelegate sharedInstance].userKeyboardLayoutsPath;
+    NSArray *userKeyboardLayouts = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:userKeyboardLayoutsPath error:nil] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pathExtension.lowercaseString = %@", @"nfkeyboardlayout"]];
+    if (userKeyboardLayouts.count > 0) {
+        keyboardLayouts = [keyboardLayouts arrayByAddingObjectsFromArray:userKeyboardLayouts];
+    }
     [self loadEmulatorBundles];
     [self loadCredits];
 }
