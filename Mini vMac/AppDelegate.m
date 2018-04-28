@@ -294,6 +294,17 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    NSMutableDictionary *options = [NSMutableDictionary dictionaryWithCapacity:2];
+    if (sourceApplication) {
+        options[UIApplicationOpenURLOptionsSourceApplicationKey] = sourceApplication;
+    }
+    if (annotation) {
+        options[UIApplicationOpenURLOptionsAnnotationKey] = annotation;
+    }
+    return [self application:application openURL:url options:options];
+}
+
+- (BOOL)importFileToDocuments:(NSURL *)url {
     if (url.fileURL) {
         // opening file
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -318,6 +329,24 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
             NSDictionary *userInfo = @{@"path": destinationPath};
             [[NSNotificationCenter defaultCenter] postNotificationName:DocumentsChangedNotification object:self userInfo:userInfo];
             [self showAlertWithTitle:@"File Import" message:[NSString stringWithFormat:@"%@ imported to Documents", destinationPath.lastPathComponent]];
+        }
+    }
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    if (url.fileURL) {
+        // opening file
+        if ([url.path.stringByStandardizingPath hasPrefix:self.documentsPath]) {
+            // already in documents - mount
+            [sharedEmulator insertDisk:url.path];
+        } else if ([options[UIApplicationOpenURLOptionsOpenInPlaceKey] boolValue]) {
+            // not in documents - copy
+            [url startAccessingSecurityScopedResource];
+            [self importFileToDocuments:url];
+            [url stopAccessingSecurityScopedResource];
+        } else {
+            return [self importFileToDocuments:url];
         }
     }
     return YES;
