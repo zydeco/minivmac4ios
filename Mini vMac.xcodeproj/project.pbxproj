@@ -902,7 +902,7 @@
 		28F676B51CD15E0B00FC6FA6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = namedfork;
 				TargetAttributes = {
 					283422C91CF8EF8C0088B634 = {
@@ -1034,13 +1034,14 @@
 			files = (
 			);
 			inputPaths = (
+				$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info.plist,
 			);
 			name = "Set Git version in Info.plist";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string $GIT_VERSION\nchmod 0644 \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info.plist\"";
+			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string $GIT_VERSION\nchmod 0644 \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info.plist\"\n";
 		};
 		28F8758E1D2936B5001E99EB /* Add capabilities to Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1531,12 +1532,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1584,12 +1587,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
