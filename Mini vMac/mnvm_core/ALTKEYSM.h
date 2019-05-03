@@ -47,7 +47,7 @@ LOCALPROC CheckAltKeyUseMode(void)
 	}
 }
 
-LOCALPROC Keyboard_UpdateKeyMap1(int key, blnr down)
+LOCALPROC Keyboard_UpdateKeyMap1(ui3r key, blnr down)
 {
 	if (MKC_Command == key) {
 		AltKeysTrueCmnd = down;

@@ -8,6 +8,8 @@
 #define SmallGlobals 0
 #define cIncludeUnused 0
 #define UnusedParam(p) (void) p
+#define AutoTimeZone 1
+#define AutoLocation 1
 
 /* --- integer types ---- */
 

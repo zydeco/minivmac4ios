@@ -34,9 +34,9 @@
 #endif
 
 
-EXPORTOSGLUPROC WarnMsgCorruptedROM(void);
-EXPORTOSGLUPROC WarnMsgUnsupportedROM(void);
+#if WantAbnormalReports
 EXPORTOSGLUPROC WarnMsgAbnormalID(ui4r id);
+#endif
 
 #if dbglog_HAVE
 EXPORTOSGLUPROC dbglog_writeCStr(char *s);
@@ -161,10 +161,14 @@ EXPORTOSGLUFUNC tMacErr HTCEimport(tPbuf *r);
 EXPORTVAR(ui5b, OnTrueTime)
 
 EXPORTVAR(ui5b, CurMacDateInSeconds)
+#if AutoLocation
 EXPORTVAR(ui5b, CurMacLatitude)
 EXPORTVAR(ui5b, CurMacLongitude)
+#endif
+#if AutoTimeZone
 EXPORTVAR(ui5b, CurMacDelta)
 	/* (dlsDelta << 24) | (gmtDelta & 0x00FFFFFF) */
+#endif
 
 
 #define vMacScreenNumPixels \
@@ -407,3 +411,31 @@ EXPORTOSGLUPROC MyEvtQOutDone(void);
 #define MKC_Pause 0x71
 
 #define MKC_AngleBracket 0x0A /* found on german keyboard */
+
+/*
+	Additional codes found in Apple headers
+
+	#define MKC_RightShift 0x3C
+	#define MKC_RightOption 0x3D
+	#define MKC_RightControl 0x3E
+	#define MKC_Function 0x3F
+
+	#define MKC_VolumeUp 0x48
+	#define MKC_VolumeDown 0x49
+	#define MKC_Mute 0x4A
+
+	#define MKC_F16 0x6A
+	#define MKC_F17 0x40
+	#define MKC_F18 0x4F
+	#define MKC_F19 0x50
+	#define MKC_F20 0x5A
+
+	#define MKC_F13 MKC_Print
+	#define MKC_F14 MKC_ScrollLock
+	#define MKC_F15 MKC_Pause
+*/
+
+/* not Apple key codes, only for Mini vMac */
+
+#define MKC_CM 0x80
+#define MKC_None 0xFF

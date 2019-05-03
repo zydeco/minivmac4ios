@@ -239,32 +239,12 @@ LOCALPROC Sony_Install(void)
 }
 #endif
 
-#ifndef CheckRomCheckSum
-#define CheckRomCheckSum 1
-#endif
-
 #ifndef DisableRomCheck
 #define DisableRomCheck 1
 #endif
 
 #ifndef DisableRamTest
 #define DisableRamTest 1
-#endif
-
-#if CheckRomCheckSum
-LOCALFUNC ui5r Calc_Checksum(void)
-{
-	long int i;
-	ui5b CheckSum = 0;
-	ui3p p = 4 + ROM;
-
-	for (i = (kCheckSumRom_Size - 4) >> 1; --i >= 0; ) {
-		CheckSum += do_get_mem_word(p);
-		p += 2;
-	}
-
-	return CheckSum;
-}
 #endif
 
 #ifdef CurAltHappyMac
@@ -296,68 +276,6 @@ LOCALPROC ROMscrambleForMTB(void)
 
 GLOBALFUNC blnr ROM_Init(void)
 {
-#if CheckRomCheckSum
-	ui5r CheckSum = Calc_Checksum();
-
-#if CurEmMd >= kEmMd_Twiggy
-	if (CheckSum != do_get_mem_long(ROM)) {
-		WarnMsgCorruptedROM();
-	} else
-#endif
-#if CurEmMd <= kEmMd_Twig43
-	if (CheckSum == 0x27F4E04B) {
-	} else
-#elif CurEmMd <= kEmMd_Twiggy
-	if (CheckSum == 0x2884371D) {
-	} else
-#elif CurEmMd <= kEmMd_128K
-	if (CheckSum == 0x28BA61CE) {
-	} else
-	if (CheckSum == 0x28BA4E50) {
-	} else
-#elif CurEmMd <= kEmMd_Plus
-	if (CheckSum == 0x4D1EEEE1) {
-		/* Mac Plus ROM v 1, 'Lonely Hearts' */
-	} else
-	if (CheckSum == 0x4D1EEAE1) {
-		/* Mac Plus ROM v 2, 'Lonely Heifers' */
-	} else
-	if (CheckSum == 0x4D1F8172) {
-		/* Mac Plus ROM v 3, 'Loud Harmonicas' */
-	} else
-#elif CurEmMd <= kEmMd_SE
-	if (CheckSum == 0xB2E362A8) {
-	} else
-#elif CurEmMd <= kEmMd_SEFDHD
-	if (CheckSum == 0xB306E171) {
-	} else
-#elif CurEmMd <= kEmMd_Classic
-	if (CheckSum == 0xA49F9914) {
-	} else
-#elif CurEmMd <= kEmMd_PB100
-	if (CheckSum == 0x96645F9C) {
-	} else
-#elif CurEmMd <= kEmMd_II
-	if (CheckSum == 0x9779D2C4) {
-	} else
-	if (CheckSum == 0x97221136) {
-		/* accept IIx ROM */
-	} else
-#elif CurEmMd <= kEmMd_IIx
-	if (CheckSum == 0x97221136) {
-	} else
-#endif
-	{
-		WarnMsgUnsupportedROM();
-	}
-	/*
-		Even if ROM is corrupt or unsupported, go ahead and
-		try to run anyway. It shouldn't do any harm.
-	*/
-
-#endif /* CheckRomCheckSum */
-
-
 #if DisableRomCheck
 
 /* skip the rom checksum */

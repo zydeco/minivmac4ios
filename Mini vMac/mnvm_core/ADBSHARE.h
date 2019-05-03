@@ -48,12 +48,13 @@ LOCALPROC ADB_DoMouseTalk(void)
 	switch (ADB_CurCmd & 3) {
 		case 0:
 			{
-				blnr overflow = falseblnr;
+				MyEvtQEl *p;
 				ui4b partH;
 				ui4b partV;
+				blnr overflow = falseblnr;
 				blnr MouseButtonChange = falseblnr;
-				MyEvtQEl *p = MyEvtQOutP();
-				if (nullpr != p) {
+
+				if (nullpr != (p = MyEvtQOutP())) {
 					if (MyEvtQElKindMouseDelta == p->kind) {
 						MouseADBDeltaH += p->u.pos.h;
 						MouseADBDeltaV += p->u.pos.v;
@@ -86,8 +87,7 @@ LOCALPROC ADB_DoMouseTalk(void)
 				MouseADBDeltaH -= partH;
 				MouseADBDeltaV -= partV;
 				if (! overflow) {
-					MyEvtQEl *p = MyEvtQOutP();
-					if (nullpr != p) {
+					if (nullpr != (p = MyEvtQOutP())) {
 						if (MyEvtQElKindMouseButton == p->kind) {
 							SavedCurMouseButton = p->u.press.down;
 							MouseButtonChange = trueblnr;

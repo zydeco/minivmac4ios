@@ -262,6 +262,37 @@ GLOBALFUNC blnr RTC_Init(void)
 	RTC.PARAMRAM[0x81] = 0x80;
 #endif
 
+#if (CurEmMd == kEmMd_II) || (CurEmMd == kEmMd_IIx)
+
+#define pr_HilColRedHi (pr_HilColRed >> 8)
+#if 0 != pr_HilColRedHi
+	RTC.PARAMRAM[0x82] = pr_HilColRedHi;
+#endif
+#define pr_HilColRedLo (pr_HilColRed & 0xFF)
+#if 0 != pr_HilColRedLo
+	RTC.PARAMRAM[0x83] = pr_HilColRedLo;
+#endif
+
+#define pr_HilColGreenHi (pr_HilColGreen >> 8)
+#if 0 != pr_HilColGreenHi
+	RTC.PARAMRAM[0x84] = pr_HilColGreenHi;
+#endif
+#define pr_HilColGreenLo (pr_HilColGreen & 0xFF)
+#if 0 != pr_HilColGreenLo
+	RTC.PARAMRAM[0x85] = pr_HilColGreenLo;
+#endif
+
+#define pr_HilColBlueHi (pr_HilColBlue >> 8)
+#if 0 != pr_HilColBlueHi
+	RTC.PARAMRAM[0x86] = pr_HilColBlueHi;
+#endif
+#define pr_HilColBlueLo (pr_HilColBlue & 0xFF)
+#if 0 != pr_HilColBlueLo
+	RTC.PARAMRAM[0x87] = pr_HilColBlueLo;
+#endif
+
+#endif /* (CurEmMd == kEmMd_II) || (CurEmMd == kEmMd_IIx) */
+
 #if HaveXPRAM /* extended parameter ram initialized */
 	do_put_mem_long(&RTC.PARAMRAM[0xE4], CurMacLatitude);
 	do_put_mem_long(&RTC.PARAMRAM[0xE8], CurMacLongitude);

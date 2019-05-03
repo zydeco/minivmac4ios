@@ -201,12 +201,15 @@ GLOBALPROC dbglog_WriteSetBool(char *s, blnr v)
 }
 #endif
 
+#if WantAbnormalReports
 LOCALVAR blnr GotOneAbnormal = falseblnr;
+#endif
 
 #ifndef ReportAbnormalInterrupt
 #define ReportAbnormalInterrupt 0
 #endif
 
+#if WantAbnormalReports
 GLOBALPROC DoReportAbnormalID(ui4r id
 #if dbglog_HAVE
 	, char *s
@@ -228,6 +231,7 @@ GLOBALPROC DoReportAbnormalID(ui4r id
 		GotOneAbnormal = trueblnr;
 	}
 }
+#endif
 
 /* map of address space */
 

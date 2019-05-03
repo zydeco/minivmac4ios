@@ -108,6 +108,7 @@ LOCALPROC dbglog_close0(void) {
 #define WantColorTransValid 1
 
 #include "COMOSGLU.h"
+#include "PBUFSTDC.h"
 
 #pragma mark - Cocoa Stuff
 
@@ -166,78 +167,6 @@ LOCALPROC Screen_UnInit(void) {
         colorColorSpace = NULL;
     }
 }
-
-#pragma mark - Parameter Buffers
-
-#if IncludePbufs
-LOCALVAR void *PbufDat[NumPbufs];
-#endif
-
-#if IncludePbufs
-LOCALFUNC tMacErr PbufNewFromPtr(void *p, ui5b count, tPbuf *r) {
-    tPbuf i;
-    tMacErr err;
-
-    if (!FirstFreePbuf(&i)) {
-        free(p);
-        err = mnvm_miscErr;
-    } else {
-        *r = i;
-        PbufDat[i] = p;
-        PbufNewNotify(i, count);
-        err = mnvm_noErr;
-    }
-
-    return err;
-}
-#endif
-
-#if IncludePbufs
-GLOBALFUNC tMacErr PbufNew(ui5b count, tPbuf *r) {
-    tMacErr err = mnvm_miscErr;
-
-    void *p = calloc(1, count);
-    if (NULL != p) {
-        err = PbufNewFromPtr(p, count, r);
-    }
-
-    return err;
-}
-#endif
-
-#if IncludePbufs
-GLOBALPROC PbufDispose(tPbuf i) {
-    free(PbufDat[i]);
-    PbufDisposeNotify(i);
-}
-#endif
-
-#if IncludePbufs
-LOCALPROC UnInitPbufs(void) {
-    tPbuf i;
-
-    for (i = 0; i < NumPbufs; ++i) {
-        if (PbufIsAllocated(i)) {
-            PbufDispose(i);
-        }
-    }
-}
-#endif
-
-#if IncludePbufs
-GLOBALPROC PbufTransfer(ui3p Buffer,
-                        tPbuf i,
-                        ui5r offset,
-                        ui5r count,
-                        blnr IsWrite) {
-    void *p = ((ui3p)PbufDat[i]) + offset;
-    if (IsWrite) {
-        (void)memcpy(p, Buffer, count);
-    } else {
-        (void)memcpy(Buffer, p, count);
-    }
-}
-#endif
 
 #pragma mark - Text Translation
 

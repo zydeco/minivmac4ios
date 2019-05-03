@@ -133,6 +133,9 @@ EXPORTPROC dbglog_AddrAccess(char *s,
 EXPORTPROC dbglog_Access(char *s, ui5r Data, blnr WriteMem);
 #endif
 
+#if ! WantAbnormalReports
+#define ReportAbnormalID(id, s)
+#else
 #if dbglog_HAVE
 #define ReportAbnormalID DoReportAbnormalID
 #else
@@ -143,6 +146,7 @@ EXPORTPROC DoReportAbnormalID(ui4r id
 	, char *s
 #endif
 	);
+#endif /* WantAbnormalReports */
 
 EXPORTPROC VIAorSCCinterruptChngNtfy(void);
 

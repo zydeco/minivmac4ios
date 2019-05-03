@@ -93,7 +93,7 @@ LOCALFUNC blnr CheckActvCode(ui3p p, blnr *Trial)
 
 /* user interface */
 
-LOCALFUNC blnr Key2Digit(int key, ui3r *r)
+LOCALFUNC blnr Key2Digit(ui3r key, ui3r *r)
 {
 	ui3r v;
 
@@ -160,7 +160,7 @@ FORWARDFUNC tMacErr ActvCodeFileLoad(ui3p p);
 
 LOCALVAR ui3b CurActvCode[ActvCodeFileLen];
 
-LOCALPROC DoActvCodeModeKey(int key)
+LOCALPROC DoActvCodeModeKey(ui3r key)
 {
 	ui3r digit;
 	ui3r L;

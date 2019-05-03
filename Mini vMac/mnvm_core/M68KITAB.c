@@ -1947,7 +1947,7 @@ LOCALPROCUSEDONCE DeCode5(WorkR *p)
 #if Use68020
 			if ((mode(p) == 7) && (reg(p) >= 2)) {
 				/* TRAPcc 0101cccc11111sss */
-				p->DecOp.y.v[0].ArgDat = reg(p);
+				p->DecOp.y.v[1].ArgDat = reg(p);
 				p->MainClass = kIKindTRAPcc;
 			} else
 #endif

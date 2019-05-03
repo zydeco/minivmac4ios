@@ -24,7 +24,7 @@
 #define kStrAboutMessage "To display information about this program, use the ;]A;} command of the ^p Control Mode. To learn about the Control Mode, see the ;[More Commands;ll;{ item in the ;[Special;{ menu."
 
 #define kStrMoreCommandsTitle "More commands are available in the ^p Control Mode."
-#define kStrMoreCommandsMessage "To enter the Control Mode, press and hold down the ;]control;} key. You will remain in the Control Mode until you release the ;]control;} key. Type ;]H;} in the Control Mode to list available commands."
+#define kStrMoreCommandsMessage "To enter the Control Mode, press and hold down the ;]^c;} key. You will remain in the Control Mode until you release the ;]^c;} key. Type ;]H;} in the Control Mode to list available commands."
 
 #define kStrTooManyImagesTitle "Too many Disk Images"
 #define kStrTooManyImagesMessage "I can not mount that many Disk Images. Try ejecting one."
@@ -83,7 +83,7 @@
 #define kStrDisclaimer " ^p is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;ls without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
 
 /* Help Screen */
-#define kStrHowToLeaveControl "To leave the Control Mode, release the ;]control;} key."
+#define kStrHowToLeaveControl "To leave the Control Mode, release the ;]^c;} key."
 #define kStrHowToPickACommand "Otherwise, type a letter. Available commands are:"
 #define kStrCmdAbout "About (version information)"
 #define kStrCmdOpenDiskImage "Open disk image;ll"
@@ -91,7 +91,7 @@
 #define kStrCmdSpeedControl "Speed control;ll (^s)"
 #define kStrCmdMagnifyToggle "Magnify toggle (^g)"
 #define kStrCmdFullScrnToggle "Full screen toggle (^f)"
-#define kStrCmdCtrlKeyToggle "emulated ;]control;} Key toggle (^k)"
+#define kStrCmdCtrlKeyToggle "emulated ;]^m;} Key toggle (^k)"
 #define kStrCmdReset "Reset"
 #define kStrCmdInterrupt "Interrupt"
 #define kStrCmdHelp "Help (show this page)"
@@ -115,7 +115,7 @@
 
 #define kStrNewFullScreen "Full Screen is ^f."
 
-#define kStrNewCntrlKey "Emulated ;]control;} key ^k."
+#define kStrNewCntrlKey "Emulated ;]^m;} key ^k."
 
 #define kStrCmdCancel "cancel"
 
@@ -162,3 +162,6 @@
 #define kStrAppMenuItemHideOthers "Hide Others"
 #define kStrAppMenuItemShowAll "Show All"
 #define kStrAppMenuItemQuit "Quit ^p"
+
+#define kStrCmdCopyOptions "copy variation options"
+#define kStrHaveCopiedOptions "Variation options copied"

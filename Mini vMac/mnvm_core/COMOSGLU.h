@@ -37,6 +37,7 @@
 #endif
 
 GLOBALVAR ui3p ROM = nullpr;
+LOCALVAR blnr ROM_loaded = falseblnr;
 
 GLOBALVAR ui5b vSonyWritableMask = 0;
 GLOBALVAR ui5b vSonyInsertedMask = 0;
@@ -55,9 +56,13 @@ GLOBALVAR tPbuf vSonyNewDiskName = NotAPbuf;
 #endif
 
 GLOBALVAR ui5b CurMacDateInSeconds = 0;
+#if AutoLocation
 GLOBALVAR ui5b CurMacLatitude = 0;
 GLOBALVAR ui5b CurMacLongitude = 0;
+#endif
+#if AutoTimeZone
 GLOBALVAR ui5b CurMacDelta = 0;
+#endif
 
 #if 0 != vMacScreenDepth
 GLOBALVAR blnr UseColorMode = falseblnr;
@@ -183,7 +188,9 @@ LOCALFUNC blnr FirstFreeDisk(tDrive *Drive_No)
 
 	for (i = 0; i < NumDrives; ++i) {
 		if (! vSonyIsInserted(i)) {
-			*Drive_No = i;
+			if (nullpr != Drive_No) {
+				*Drive_No = i;
+			}
 			return trueblnr;
 		}
 	}
@@ -1020,10 +1027,10 @@ LOCALFUNC MyEvtQEl * MyEvtQElAlloc(void)
 
 LOCALVAR ui5b theKeys[4];
 
-LOCALPROC Keyboard_UpdateKeyMap(int key, blnr down)
+LOCALPROC Keyboard_UpdateKeyMap(ui3r key, blnr down)
 {
-	int k = key & 127; /* just for safety */
-	int bit = 1 << (k & 7);
+	ui3r k = key & 127; /* just for safety */
+	ui3r bit = 1 << (k & 7);
 	ui3b *kp = (ui3b *)theKeys;
 	ui3b *kpi = &kp[k / 8];
 	blnr CurDown = ((*kpi & bit) != 0);
@@ -1175,7 +1182,9 @@ LOCALPROC MyEvtQTryRecoverFromFull(void)
 
 LOCALVAR char *SavedBriefMsg = nullpr;
 LOCALVAR char *SavedLongMsg;
+#if WantAbnormalReports
 LOCALVAR ui4r SavedIDMsg = 0;
+#endif
 LOCALVAR blnr SavedFatalMsg;
 
 LOCALPROC MacMsg(char *briefMsg, char *longMsg, blnr fatal)
@@ -1192,17 +1201,7 @@ LOCALPROC MacMsg(char *briefMsg, char *longMsg, blnr fatal)
 	}
 }
 
-GLOBALOSGLUPROC WarnMsgCorruptedROM(void)
-{
-	MacMsg(kStrCorruptedROMTitle, kStrCorruptedROMMessage, falseblnr);
-}
-
-GLOBALOSGLUPROC WarnMsgUnsupportedROM(void)
-{
-	MacMsg(kStrUnsupportedROMTitle,
-		kStrUnsupportedROMMessage, falseblnr);
-}
-
+#if WantAbnormalReports
 GLOBALOSGLUPROC WarnMsgAbnormalID(ui4r id)
 {
 	MacMsg(kStrReportAbnormalTitle,
@@ -1217,3 +1216,4 @@ GLOBALOSGLUPROC WarnMsgAbnormalID(ui4r id)
 		SavedIDMsg = id;
 	}
 }
+#endif

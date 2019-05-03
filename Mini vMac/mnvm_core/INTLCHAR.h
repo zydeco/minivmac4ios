@@ -22,7 +22,7 @@
 /*
 	Data in commments:
 	Mini vMac Cell name
-	Mac Roman
+	Mac Roman (Octal)
 	windows-1252 code page
 	Unicode
 	plain ascii
@@ -222,7 +222,7 @@ LOCALVAR const ui3b CellData[] = {
 	/* kCellAmpersand 046 0x26 0x0026 '&' '&' amp */
 	0x00, 0x00, 0x00, 0x30, 0x48, 0x48, 0x50, 0x20,
 	0x50, 0x4A, 0x44, 0x3A, 0x00, 0x00, 0x00, 0x00,
-	/* kCellApostrophe 047 0x27 0x0027 '\047' ';la' apos */
+	/* kCellApostrophe 047 0x27 0x0027 '\047' ';la' #39 (apos) */
 	0x00, 0x00, 0x00, 0x08, 0x08, 0x08, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	/* kCellLeftParen 050 0x28 0x0028 '(' '(' ( */
@@ -246,13 +246,13 @@ LOCALVAR const ui3b CellData[] = {
 	/* kCellColon 072 0x3A 0x003A ':' ':' : */
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08,
 	0x00, 0x00, 0x08, 0x08, 0x00, 0x00, 0x00, 0x00,
-	/* kCellSemicolon 073 0x3B 0x003B ';' ';ls' #59 */
+	/* kCellSemicolon 073 0x3B 0x003B ';' ';ls' #59 (semi) */
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08,
 	0x00, 0x00, 0x08, 0x08, 0x08, 0x10, 0x00, 0x00,
 	/* kCellQuestion 077 0x3F 0x003F '?' '?' ? */
 	0x00, 0x00, 0x00, 0x38, 0x44, 0x04, 0x08, 0x10,
 	0x10, 0x00, 0x10, 0x10, 0x00, 0x00, 0x00, 0x00,
-	/* kCellEllipsis 311 0x85 0x2026 '_' ';ll' #8230 */
+	/* kCellEllipsis 311 0x85 0x2026 '_' ';ll' #8230 (mldr) */
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x54, 0x00, 0x00, 0x00, 0x00,
 	/* kCellUnderscore 137 0x5F 0x005F '_' '_' _ */
@@ -468,54 +468,96 @@ LOCALVAR const ui3b CellData[] = {
 	0x00, 0x00, 0x00, 0x1C, 0x22, 0x42, 0x44, 0x44,
 	0x42, 0x42, 0x42, 0x5C, 0x40, 0x00, 0x00, 0x00,
 
-	/* kCellUpACedille 260 ? 0x0104 'A' ';dA' #260 */
+	/* kCellUpACedille 260 ? 0x0104 'A' ';dA' #260 (Aogon) */
 	0x00, 0x00, 0x00, 0x3C, 0x42, 0x42, 0x42, 0x7E,
 	0x42, 0x42, 0x42, 0x42, 0x04, 0x04, 0x02, 0x00,
-	/* kCellLoACedille 261 ? 0x0105 'a' ';da' #261 */
+	/* kCellLoACedille 261 ? 0x0105 'a' ';da' #261 (aogon) */
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3E, 0x42,
 	0x42, 0x42, 0x46, 0x3A, 0x04, 0x04, 0x02, 0x00,
-	/* kCellUpCAcute 262 ? 0x0106 'C' ';eC' #262 */
+	/* kCellUpCAcute 262 ? 0x0106 'C' ';eC' #262 (Cacute) */
 	0x08, 0x10, 0x00, 0x3C, 0x42, 0x42, 0x40, 0x40,
 	0x40, 0x40, 0x42, 0x3C, 0x00, 0x00, 0x00, 0x00,
-	/* kCellLoCAcute 263 ? 0x0107 'c' ';ec' #263 */
+	/* kCellLoCAcute 263 ? 0x0107 'c' ';ec' #263 (cacute) */
 	0x00, 0x00, 0x00, 0x08, 0x10, 0x00, 0x3C, 0x42,
 	0x40, 0x40, 0x42, 0x3C, 0x00, 0x00, 0x00, 0x00,
-	/* kCellUpECedille 264 ? 0x0118 'E' ';dE' #280 */
+	/* kCellUpECedille 264 ? 0x0118 'E' ';dE' #280 (Eogon) */
 	0x00, 0x00, 0x00, 0x7E, 0x40, 0x40, 0x40, 0x7C,
 	0x40, 0x40, 0x40, 0x7E, 0x04, 0x04, 0x02, 0x00,
-	/* kCellLoECedille 265 ? 0x0119 'e' ';de' #281 */
+	/* kCellLoECedille 265 ? 0x0119 'e' ';de' #281 (eogon) */
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3C, 0x42,
 	0x7E, 0x40, 0x42, 0x3C, 0x08, 0x08, 0x04, 0x00,
-	/* kCellUpLBar 266 ? 0x0141 'L' ';dL' #321 */
+	/* kCellUpLBar 266 ? 0x0141 'L' ';dL' #321 (Lstrok) */
 	0x00, 0x00, 0x00, 0x40, 0x40, 0x40, 0x60, 0x40,
 	0xC0, 0x40, 0x40, 0x7E, 0x00, 0x00, 0x00, 0x00,
-	/* kCellLoLBar 267 ? 0x0142 'l' ';dl' #322 */
+	/* kCellLoLBar 267 ? 0x0142 'l' ';dl' #322 (lstrok) */
 	0x00, 0x00, 0x00, 0x08, 0x08, 0x08, 0x0C, 0x08,
 	0x18, 0x08, 0x08, 0x08, 0x00, 0x00, 0x00, 0x00,
-	/* kCellUpNAcute 270 ? 0x0143 'N' ';eN' #323 */
+	/* kCellUpNAcute 270 ? 0x0143 'N' ';eN' #323 (Nacute) */
 	0x08, 0x10, 0x00, 0x42, 0x42, 0x62, 0x52, 0x4A,
 	0x46, 0x42, 0x42, 0x42, 0x00, 0x00, 0x00, 0x00,
-	/* kCellLoNAcute 271 ? 0x0144 'n' ';en' #324 */
+	/* kCellLoNAcute 271 ? 0x0144 'n' ';en' #324 (nacute) */
 	0x00, 0x00, 0x00, 0x08, 0x10, 0x00, 0x7C, 0x42,
 	0x42, 0x42, 0x42, 0x42, 0x00, 0x00, 0x00, 0x00,
-	/* kCellUpSAcute 272 ? 0x015A 'S' ';eS' #346 */
+	/* kCellUpSAcute 272 ? 0x015A 'S' ';eS' #346 (Sacute) */
 	0x08, 0x10, 0x00, 0x3C, 0x42, 0x40, 0x40, 0x3C,
 	0x02, 0x02, 0x42, 0x3C, 0x00, 0x00, 0x00, 0x00,
-	/* kCellLoSAcute 273 ? 0x015B 's' ';es' #347 */
+	/* kCellLoSAcute 273 ? 0x015B 's' ';es' #347 (sacute) */
 	0x00, 0x00, 0x00, 0x08, 0x10, 0x00, 0x3C, 0x42,
 	0x3C, 0x02, 0x42, 0x3C, 0x00, 0x00, 0x00, 0x00,
-	/* kCellUpZAcute 274 ? 0x0179 'Z' ';eZ' #377 */
+	/* kCellUpZAcute 274 ? 0x0179 'Z' ';eZ' #377 (Zacute) */
 	0x08, 0x10, 0x00, 0x7E, 0x02, 0x04, 0x08, 0x10,
 	0x20, 0x40, 0x40, 0x7E, 0x00, 0x00, 0x00, 0x00,
-	/* kCellLoZAcute 275 ? 0x017A 'z' ';ez' #378 */
+	/* kCellLoZAcute 275 ? 0x017A 'z' ';ez' #378 (zacute) */
 	0x00, 0x00, 0x00, 0x08, 0x10, 0x00, 0x7E, 0x04,
 	0x08, 0x10, 0x20, 0x7E, 0x00, 0x00, 0x00, 0x00,
-	/* kCellUpZDot 276 ? 0x017B 'Z' ';dZ' #379 */
+	/* kCellUpZDot 276 ? 0x017B 'Z' ';dZ' #379 (Zdot) */
 	0x10, 0x00, 0x00, 0x7E, 0x02, 0x04, 0x08, 0x10,
 	0x20, 0x40, 0x40, 0x7E, 0x00, 0x00, 0x00, 0x00,
-	/* kCellLoZDot 277 ? 0x017C 'z' ';dz' #380 */
+	/* kCellLoZDot 277 ? 0x017C 'z' ';dz' #380 (zdot) */
 	0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x7E, 0x04,
 	0x08, 0x10, 0x20, 0x7E, 0x00, 0x00, 0x00, 0x00,
+	/* kCellMidDot 341 0xB7 0x00B7 '.' ';l.' middot */
+	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08,
+	0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+	/* kCellUpCCaron 077 ? 0x010C 'C' ';vC' #268 (Ccaron) */
+	0x14, 0x08, 0x00, 0x3C, 0x42, 0x42, 0x40, 0x40,
+	0x40, 0x40, 0x42, 0x3C, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoCCaron 077 ? 0x010D 'c' ';vc' #269 (ccaron) */
+	0x00, 0x00, 0x00, 0x14, 0x08, 0x00, 0x3C, 0x42,
+	0x40, 0x40, 0x42, 0x3C, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoECaron 077 ? 0x011B 'e' ';ve' #283 (ecaron) */
+	0x00, 0x00, 0x00, 0x14, 0x08, 0x00, 0x3C, 0x42,
+	0x7E, 0x40, 0x42, 0x3C, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoRCaron 077 ? 0x0159 'r' ';vr' #345 (rcaron) */
+	0x00, 0x00, 0x00, 0x14, 0x08, 0x00, 0x5C, 0x62,
+	0x42, 0x40, 0x40, 0x40, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoSCaron 077 0x9A 0x0161 's' ';vs' #353 (scaron) */
+	0x00, 0x00, 0x00, 0x14, 0x08, 0x00, 0x3C, 0x42,
+	0x3C, 0x02, 0x42, 0x3C, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoTCaron 077 ? 0x0165 't' ';vt' #357 (tcaron) */
+	0x00, 0x14, 0x08, 0x00, 0x20, 0x20, 0x78, 0x20,
+	0x20, 0x20, 0x20, 0x1C, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoZCaron 077 0x9E 0x017E 'z' ';vz' #382 (zcaron) */
+	0x00, 0x00, 0x00, 0x14, 0x08, 0x00, 0x7E, 0x04,
+	0x08, 0x10, 0x20, 0x7E, 0x00, 0x00, 0x00, 0x00,
+	/* kCellUpYAcute 077 0xDD 0x00DD 'Y' ';eY' Yacute */
+	0x08, 0x10, 0x00, 0x22, 0x22, 0x22, 0x22, 0x14,
+	0x08, 0x08, 0x08, 0x08, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoYAcute 077 0xFD 0x00FD 'y' ';ey' yacute */
+	0x00, 0x00, 0x00, 0x08, 0x10, 0x00, 0x42, 0x42,
+	0x42, 0x42, 0x42, 0x3E, 0x02, 0x42, 0x3C, 0x00,
+	/* kCellLoUDblac 077 ? 0x0171 'u' ';Eu' #369 (udblac) */
+	0x00, 0x00, 0x00, 0x12, 0x24, 0x00, 0x42, 0x42,
+	0x42, 0x42, 0x46, 0x3A, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoURing 077 ? 0x016F 'u' ';ru' #367 (uring) */
+	0x00, 0x00, 0x18, 0x24, 0x24, 0x18, 0x42, 0x42,
+	0x42, 0x42, 0x46, 0x3A, 0x00, 0x00, 0x00, 0x00,
+	/* kCellUpDStroke 077 ? 0x0110 'D' ';dD' #272 (Dstrok) */
+	0x00, 0x00, 0x00, 0x7C, 0x42, 0x42, 0x42, 0xF2,
+	0x42, 0x42, 0x42, 0x7C, 0x00, 0x00, 0x00, 0x00,
+	/* kCellLoDStroke 077 ? 0x0111 'd' ';dd' #273 (dstrok) */
+	0x00, 0x00, 0x00, 0x02, 0x0F, 0x02, 0x3E, 0x42,
+	0x42, 0x42, 0x42, 0x3E, 0x00, 0x00, 0x00, 0x00,
 #endif
 
 	/* kCellUpperLeft */
@@ -797,6 +839,20 @@ enum {
 	kCellLoZAcute,
 	kCellUpZDot,
 	kCellLoZDot,
+	kCellMidDot,
+	kCellUpCCaron,
+	kCellLoCCaron,
+	kCellLoECaron,
+	kCellLoRCaron,
+	kCellLoSCaron,
+	kCellLoTCaron,
+	kCellLoZCaron,
+	kCellUpYAcute,
+	kCellLoYAcute,
+	kCellLoUDblac,
+	kCellLoURing,
+	kCellUpDStroke,
+	kCellLoDStroke,
 #endif
 
 	kCellUpperLeft,
@@ -848,7 +904,7 @@ enum {
 #endif
 
 #ifndef NeedCell2MacAsciiMap
-#if UseActvCode || EnableDemoMsg
+#if 1 /* UseActvCode || EnableDemoMsg */
 #define NeedCell2MacAsciiMap 1
 #else
 #define NeedCell2MacAsciiMap 0
@@ -1026,6 +1082,20 @@ LOCALVAR const char Cell2MacAsciiMap[] = {
 	'\275', /* kCellLoZAcute */
 	'\276', /* kCellUpZDot */
 	'\277', /* kCellLoZDot */
+	'\341', /* kCellMidDot */
+	'\103', /* kCellUpCCaron */
+	'\143', /* kCellLoCCaron */
+	'\145', /* kCellLoECaron */
+	'\162', /* kCellLoRCaron */
+	'\163', /* kCellLoSCaron */
+	'\164', /* kCellLoTCaron */
+	'\172', /* kCellLoZCaron */
+	'\131', /* kCellUpYAcute */
+	'\171', /* kCellLoYAcute */
+	'\165', /* kCellLoUDblac */
+	'\165', /* kCellLoURing */
+	'\104', /* kCellUpDStroke */
+	'\144', /* kCellLoDStroke */
 #endif
 
 	'\0' /* just so last above line can end in ',' */
@@ -1207,6 +1277,20 @@ LOCALVAR const ui3b Cell2WinAsciiMap[] = {
 	0x7A, /* kCellLoZAcute */
 	0x5A, /* kCellUpZDot */
 	0x7A, /* kCellLoZDot */
+	0xB7, /* kCellMidDot */
+	0x43, /* kCellUpCCaron */
+	0x63, /* kCellLoCCaron */
+	0x65, /* kCellLoECaron */
+	0x61, /* kCellLoRCaron */
+	0x9A, /* kCellLoSCaron */
+	0x74, /* kCellLoTCaron */
+	0x9E, /* kCellLoZCaron */
+	0xDD, /* kCellUpYAcute */
+	0xFD, /* kCellLoYAcute */
+	0x75, /* kCellLoUDblac */
+	0x75, /* kCellLoURing */
+	0x44, /* kCellUpDStroke */
+	0x64, /* kCellLoDStroke */
 #endif
 
 	'\0' /* just so last above line can end in ',' */
@@ -1388,6 +1472,20 @@ LOCALVAR const char Cell2PlainAsciiMap[] = {
 	'z', /* kCellLoZAcute */
 	'Z', /* kCellUpZDot */
 	'z', /* kCellLoZDot */
+	'.', /* kCellMidDot */
+	'C', /* kCellUpCCaron */
+	'c', /* kCellLoCCaron */
+	'e', /* kCellLoECaron */
+	'r', /* kCellLoRCaron */
+	's', /* kCellLoSCaron */
+	't', /* kCellLoTCaron */
+	'z', /* kCellLoZCaron */
+	'Y', /* kCellUpYAcute */
+	'y', /* kCellLoYAcute */
+	'u', /* kCellLoUDblac */
+	'u', /* kCellLoURing */
+	'D', /* kCellUpDStroke */
+	'd', /* kCellLoDStroke */
 #endif
 
 	'\0' /* just so last above line can end in ',' */
@@ -1569,6 +1667,20 @@ LOCALVAR const ui4b Cell2UnicodeMap[] = {
 	0x017A, /* kCellLoZAcute */
 	0x017B, /* kCellUpZDot */
 	0x017C, /* kCellLoZDot */
+	0x00B7, /* kCellMidDot */
+	0x010C, /* kCellUpCCaron */
+	0x010D, /* kCellLoCCaron */
+	0x011B, /* kCellLoECaron */
+	0x0159, /* kCellLoRCaron */
+	0x0161, /* kCellLoSCaron */
+	0x0165, /* kCellLoTCaron */
+	0x017E, /* kCellLoZCaron */
+	0x00DD, /* kCellUpYAcute */
+	0x00FD, /* kCellLoYAcute */
+	0x0171, /* kCellLoUDblac */
+	0x016F, /* kCellLoURing */
+	0x0110, /* kCellUpDStroke */
+	0x0111, /* kCellLoDStroke */
 #endif
 
 	'\0' /* just so last above line can end in ',' */
@@ -1591,8 +1703,28 @@ LOCALVAR blnr WantMagnify = (WantInitMagnify != 0);
 LOCALVAR blnr RequestInsertDisk = falseblnr;
 #endif
 
+#ifndef NeedRequestIthDisk
+#define NeedRequestIthDisk 0
+#endif
+
+#if NeedRequestIthDisk
+LOCALVAR ui3r RequestIthDisk = 0;
+#endif
+
 #if UseControlKeys
 LOCALVAR blnr ControlKeyPressed = falseblnr;
+#endif
+
+#ifndef kStrCntrlKyName
+#define kStrCntrlKyName "control"
+#endif
+
+#ifndef kControlModeKey
+#define kControlModeKey kStrCntrlKyName
+#endif
+
+#ifndef kUnMappedKey
+#define kUnMappedKey kStrCntrlKyName
 #endif
 
 LOCALFUNC char * GetSubstitutionStr(char x)
@@ -1614,6 +1746,12 @@ LOCALFUNC char * GetSubstitutionStr(char x)
 			break;
 		case 'r':
 			s = RomFileName;
+			break;
+		case 'c':
+			s = kControlModeKey;
+			break;
+		case 'm':
+			s = kUnMappedKey;
 			break;
 #if UseControlKeys
 		case 'k':
@@ -1697,47 +1835,108 @@ LOCALFUNC char * GetSubstitutionStr(char x)
 	return s;
 }
 
-#define ClStrMaxLength 512
+LOCALFUNC int ClStrSizeSubstCStr(char *s)
+{
+	/* must match ClStrAppendSubstCStr ! */
+
+	char *p = s;
+	char c;
+	int L = 0;
+
+	while (0 != (c = *p++)) {
+		if ('^' == c) {
+			if (0 == (c = *p++)) {
+				goto l_exit; /* oops, unexpected end of string, abort */
+			} else if ('^' == c) {
+				++L;
+			} else {
+				L += ClStrSizeSubstCStr(GetSubstitutionStr(c));
+			}
+		} else if (';' == c) {
+			if (0 == (c = *p++)) {
+				goto l_exit; /* oops, unexpected end of string, abort */
+			}
+
+			switch (c) {
+				case 'l':
+#if NeedIntlChars
+				case '`':
+				case 'd':
+				case 'e':
+				case 'i':
+				case 'n':
+				case 'u':
+				case 'v':
+				case 'E':
+				case 'r':
+#endif
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						goto l_exit;
+					}
+					break;
+				default:
+					break;
+			}
+			++L;
+		} else {
+			++L;
+		}
+	}
+
+l_exit:
+	return L;
+}
 
 LOCALPROC ClStrAppendChar(int *L0, ui3b *r, ui3b c)
 {
-	unsigned short L = *L0;
+	int L = *L0;
 
-	if (ClStrMaxLength != L) {
-		r[L] = c;
-		L++;
-		*L0 = L;
-	}
+	r[L] = c;
+	L++;
+	*L0 = L;
 }
 
 LOCALPROC ClStrAppendSubstCStr(int *L, ui3b *r, char *s)
 {
+	/* must match ClStrSizeSubstCStr ! */
+
 	char *p = s;
 	char c;
 	ui3b x;
 
-	while ((c = *p++) != 0) {
-		if (c == '^') {
-			if ((c = *p++) == 0) {
+	while (0 != (c = *p++)) {
+		if ('^' == c) {
+			if (0 == (c = *p++)) {
 				return; /* oops, unexpected end of string, abort */
-			} else if (c == '^') {
+			} else if ('^' == c) {
 				ClStrAppendChar(L, r, c);
 			} else {
 				ClStrAppendSubstCStr(L, r, GetSubstitutionStr(c));
 			}
-		} else if (c == ';') {
-			switch (*p++) {
+		} else if (';' == c) {
+			if (0 == (c = *p++)) {
+				return; /* oops, unexpected end of string, abort */
+			}
+
+			switch (c) {
 				case 'g': x = kCellCopyright; break;
 				case 'l':
-					switch (*p++) {
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
 						case 'a': x = kCellApostrophe; break;
 						case 'l': x = kCellEllipsis; break;
 						case 's': x = kCellSemicolon; break;
 #if NeedIntlChars
 						case 'E': x = kCellUpAE; break;
 						case 'e': x = kCellLoAE; break;
+						case '.': x = kCellMidDot; break;
 #endif
-						default: return; break;
+						default: x = kCellQuestion; break;
 					}
 					break;
 				case '[': x = kCellLeftDQuote; break;
@@ -1751,7 +1950,12 @@ LOCALPROC ClStrAppendSubstCStr(int *L, ui3b *r, char *s)
 				case 'O': x = kCellUpOStroke; break;
 				case 'Q': x = kCellUpLigatureOE; break;
 				case '`':
-					switch (*p++) {
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
 						case 'A': x = kCellUpAGrave; break;
 						case 'E': x = kCellUpEGrave; break;
 						case 'I': x = kCellUpIGrave; break;
@@ -1762,26 +1966,38 @@ LOCALPROC ClStrAppendSubstCStr(int *L, ui3b *r, char *s)
 						case 'i': x = kCellLoIGrave; break;
 						case 'o': x = kCellLoOGrave; break;
 						case 'u': x = kCellLoUGrave; break;
-						default: return; break;
+						default: x = kCellQuestion; break;
 					}
 					break;
 				case 'a': x = kCellLoARing; break;
 				case 'c': x = kCellLoCCedilla; break;
 				case 'd':
-					switch (*p++) {
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
 						case 'A': x = kCellUpACedille; break;
 						case 'a': x = kCellLoACedille; break;
+						case 'D': x = kCellUpDStroke; break;
+						case 'd': x = kCellLoDStroke; break;
 						case 'E': x = kCellUpECedille; break;
 						case 'e': x = kCellLoECedille; break;
 						case 'L': x = kCellUpLBar; break;
 						case 'l': x = kCellLoLBar; break;
 						case 'Z': x = kCellUpZDot; break;
 						case 'z': x = kCellLoZDot; break;
-						default: return; break;
+						default: x = kCellQuestion; break;
 					}
 					break;
 				case 'e':
-					switch (*p++) {
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
 						case 'A': x = kCellUpAAcute; break;
 						case 'E': x = kCellUpEAcute; break;
 						case 'I': x = kCellUpIAcute; break;
@@ -1801,12 +2017,19 @@ LOCALPROC ClStrAppendSubstCStr(int *L, ui3b *r, char *s)
 						case 's': x = kCellLoSAcute; break;
 						case 'Z': x = kCellUpZAcute; break;
 						case 'z': x = kCellLoZAcute; break;
+						case 'Y': x = kCellUpYAcute; break;
+						case 'y': x = kCellLoYAcute; break;
 
-						default: return; break;
+						default: x = kCellQuestion; break;
 					}
 					break;
 				case 'i':
-					switch (*p++) {
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
 						case 'A': x = kCellUpACircumflex; break;
 						case 'E': x = kCellUpECircumflex; break;
 						case 'I': x = kCellUpICircumflex; break;
@@ -1817,25 +2040,35 @@ LOCALPROC ClStrAppendSubstCStr(int *L, ui3b *r, char *s)
 						case 'i': x = kCellLoICircumflex; break;
 						case 'o': x = kCellLoOCircumflex; break;
 						case 'u': x = kCellLoUCircumflex; break;
-						default: return; break;
+						default: x = kCellQuestion; break;
 					}
 					break;
 				case 'n':
-					switch (*p++) {
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
 						case 'A': x = kCellUpATilde; break;
 						case 'N': x = kCellUpNTilde; break;
 						case 'O': x = kCellUpOTilde; break;
 						case 'a': x = kCellLoATilde; break;
 						case 'n': x = kCellLoNTilde; break;
 						case 'o': x = kCellLoOTilde; break;
-						default: return; break;
+						default: x = kCellQuestion; break;
 					}
 					break;
 				case 'o': x = kCellLoOStroke; break;
 				case 'q': x = kCellLoLigatureOE; break;
 				case 's': x = kCellSharpS; break;
 				case 'u':
-					switch (*p++) {
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
 						case 'A': x = kCellUpADiaeresis; break;
 						case 'E': x = kCellUpEDiaeresis; break;
 						case 'I': x = kCellUpIDiaeresis; break;
@@ -1848,17 +2081,50 @@ LOCALPROC ClStrAppendSubstCStr(int *L, ui3b *r, char *s)
 						case 'o': x = kCellLoODiaeresis; break;
 						case 'u': x = kCellLoUDiaeresis; break;
 						case 'y': x = kCellLoYDiaeresis; break;
-						default: return; break;
+						default: x = kCellQuestion; break;
+					}
+					break;
+				case 'v':
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
+						case 'C': x = kCellUpCCaron; break;
+						case 'c': x = kCellLoCCaron; break;
+						case 'e': x = kCellLoECaron; break;
+						case 'r': x = kCellLoRCaron; break;
+						case 's': x = kCellLoSCaron; break;
+						case 't': x = kCellLoTCaron; break;
+						case 'z': x = kCellLoZCaron; break;
+						default: x = kCellQuestion; break;
+					}
+					break;
+				case 'E':
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
+						case 'u': x = kCellLoUDblac; break;
+						default: x = kCellQuestion; break;
+					}
+					break;
+				case 'r':
+					if (0 == (c = *p++)) {
+						/* oops, unexpected end of string, abort */
+						return;
+					}
+
+					switch (c) {
+						case 'u': x = kCellLoURing; break;
+						default: x = kCellQuestion; break;
 					}
 					break;
 #endif
-				default:
-					return;
-					/*
-						oops, unexpected char,
-						maybe end of string, abort
-					*/
-					break;
+				default: x = kCellQuestion; break;
 			}
 			ClStrAppendChar(L, r, x);
 		} else {
@@ -1937,15 +2203,29 @@ LOCALPROC ClStrAppendSubstCStr(int *L, ui3b *r, char *s)
 				case ';': x = kCellSemicolon; break;
 				case '?': x = kCellQuestion; break;
 				case '_': x = kCellUnderscore; break;
-				default: x = kCellSpace; break;
+				case ' ': x = kCellSpace; break;
+				case '\047': x = kCellApostrophe; break;
+
+				default: x = kCellQuestion; break;
 			}
 			ClStrAppendChar(L, r, x);
 		}
 	}
 }
 
+#define ClStrMaxLength 512
+
 LOCALPROC ClStrFromSubstCStr(int *L, ui3b *r, char *s)
 {
+	int n = ClStrSizeSubstCStr(s);
+
 	*L = 0;
-	ClStrAppendSubstCStr(L, r, s);
+	if (n <= ClStrMaxLength) {
+		ClStrAppendSubstCStr(L, r, s);
+
+		if (n != *L) {
+			/* try to ensure mismatch is noticed */
+			*L = 0;
+		}
+	}
 }
