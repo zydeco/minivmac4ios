@@ -59,6 +59,7 @@ static ScreenView *sharedScreenView = nil;
     screenBounds.origin.x = (viewBounds.size.width - screenBounds.size.width)/2;
     screenBounds = CGRectIntegral(screenBounds);
     videoLayer.frame = screenBounds;
+    screenBounds.origin.y = self.frame.origin.y;
     BOOL scaleIsIntegral = (floor(screenScale) == screenScale);
     NSString *screenFilter = scaleIsIntegral ? kCAFilterNearest : [[NSUserDefaults standardUserDefaults] stringForKey:@"screenFilter"];
     videoLayer.magnificationFilter = screenFilter;
