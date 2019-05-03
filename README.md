@@ -72,7 +72,7 @@ the following:
 ### Credits
 
 * Mini vMac for iOS by [Jesús A. Álvarez](https://github.com/zydeco)
-* [Mini vMac](http://gryphel.com/c/minivmac/) ©2001-2016 Paul C. Pratt
+* [Mini vMac](http://gryphel.com/c/minivmac/) ©2001-2019 Paul C. Pratt
 * [vMac](http://vmac.org/) ©1996-1999 Philip Cummins & al.
 * [hfsutils](http://www.mars.org/home/rob/proj/hfs/) ©1996-2000 Robert Leslie
 * [libmfs](https://github.com/zydeco/libmfs) and [libres](https://github.com/zydeco/libres) by [Jesús A. Álvarez](https://github.com/zydeco)
