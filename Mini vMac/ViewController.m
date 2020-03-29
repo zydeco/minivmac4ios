@@ -13,6 +13,8 @@
 #import "KBKeyboardView.h"
 #import "KBKeyboardLayout.h"
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 @interface ViewController ()
 
 @end
@@ -22,7 +24,30 @@
     KBKeyboardView *keyboardView;
     UISwipeGestureRecognizer *showKeyboardGesture, *hideKeyboardGesture, *insertDiskGesture, *showSettingsGesture;
     UIControl *pointingDeviceView;
+#ifdef __IPHONE_13_4
+    UIPointerInteraction* interaction;
+#endif
 }
+
+- (Point)mouseLocForCGPoint:(CGPoint)point {
+    Point mouseLoc;
+    CGRect screenBounds = self.screenView.screenBounds;
+    CGSize screenSize = self.screenView.screenSize;
+    mouseLoc.h = (point.x - screenBounds.origin.x) * (screenSize.width/screenBounds.size.width);
+    mouseLoc.v = (point.y - screenBounds.origin.y) * (screenSize.height/screenBounds.size.height);
+    return mouseLoc;
+}
+
+#ifdef __IPHONE_13_4
+- (UIPointerRegion *)pointerInteraction:(UIPointerInteraction *)interaction regionForRequest:(UIPointerRegionRequest *)request defaultRegion:(UIPointerRegion *)defaultRegion  API_AVAILABLE(ios(13.4)){
+    if (request != nil) {
+        Point mouseLoc = [self mouseLocForCGPoint:request.location];
+        // NSLog(@"Interaction: x2: %hi, y2: %hi", (short)mouseLoc.h, (short)mouseLoc.v);
+        [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
+    }
+    return nil;
+}
+#endif
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,6 +88,12 @@
         [pointingDeviceView removeFromSuperview];
         pointingDeviceView = nil;
     }
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"13.4")) {
+        interaction = [[UIPointerInteraction alloc] initWithDelegate: self];
+        [self.view addInteraction:interaction];
+    }
+
     BOOL useTrackPad = [[NSUserDefaults standardUserDefaults] boolForKey:@"trackpad"];
     Class pointingDeviceClass = useTrackPad ? [TrackPad class] : [TouchScreen class];
     pointingDeviceView = [[pointingDeviceClass alloc] initWithFrame:self.view.bounds];
