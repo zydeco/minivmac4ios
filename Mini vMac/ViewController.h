@@ -10,7 +10,12 @@
 #import "ScreenView.h"
 #import "KBKeyboardView.h"
 
+#ifdef __IPHONE_13_4
+API_AVAILABLE(ios(13.4))
+@interface ViewController : UIViewController <UIPointerInteractionDelegate, KBKeyboardViewDelegate>
+#else
 @interface ViewController : UIViewController <KBKeyboardViewDelegate>
+#endif
 
 @property (weak, nonatomic) IBOutlet ScreenView *screenView;
 @property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
