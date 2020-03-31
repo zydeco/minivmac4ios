@@ -45,7 +45,12 @@
         // NSLog(@"Interaction: x2: %hi, y2: %hi", (short)mouseLoc.h, (short)mouseLoc.v);
         [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
     }
-    return nil;
+    return defaultRegion;
+}
+
+- (UIPointerStyle *)pointerInteraction:(UIPointerInteraction *)interaction styleForRegion:(UIPointerRegion *)region {
+    return [UIPointerStyle hiddenPointerStyle];
+
 }
 #endif
 
