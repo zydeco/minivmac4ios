@@ -82,7 +82,7 @@ static int8_t usb_to_adb_scancode[] = {
 }
 
 - (void)_updateCapsLockStatus:(UIPhysicalKeyboardEvent *)event {
-    if (event._modifierFlags == 0 && event._unmodifiedInput.length == 1) {
+    if (event._modifierFlags == 0 && event._unmodifiedInput.length == 1 && event._modifiedInput.length == 1) {
         unichar unmodifiedChar = [event._unmodifiedInput characterAtIndex:0];
         unichar modifiedChar = [event._modifiedInput characterAtIndex:0];
         if ([[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:unmodifiedChar]) {
