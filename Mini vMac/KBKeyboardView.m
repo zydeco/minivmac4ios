@@ -29,7 +29,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         safeAreaInsets = insets;
-        self.backgroundColor = [UIColor colorWithRed:0xEB / 255.0 green:0xF0 / 255.0 blue:0xF7 / 255.0 alpha:0.9];
+        if (@available(iOS 13.0, *)) {
+            self.backgroundColor = [UIColor clearColor];
+            UIVisualEffectView *backgroundView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemThickMaterial]];
+            backgroundView.frame = self.bounds;
+            [self addSubview: backgroundView];
+        } else {
+            self.backgroundColor = [UIColor colorWithRed:0xEB / 255.0 green:0xF0 / 255.0 blue:0xF7 / 255.0 alpha:0.9];
+        }
         modifiers = [NSMutableSet setWithCapacity:4];
         keysDown = [NSMutableIndexSet indexSet];
     }

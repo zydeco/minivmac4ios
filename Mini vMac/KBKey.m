@@ -20,13 +20,20 @@ const NSUInteger KBKeyEventStickyKey = 1 << 24;
         self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.titleLabel.minimumScaleFactor = 0.5;
         self.titleEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 2);
-        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        UIColor *labelColor;
+        if (@available(iOS 13.0, *)) {
+            labelColor = [UIColor labelColor];
+        } else {
+            labelColor = [UIColor darkTextColor];
+        }
+        [self setTitleColor:labelColor forState:UIControlStateNormal];
+        self.tintColor = labelColor;
     }
     return self;
 }
 
 - (void)awakeFromNib {
-    [self awakeFromNib];
+    [super awakeFromNib];
     self.dark = NO;
 }
 
