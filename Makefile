@@ -3,7 +3,7 @@ PROJECT="Mini vMac.xcodeproj"
 SCHEME="Mini vMac"
 CONFIGURATION=Release
 APP="build/Build/Products/$(CONFIGURATION)-iphoneos/Mini vMac.app"
-VERSION=`xpath 2>/dev/null Mini\ vMac/Info.plist "/plist/dict/key[.='CFBundleShortVersionString']/following-sibling::*[1]/text()"`
+VERSION=`plutil -extract CFBundleShortVersionString xml1 $(APP)/Info.plist -o - | xpath 2>/dev/null '/plist/string/text()'`
 LDID=ldid
 
 deb: $(APP)
