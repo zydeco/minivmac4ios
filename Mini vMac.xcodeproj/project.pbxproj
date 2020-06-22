@@ -159,7 +159,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolderSpec = 10;
 			files = (
 				281BB6C91D231F7700BF87B0 /* MacII-640x480.framework in Embed Frameworks */,
 				289710DF1CFB12660089D463 /* Mac128K.framework in Embed Frameworks */,
@@ -831,7 +831,7 @@
 				28F676BB1CD15E0B00FC6FA6 /* Resources */,
 				28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */,
 				283422D61CF8EF8C0088B634 /* Embed Frameworks */,
-				283422F51CF9ACAD0088B634 /* Change PlugIn extensions to mnvm */,
+				283422F51CF9ACAD0088B634 /* Change emulator bundle extensions to mnvm */,
 			);
 			buildRules = (
 			);
@@ -1015,19 +1015,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		283422F51CF9ACAD0088B634 /* Change PlugIn extensions to mnvm */ = {
+		283422F51CF9ACAD0088B634 /* Change emulator bundle extensions to mnvm */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Change PlugIn extensions to mnvm";
+			name = "Change emulator bundle extensions to mnvm";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$BUILT_PRODUCTS_DIR/$PLUGINS_FOLDER_PATH\"\nrm -rf *.mnvm\nfor name in *.framework\ndo\n  mv \"$name\" \"${name%.framework}.mnvm\"\ndone\n";
+			shellScript = "cd \"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH\"\nrm -rf *.mnvm\nfor name in *.framework\ndo\n  mv \"$name\" \"${name%.framework}.mnvm\"\ndone\n";
 		};
 		28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;

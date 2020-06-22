@@ -247,7 +247,6 @@ typedef enum : NSInteger {
         BOOL rowIsHeader = [item isKindOfClass:[NSString class]];
         BOOL rowHasHeader = [groupedEmulatorBundles containsObject:item];
         NSBundle *bundle = rowIsHeader ? machineList[indexPath.row + 1] : item;
-        NSString *bundleName = bundle.bundlePath.lastPathComponent.stringByDeletingPathExtension;
         cell = [tableView dequeueReusableCellWithIdentifier:@"machine" forIndexPath:indexPath];
         if (rowIsHeader) {
             cell.textLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
@@ -264,7 +263,7 @@ typedef enum : NSInteger {
             cell.imageView.image = nil;
             cell.indentationLevel = 1;
         } else {
-            NSString *iconName = [NSString stringWithFormat:@"PlugIns/%@.mnvm/Icon", bundleName];
+            NSString *iconName = [NSString stringWithFormat:@"%@/Icon", bundle.bundlePath];
             cell.imageView.image = [UIImage imageNamed:iconName];
             cell.indentationLevel = 0;
         }

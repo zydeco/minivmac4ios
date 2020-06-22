@@ -84,12 +84,15 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     }
 }
 
+- (NSString*)emulatorBundlesPath {
+    return [NSBundle mainBundle].privateFrameworksPath;
+}
+
 - (NSArray<NSBundle*>*)emulatorBundles {
-    NSString *pluginsPath = [NSBundle mainBundle].builtInPlugInsPath;
-    NSArray<NSString*> *names = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:pluginsPath error:NULL];
+    NSArray<NSString*> *names = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.emulatorBundlesPath error:NULL];
     NSMutableArray *emulatorBundles = [NSMutableArray arrayWithCapacity:names.count];
     for (NSString *name in [names pathsMatchingExtensions:@[@"mnvm"]]) {
-        NSBundle *bundle = [NSBundle bundleWithPath:[pluginsPath stringByAppendingPathComponent:name]];
+        NSBundle *bundle = [NSBundle bundleWithPath:[self.emulatorBundlesPath stringByAppendingPathComponent:name]];
         [emulatorBundles addObject:bundle];
     }
     return emulatorBundles;
@@ -97,7 +100,7 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 
 - (BOOL)loadEmulator:(NSString*)name {
     NSString *emulatorBundleName = [name stringByAppendingPathExtension:@"mnvm"];
-    NSString *emulatorBundlePath = [[NSBundle mainBundle].builtInPlugInsPath stringByAppendingPathComponent:emulatorBundleName];
+    NSString *emulatorBundlePath = [self.emulatorBundlesPath stringByAppendingPathComponent:emulatorBundleName];
     NSBundle *emulatorBundle = [NSBundle bundleWithPath:emulatorBundlePath];
     [emulatorBundle load];
     sharedEmulator = [[emulatorBundle principalClass] new];
