@@ -71,7 +71,12 @@
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return YES;
+    UIScreen *screen = self.view.window.screen;
+    return CGRectEqualToRect(screen.bounds, self.view.window.bounds);
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
@@ -133,6 +138,17 @@
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    if (self.keyboardVisible) {
+        // willTransitionToTraitCollection... is caled before us, so keyboard will already be hidden here in a trait collection transition
+        [self setKeyboardVisible:NO animated:NO];
+        [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+            [self setKeyboardVisible:YES animated:YES];
+        }];
+    }
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super willTransitionToTraitCollection:newCollection withTransitionCoordinator:coordinator];
     if (self.keyboardVisible) {
         [self setKeyboardVisible:NO animated:NO];
         [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {

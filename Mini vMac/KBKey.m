@@ -18,8 +18,8 @@ const NSUInteger KBKeyEventStickyKey = 1 << 24;
         self.dark = NO;
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        self.titleLabel.minimumScaleFactor = 0.5;
-        self.titleEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 2);
+        self.titleLabel.minimumScaleFactor = 0.3;
+        self.titleLabel.allowsDefaultTighteningForTruncation = YES;
         UIColor *labelColor;
         if (@available(iOS 13.0, *)) {
             labelColor = [UIColor labelColor];
@@ -28,6 +28,8 @@ const NSUInteger KBKeyEventStickyKey = 1 << 24;
         }
         [self setTitleColor:labelColor forState:UIControlStateNormal];
         self.tintColor = labelColor;
+        self.contentEdgeInsets = UIEdgeInsetsMake(4, 4, 6, 4);
+        self.contentMode = UIViewContentModeScaleAspectFit;
     }
     return self;
 }

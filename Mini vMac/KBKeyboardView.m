@@ -47,6 +47,31 @@
     return [self initWithFrame:frame safeAreaInsets:UIEdgeInsetsZero];
 }
 
+- (BOOL)isCompactKeyboardSize:(CGSize)size {
+    return size.width < 768.0;
+}
+
+- (CGSize)findBestSizeForWidth:(CGFloat)preferredWidth inArray:(NSArray<NSValue*>*)sizes {
+    CGSize selectedSize = CGSizeZero;
+    for (NSValue *key in sizes) {
+        CGSize size = key.CGSizeValue;
+        if (size.width > selectedSize.width && size.width <= preferredWidth) {
+            selectedSize = size;
+            if (size.width == preferredWidth) {
+                // exact match
+                break;
+            }
+        }
+    }
+
+    // still not found, use smallest width
+    if (CGSizeEqualToSize(selectedSize, CGSizeZero)) {
+        selectedSize = sizes.firstObject.CGSizeValue;
+    }
+    
+    return selectedSize;
+}
+
 - (void)setLayout:(KBKeyboardLayout *)layout {
     if ([_layout isEqual:layout]) {
         return;
@@ -57,32 +82,18 @@
     CGRect safeFrame = UIEdgeInsetsInsetRect(self.frame, safeAreaInsets);
     CGFloat frameWidth = safeFrame.size.width;
     CGFloat preferredWidth = frameWidth;
-    selectedSize = CGSizeZero;
-    for (NSValue *key in layout.availableSizes) {
-        CGSize size = key.CGSizeValue;
-        if (!CGSizeEqualToSize(size, CGSizeZero) && size.width > selectedSize.width && size.width <= preferredWidth) {
-            selectedSize = size;
-        }
-    }
-
-    // try sideways
-    if (CGSizeEqualToSize(selectedSize, CGSizeZero)) {
-        preferredWidth = safeFrame.size.height;
-        for (NSValue *key in layout.availableSizes) {
-            CGSize size = key.CGSizeValue;
-            if (!CGSizeEqualToSize(size, CGSizeZero) && size.width > selectedSize.width && size.width <= preferredWidth) {
-                selectedSize = size;
-            }
-        }
-    }
     
-    // still not found
-    if (CGSizeEqualToSize(selectedSize, CGSizeZero)) {
-        return;
-    }
+    // find best size in class
+    BOOL isCompactSize = self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact;
+    NSArray<NSValue*> *sizes = [[layout.availableSizes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSValue *size, NSDictionary<NSString *,id> * _Nullable bindings) {
+        return [self isCompactKeyboardSize:size.CGSizeValue] == isCompactSize;
+    }]] sortedArrayUsingComparator:^NSComparisonResult(NSValue * _Nonnull size1, NSValue * _Nonnull size2) {
+        return size1.CGSizeValue.width - size2.CGSizeValue.width;
+    }];
+    selectedSize = [self findBestSizeForWidth:preferredWidth inArray:sizes];
     
     defaultKeyTransform = CGAffineTransformIdentity;
-    fontSize = [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? 22.0 : 30.0;
+    fontSize = [self isCompactKeyboardSize:selectedSize] ? 22.0 : 30.0;
     if (preferredWidth != selectedSize.width || preferredWidth != frameWidth) {
         // adjust width
         if (frameWidth / selectedSize.width > 2 || frameWidth / selectedSize.width < 0.5) {
@@ -90,7 +101,7 @@
             defaultKeyTransform = CGAffineTransformMakeScale(frameWidth / selectedSize.width, frameWidth / selectedSize.width);
         } else if (frameWidth < selectedSize.width) {
             // shrink keyboard
-            defaultKeyTransform = CGAffineTransformMakeScale(frameWidth / selectedSize.width, 1.33333);
+            defaultKeyTransform = CGAffineTransformMakeScale(frameWidth / selectedSize.width, 1.0);
         } else {
             // iPhone keyboard on bigger phone
             CGFloat wScale = safeFrame.size.width / selectedSize.width;
@@ -109,36 +120,42 @@
     [self switchToKeyPlane:0];
 }
 
+- (void)_addKeyWithFrame:(CGRect)keyFrame scanCode:(int8_t)scancode fontScale:(CGFloat)fontScale dark:(BOOL)dark sticky:(BOOL)sticky toKeyPlane:(NSMutableArray*)keyPlane {
+    KBKey *key = nil;
+    if (@available(iOS 11, *)) {
+        keyFrame.origin.x += safeAreaInsets.left;
+    }
+    if (scancode == VKC_HIDE) {
+        key = [[KBHideKey alloc] initWithFrame:keyFrame];
+        [key addTarget:self action:@selector(hideKeyboard:) forControlEvents:UIControlEventTouchUpInside];
+    } else if (scancode == VKC_SHIFT_CAPS) {
+        key = [[KBShiftCapsKey alloc] initWithFrame:keyFrame];
+        key.scancode = KC_SHIFT;
+        [key addTarget:self action:@selector(capsKey:) forControlEvents:KBKeyEventStickyKey];
+    } else if (sticky) {
+        key = [[KBStickyKey alloc] initWithFrame:keyFrame];
+        key.scancode = scancode;
+        [key addTarget:self action:@selector(stickyKey:) forControlEvents:KBKeyEventStickyKey];
+    } else {
+        key = [[KBKey alloc] initWithFrame:keyFrame];
+        key.scancode = scancode;
+        [key addTarget:self action:@selector(keyDown:) forControlEvents:UIControlEventTouchDown];
+        [key addTarget:self action:@selector(keyUp:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchDragExit | UIControlEventTouchCancel];
+    }
+    key.dark = dark;
+    NSString *label = [_layout labelForScanCode:scancode];
+    if ([label containsString:@"\n"]) {
+        fontScale *= [self isCompactKeyboardSize:selectedSize] ? 0.6 : 0.65;
+    }
+    key.label = label;
+    key.titleLabel.font = [UIFont systemFontOfSize:self->fontSize * fontScale weight:&UIFontWeightRegular ? UIFontWeightRegular : 1.0];
+    [keyPlane addObject:key];
+}
+
 - (NSArray *)_loadKeyPlane:(NSUInteger)plane {
     NSMutableArray *keyPlane = [NSMutableArray arrayWithCapacity:64];
     [_layout enumerateKeysForSize:selectedSize plane:plane transform:defaultKeyTransform usingBlock:^(int8_t scancode, CGRect keyFrame, CGFloat fontScale, BOOL dark, BOOL sticky) {
-        KBKey *key = nil;
-        keyFrame.origin.x += safeAreaInsets.left;
-        if (scancode == VKC_HIDE) {
-            key = [[KBHideKey alloc] initWithFrame:keyFrame];
-            [key addTarget:self action:@selector(hideKeyboard:) forControlEvents:UIControlEventTouchUpInside];
-        } else if (scancode == VKC_SHIFT_CAPS) {
-            key = [[KBShiftCapsKey alloc] initWithFrame:keyFrame];
-            key.scancode = KC_SHIFT;
-            [key addTarget:self action:@selector(capsKey:) forControlEvents:KBKeyEventStickyKey];
-        } else if (sticky) {
-            key = [[KBStickyKey alloc] initWithFrame:keyFrame];
-            key.scancode = scancode;
-            [key addTarget:self action:@selector(stickyKey:) forControlEvents:KBKeyEventStickyKey];
-        } else {
-            key = [[KBKey alloc] initWithFrame:keyFrame];
-            key.scancode = scancode;
-            [key addTarget:self action:@selector(keyDown:) forControlEvents:UIControlEventTouchDown];
-            [key addTarget:self action:@selector(keyUp:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchDragExit | UIControlEventTouchCancel];
-        }
-        key.dark = dark;
-        NSString *label = [_layout labelForScanCode:scancode];
-        if ([label containsString:@"\n"]) {
-            fontScale *= [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone ? 0.6 : 0.65;
-        }
-        key.label = label;
-        key.titleLabel.font = [UIFont systemFontOfSize:fontSize * fontScale weight:&UIFontWeightRegular ? UIFontWeightRegular : 1.0];
-        [keyPlane addObject:key];
+        [self _addKeyWithFrame:keyFrame scanCode:scancode fontScale:fontScale dark:dark sticky:sticky toKeyPlane:keyPlane];
     }];
     return keyPlane;
 }
