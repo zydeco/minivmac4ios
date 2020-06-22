@@ -15,7 +15,7 @@
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
-@interface ViewController ()
+@interface ViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 @end
 
@@ -24,6 +24,7 @@
     KBKeyboardView *keyboardView;
     UISwipeGestureRecognizer *showKeyboardGesture, *hideKeyboardGesture, *insertDiskGesture, *showSettingsGesture;
     UIControl *pointingDeviceView;
+    UISwipeGestureRecognizerDirection modalPanePresentationDirection;
 #ifdef __IPHONE_13_4
     UIPointerInteraction* interaction;
 #endif
@@ -57,17 +58,72 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self installKeyboardGestures];
-    insertDiskGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:[AppDelegate sharedInstance] action:@selector(showInsertDisk:)];
+    insertDiskGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showInsertDisk:)];
     insertDiskGesture.direction = UISwipeGestureRecognizerDirectionLeft;
     insertDiskGesture.numberOfTouchesRequired = 2;
     [self.view addGestureRecognizer:insertDiskGesture];
     
-    showSettingsGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:[AppDelegate sharedInstance] action:@selector(showSettings:)];
+    showSettingsGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
     showSettingsGesture.direction = UISwipeGestureRecognizerDirectionRight;
     showSettingsGesture.numberOfTouchesRequired = 2;
     [self.view addGestureRecognizer:showSettingsGesture];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emulatorDidShutDown:) name:[AppDelegate sharedEmulator].shutdownNotification object:nil];
+}
+
+- (void)showSettings:(id)sender {
+    [self performSegueWithIdentifier:@"settings" sender:sender];
+}
+
+- (void)showInsertDisk:(id)sender {
+    [self performSegueWithIdentifier:@"disk" sender:sender];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([sender isKindOfClass:[UIGestureRecognizer class]]) {
+        UISwipeGestureRecognizer *gestureRecognizer = (UISwipeGestureRecognizer*)sender;
+        modalPanePresentationDirection = gestureRecognizer.direction;
+        segue.destinationViewController.transitioningDelegate = self;
+    } else if (self.presentedViewController != nil && [@[@"disk", @"settings"] containsObject:segue.identifier]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return self;
+}
+
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+    return 0.3;
+}
+
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+    UIView *containerView = [transitionContext containerView];
+    UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
+
+    [containerView addSubview:toView];
+    switch (modalPanePresentationDirection) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            toView.transform = CGAffineTransformMakeTranslation(containerView.bounds.size.width, 0);
+            break;
+        case UISwipeGestureRecognizerDirectionRight:
+            toView.transform = CGAffineTransformMakeTranslation(-containerView.bounds.size.width, 0);
+            break;
+        case UISwipeGestureRecognizerDirectionDown:
+            toView.transform = CGAffineTransformMakeTranslation(0, -containerView.bounds.size.height);
+            break;
+        case UISwipeGestureRecognizerDirectionUp:
+            toView.transform = CGAffineTransformMakeTranslation(0, containerView.bounds.size.height);
+            break;
+        default:
+            break;
+    }
+
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+        toView.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        [transitionContext completeTransition:finished];
+    }];
 }
 
 - (BOOL)prefersStatusBarHidden {

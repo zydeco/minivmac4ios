@@ -15,13 +15,12 @@ static AppDelegate *sharedAppDelegate = nil;
 static NSObject<Emulator> *sharedEmulator = nil;
 NSString *DocumentsChangedNotification = @"documentsChanged";
 
-@interface AppDelegate () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, BTCMouseDelegate>
+@interface AppDelegate () <BTCMouseDelegate>
 
 @end
 
 @implementation AppDelegate
 {
-    UISwipeGestureRecognizerDirection modalPanePresentationDirection;
 }
 
 + (instancetype)sharedInstance {
@@ -160,97 +159,11 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 #pragma mark - Settings / Insert Disk panels
 
 - (void)showSettings:(id)sender {
-    [self showModalPanel:@"settings" sender:sender];
+    [self.window.rootViewController performSelector:@selector(showSettings:) withObject:sender];
 }
 
 - (void)showInsertDisk:(id)sender {
-    [self showModalPanel:@"disk" sender:sender];
-}
-
-- (void)showModalPanel:(NSString*)name sender:(id)sender {
-    Class classToShow, otherClass;
-    if ([name isEqualToString:@"settings"]) {
-        classToShow = [SettingsViewController class];
-        otherClass = [InsertDiskViewController class];
-    } else {
-        classToShow = [InsertDiskViewController class];
-        otherClass = [SettingsViewController class];
-    }
-    
-    UIViewController *rootViewController = self.window.rootViewController;
-    UIViewController *presentedViewController = rootViewController.presentedViewController;
-    UIViewController *presentedTopViewController = [presentedViewController isKindOfClass:[UINavigationController class]] ? [(UINavigationController*)presentedViewController topViewController] : nil;
-    
-    if ([presentedTopViewController isKindOfClass:classToShow]) {
-        [presentedViewController dismissViewControllerAnimated:YES completion:nil];
-        return;
-    } else if ([presentedTopViewController isKindOfClass:otherClass]) {
-        // flip
-        UIViewController *viewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:name];
-        viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        viewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        UIView *windowSnapshotView = [self.window snapshotViewAfterScreenUpdates:NO];
-        [self.window addSubview:windowSnapshotView];
-        UIView *oldPanelSnapshotView = [presentedViewController.view snapshotViewAfterScreenUpdates:NO];
-        [viewController.view addSubview:oldPanelSnapshotView];
-        [rootViewController dismissViewControllerAnimated:NO completion:^{
-            [rootViewController presentViewController:viewController animated:NO completion:^{
-                UIView *emptyView = [[UIView alloc] initWithFrame:viewController.view.bounds];
-                [windowSnapshotView removeFromSuperview];
-                viewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                [UIView transitionFromView:oldPanelSnapshotView
-                                    toView:emptyView
-                                  duration:0.5
-                                   options:UIViewAnimationOptionTransitionFlipFromRight
-                                completion:^(BOOL finished) {
-                                    [emptyView removeFromSuperview];
-                                }];
-            }];
-        }];
-    } else {
-        UIViewController *viewController = [rootViewController.storyboard instantiateViewControllerWithIdentifier:name];
-        viewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        viewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        if ([sender isKindOfClass:[UISwipeGestureRecognizer class]] && NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_8_0) {
-            modalPanePresentationDirection = [(UISwipeGestureRecognizer*)sender direction];
-            viewController.transitioningDelegate = self;
-        }
-        [rootViewController presentViewController:viewController animated:YES completion:nil];
-    }
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    return self;
-}
-
-- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    return 0.3;
-}
-
-- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-    UIView *containerView = [transitionContext containerView];
-    UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
-    
-    [containerView addSubview:toView];
-    switch (modalPanePresentationDirection) {
-        case UISwipeGestureRecognizerDirectionLeft:
-            toView.transform = CGAffineTransformMakeTranslation(containerView.bounds.size.width, 0);
-            break;
-        case UISwipeGestureRecognizerDirectionRight:
-            toView.transform = CGAffineTransformMakeTranslation(-containerView.bounds.size.width, 0);
-            break;
-        case UISwipeGestureRecognizerDirectionDown:
-            toView.transform = CGAffineTransformMakeTranslation(0, -containerView.bounds.size.height);
-            break;
-        default:
-            toView.transform = CGAffineTransformMakeTranslation(0, containerView.bounds.size.height);
-    }
-    
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        toView.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished) {
-        [transitionContext completeTransition:finished];
-    }];
+    [self.window.rootViewController performSelector:@selector(showInsertDisk:) withObject:sender];
 }
 
 #pragma mark - Files
