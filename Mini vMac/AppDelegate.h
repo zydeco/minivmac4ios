@@ -28,6 +28,7 @@ extern NSString *DocumentsChangedNotification;
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
 - (IBAction)showInsertDisk:(id)sender;
 - (IBAction)showSettings:(id)sender;
+- (IBAction)showGestureHelp:(id)sender;
 
 @end
 

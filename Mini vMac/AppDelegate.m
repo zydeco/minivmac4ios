@@ -156,7 +156,7 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     }
 }
 
-#pragma mark - Settings / Insert Disk panels
+#pragma mark - Settings / Insert Disk / Help
 
 - (void)showSettings:(id)sender {
     [self.window.rootViewController performSelector:@selector(showSettings:) withObject:sender];
@@ -164,6 +164,10 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 
 - (void)showInsertDisk:(id)sender {
     [self.window.rootViewController performSelector:@selector(showInsertDisk:) withObject:sender];
+}
+
+- (void)showGestureHelp:(id)sender {
+    [self.window.rootViewController performSelector:@selector(showGestureHelp:) withObject:sender];
 }
 
 #pragma mark - Files

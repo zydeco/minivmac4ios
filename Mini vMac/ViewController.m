@@ -69,6 +69,8 @@
     [self.view addGestureRecognizer:showSettingsGesture];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emulatorDidShutDown:) name:[AppDelegate sharedEmulator].shutdownNotification object:nil];
+    
+    [self scheduleHelpPresentationIfNeededAfterDelay:6.0];
 }
 
 - (void)showSettings:(id)sender {
@@ -80,6 +82,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    [self cancelHelpPresentation];
     if ([sender isKindOfClass:[UIGestureRecognizer class]]) {
         UISwipeGestureRecognizer *gestureRecognizer = (UISwipeGestureRecognizer*)sender;
         modalPanePresentationDirection = gestureRecognizer.direction;
@@ -238,6 +241,50 @@
         id emulator = [AppDelegate sharedEmulator];
         [emulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
     }
+}
+
+#pragma mark - Gesture Help
+
+- (void)showGestureHelp:(id)sender {
+    [self setGestureHelpHidden:NO];
+}
+
+- (void)hideGestureHelp:(id)sender {
+    [self setGestureHelpHidden:YES];
+}
+
+- (void)setGestureHelpHidden:(BOOL)hidden {
+    if (self.helpView.hidden == hidden) {
+        return;
+    } else if (!hidden) {
+        // prepare to show
+        self.helpView.alpha = 0.0;
+        self.helpView.hidden = NO;
+    }
+    [UIView animateWithDuration:0.2
+                     animations:^{
+        self.helpView.alpha = hidden ? 0.0 : 1.0;
+    }
+                     completion:^(BOOL finished) {
+        self.helpView.hidden = hidden;
+    }];
+}
+
+- (void)showGestureHelpIfNeeded:(id)sender {
+    // show help if no disks have been inserted
+    if (![AppDelegate sharedEmulator].anyDiskInserted) {
+        [self showGestureHelp:sender];
+    }
+}
+
+- (void)scheduleHelpPresentationIfNeededAfterDelay:(NSTimeInterval)delay {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoShowGestureHelp"]) {
+        [self performSelector:@selector(showGestureHelpIfNeeded:) withObject:self afterDelay:delay];
+    }
+}
+
+- (void)cancelHelpPresentation {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(showGestureHelpIfNeeded:) object:self];
 }
 
 #pragma mark - Keyboard

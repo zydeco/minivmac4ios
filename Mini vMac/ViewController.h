@@ -19,6 +19,10 @@ API_AVAILABLE(ios(13.4))
 
 @property (weak, nonatomic) IBOutlet ScreenView *screenView;
 @property (nonatomic, getter=isKeyboardVisible) BOOL keyboardVisible;
+@property (weak, nonatomic) IBOutlet UIView *helpView;
+
+- (IBAction)showGestureHelp:(id)sender;
+- (IBAction)hideGestureHelp:(id)sender;
 
 @end
 

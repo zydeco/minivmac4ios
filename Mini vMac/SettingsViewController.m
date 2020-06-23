@@ -92,6 +92,7 @@ typedef enum : NSInteger {
     footerView.textColor = [UIColor darkGrayColor];
     footerView.font = [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
     footerView.backgroundColor = [UIColor clearColor];
+    footerView.scrollEnabled = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -147,6 +148,12 @@ typedef enum : NSInteger {
     }
 }
 
+- (void)changeAutoShowGestureHelp:(UISwitch*)sender {
+    if ([sender isKindOfClass:[UISwitch class]]) {
+        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:@"autoShowGestureHelp"];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -165,7 +172,7 @@ typedef enum : NSInteger {
         case SettingsSectionMachine:
             return machineList.count;
         case SettingsSectionAbout:
-            return aboutItems.count;
+            return aboutItems.count + 1;
         default:
             return 1;
     }
@@ -270,18 +277,12 @@ typedef enum : NSInteger {
         cell.accessoryType = (item == selectedEmulatorBundle) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         cell.selectionStyle = rowIsHeader ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
     } else if (section == SettingsSectionAbout) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"about" forIndexPath:indexPath];
-        NSDictionary<NSString*,NSString*> *item = aboutItems[indexPath.row];
-        cell.textLabel.text = item[@"text"];
-        NSString *detailText = item[@"detailText"];
-        if ([detailText isEqualToString:@"$version"]) {
-            NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-            NSString *commitString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"GitVersion"];
-            cell.detailTextLabel.text = commitString.length > 0 ? [NSString stringWithFormat:@"%@ (%@)", versionString, commitString] : versionString;
+        if (indexPath.row >= aboutItems.count) {
+            cell = [self switchCellForTableView:tableView indexPath:indexPath action:@selector(changeAutoShowGestureHelp:) on:[defaults boolForKey:@"autoShowGestureHelp"]];
+            cell.textLabel.text = NSLocalizedString(@"Show Gesture Help", nil);
         } else {
-            cell.detailTextLabel.text = detailText;
+            cell = [self aboutCellForTableView:tableView indexPath:indexPath];
         }
-        cell.accessoryType = item[@"link"] == nil ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
     } else if (section == SettingsSectionDisplay) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"display" forIndexPath:indexPath];
         UISegmentedControl *filterControl = (UISegmentedControl*)[cell viewWithTag:128];
@@ -294,6 +295,22 @@ typedef enum : NSInteger {
             filterControl.selectedSegmentIndex = 1;
         }
     }
+    return cell;
+}
+
+- (UITableViewCell*)aboutCellForTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"about" forIndexPath:indexPath];
+    NSDictionary<NSString*,NSString*> *item = aboutItems[indexPath.row];
+    cell.textLabel.text = item[@"text"];
+    NSString *detailText = item[@"detailText"];
+    if ([detailText isEqualToString:@"$version"]) {
+        NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        NSString *commitString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"GitVersion"];
+        cell.detailTextLabel.text = commitString.length > 0 ? [NSString stringWithFormat:@"%@ (%@)", versionString, commitString] : versionString;
+    } else {
+        cell.detailTextLabel.text = detailText;
+    }
+    cell.accessoryType = item[@"link"] == nil ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -322,10 +339,17 @@ typedef enum : NSInteger {
         selectedEmulatorBundle = bundle;
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:SettingsSectionSpeed] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else if (indexPath.section == SettingsSectionAbout) {
-        // links in about
-        NSString *linkURL = aboutItems[indexPath.row][@"link"];
-        if (linkURL != nil) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkURL]];
+        if (indexPath.row >= aboutItems.count) {
+            // show gesture help
+            [self dismissViewControllerAnimated:YES completion:^{
+                [[AppDelegate sharedInstance] showGestureHelp:self];
+            }];
+        } else {
+            // links in about
+            NSString *linkURL = aboutItems[indexPath.row][@"link"];
+            if (linkURL != nil) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkURL]];
+            }
         }
     }
 }
