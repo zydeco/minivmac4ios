@@ -13,11 +13,16 @@
 #import "KBKeyboardView.h"
 #import "KBKeyboardLayout.h"
 
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
-
 @interface ViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
 
 @end
+
+#ifdef __IPHONE_13_4
+API_AVAILABLE(ios(13.4))
+@interface ViewController (PointerInteraction) <UIPointerInteractionDelegate>
+
+@end
+#endif
 
 @implementation ViewController
 {
@@ -25,9 +30,7 @@
     UISwipeGestureRecognizer *showKeyboardGesture, *hideKeyboardGesture, *insertDiskGesture, *showSettingsGesture;
     UIControl *pointingDeviceView;
     UISwipeGestureRecognizerDirection modalPanePresentationDirection;
-#ifdef __IPHONE_13_4
-    UIPointerInteraction* interaction;
-#endif
+    id interaction;
 }
 
 - (Point)mouseLocForCGPoint:(CGPoint)point {
@@ -38,22 +41,6 @@
     mouseLoc.v = (point.y - screenBounds.origin.y) * (screenSize.height/screenBounds.size.height);
     return mouseLoc;
 }
-
-#ifdef __IPHONE_13_4
-- (UIPointerRegion *)pointerInteraction:(UIPointerInteraction *)interaction regionForRequest:(UIPointerRegionRequest *)request defaultRegion:(UIPointerRegion *)defaultRegion  API_AVAILABLE(ios(13.4)){
-    if (request != nil) {
-        Point mouseLoc = [self mouseLocForCGPoint:request.location];
-        // NSLog(@"Interaction: x2: %hi, y2: %hi", (short)mouseLoc.h, (short)mouseLoc.v);
-        [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
-    }
-    return defaultRegion;
-}
-
-- (UIPointerStyle *)pointerInteraction:(UIPointerInteraction *)interaction styleForRegion:(UIPointerRegion *)region {
-    return [UIPointerStyle hiddenPointerStyle];
-
-}
-#endif
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -158,10 +145,12 @@
         pointingDeviceView = nil;
     }
     
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"13.4")) {
+#ifdef __IPHONE_13_4
+    if (@available(iOS 13.4, *)) {
         interaction = [[UIPointerInteraction alloc] initWithDelegate: self];
         [self.view addInteraction:interaction];
     }
+#endif
 
     BOOL useTrackPad = [[NSUserDefaults standardUserDefaults] boolForKey:@"trackpad"];
     Class pointingDeviceClass = useTrackPad ? [TrackPad class] : [TouchScreen class];
@@ -398,3 +387,21 @@
 }
 
 @end
+
+#ifdef __IPHONE_13_4
+API_AVAILABLE(ios(13.4))
+@implementation ViewController (PointerInteraction)
+- (UIPointerRegion *)pointerInteraction:(UIPointerInteraction *)interaction regionForRequest:(UIPointerRegionRequest *)request defaultRegion:(UIPointerRegion *)defaultRegion  API_AVAILABLE(ios(13.4)){
+    if (request != nil) {
+        Point mouseLoc = [self mouseLocForCGPoint:request.location];
+        [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
+    }
+    return defaultRegion;
+}
+
+- (UIPointerStyle *)pointerInteraction:(UIPointerInteraction *)interaction styleForRegion:(UIPointerRegion *)region {
+    return [UIPointerStyle hiddenPointerStyle];
+}
+
+@end
+#endif
