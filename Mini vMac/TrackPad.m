@@ -45,7 +45,21 @@
     }
 }
 
+- (BOOL)isMouseEvent:(UIEvent *)event {
+#if __IPHONE_13_4
+    if (@available(iOS 13.4, *)) {
+        return event.buttonMask != 0;
+    }
+#endif
+    return NO;
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([self isMouseEvent:event]) {
+        [self startDragging];
+        return;
+    }
+    
     [currentTouches unionSet:touches];
     if (currentTouches.count == 1) {
         [self firstTouchBegan:touches.anyObject withEvent:event];
@@ -67,6 +81,7 @@
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([self isMouseEvent:event]) return;
     UITouch *touch = touches.anyObject;
     CGPoint touchLoc = [touch locationInView:self];
     previousTouchLoc = [touch previousLocationInView:self];
@@ -91,6 +106,10 @@
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([self isMouseEvent:event]) {
+        [self stopDragging];
+        return;
+    }
     [currentTouches minusSet:touches];
     if (currentTouches.count > 0) {
         return;

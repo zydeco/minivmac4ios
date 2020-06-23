@@ -147,8 +147,10 @@ API_AVAILABLE(ios(13.4))
     
 #ifdef __IPHONE_13_4
     if (@available(iOS 13.4, *)) {
-        interaction = [[UIPointerInteraction alloc] initWithDelegate: self];
-        [self.view addInteraction:interaction];
+        if (interaction == nil) {
+            interaction = [[UIPointerInteraction alloc] initWithDelegate: self];
+            [self.view addInteraction:interaction];
+        }
     }
 #endif
 
