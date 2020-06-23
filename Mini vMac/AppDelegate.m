@@ -63,7 +63,8 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
                                     @"speedValue": @(sharedEmulator.initialSpeed),
                                     @"runInBackground": @NO,
                                     @"autoSlow": @(sharedEmulator.initialAutoSlow),
-                                    @"screenFilter": kCAFilterLinear
+                                    @"screenFilter": kCAFilterLinear,
+                                    @"autoShowGestureHelp": @YES
                                     };
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
