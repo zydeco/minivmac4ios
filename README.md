@@ -11,7 +11,7 @@
 
 ## Requirements
 
-* iOS 7 or later
+* iOS 8 or later
 * ROM image from Mac Plus, Mac II and/or Mac 128K
 * Disk images with Mac software
 
@@ -21,7 +21,7 @@
 
 You can import the ROM (`vMac.ROM`) and disk images (with `.dsk` or `.img`
 extension) into Mini vMac from other apps (iCloud Storage, Dropbox, etc), using
-AirDrop, or via iTunes File Sharing.
+AirDrop, iTunes File Sharing or the iOS Files app.
 
 * To insert disk images, swipe left with two fingers and the list of disks will
     appear. Icons are automatically generated based on the contents of the disk.
@@ -58,6 +58,8 @@ tapping twice fast and holding it down.
 
 If you have a jailbroken device and [BTC Mouse & Trackpad](http://www.ringwald.ch/cydia/mouse/),
 Mini vMac will use your bluetooth mouse or trackpad.
+
+If you use a mouse or trackpad on iPad OS 13.4 or newer, it will be used automatically.
 
 ### Settings
 
