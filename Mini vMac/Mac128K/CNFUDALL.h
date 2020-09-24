@@ -39,6 +39,8 @@
 #define AutoLocation 1
 #define AutoTimeZone 1
 
+#define MNVMBundleClassName Mac128KEmulator
+
 #ifdef PLIST_PREPROCESSOR
 #define MNVMBundleDisplayName Mac 128K
 #define MNVMBundleGetInfoString 128K, 512×342

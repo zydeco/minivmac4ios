@@ -108,6 +108,24 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     return sharedEmulator != nil;
 }
 
+- (void)reloadEmulator {
+    NSBundle *bundle = sharedEmulator.bundle;
+    [self willChangeValueForKey:@"sharedEmulator"];
+    id<Emulator> oldEmulator = sharedEmulator;
+    sharedEmulator = nil;
+    [oldEmulator shutdown];
+    [bundle unload];
+    if (![self loadEmulator:[[NSUserDefaults standardUserDefaults] stringForKey:@"machine"]]) {
+        [self loadEmulator:@"MacPlus4M"];
+    }
+    [self didChangeValueForKey:@"sharedEmulator"];
+    [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
+}
+
+- (id<Emulator>)sharedEmulator {
+    return sharedEmulator;
+}
+
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];

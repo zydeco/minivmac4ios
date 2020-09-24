@@ -26,13 +26,9 @@ static ScreenView *sharedScreenView = nil;
     NSString *screenFilter = [[NSUserDefaults standardUserDefaults] stringForKey:@"screenFilter"];
     videoLayer.magnificationFilter = screenFilter;
     videoLayer.minificationFilter = screenFilter;
-    [AppDelegate sharedEmulator].screenLayer = videoLayer;
-    if ([AppDelegate sharedEmulator]) {
-        screenSize = [AppDelegate sharedEmulator].screenSize;
-    } else {
-        screenSize = CGSizeMake(1, 1);
-    }
+    [self updateVideoLayer];
     [self.layer addSublayer:videoLayer];
+    [[AppDelegate sharedInstance] addObserver:self forKeyPath:@"sharedEmulator" options:NSKeyValueObservingOptionNew context:NULL];
     [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"screenFilter" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
@@ -46,6 +42,15 @@ static ScreenView *sharedScreenView = nil;
 
 - (CGSize)screenSize {
     return screenSize;
+}
+
+- (void)updateVideoLayer {
+    if ([AppDelegate sharedEmulator]) {
+        [AppDelegate sharedEmulator].screenLayer = videoLayer;
+        screenSize = [AppDelegate sharedEmulator].screenSize;
+    } else {
+        screenSize = CGSizeMake(1, 1);
+    }
 }
 
 - (void)layoutSubviews {
@@ -73,10 +78,14 @@ static ScreenView *sharedScreenView = nil;
             videoLayer.magnificationFilter = value;
             videoLayer.minificationFilter = value;
         }
+    } else if (object == [AppDelegate sharedInstance] && [keyPath isEqualToString:@"sharedEmulator"]) {
+        [self updateVideoLayer];
+        [self layoutSubviews];
     }
 }
 
 - (void)dealloc {
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"screenFilter" context:NULL];
 }
+
 @end

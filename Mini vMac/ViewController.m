@@ -208,19 +208,21 @@ API_AVAILABLE(ios(13.4))
 }
 
 - (void)emulatorDidShutDown:(NSNotification*)notification {
-    UILabel *shutdownLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
-    shutdownLabel.text = NSLocalizedString(@"the emulated Mac has shut down\ntap to restart", nil);
-    shutdownLabel.textColor = [UIColor whiteColor];
-    [self.view addSubview:shutdownLabel];
-    shutdownLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [shutdownLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restartEmulator:)]];
-    shutdownLabel.numberOfLines = -1;
-    shutdownLabel.textAlignment = NSTextAlignmentCenter;
-    shutdownLabel.userInteractionEnabled = YES;
-    [UIView animateWithDuration:0.5 animations:^{
-        self.screenView.alpha = 0.5;
-    }];
-    [self hideKeyboard:notification];
+    if (notification.object == [AppDelegate sharedEmulator]) {
+        UILabel *shutdownLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
+        shutdownLabel.text = NSLocalizedString(@"the emulated Mac has shut down\ntap to restart", nil);
+        shutdownLabel.textColor = [UIColor whiteColor];
+        [self.view addSubview:shutdownLabel];
+        shutdownLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [shutdownLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(restartEmulator:)]];
+        shutdownLabel.numberOfLines = -1;
+        shutdownLabel.textAlignment = NSTextAlignmentCenter;
+        shutdownLabel.userInteractionEnabled = YES;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.screenView.alpha = 0.5;
+        }];
+        [self hideKeyboard:notification];
+    }
 }
 
 - (void)restartEmulator:(UITapGestureRecognizer*)gestureRecognizer {

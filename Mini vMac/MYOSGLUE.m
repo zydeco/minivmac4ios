@@ -36,14 +36,14 @@ EXPORTVAR(ui3p, RAM)
 EXPORTVAR(ui3p, VidROM)
 EXPORTVAR(ui3p, VidMem)
 
-@interface Emulator : NSObject <Emulator, UIAlertViewDelegate>
+@interface MNVMBundleClassName : NSObject <Emulator, UIAlertViewDelegate>
 
 - (void)makeNewDisk:(NSString*)name size:(NSInteger)size;
 - (void)updateScreen:(CGImageRef)screenImage;
 
 @end
 
-static Emulator *sharedEmulator = nil;
+static __weak MNVMBundleClassName *sharedEmulator = nil;
 
 #pragma mark - some simple utilities
 
@@ -405,7 +405,7 @@ LOCALFUNC tMacErr vSonyEject0(tDrive Drive_No, blnr deleteit) {
     }
 #endif
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:[Emulator sharedEmulator].ejectDiskNotification object:[Emulator sharedEmulator] userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:sharedEmulator.ejectDiskNotification object:sharedEmulator userInfo:userInfo];
 
     return mnvm_noErr;
 }
@@ -455,7 +455,7 @@ LOCALFUNC blnr Sony_Insert0(FILE *refnum, blnr locked, NSString *filePath) {
     } else {
         NSDictionary *userInfo = @{@"path": filePath,
                                    @"drive": @(Drive_No)};
-        [[NSNotificationCenter defaultCenter] postNotificationName:[Emulator sharedEmulator].insertDiskNotification object:[Emulator sharedEmulator] userInfo:userInfo];
+        [[NSNotificationCenter defaultCenter] postNotificationName:sharedEmulator.insertDiskNotification object:sharedEmulator userInfo:userInfo];
         
 /* printf("Sony_Insert0 %d\n", (int)Drive_No); */
 
@@ -787,7 +787,7 @@ LOCALPROC HaveChangedScreenBuff(ui4r top, ui4r left, ui4r bottom, ui4r right) {
     
     if (colorSpace) {
         CGImageRef screenImage = CGImageCreate(vMacScreenWidth, vMacScreenHeight, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace, options, screenDataProvider, NULL, false, kCGRenderingIntentDefault);
-        [[Emulator sharedEmulator] updateScreen:screenImage];
+        [sharedEmulator updateScreen:screenImage];
         CGImageRelease(screenImage);
     }
 }
@@ -1644,29 +1644,22 @@ GLOBALPROC WaitForNextTick(void) {
 
 #pragma mark - Objective-C Interface
 
-static dispatch_once_t onceToken;
-
-@implementation Emulator
+@implementation MNVMBundleClassName
 {
     __block __weak UITextField *nameTextField;
 }
 
 @synthesize dataPath;
 
-+ (instancetype)sharedEmulator {
-    dispatch_once(&onceToken, ^{
-        sharedEmulator = [self new];
-    });
-    return sharedEmulator;
-}
-
 - (instancetype)init {
     if ((self = [super init])) {
-        dispatch_once(&onceToken, ^{
-            sharedEmulator = self;
-        });
+        sharedEmulator = self;
     }
     return self;
+}
+
+- (void)shutdown {
+    RequestMacOff = trueblnr;
 }
 
 - (void)run {

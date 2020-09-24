@@ -39,6 +39,8 @@
 #define AutoLocation 1
 #define AutoTimeZone 1
 
+#define MNVMBundleClassName MacIIEmulator
+
 #ifdef PLIST_PREPROCESSOR
 #define MNVMBundleDisplayName Mac II
 #define MNVMBundleGetInfoString 8M, 1024×768

@@ -21,9 +21,11 @@ extern NSString *DocumentsChangedNotification;
 @property (nonatomic, readonly) NSArray<NSBundle*> *emulatorBundles;
 @property (nonatomic, readonly) NSString *emulatorBundlesPath;
 @property (readonly, nonatomic, getter = isSandboxed) BOOL sandboxed;
+@property (readonly, nonatomic) id<Emulator> sharedEmulator;
 
 + (instancetype)sharedInstance;
 + (id<Emulator>)sharedEmulator;
+- (void)reloadEmulator;
 
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
 - (IBAction)showInsertDisk:(id)sender;

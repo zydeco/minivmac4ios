@@ -108,6 +108,9 @@ typedef enum : NSInteger {
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [AppDelegate sharedEmulator].running = YES;
+    if (![selectedEmulatorBundle isEqual:[AppDelegate sharedEmulator].bundle] && ![AppDelegate sharedEmulator].anyDiskInserted) {
+        [[AppDelegate sharedInstance] reloadEmulator];
+    }
 }
 
 - (void)showInsertDisk:(id)sender {
@@ -209,8 +212,8 @@ typedef enum : NSInteger {
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == SettingsSectionSpeed) {
         return NSLocalizedString(@"Faster speeds and running in background drain the battery faster", nil);
-    } else if (section == SettingsSectionMachine) {
-        return NSLocalizedString(@"Changing the emulated machine requires to relaunch Mini vMac", nil);
+    } else if (section == SettingsSectionMachine && [AppDelegate sharedEmulator].anyDiskInserted) {
+        return NSLocalizedString(@"The emulated machine cannot be changed while disks are inserted.", nil);
     } else {
         return nil;
     }
@@ -326,6 +329,13 @@ typedef enum : NSInteger {
     }
     cell.accessoryType = item[@"link"] == nil ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
     return cell;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == SettingsSectionMachine && [AppDelegate sharedEmulator].anyDiskInserted) {
+        return nil;
+    }
+    return indexPath;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -38,11 +38,10 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) BOOL anyDiskInserted;
 @property (nonatomic, readonly) NSString *currentApplication;
 
-+ (instancetype)sharedEmulator;
-
 - (void)run;
 - (void)reset;
 - (void)interrupt;
+- (void)shutdown;
 
 - (void)keyDown:(int)scancode;
 - (void)keyUp:(int)scancode;

@@ -40,6 +40,8 @@
 #define AutoLocation 1
 #define AutoTimeZone 1
 
+#define MNVMBundleClassName MacPlus4MEmulator
+
 #ifdef PLIST_PREPROCESSOR
 #define MNVMBundleDisplayName Mac Plus
 #define MNVMBundleGetInfoString 4M, 512×342
