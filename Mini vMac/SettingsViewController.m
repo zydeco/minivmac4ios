@@ -27,6 +27,7 @@ typedef enum : NSInteger {
     NSArray *keyboardLayouts;
     NSArray<NSBundle*> *emulatorBundles;
     NSMutableArray *machineList; // NSString (header) or NSBundle (emulator bundle)
+    NSMutableDictionary<NSString*,UIImage*> *bundleIcons;
     NSMutableSet<NSBundle*> *groupedEmulatorBundles;
     NSBundle *selectedEmulatorBundle;
     NSString *aboutTitle;
@@ -48,6 +49,7 @@ typedef enum : NSInteger {
 
 - (void)loadEmulatorBundles {
     emulatorBundles = [AppDelegate sharedInstance].emulatorBundles;
+    bundleIcons = [NSMutableDictionary dictionaryWithCapacity:emulatorBundles.count];
     NSMutableDictionary<NSString*,NSMutableArray<NSBundle*>*> *bundlesByName = [NSMutableDictionary dictionaryWithCapacity:emulatorBundles.count];
     NSString *selectedBundleName = [[NSUserDefaults standardUserDefaults] stringForKey:@"machine"];
     for (NSBundle *bundle in emulatorBundles) {
@@ -270,8 +272,7 @@ typedef enum : NSInteger {
             cell.imageView.image = nil;
             cell.indentationLevel = 1;
         } else {
-            NSString *iconName = [NSString stringWithFormat:@"%@/Icon", bundle.bundlePath];
-            cell.imageView.image = [UIImage imageNamed:iconName];
+            cell.imageView.image = [self iconForBundle:bundle];
             cell.indentationLevel = 0;
         }
         cell.accessoryType = (item == selectedEmulatorBundle) ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
@@ -296,6 +297,19 @@ typedef enum : NSInteger {
         }
     }
     return cell;
+}
+
+- (UIImage*)iconForBundle:(NSBundle*)bundle {
+    UIImage *icon = bundleIcons[bundle.bundlePath];
+    if (icon != nil) {
+        return icon;
+    }
+    NSString *iconPath = [NSString stringWithFormat:@"%@/Icon.png", bundle.bundlePath];
+    icon = [UIImage imageWithContentsOfFile:iconPath];
+    if (icon != nil) {
+        bundleIcons[bundle.bundlePath] = icon;
+    }
+    return icon;
 }
 
 - (UITableViewCell*)aboutCellForTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
