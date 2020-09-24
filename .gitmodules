@@ -4,3 +4,7 @@
 [submodule "libres"]
 	path = libres
 	url = https://github.com/zydeco/libres.git
+[submodule "minivmac"]
+	path = minivmac
+	url = git@github.com:zydeco/minivmac.git
+	branch = wintergames

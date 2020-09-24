@@ -10,40 +10,8 @@
 		281BB6C91D231F7700BF87B0 /* MacII-640x480.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		283422D21CF8EF8C0088B634 /* MacPlus4M.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		283422EE1CF8F2210088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
-		283423601CF9C1050088B634 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423341CF9C0F10088B634 /* GLOBGLUE.c */; };
-		283423611CF9C10B0088B634 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423371CF9C0F10088B634 /* IWMEMDEV.c */; };
-		283423631CF9C1320088B634 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423391CF9C0F10088B634 /* KBRDEMDV.c */; };
-		283423641CF9C1320088B634 /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233B1CF9C0F10088B634 /* M68KITAB.c */; };
-		283423651CF9C1320088B634 /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233D1CF9C0F10088B634 /* MINEM68K.c */; };
-		283423661CF9C1320088B634 /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233F1CF9C0F10088B634 /* MOUSEMDV.c */; };
-		283423671CF9C1320088B634 /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423441CF9C0F10088B634 /* PROGMAIN.c */; };
-		283423681CF9C1320088B634 /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423461CF9C0F10088B634 /* ROMEMDEV.c */; };
-		283423691CF9C1320088B634 /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423481CF9C0F10088B634 /* RTCEMDEV.c */; };
-		2834236A1CF9C1320088B634 /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234A1CF9C0F10088B634 /* SCCEMDEV.c */; };
-		2834236B1CF9C1320088B634 /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234C1CF9C0F10088B634 /* SCRNEMDV.c */; };
-		2834236C1CF9C1320088B634 /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423511CF9C0F10088B634 /* SCSIEMDV.c */; };
-		2834236D1CF9C1320088B634 /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423531CF9C0F10088B634 /* SNDEMDEV.c */; };
-		2834236E1CF9C1320088B634 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423551CF9C0F10088B634 /* SONYEMDV.c */; };
-		2834236F1CF9C1320088B634 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235B1CF9C0F10088B634 /* VIAEMDEV.c */; };
 		283423881CF9C4CB0088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
 		283423A31CF9C5880088B634 /* MacII.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283423961CF9C4CB0088B634 /* MacII.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		283423D21CF9C66D0088B634 /* ADBEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423231CF9C0F10088B634 /* ADBEMDEV.c */; };
-		283423D31CF9C66D0088B634 /* ASCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423271CF9C0F10088B634 /* ASCEMDEV.c */; };
-		283423D41CF9C66D0088B634 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423341CF9C0F10088B634 /* GLOBGLUE.c */; };
-		283423D51CF9C66D0088B634 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423371CF9C0F10088B634 /* IWMEMDEV.c */; };
-		283423D61CF9C66D0088B634 /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233B1CF9C0F10088B634 /* M68KITAB.c */; };
-		283423D71CF9C66D0088B634 /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233D1CF9C0F10088B634 /* MINEM68K.c */; };
-		283423D81CF9C66D0088B634 /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233F1CF9C0F10088B634 /* MOUSEMDV.c */; };
-		283423D91CF9C66D0088B634 /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423441CF9C0F10088B634 /* PROGMAIN.c */; };
-		283423DA1CF9C66D0088B634 /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423461CF9C0F10088B634 /* ROMEMDEV.c */; };
-		283423DB1CF9C66D0088B634 /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423481CF9C0F10088B634 /* RTCEMDEV.c */; };
-		283423DC1CF9C66D0088B634 /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234A1CF9C0F10088B634 /* SCCEMDEV.c */; };
-		283423DD1CF9C66D0088B634 /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234C1CF9C0F10088B634 /* SCRNEMDV.c */; };
-		283423DE1CF9C66D0088B634 /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423511CF9C0F10088B634 /* SCSIEMDV.c */; };
-		283423DF1CF9C66D0088B634 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423551CF9C0F10088B634 /* SONYEMDV.c */; };
-		283423E01CF9C66D0088B634 /* VIA2EMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423591CF9C0F10088B634 /* VIA2EMDV.c */; };
-		283423E11CF9C66D0088B634 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235B1CF9C0F10088B634 /* VIAEMDEV.c */; };
-		283423E21CF9C66D0088B634 /* VIDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235D1CF9C0F10088B634 /* VIDEMDEV.c */; };
 		283423E91CFA32870088B634 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E31CFA32800088B634 /* Icon.png */; };
 		283423EA1CFA32870088B634 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E41CFA32800088B634 /* Icon@2x.png */; };
 		283423EB1CFA32870088B634 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E51CFA32800088B634 /* Icon@3x.png */; };
@@ -52,22 +20,7 @@
 		283423F11CFA329C0088B634 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EE1CFA329C0088B634 /* Icon@3x.png */; };
 		28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B611CDE97D600B86C45 /* InsertDiskViewController.m */; };
 		28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28848B641CDE97E900B86C45 /* SettingsViewController.m */; };
-		289710BA1CFB11BF0089D463 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423551CF9C0F10088B634 /* SONYEMDV.c */; };
-		289710BB1CFB11BF0089D463 /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235B1CF9C0F10088B634 /* VIAEMDEV.c */; };
-		289710BC1CFB11BF0089D463 /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423461CF9C0F10088B634 /* ROMEMDEV.c */; };
-		289710BD1CFB11BF0089D463 /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423531CF9C0F10088B634 /* SNDEMDEV.c */; };
-		289710BE1CFB11BF0089D463 /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423511CF9C0F10088B634 /* SCSIEMDV.c */; };
-		289710BF1CFB11BF0089D463 /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234A1CF9C0F10088B634 /* SCCEMDEV.c */; };
-		289710C01CFB11BF0089D463 /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234C1CF9C0F10088B634 /* SCRNEMDV.c */; };
-		289710C21CFB11BF0089D463 /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423371CF9C0F10088B634 /* IWMEMDEV.c */; };
 		289710C31CFB11BF0089D463 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
-		289710C41CFB11BF0089D463 /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233F1CF9C0F10088B634 /* MOUSEMDV.c */; };
-		289710C51CFB11BF0089D463 /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423341CF9C0F10088B634 /* GLOBGLUE.c */; };
-		289710C61CFB11BF0089D463 /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423391CF9C0F10088B634 /* KBRDEMDV.c */; };
-		289710C71CFB11BF0089D463 /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233D1CF9C0F10088B634 /* MINEM68K.c */; };
-		289710C81CFB11BF0089D463 /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233B1CF9C0F10088B634 /* M68KITAB.c */; };
-		289710C91CFB11BF0089D463 /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423441CF9C0F10088B634 /* PROGMAIN.c */; };
-		289710CA1CFB11BF0089D463 /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423481CF9C0F10088B634 /* RTCEMDEV.c */; };
 		289710DC1CFB12240089D463 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710D81CFB121F0089D463 /* Icon.png */; };
 		289710DD1CFB12240089D463 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710D91CFB121F0089D463 /* Icon@2x.png */; };
 		289710DE1CFB12240089D463 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710DA1CFB121F0089D463 /* Icon@3x.png */; };
@@ -78,29 +31,79 @@
 		28BA89821CE7336500A98104 /* Keyboard Layouts in Resources */ = {isa = PBXBuildFile; fileRef = 28BA89811CE7336500A98104 /* Keyboard Layouts */; };
 		28BA89851CE73E7200A98104 /* TrackPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89841CE73E7200A98104 /* TrackPad.m */; };
 		28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89871CE73FBC00A98104 /* MNVMApplication.m */; };
-		28BDBE9C1D230EEB0072ED5B /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423551CF9C0F10088B634 /* SONYEMDV.c */; };
-		28BDBE9D1D230EEB0072ED5B /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423511CF9C0F10088B634 /* SCSIEMDV.c */; };
-		28BDBE9E1D230EEB0072ED5B /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234C1CF9C0F10088B634 /* SCRNEMDV.c */; };
-		28BDBE9F1D230EEB0072ED5B /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423481CF9C0F10088B634 /* RTCEMDEV.c */; };
 		28BDBEA01D230EEB0072ED5B /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
-		28BDBEA11D230EEB0072ED5B /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233D1CF9C0F10088B634 /* MINEM68K.c */; };
-		28BDBEA21D230EEB0072ED5B /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233F1CF9C0F10088B634 /* MOUSEMDV.c */; };
-		28BDBEA31D230EEB0072ED5B /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235B1CF9C0F10088B634 /* VIAEMDEV.c */; };
-		28BDBEA41D230EEB0072ED5B /* VIA2EMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423591CF9C0F10088B634 /* VIA2EMDV.c */; };
-		28BDBEA51D230EEB0072ED5B /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834233B1CF9C0F10088B634 /* M68KITAB.c */; };
-		28BDBEA61D230EEB0072ED5B /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423341CF9C0F10088B634 /* GLOBGLUE.c */; };
-		28BDBEA71D230EEB0072ED5B /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423461CF9C0F10088B634 /* ROMEMDEV.c */; };
-		28BDBEA81D230EEB0072ED5B /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423441CF9C0F10088B634 /* PROGMAIN.c */; };
-		28BDBEA91D230EEB0072ED5B /* ADBEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423231CF9C0F10088B634 /* ADBEMDEV.c */; };
-		28BDBEAA1D230EEB0072ED5B /* ASCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423271CF9C0F10088B634 /* ASCEMDEV.c */; };
-		28BDBEAB1D230EEB0072ED5B /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834234A1CF9C0F10088B634 /* SCCEMDEV.c */; };
-		28BDBEAC1D230EEB0072ED5B /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 283423371CF9C0F10088B634 /* IWMEMDEV.c */; };
-		28BDBEAD1D230EEB0072ED5B /* VIDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 2834235D1CF9C0F10088B634 /* VIDEMDEV.c */; };
 		28BDBEB11D230EEB0072ED5B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EC1CFA329C0088B634 /* Icon.png */; };
 		28BDBEB21D230EEB0072ED5B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423ED1CFA329C0088B634 /* Icon@2x.png */; };
 		28BDBEB31D230EEB0072ED5B /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EE1CFA329C0088B634 /* Icon@3x.png */; };
 		28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */; };
 		28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */; };
+		28E3B7DF251D0F13007C273F /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CC251D0F12007C273F /* MOUSEMDV.c */; };
+		28E3B7E0251D0F13007C273F /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CC251D0F12007C273F /* MOUSEMDV.c */; };
+		28E3B7E1251D0F13007C273F /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CC251D0F12007C273F /* MOUSEMDV.c */; };
+		28E3B7E2251D0F13007C273F /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CC251D0F12007C273F /* MOUSEMDV.c */; };
+		28E3B7E3251D0F13007C273F /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CD251D0F12007C273F /* RTCEMDEV.c */; };
+		28E3B7E4251D0F13007C273F /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CD251D0F12007C273F /* RTCEMDEV.c */; };
+		28E3B7E5251D0F13007C273F /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CD251D0F12007C273F /* RTCEMDEV.c */; };
+		28E3B7E6251D0F13007C273F /* RTCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CD251D0F12007C273F /* RTCEMDEV.c */; };
+		28E3B7E7251D0F13007C273F /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CE251D0F12007C273F /* GLOBGLUE.c */; };
+		28E3B7E8251D0F13007C273F /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CE251D0F12007C273F /* GLOBGLUE.c */; };
+		28E3B7E9251D0F13007C273F /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CE251D0F12007C273F /* GLOBGLUE.c */; };
+		28E3B7EA251D0F13007C273F /* GLOBGLUE.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CE251D0F12007C273F /* GLOBGLUE.c */; };
+		28E3B7EB251D0F13007C273F /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CF251D0F12007C273F /* M68KITAB.c */; };
+		28E3B7EC251D0F13007C273F /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CF251D0F12007C273F /* M68KITAB.c */; };
+		28E3B7ED251D0F13007C273F /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CF251D0F12007C273F /* M68KITAB.c */; };
+		28E3B7EE251D0F13007C273F /* M68KITAB.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CF251D0F12007C273F /* M68KITAB.c */; };
+		28E3B7EF251D0F13007C273F /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D0251D0F12007C273F /* PROGMAIN.c */; };
+		28E3B7F0251D0F13007C273F /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D0251D0F12007C273F /* PROGMAIN.c */; };
+		28E3B7F1251D0F13007C273F /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D0251D0F12007C273F /* PROGMAIN.c */; };
+		28E3B7F2251D0F13007C273F /* PROGMAIN.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D0251D0F12007C273F /* PROGMAIN.c */; };
+		28E3B7F3251D0F13007C273F /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D1251D0F12007C273F /* SONYEMDV.c */; };
+		28E3B7F4251D0F13007C273F /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D1251D0F12007C273F /* SONYEMDV.c */; };
+		28E3B7F5251D0F13007C273F /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D1251D0F12007C273F /* SONYEMDV.c */; };
+		28E3B7F6251D0F13007C273F /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D1251D0F12007C273F /* SONYEMDV.c */; };
+		28E3B7F8251D0F13007C273F /* ADBEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D2251D0F13007C273F /* ADBEMDEV.c */; };
+		28E3B7FA251D0F13007C273F /* ADBEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D2251D0F13007C273F /* ADBEMDEV.c */; };
+		28E3B7FB251D0F13007C273F /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D3251D0F13007C273F /* MINEM68K.c */; };
+		28E3B7FC251D0F13007C273F /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D3251D0F13007C273F /* MINEM68K.c */; };
+		28E3B7FD251D0F13007C273F /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D3251D0F13007C273F /* MINEM68K.c */; };
+		28E3B7FE251D0F13007C273F /* MINEM68K.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D3251D0F13007C273F /* MINEM68K.c */; };
+		28E3B7FF251D0F13007C273F /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D4251D0F13007C273F /* SCRNEMDV.c */; };
+		28E3B800251D0F13007C273F /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D4251D0F13007C273F /* SCRNEMDV.c */; };
+		28E3B801251D0F13007C273F /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D4251D0F13007C273F /* SCRNEMDV.c */; };
+		28E3B802251D0F13007C273F /* SCRNEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D4251D0F13007C273F /* SCRNEMDV.c */; };
+		28E3B803251D0F13007C273F /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D5251D0F13007C273F /* IWMEMDEV.c */; };
+		28E3B804251D0F13007C273F /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D5251D0F13007C273F /* IWMEMDEV.c */; };
+		28E3B805251D0F13007C273F /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D5251D0F13007C273F /* IWMEMDEV.c */; };
+		28E3B806251D0F13007C273F /* IWMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D5251D0F13007C273F /* IWMEMDEV.c */; };
+		28E3B808251D0F13007C273F /* VIA2EMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D6251D0F13007C273F /* VIA2EMDV.c */; };
+		28E3B80A251D0F13007C273F /* VIA2EMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D6251D0F13007C273F /* VIA2EMDV.c */; };
+		28E3B80B251D0F13007C273F /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D7251D0F13007C273F /* SCCEMDEV.c */; };
+		28E3B80C251D0F13007C273F /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D7251D0F13007C273F /* SCCEMDEV.c */; };
+		28E3B80D251D0F13007C273F /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D7251D0F13007C273F /* SCCEMDEV.c */; };
+		28E3B80E251D0F13007C273F /* SCCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D7251D0F13007C273F /* SCCEMDEV.c */; };
+		28E3B810251D0F13007C273F /* VIDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D8251D0F13007C273F /* VIDEMDEV.c */; };
+		28E3B812251D0F13007C273F /* VIDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D8251D0F13007C273F /* VIDEMDEV.c */; };
+		28E3B813251D0F13007C273F /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D9251D0F13007C273F /* SCSIEMDV.c */; };
+		28E3B814251D0F13007C273F /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D9251D0F13007C273F /* SCSIEMDV.c */; };
+		28E3B815251D0F13007C273F /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D9251D0F13007C273F /* SCSIEMDV.c */; };
+		28E3B816251D0F13007C273F /* SCSIEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D9251D0F13007C273F /* SCSIEMDV.c */; };
+		28E3B817251D0F13007C273F /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DA251D0F13007C273F /* ROMEMDEV.c */; };
+		28E3B818251D0F13007C273F /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DA251D0F13007C273F /* ROMEMDEV.c */; };
+		28E3B819251D0F13007C273F /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DA251D0F13007C273F /* ROMEMDEV.c */; };
+		28E3B81A251D0F13007C273F /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DA251D0F13007C273F /* ROMEMDEV.c */; };
+		28E3B81B251D0F13007C273F /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DB251D0F13007C273F /* KBRDEMDV.c */; };
+		28E3B81D251D0F13007C273F /* KBRDEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DB251D0F13007C273F /* KBRDEMDV.c */; };
+		28E3B81F251D0F13007C273F /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DC251D0F13007C273F /* VIAEMDEV.c */; };
+		28E3B821251D0F13007C273F /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DC251D0F13007C273F /* VIAEMDEV.c */; };
+		28E3B823251D0F13007C273F /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DD251D0F13007C273F /* SNDEMDEV.c */; };
+		28E3B825251D0F13007C273F /* SNDEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DD251D0F13007C273F /* SNDEMDEV.c */; };
+		28E3B828251D0F13007C273F /* ASCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DE251D0F13007C273F /* ASCEMDEV.c */; };
+		28E3B82A251D0F13007C273F /* ASCEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DE251D0F13007C273F /* ASCEMDEV.c */; };
+		28E3B838251D1EC1007C273F /* CNFUDALL.h in Headers */ = {isa = PBXBuildFile; fileRef = 28E3B835251D1EC1007C273F /* CNFUDALL.h */; };
+		28E3B839251D1EC1007C273F /* CNFUDOSG.h in Headers */ = {isa = PBXBuildFile; fileRef = 28E3B836251D1EC1007C273F /* CNFUDOSG.h */; };
+		28E3B83A251D1EC1007C273F /* CNFUDPIC.h in Headers */ = {isa = PBXBuildFile; fileRef = 28E3B837251D1EC1007C273F /* CNFUDPIC.h */; };
+		28E3B83B251D1FA6007C273F /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DC251D0F13007C273F /* VIAEMDEV.c */; };
+		28E3B83C251D1FA7007C273F /* VIAEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DC251D0F13007C273F /* VIAEMDEV.c */; };
 		28F676C21CD15E0B00FC6FA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C11CD15E0B00FC6FA6 /* main.m */; };
 		28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */; };
 		28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F676C71CD15E0B00FC6FA6 /* ViewController.m */; };
@@ -202,69 +205,9 @@
 /* Begin PBXFileReference section */
 		283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacPlus4M.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		283422D71CF8EFD80088B634 /* EmulatorProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmulatorProtocol.h; sourceTree = "<group>"; };
-		283422E71CF8F1C80088B634 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
-		283422E91CF8F1C80088B634 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
-		283423221CF9C0F10088B634 /* ACTVCODE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ACTVCODE.h; sourceTree = "<group>"; };
-		283423231CF9C0F10088B634 /* ADBEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = ADBEMDEV.c; sourceTree = "<group>"; };
-		283423241CF9C0F10088B634 /* ADBEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ADBEMDEV.h; sourceTree = "<group>"; };
-		283423251CF9C0F10088B634 /* ADBSHARE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ADBSHARE.h; sourceTree = "<group>"; };
-		283423261CF9C0F10088B634 /* ALTKEYSM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ALTKEYSM.h; sourceTree = "<group>"; };
-		283423271CF9C0F10088B634 /* ASCEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = ASCEMDEV.c; sourceTree = "<group>"; };
-		283423281CF9C0F10088B634 /* ASCEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ASCEMDEV.h; sourceTree = "<group>"; };
-		283423291CF9C0F10088B634 /* BPFILTER.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BPFILTER.h; sourceTree = "<group>"; };
-		2834232A1CF9C0F10088B634 /* COMOSGLU.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = COMOSGLU.h; sourceTree = "<group>"; };
-		2834232B1CF9C0F10088B634 /* CONTROLM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CONTROLM.h; sourceTree = "<group>"; };
-		2834232C1CF9C0F10088B634 /* DATE2SEC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DATE2SEC.h; sourceTree = "<group>"; };
-		2834232D1CF9C0F10088B634 /* DISAM68K.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = DISAM68K.c; sourceTree = "<group>"; };
-		2834232E1CF9C0F10088B634 /* DISAM68K.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DISAM68K.h; sourceTree = "<group>"; };
-		2834232F1CF9C0F10088B634 /* ENDIANAC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ENDIANAC.h; sourceTree = "<group>"; };
-		283423311CF9C0F10088B634 /* FPCPEMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FPCPEMDV.h; sourceTree = "<group>"; };
-		283423321CF9C0F10088B634 /* FPMATHEM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FPMATHEM.h; sourceTree = "<group>"; };
-		283423341CF9C0F10088B634 /* GLOBGLUE.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = GLOBGLUE.c; sourceTree = "<group>"; };
-		283423351CF9C0F10088B634 /* GLOBGLUE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GLOBGLUE.h; sourceTree = "<group>"; };
-		283423361CF9C0F10088B634 /* INTLCHAR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = INTLCHAR.h; sourceTree = "<group>"; };
-		283423371CF9C0F10088B634 /* IWMEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = IWMEMDEV.c; sourceTree = "<group>"; };
-		283423381CF9C0F10088B634 /* IWMEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IWMEMDEV.h; sourceTree = "<group>"; };
-		283423391CF9C0F10088B634 /* KBRDEMDV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = KBRDEMDV.c; sourceTree = "<group>"; };
-		2834233A1CF9C0F10088B634 /* KBRDEMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = KBRDEMDV.h; sourceTree = "<group>"; };
-		2834233B1CF9C0F10088B634 /* M68KITAB.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = M68KITAB.c; sourceTree = "<group>"; };
-		2834233C1CF9C0F10088B634 /* M68KITAB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = M68KITAB.h; sourceTree = "<group>"; };
-		2834233D1CF9C0F10088B634 /* MINEM68K.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = MINEM68K.c; sourceTree = "<group>"; };
-		2834233E1CF9C0F10088B634 /* MINEM68K.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MINEM68K.h; sourceTree = "<group>"; };
-		2834233F1CF9C0F10088B634 /* MOUSEMDV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = MOUSEMDV.c; sourceTree = "<group>"; };
-		283423401CF9C0F10088B634 /* MOUSEMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MOUSEMDV.h; sourceTree = "<group>"; };
-		283423411CF9C0F10088B634 /* MYOSGLUE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MYOSGLUE.h; sourceTree = "<group>"; };
-		283423421CF9C0F10088B634 /* PMUEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = PMUEMDEV.c; sourceTree = "<group>"; };
-		283423431CF9C0F10088B634 /* PMUEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PMUEMDEV.h; sourceTree = "<group>"; };
-		283423441CF9C0F10088B634 /* PROGMAIN.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = PROGMAIN.c; sourceTree = "<group>"; };
-		283423451CF9C0F10088B634 /* PROGMAIN.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PROGMAIN.h; sourceTree = "<group>"; };
-		283423461CF9C0F10088B634 /* ROMEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = ROMEMDEV.c; sourceTree = "<group>"; };
-		283423471CF9C0F10088B634 /* ROMEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ROMEMDEV.h; sourceTree = "<group>"; };
-		283423481CF9C0F10088B634 /* RTCEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = RTCEMDEV.c; sourceTree = "<group>"; };
-		283423491CF9C0F10088B634 /* RTCEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RTCEMDEV.h; sourceTree = "<group>"; };
-		2834234A1CF9C0F10088B634 /* SCCEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = SCCEMDEV.c; sourceTree = "<group>"; };
-		2834234B1CF9C0F10088B634 /* SCCEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SCCEMDEV.h; sourceTree = "<group>"; };
-		2834234C1CF9C0F10088B634 /* SCRNEMDV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = SCRNEMDV.c; sourceTree = "<group>"; };
-		2834234D1CF9C0F10088B634 /* SCRNEMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SCRNEMDV.h; sourceTree = "<group>"; };
-		2834234E1CF9C0F10088B634 /* SCRNHACK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SCRNHACK.h; sourceTree = "<group>"; };
-		2834234F1CF9C0F10088B634 /* SCRNMAPR.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SCRNMAPR.h; sourceTree = "<group>"; };
-		283423501CF9C0F10088B634 /* SCRNTRNS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SCRNTRNS.h; sourceTree = "<group>"; };
-		283423511CF9C0F10088B634 /* SCSIEMDV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = SCSIEMDV.c; sourceTree = "<group>"; };
-		283423521CF9C0F10088B634 /* SCSIEMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SCSIEMDV.h; sourceTree = "<group>"; };
-		283423531CF9C0F10088B634 /* SNDEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = SNDEMDEV.c; sourceTree = "<group>"; };
-		283423541CF9C0F10088B634 /* SNDEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SNDEMDEV.h; sourceTree = "<group>"; };
-		283423551CF9C0F10088B634 /* SONYEMDV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = SONYEMDV.c; sourceTree = "<group>"; };
-		283423561CF9C0F10088B634 /* SONYEMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SONYEMDV.h; sourceTree = "<group>"; };
-		283423581CF9C0F10088B634 /* SYSDEPNS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SYSDEPNS.h; sourceTree = "<group>"; };
-		283423591CF9C0F10088B634 /* VIA2EMDV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = VIA2EMDV.c; sourceTree = "<group>"; };
-		2834235A1CF9C0F10088B634 /* VIA2EMDV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VIA2EMDV.h; sourceTree = "<group>"; };
-		2834235B1CF9C0F10088B634 /* VIAEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = VIAEMDEV.c; sourceTree = "<group>"; };
-		2834235C1CF9C0F10088B634 /* VIAEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VIAEMDEV.h; sourceTree = "<group>"; };
-		2834235D1CF9C0F10088B634 /* VIDEMDEV.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = VIDEMDEV.c; sourceTree = "<group>"; };
-		2834235E1CF9C0F10088B634 /* VIDEMDEV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = VIDEMDEV.h; sourceTree = "<group>"; };
+		283422E71CF8F1C80088B634 /* CNFUDOSG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
+		283422E91CF8F1C80088B634 /* CNFUDALL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
 		283423961CF9C4CB0088B634 /* MacII.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacII.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		283423991CF9C5380088B634 /* CNFGGLOB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
-		2834239B1CF9C5380088B634 /* EMCONFIG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
 		283423E31CFA32800088B634 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		283423E41CFA32800088B634 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		283423E51CFA32800088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
@@ -277,10 +220,9 @@
 		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
 		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		28848B641CDE97E900B86C45 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		289710B71CFB0DC70089D463 /* CNFGGLOB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
 		289710D41CFB11BF0089D463 /* Mac128K.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mac128K.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		289710D61CFB121F0089D463 /* CNFGGLOB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
-		289710D71CFB121F0089D463 /* EMCONFIG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
+		289710D61CFB121F0089D463 /* CNFUDOSG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
+		289710D71CFB121F0089D463 /* CNFUDALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
 		289710D81CFB121F0089D463 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		289710D91CFB121F0089D463 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		289710DA1CFB121F0089D463 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
@@ -296,15 +238,43 @@
 		28BA89861CE73FBC00A98104 /* MNVMApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNVMApplication.h; sourceTree = "<group>"; };
 		28BA89871CE73FBC00A98104 /* MNVMApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNVMApplication.m; sourceTree = "<group>"; };
 		28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MacII-640x480.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		28BDBEBA1D230F280072ED5B /* CNFGGLOB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFGGLOB.h; sourceTree = "<group>"; };
-		28BDBEBB1D230F280072ED5B /* EMCONFIG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMCONFIG.h; sourceTree = "<group>"; };
-		28C63A5D1F76970000BB02B3 /* HPMCHACK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPMCHACK.h; sourceTree = "<group>"; };
-		28C63A5E1F76979500BB02B3 /* STRCNENG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STRCNENG.h; sourceTree = "<group>"; };
 		28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYOSGLUE.m; sourceTree = "<group>"; };
 		28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenView.h; sourceTree = "<group>"; };
 		28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
 		28D5A3FB1CD6868E001A33F6 /* TouchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchScreen.h; sourceTree = "<group>"; };
 		28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchScreen.m; sourceTree = "<group>"; };
+		28E3B7CC251D0F12007C273F /* MOUSEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MOUSEMDV.c; sourceTree = "<group>"; };
+		28E3B7CD251D0F12007C273F /* RTCEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RTCEMDEV.c; sourceTree = "<group>"; };
+		28E3B7CE251D0F12007C273F /* GLOBGLUE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GLOBGLUE.c; sourceTree = "<group>"; };
+		28E3B7CF251D0F12007C273F /* M68KITAB.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = M68KITAB.c; sourceTree = "<group>"; };
+		28E3B7D0251D0F12007C273F /* PROGMAIN.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PROGMAIN.c; sourceTree = "<group>"; };
+		28E3B7D1251D0F12007C273F /* SONYEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SONYEMDV.c; sourceTree = "<group>"; };
+		28E3B7D2251D0F13007C273F /* ADBEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ADBEMDEV.c; sourceTree = "<group>"; };
+		28E3B7D3251D0F13007C273F /* MINEM68K.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MINEM68K.c; sourceTree = "<group>"; };
+		28E3B7D4251D0F13007C273F /* SCRNEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCRNEMDV.c; sourceTree = "<group>"; };
+		28E3B7D5251D0F13007C273F /* IWMEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IWMEMDEV.c; sourceTree = "<group>"; };
+		28E3B7D6251D0F13007C273F /* VIA2EMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VIA2EMDV.c; sourceTree = "<group>"; };
+		28E3B7D7251D0F13007C273F /* SCCEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCCEMDEV.c; sourceTree = "<group>"; };
+		28E3B7D8251D0F13007C273F /* VIDEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VIDEMDEV.c; sourceTree = "<group>"; };
+		28E3B7D9251D0F13007C273F /* SCSIEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCSIEMDV.c; sourceTree = "<group>"; };
+		28E3B7DA251D0F13007C273F /* ROMEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ROMEMDEV.c; sourceTree = "<group>"; };
+		28E3B7DB251D0F13007C273F /* KBRDEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = KBRDEMDV.c; sourceTree = "<group>"; };
+		28E3B7DC251D0F13007C273F /* VIAEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VIAEMDEV.c; sourceTree = "<group>"; };
+		28E3B7DD251D0F13007C273F /* SNDEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SNDEMDEV.c; sourceTree = "<group>"; };
+		28E3B7DE251D0F13007C273F /* ASCEMDEV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASCEMDEV.c; sourceTree = "<group>"; };
+		28E3B82B251D10A8007C273F /* CNFUIOSG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUIOSG.h; sourceTree = "<group>"; };
+		28E3B82C251D1255007C273F /* CNFUIALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUIALL.h; sourceTree = "<group>"; };
+		28E3B82D251D144E007C273F /* CNFUDPIC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDPIC.h; sourceTree = "<group>"; };
+		28E3B82E251D14A7007C273F /* CNFUDPIC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDPIC.h; sourceTree = "<group>"; };
+		28E3B82F251D167F007C273F /* STRCONST.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STRCONST.h; sourceTree = "<group>"; };
+		28E3B830251D18D9007C273F /* CNFUIPIC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUIPIC.h; sourceTree = "<group>"; };
+		28E3B831251D195D007C273F /* PICOMMON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PICOMMON.h; sourceTree = "<group>"; };
+		28E3B832251D1E8A007C273F /* CNFUDALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
+		28E3B833251D1E8A007C273F /* CNFUDPIC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDPIC.h; sourceTree = "<group>"; };
+		28E3B834251D1E8A007C273F /* CNFUDOSG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
+		28E3B835251D1EC1007C273F /* CNFUDALL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
+		28E3B836251D1EC1007C273F /* CNFUDOSG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
+		28E3B837251D1EC1007C273F /* CNFUDPIC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFUDPIC.h; sourceTree = "<group>"; };
 		28F676BD1CD15E0B00FC6FA6 /* Mini vMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mini vMac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F676C11CD15E0B00FC6FA6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28F676C31CD15E0B00FC6FA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -427,8 +397,9 @@
 		283422CB1CF8EF8C0088B634 /* MacPlus4M */ = {
 			isa = PBXGroup;
 			children = (
-				283422E71CF8F1C80088B634 /* CNFGGLOB.h */,
-				283422E91CF8F1C80088B634 /* EMCONFIG.h */,
+				283422E91CF8F1C80088B634 /* CNFUDALL.h */,
+				283422E71CF8F1C80088B634 /* CNFUDOSG.h */,
+				28E3B82D251D144E007C273F /* CNFUDPIC.h */,
 				283423E31CFA32800088B634 /* Icon.png */,
 				283423E41CFA32800088B634 /* Icon@2x.png */,
 				283423E51CFA32800088B634 /* Icon@3x.png */,
@@ -451,88 +422,25 @@
 		283422F01CF8F3530088B634 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				283423211CF9C0F10088B634 /* mnvm_core */,
+				28E3B7CB251D0EEC007C273F /* src */,
 				283422D71CF8EFD80088B634 /* EmulatorProtocol.h */,
 				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
-				289710B71CFB0DC70089D463 /* CNFGGLOB.h */,
 				285A8C901D05AFD3002993DE /* PlugIn-Info.plist */,
 				28F875921D29402B001E99EB /* PlugIn-Capabilities.plist.xml */,
+				28E3B82C251D1255007C273F /* CNFUIALL.h */,
+				28E3B82B251D10A8007C273F /* CNFUIOSG.h */,
+				28E3B830251D18D9007C273F /* CNFUIPIC.h */,
+				28E3B82F251D167F007C273F /* STRCONST.h */,
 			);
 			name = Shared;
-			sourceTree = "<group>";
-		};
-		283423211CF9C0F10088B634 /* mnvm_core */ = {
-			isa = PBXGroup;
-			children = (
-				283423221CF9C0F10088B634 /* ACTVCODE.h */,
-				283423231CF9C0F10088B634 /* ADBEMDEV.c */,
-				283423241CF9C0F10088B634 /* ADBEMDEV.h */,
-				283423251CF9C0F10088B634 /* ADBSHARE.h */,
-				283423261CF9C0F10088B634 /* ALTKEYSM.h */,
-				283423271CF9C0F10088B634 /* ASCEMDEV.c */,
-				283423281CF9C0F10088B634 /* ASCEMDEV.h */,
-				283423291CF9C0F10088B634 /* BPFILTER.h */,
-				2834232A1CF9C0F10088B634 /* COMOSGLU.h */,
-				2834232B1CF9C0F10088B634 /* CONTROLM.h */,
-				2834232C1CF9C0F10088B634 /* DATE2SEC.h */,
-				2834232D1CF9C0F10088B634 /* DISAM68K.c */,
-				2834232E1CF9C0F10088B634 /* DISAM68K.h */,
-				2834232F1CF9C0F10088B634 /* ENDIANAC.h */,
-				283423311CF9C0F10088B634 /* FPCPEMDV.h */,
-				283423321CF9C0F10088B634 /* FPMATHEM.h */,
-				283423341CF9C0F10088B634 /* GLOBGLUE.c */,
-				283423351CF9C0F10088B634 /* GLOBGLUE.h */,
-				28C63A5D1F76970000BB02B3 /* HPMCHACK.h */,
-				283423361CF9C0F10088B634 /* INTLCHAR.h */,
-				283423371CF9C0F10088B634 /* IWMEMDEV.c */,
-				283423381CF9C0F10088B634 /* IWMEMDEV.h */,
-				283423391CF9C0F10088B634 /* KBRDEMDV.c */,
-				2834233A1CF9C0F10088B634 /* KBRDEMDV.h */,
-				2834233B1CF9C0F10088B634 /* M68KITAB.c */,
-				2834233C1CF9C0F10088B634 /* M68KITAB.h */,
-				2834233D1CF9C0F10088B634 /* MINEM68K.c */,
-				2834233E1CF9C0F10088B634 /* MINEM68K.h */,
-				2834233F1CF9C0F10088B634 /* MOUSEMDV.c */,
-				283423401CF9C0F10088B634 /* MOUSEMDV.h */,
-				283423411CF9C0F10088B634 /* MYOSGLUE.h */,
-				283423421CF9C0F10088B634 /* PMUEMDEV.c */,
-				283423431CF9C0F10088B634 /* PMUEMDEV.h */,
-				283423441CF9C0F10088B634 /* PROGMAIN.c */,
-				283423451CF9C0F10088B634 /* PROGMAIN.h */,
-				283423461CF9C0F10088B634 /* ROMEMDEV.c */,
-				283423471CF9C0F10088B634 /* ROMEMDEV.h */,
-				283423481CF9C0F10088B634 /* RTCEMDEV.c */,
-				283423491CF9C0F10088B634 /* RTCEMDEV.h */,
-				2834234A1CF9C0F10088B634 /* SCCEMDEV.c */,
-				2834234B1CF9C0F10088B634 /* SCCEMDEV.h */,
-				2834234C1CF9C0F10088B634 /* SCRNEMDV.c */,
-				2834234D1CF9C0F10088B634 /* SCRNEMDV.h */,
-				2834234E1CF9C0F10088B634 /* SCRNHACK.h */,
-				2834234F1CF9C0F10088B634 /* SCRNMAPR.h */,
-				283423501CF9C0F10088B634 /* SCRNTRNS.h */,
-				283423511CF9C0F10088B634 /* SCSIEMDV.c */,
-				283423521CF9C0F10088B634 /* SCSIEMDV.h */,
-				283423531CF9C0F10088B634 /* SNDEMDEV.c */,
-				283423541CF9C0F10088B634 /* SNDEMDEV.h */,
-				283423551CF9C0F10088B634 /* SONYEMDV.c */,
-				283423561CF9C0F10088B634 /* SONYEMDV.h */,
-				28C63A5E1F76979500BB02B3 /* STRCNENG.h */,
-				283423581CF9C0F10088B634 /* SYSDEPNS.h */,
-				283423591CF9C0F10088B634 /* VIA2EMDV.c */,
-				2834235A1CF9C0F10088B634 /* VIA2EMDV.h */,
-				2834235B1CF9C0F10088B634 /* VIAEMDEV.c */,
-				2834235C1CF9C0F10088B634 /* VIAEMDEV.h */,
-				2834235D1CF9C0F10088B634 /* VIDEMDEV.c */,
-				2834235E1CF9C0F10088B634 /* VIDEMDEV.h */,
-			);
-			path = mnvm_core;
 			sourceTree = "<group>";
 		};
 		283423981CF9C5380088B634 /* MacII */ = {
 			isa = PBXGroup;
 			children = (
-				283423991CF9C5380088B634 /* CNFGGLOB.h */,
-				2834239B1CF9C5380088B634 /* EMCONFIG.h */,
+				28E3B832251D1E8A007C273F /* CNFUDALL.h */,
+				28E3B834251D1E8A007C273F /* CNFUDOSG.h */,
+				28E3B833251D1E8A007C273F /* CNFUDPIC.h */,
 				283423EC1CFA329C0088B634 /* Icon.png */,
 				283423ED1CFA329C0088B634 /* Icon@2x.png */,
 				283423EE1CFA329C0088B634 /* Icon@3x.png */,
@@ -543,8 +451,9 @@
 		289710D51CFB11D90089D463 /* Mac128K */ = {
 			isa = PBXGroup;
 			children = (
-				289710D61CFB121F0089D463 /* CNFGGLOB.h */,
-				289710D71CFB121F0089D463 /* EMCONFIG.h */,
+				289710D71CFB121F0089D463 /* CNFUDALL.h */,
+				289710D61CFB121F0089D463 /* CNFUDOSG.h */,
+				28E3B82E251D14A7007C273F /* CNFUDPIC.h */,
 				289710D81CFB121F0089D463 /* Icon.png */,
 				289710D91CFB121F0089D463 /* Icon@2x.png */,
 				289710DA1CFB121F0089D463 /* Icon@3x.png */,
@@ -569,10 +478,39 @@
 		28BDBEB91D230F280072ED5B /* MacII-640x480 */ = {
 			isa = PBXGroup;
 			children = (
-				28BDBEBA1D230F280072ED5B /* CNFGGLOB.h */,
-				28BDBEBB1D230F280072ED5B /* EMCONFIG.h */,
+				28E3B835251D1EC1007C273F /* CNFUDALL.h */,
+				28E3B836251D1EC1007C273F /* CNFUDOSG.h */,
+				28E3B837251D1EC1007C273F /* CNFUDPIC.h */,
 			);
 			path = "MacII-640x480";
+			sourceTree = "<group>";
+		};
+		28E3B7CB251D0EEC007C273F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				28E3B831251D195D007C273F /* PICOMMON.h */,
+				28E3B7D2251D0F13007C273F /* ADBEMDEV.c */,
+				28E3B7DE251D0F13007C273F /* ASCEMDEV.c */,
+				28E3B7CE251D0F12007C273F /* GLOBGLUE.c */,
+				28E3B7D5251D0F13007C273F /* IWMEMDEV.c */,
+				28E3B7DB251D0F13007C273F /* KBRDEMDV.c */,
+				28E3B7CF251D0F12007C273F /* M68KITAB.c */,
+				28E3B7D3251D0F13007C273F /* MINEM68K.c */,
+				28E3B7CC251D0F12007C273F /* MOUSEMDV.c */,
+				28E3B7D0251D0F12007C273F /* PROGMAIN.c */,
+				28E3B7DA251D0F13007C273F /* ROMEMDEV.c */,
+				28E3B7CD251D0F12007C273F /* RTCEMDEV.c */,
+				28E3B7D7251D0F13007C273F /* SCCEMDEV.c */,
+				28E3B7D4251D0F13007C273F /* SCRNEMDV.c */,
+				28E3B7D9251D0F13007C273F /* SCSIEMDV.c */,
+				28E3B7DD251D0F13007C273F /* SNDEMDEV.c */,
+				28E3B7D1251D0F12007C273F /* SONYEMDV.c */,
+				28E3B7D6251D0F13007C273F /* VIA2EMDV.c */,
+				28E3B7DC251D0F13007C273F /* VIAEMDEV.c */,
+				28E3B7D8251D0F13007C273F /* VIDEMDEV.c */,
+			);
+			name = src;
+			path = ../minivmac/src;
 			sourceTree = "<group>";
 		};
 		28F676B41CD15E0B00FC6FA6 = {
@@ -719,6 +657,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E3B838251D1EC1007C273F /* CNFUDALL.h in Headers */,
+				28E3B83A251D1EC1007C273F /* CNFUDPIC.h in Headers */,
+				28E3B839251D1EC1007C273F /* CNFUDOSG.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -902,7 +843,7 @@
 		28F676B51CD15E0B00FC6FA6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = namedfork;
 				TargetAttributes = {
 					283422C91CF8EF8C0088B634 = {
@@ -1107,22 +1048,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2834236E1CF9C1320088B634 /* SONYEMDV.c in Sources */,
-				2834236F1CF9C1320088B634 /* VIAEMDEV.c in Sources */,
-				283423681CF9C1320088B634 /* ROMEMDEV.c in Sources */,
-				2834236D1CF9C1320088B634 /* SNDEMDEV.c in Sources */,
-				2834236C1CF9C1320088B634 /* SCSIEMDV.c in Sources */,
-				2834236A1CF9C1320088B634 /* SCCEMDEV.c in Sources */,
-				2834236B1CF9C1320088B634 /* SCRNEMDV.c in Sources */,
-				283423611CF9C10B0088B634 /* IWMEMDEV.c in Sources */,
+				28E3B813251D0F13007C273F /* SCSIEMDV.c in Sources */,
+				28E3B7FB251D0F13007C273F /* MINEM68K.c in Sources */,
+				28E3B7E7251D0F13007C273F /* GLOBGLUE.c in Sources */,
+				28E3B7EB251D0F13007C273F /* M68KITAB.c in Sources */,
+				28E3B7EF251D0F13007C273F /* PROGMAIN.c in Sources */,
+				28E3B803251D0F13007C273F /* IWMEMDEV.c in Sources */,
+				28E3B81F251D0F13007C273F /* VIAEMDEV.c in Sources */,
+				28E3B7FF251D0F13007C273F /* SCRNEMDV.c in Sources */,
+				28E3B7F3251D0F13007C273F /* SONYEMDV.c in Sources */,
+				28E3B823251D0F13007C273F /* SNDEMDEV.c in Sources */,
+				28E3B817251D0F13007C273F /* ROMEMDEV.c in Sources */,
 				283422EE1CF8F2210088B634 /* MYOSGLUE.m in Sources */,
-				283423661CF9C1320088B634 /* MOUSEMDV.c in Sources */,
-				283423601CF9C1050088B634 /* GLOBGLUE.c in Sources */,
-				283423631CF9C1320088B634 /* KBRDEMDV.c in Sources */,
-				283423651CF9C1320088B634 /* MINEM68K.c in Sources */,
-				283423641CF9C1320088B634 /* M68KITAB.c in Sources */,
-				283423671CF9C1320088B634 /* PROGMAIN.c in Sources */,
-				283423691CF9C1320088B634 /* RTCEMDEV.c in Sources */,
+				28E3B7E3251D0F13007C273F /* RTCEMDEV.c in Sources */,
+				28E3B81B251D0F13007C273F /* KBRDEMDV.c in Sources */,
+				28E3B80B251D0F13007C273F /* SCCEMDEV.c in Sources */,
+				28E3B7DF251D0F13007C273F /* MOUSEMDV.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1130,24 +1071,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				283423DF1CF9C66D0088B634 /* SONYEMDV.c in Sources */,
-				283423DE1CF9C66D0088B634 /* SCSIEMDV.c in Sources */,
-				283423DD1CF9C66D0088B634 /* SCRNEMDV.c in Sources */,
-				283423DB1CF9C66D0088B634 /* RTCEMDEV.c in Sources */,
+				28E3B814251D0F13007C273F /* SCSIEMDV.c in Sources */,
+				28E3B7FC251D0F13007C273F /* MINEM68K.c in Sources */,
+				28E3B7E8251D0F13007C273F /* GLOBGLUE.c in Sources */,
+				28E3B7EC251D0F13007C273F /* M68KITAB.c in Sources */,
+				28E3B7F0251D0F13007C273F /* PROGMAIN.c in Sources */,
+				28E3B7F8251D0F13007C273F /* ADBEMDEV.c in Sources */,
+				28E3B808251D0F13007C273F /* VIA2EMDV.c in Sources */,
+				28E3B804251D0F13007C273F /* IWMEMDEV.c in Sources */,
+				28E3B83B251D1FA6007C273F /* VIAEMDEV.c in Sources */,
+				28E3B800251D0F13007C273F /* SCRNEMDV.c in Sources */,
+				28E3B7F4251D0F13007C273F /* SONYEMDV.c in Sources */,
+				28E3B818251D0F13007C273F /* ROMEMDEV.c in Sources */,
 				283423881CF9C4CB0088B634 /* MYOSGLUE.m in Sources */,
-				283423D71CF9C66D0088B634 /* MINEM68K.c in Sources */,
-				283423D81CF9C66D0088B634 /* MOUSEMDV.c in Sources */,
-				283423E11CF9C66D0088B634 /* VIAEMDEV.c in Sources */,
-				283423E01CF9C66D0088B634 /* VIA2EMDV.c in Sources */,
-				283423D61CF9C66D0088B634 /* M68KITAB.c in Sources */,
-				283423D41CF9C66D0088B634 /* GLOBGLUE.c in Sources */,
-				283423DA1CF9C66D0088B634 /* ROMEMDEV.c in Sources */,
-				283423D91CF9C66D0088B634 /* PROGMAIN.c in Sources */,
-				283423D21CF9C66D0088B634 /* ADBEMDEV.c in Sources */,
-				283423D31CF9C66D0088B634 /* ASCEMDEV.c in Sources */,
-				283423DC1CF9C66D0088B634 /* SCCEMDEV.c in Sources */,
-				283423D51CF9C66D0088B634 /* IWMEMDEV.c in Sources */,
-				283423E21CF9C66D0088B634 /* VIDEMDEV.c in Sources */,
+				28E3B7E4251D0F13007C273F /* RTCEMDEV.c in Sources */,
+				28E3B80C251D0F13007C273F /* SCCEMDEV.c in Sources */,
+				28E3B7E0251D0F13007C273F /* MOUSEMDV.c in Sources */,
+				28E3B810251D0F13007C273F /* VIDEMDEV.c in Sources */,
+				28E3B828251D0F13007C273F /* ASCEMDEV.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,22 +1096,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				289710BA1CFB11BF0089D463 /* SONYEMDV.c in Sources */,
-				289710BB1CFB11BF0089D463 /* VIAEMDEV.c in Sources */,
-				289710BC1CFB11BF0089D463 /* ROMEMDEV.c in Sources */,
-				289710BD1CFB11BF0089D463 /* SNDEMDEV.c in Sources */,
-				289710BE1CFB11BF0089D463 /* SCSIEMDV.c in Sources */,
-				289710BF1CFB11BF0089D463 /* SCCEMDEV.c in Sources */,
-				289710C01CFB11BF0089D463 /* SCRNEMDV.c in Sources */,
-				289710C21CFB11BF0089D463 /* IWMEMDEV.c in Sources */,
+				28E3B815251D0F13007C273F /* SCSIEMDV.c in Sources */,
+				28E3B7FD251D0F13007C273F /* MINEM68K.c in Sources */,
+				28E3B7E9251D0F13007C273F /* GLOBGLUE.c in Sources */,
+				28E3B7ED251D0F13007C273F /* M68KITAB.c in Sources */,
+				28E3B7F1251D0F13007C273F /* PROGMAIN.c in Sources */,
+				28E3B805251D0F13007C273F /* IWMEMDEV.c in Sources */,
+				28E3B821251D0F13007C273F /* VIAEMDEV.c in Sources */,
+				28E3B801251D0F13007C273F /* SCRNEMDV.c in Sources */,
+				28E3B7F5251D0F13007C273F /* SONYEMDV.c in Sources */,
+				28E3B825251D0F13007C273F /* SNDEMDEV.c in Sources */,
+				28E3B819251D0F13007C273F /* ROMEMDEV.c in Sources */,
 				289710C31CFB11BF0089D463 /* MYOSGLUE.m in Sources */,
-				289710C41CFB11BF0089D463 /* MOUSEMDV.c in Sources */,
-				289710C51CFB11BF0089D463 /* GLOBGLUE.c in Sources */,
-				289710C61CFB11BF0089D463 /* KBRDEMDV.c in Sources */,
-				289710C71CFB11BF0089D463 /* MINEM68K.c in Sources */,
-				289710C81CFB11BF0089D463 /* M68KITAB.c in Sources */,
-				289710C91CFB11BF0089D463 /* PROGMAIN.c in Sources */,
-				289710CA1CFB11BF0089D463 /* RTCEMDEV.c in Sources */,
+				28E3B7E5251D0F13007C273F /* RTCEMDEV.c in Sources */,
+				28E3B81D251D0F13007C273F /* KBRDEMDV.c in Sources */,
+				28E3B80D251D0F13007C273F /* SCCEMDEV.c in Sources */,
+				28E3B7E1251D0F13007C273F /* MOUSEMDV.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1178,24 +1119,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28BDBE9C1D230EEB0072ED5B /* SONYEMDV.c in Sources */,
-				28BDBE9D1D230EEB0072ED5B /* SCSIEMDV.c in Sources */,
-				28BDBE9E1D230EEB0072ED5B /* SCRNEMDV.c in Sources */,
-				28BDBE9F1D230EEB0072ED5B /* RTCEMDEV.c in Sources */,
+				28E3B816251D0F13007C273F /* SCSIEMDV.c in Sources */,
+				28E3B7FE251D0F13007C273F /* MINEM68K.c in Sources */,
+				28E3B7EA251D0F13007C273F /* GLOBGLUE.c in Sources */,
+				28E3B7EE251D0F13007C273F /* M68KITAB.c in Sources */,
+				28E3B7F2251D0F13007C273F /* PROGMAIN.c in Sources */,
+				28E3B7FA251D0F13007C273F /* ADBEMDEV.c in Sources */,
+				28E3B80A251D0F13007C273F /* VIA2EMDV.c in Sources */,
+				28E3B806251D0F13007C273F /* IWMEMDEV.c in Sources */,
+				28E3B83C251D1FA7007C273F /* VIAEMDEV.c in Sources */,
+				28E3B802251D0F13007C273F /* SCRNEMDV.c in Sources */,
+				28E3B7F6251D0F13007C273F /* SONYEMDV.c in Sources */,
+				28E3B81A251D0F13007C273F /* ROMEMDEV.c in Sources */,
 				28BDBEA01D230EEB0072ED5B /* MYOSGLUE.m in Sources */,
-				28BDBEA11D230EEB0072ED5B /* MINEM68K.c in Sources */,
-				28BDBEA21D230EEB0072ED5B /* MOUSEMDV.c in Sources */,
-				28BDBEA31D230EEB0072ED5B /* VIAEMDEV.c in Sources */,
-				28BDBEA41D230EEB0072ED5B /* VIA2EMDV.c in Sources */,
-				28BDBEA51D230EEB0072ED5B /* M68KITAB.c in Sources */,
-				28BDBEA61D230EEB0072ED5B /* GLOBGLUE.c in Sources */,
-				28BDBEA71D230EEB0072ED5B /* ROMEMDEV.c in Sources */,
-				28BDBEA81D230EEB0072ED5B /* PROGMAIN.c in Sources */,
-				28BDBEA91D230EEB0072ED5B /* ADBEMDEV.c in Sources */,
-				28BDBEAA1D230EEB0072ED5B /* ASCEMDEV.c in Sources */,
-				28BDBEAB1D230EEB0072ED5B /* SCCEMDEV.c in Sources */,
-				28BDBEAC1D230EEB0072ED5B /* IWMEMDEV.c in Sources */,
-				28BDBEAD1D230EEB0072ED5B /* VIDEMDEV.c in Sources */,
+				28E3B7E6251D0F13007C273F /* RTCEMDEV.c in Sources */,
+				28E3B80E251D0F13007C273F /* SCCEMDEV.c in Sources */,
+				28E3B7E2251D0F13007C273F /* MOUSEMDV.c in Sources */,
+				28E3B812251D0F13007C273F /* VIDEMDEV.c in Sources */,
+				28E3B82A251D0F13007C273F /* ASCEMDEV.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1299,7 +1240,7 @@
 		283422D41CF8EF8C0088B634 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1307,7 +1248,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFUDALL.h";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1317,7 +1258,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macplus4m;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1327,7 +1268,7 @@
 		283422D51CF8EF8C0088B634 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1335,7 +1276,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFUDALL.h";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1345,7 +1286,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macplus4m;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1355,7 +1296,7 @@
 		283423941CF9C4CB0088B634 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1363,7 +1304,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFUDALL.h";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1373,7 +1314,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macii;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1383,7 +1324,7 @@
 		283423951CF9C4CB0088B634 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1391,7 +1332,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFUDALL.h";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1401,7 +1342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macii;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1411,7 +1352,7 @@
 		289710D21CFB11BF0089D463 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1419,7 +1360,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFUDALL.h";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1429,7 +1370,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.mac128k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1439,7 +1380,7 @@
 		289710D31CFB11BF0089D463 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1447,7 +1388,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFUDALL.h";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1457,7 +1398,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.mac128k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1467,7 +1408,7 @@
 		28BDBEB51D230EEB0072ED5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1475,7 +1416,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFUDALL.h";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1485,7 +1426,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-640x480";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1495,7 +1436,7 @@
 		28BDBEB61D230EEB0072ED5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1503,7 +1444,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Mini vMac/PlugIn-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFGGLOB.h";
+				INFOPLIST_PREFIX_HEADER = "$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)/CNFUDALL.h";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1513,7 +1454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-640x480";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/mnvm_core\"";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1523,7 +1464,7 @@
 		28F676D21CD15E0B00FC6FA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1578,7 +1519,7 @@
 		28F676D31CD15E0B00FC6FA6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1630,13 +1571,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = UJXNDZ5TNU;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				OTHER_CFLAGS = "-DUSE_LIBRES";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1650,13 +1591,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = UJXNDZ5TNU;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				OTHER_CFLAGS = "-DUSE_LIBRES";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";

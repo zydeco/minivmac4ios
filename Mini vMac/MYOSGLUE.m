@@ -27,11 +27,8 @@
 @import UIKit;
 @import AudioUnit;
 @import AudioToolbox;
-#include "SYSDEPNS.h"
-#include "ENDIANAC.h"
-#include "MYOSGLUE.h"
-#include "STRCNENG.h"
-#include "EMCONFIG.h"
+#include "OSGCOMUI.h"
+#include "OSGCOMUD.h"
 #import "EmulatorProtocol.h"
 
 #define kRAM_Size (kRAMa_Size + kRAMb_Size)
@@ -1826,7 +1823,7 @@ static dispatch_once_t onceToken;
 - (void)didMakeNewDisk:(NSString*)fileName size:(NSInteger)size {
     if (fileName) {
         NSString *filePath = [self.dataPath stringByAppendingPathComponent:fileName];
-        MakeNewDisk0(size, filePath);
+        MakeNewDisk0((ui5b)size, filePath);
     }
 #if IncludeSonyNameNew
     if (vSonyNewDiskName != NotAPbuf) {
