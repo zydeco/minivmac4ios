@@ -109,7 +109,7 @@ typedef enum : NSInteger {
     [super viewWillDisappear:animated];
     [AppDelegate sharedEmulator].running = YES;
     if (![selectedEmulatorBundle isEqual:[AppDelegate sharedEmulator].bundle] && ![AppDelegate sharedEmulator].anyDiskInserted) {
-        [[AppDelegate sharedInstance] reloadEmulator];
+        [[AppDelegate sharedInstance] loadAndStartEmulator];
     }
 }
 

@@ -25,7 +25,7 @@ extern NSString *DocumentsChangedNotification;
 
 + (instancetype)sharedInstance;
 + (id<Emulator>)sharedEmulator;
-- (void)reloadEmulator;
+- (void)loadAndStartEmulator;
 
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
 - (IBAction)showInsertDisk:(id)sender;

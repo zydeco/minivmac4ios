@@ -33,12 +33,9 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     sharedAppDelegate = self;
-    if (![self loadEmulator:[[NSUserDefaults standardUserDefaults] stringForKey:@"machine"]]) {
-        [self loadEmulator:@"MacPlus4M"];
-    }
     [self initDefaults];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:NULL];
-    [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
+    [self loadAndStartEmulator];
     
     if ([application respondsToSelector:@selector(btcMouseSetRawMode:)]) {
         [application btcMouseSetRawMode:YES];
@@ -69,7 +66,6 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults registerDefaults:defaultValues];
-    [defaults setValue:@(sharedEmulator.initialSpeed) forKey:@"speedValue"];
     [defaults addObserver:self forKeyPath:@"speedValue" options:0 context:NULL];
 }
 
@@ -108,17 +104,26 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     return sharedEmulator != nil;
 }
 
-- (void)reloadEmulator {
-    NSBundle *bundle = sharedEmulator.bundle;
+- (void)loadAndStartEmulator {
     [self willChangeValueForKey:@"sharedEmulator"];
-    id<Emulator> oldEmulator = sharedEmulator;
-    sharedEmulator = nil;
-    [oldEmulator shutdown];
-    [bundle unload];
+    if (sharedEmulator) {
+        NSBundle *bundle = sharedEmulator.bundle;
+        id<Emulator> oldEmulator = sharedEmulator;
+        sharedEmulator = nil;
+        [oldEmulator shutdown];
+        [bundle unload];
+    }
     if (![self loadEmulator:[[NSUserDefaults standardUserDefaults] stringForKey:@"machine"]]) {
         [self loadEmulator:@"MacPlus4M"];
     }
     [self didChangeValueForKey:@"sharedEmulator"];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults integerForKey:@"speedValue"] > sharedEmulator.initialSpeed) {
+        [defaults setValue:@(sharedEmulator.initialSpeed) forKey:@"speedValue"];
+    } else {
+        sharedEmulator.speed = [defaults integerForKey:@"speedValue"];
+    }
     [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
 }
 
