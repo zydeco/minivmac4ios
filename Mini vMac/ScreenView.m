@@ -45,6 +45,7 @@ static ScreenView *sharedScreenView = nil;
 }
 
 - (void)updateVideoLayer {
+    videoLayer.contents = nil;
     if ([AppDelegate sharedEmulator]) {
         [AppDelegate sharedEmulator].screenLayer = videoLayer;
         screenSize = [AppDelegate sharedEmulator].screenSize;
