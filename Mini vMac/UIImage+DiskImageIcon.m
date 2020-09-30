@@ -55,8 +55,7 @@ static const char kDiskImageIconAttributeName[] = "net.namedfork.DiskImageIcon";
 
 + (void)loadIconForDiskImageAndNotify:(NSString *)path {
     if ([NSThread isMainThread]) {
-        long queue = NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_8_0 ? QOS_CLASS_USER_INITIATED : DISPATCH_QUEUE_PRIORITY_LOW;
-        dispatch_async(dispatch_get_global_queue(queue, 0), ^{
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
             [self loadIconForDiskImageAndNotify:path];
         });
         return;

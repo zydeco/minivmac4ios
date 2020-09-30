@@ -328,7 +328,7 @@ API_AVAILABLE(ios(13.4))
         if (animated) {
             keyboardView.frame = CGRectOffset(finalFrame, 0.0, finalFrame.size.height);
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                keyboardView.frame = finalFrame;
+                self->keyboardView.frame = finalFrame;
             } completion:nil];
         } else {
             keyboardView.frame = finalFrame;
@@ -338,10 +338,10 @@ API_AVAILABLE(ios(13.4))
         if (animated) {
             CGRect finalFrame = CGRectMake(0.0, self.view.bounds.size.height, keyboardView.bounds.size.width, keyboardView.bounds.size.height);
             [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                keyboardView.frame = finalFrame;
+                self->keyboardView.frame = finalFrame;
             } completion:^(BOOL finished) {
                 if (finished) {
-                    keyboardView.hidden = YES;
+                    self->keyboardView.hidden = YES;
                 }
             }];
         } else {

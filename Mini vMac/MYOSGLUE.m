@@ -36,7 +36,7 @@ EXPORTVAR(ui3p, RAM)
 EXPORTVAR(ui3p, VidROM)
 EXPORTVAR(ui3p, VidMem)
 
-@interface MNVMBundleClassName : NSObject <Emulator, UIAlertViewDelegate>
+@interface MNVMBundleClassName : NSObject <Emulator>
 
 - (void)makeNewDisk:(NSString*)name size:(NSInteger)size;
 - (void)updateScreen:(CGImageRef)screenImage;
@@ -1471,21 +1471,13 @@ LOCALPROC MacMsgDisplayOn() {
     if (SavedBriefMsg != nullpr) {
         NSString *title = NSStringCreateFromSubstCStr(SavedBriefMsg, falseblnr);
         NSString *message = NSStringCreateFromSubstCStr(SavedLongMsg, falseblnr);
-        if ([UIAlertController class]) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-            blnr wasStopped = SpeedStopped;
-            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                SpeedStopped = wasStopped;
-            }]];
-            SpeedStopped = trueblnr;
-            [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
-        } else {
-            // fallback for iOS 7
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            alertView.delegate = sharedEmulator;
-            SpeedStopped = trueblnr;
-            [alertView show];
-        }
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        blnr wasStopped = SpeedStopped;
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            SpeedStopped = wasStopped;
+        }]];
+        SpeedStopped = trueblnr;
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
         SavedBriefMsg = nullpr;
         SavedLongMsg = nullpr;
     }
@@ -1788,29 +1780,19 @@ GLOBALPROC WaitForNextTick(void) {
 }
 
 - (void)makeNewDisk:(NSString*)name size:(NSInteger)size {
-    if ([UIAlertController class]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Export File", nil) message:NSLocalizedString(@"Enter new name", nil) preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            nameTextField = textField;
-            nameTextField.placeholder = name;
-            nameTextField.text = name;
-        }];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [self didMakeNewDisk:nil size:0];
-        }]];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Save", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self didMakeNewDisk:nameTextField.text size:size];
-        }]];
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
-    } else {
-        // iOS 7 fallback
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Export File", nil) message:NSLocalizedString(@"Enter new name", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Save", nil), nil];
-        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-        nameTextField = [alert textFieldAtIndex:0];
-        nameTextField.placeholder = name;
-        nameTextField.text = name;
-        [alert show];
-    }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Export File", nil) message:NSLocalizedString(@"Enter new name", nil) preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        self->nameTextField = textField;
+        self->nameTextField.placeholder = name;
+        self->nameTextField.text = name;
+    }];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self didMakeNewDisk:nil size:0];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Save", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self didMakeNewDisk:self->nameTextField.text size:size];
+    }]];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)didMakeNewDisk:(NSString*)fileName size:(NSInteger)size {
@@ -1826,19 +1808,6 @@ GLOBALPROC WaitForNextTick(void) {
 #endif
     vSonyNewDiskWanted = falseblnr;
     SpeedStopped = falseblnr;
-}
-
-- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (nameTextField) {
-        NSString *fileName = nil;
-        if (buttonIndex == alertView.firstOtherButtonIndex) {
-            fileName = nameTextField.text;
-        }
-        [self didMakeNewDisk:fileName size:vSonyNewDiskSize];
-    }
-    if (SpeedStopped) {
-        SpeedStopped = falseblnr;
-    }
 }
 
 #pragma mark - Keyboard

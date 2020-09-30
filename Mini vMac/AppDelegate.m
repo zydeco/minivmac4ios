@@ -166,18 +166,13 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         });
         return;
     }
-    if ([UIAlertController class]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-        UIViewController *controller = self.window.rootViewController;
-        while (controller.presentedViewController) {
-            controller = controller.presentedViewController;
-        }
-        [controller presentViewController:alert animated:YES completion:nil];
-    } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    UIViewController *controller = self.window.rootViewController;
+    while (controller.presentedViewController) {
+        controller = controller.presentedViewController;
     }
+    [controller presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Settings / Insert Disk / Help
@@ -235,17 +230,6 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         userKeyboardLayoutsPath = [self.documentsPath stringByAppendingPathComponent:@"Keyboard Layouts"];
     });
     return userKeyboardLayoutsPath;
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    NSMutableDictionary *options = [NSMutableDictionary dictionaryWithCapacity:2];
-    if (sourceApplication) {
-        options[UIApplicationOpenURLOptionsSourceApplicationKey] = sourceApplication;
-    }
-    if (annotation) {
-        options[UIApplicationOpenURLOptionsAnnotationKey] = annotation;
-    }
-    return [self application:application openURL:url options:options];
 }
 
 - (BOOL)importFileToDocuments:(NSURL *)url copy:(BOOL)copy {

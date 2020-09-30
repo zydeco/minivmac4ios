@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "UIImage+DiskImageIcon.h"
 
-@interface InsertDiskViewController () <UITextFieldDelegate, UIAlertViewDelegate>
+@interface InsertDiskViewController () <UITextFieldDelegate>
 
 @end
 
@@ -31,7 +31,6 @@
     NSString *basePath;
     NSArray<NSString*> *diskImages, *otherFiles;
     UIAlertController *createDiskImageController;
-    UIAlertView *createDiskImageAlert;
     __block __weak UITextField *sizeTextField;
     __block __weak UITextField *nameTextField;
     NSString *fileToRename;
@@ -82,10 +81,10 @@
     NSArray *allFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:basePath error:NULL];
     diskImages = [allFiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%@ containsObject: pathExtension.lowercaseString", [AppDelegate sharedInstance].diskImageExtensions]];
     otherFiles = [allFiles filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NSString* _Nonnull name, NSDictionary<NSString *,id> * _Nullable bindings) {
-        BOOL isDiskImage = [diskImages containsObject:name];
+        BOOL isDiskImage = [self->diskImages containsObject:name];
         BOOL isDirectory;
         BOOL isHidden = [name hasPrefix:@"."];
-        [[NSFileManager defaultManager] fileExistsAtPath:[basePath stringByAppendingPathComponent:name] isDirectory:&isDirectory];
+        [[NSFileManager defaultManager] fileExistsAtPath:[self->basePath stringByAppendingPathComponent:name] isDirectory:&isDirectory];
         return !(isDirectory || isDiskImage || isHidden);
     }]];
 }
@@ -272,30 +271,19 @@
 
 - (void)askRenameFile:(NSString*)filePath {
     NSString *fileName = filePath.lastPathComponent;
-    if ([UIAlertController class]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:fileName message:NSLocalizedString(@"Enter new name", nil) preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            nameTextField = textField;
-            textField.delegate = self;
-            textField.placeholder = fileName;
-            textField.text = fileName;
-        }];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Rename", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSString *newName = alertController.textFields.firstObject.text;
-            [self renameFile:filePath toName:newName];
-        }]];
-        [self presentViewController:alertController animated:YES completion:nil];
-    } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:fileName message:NSLocalizedString(@"Enter new name", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Rename", nil), nil];
-        alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-        nameTextField = [alertView textFieldAtIndex:0];
-        nameTextField.delegate = self;
-        nameTextField.placeholder = fileName;
-        nameTextField.text = fileName;
-        fileToRename = filePath;
-        [alertView show];
-    }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:fileName message:NSLocalizedString(@"Enter new name", nil) preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        self->nameTextField = textField;
+        textField.delegate = self;
+        textField.placeholder = fileName;
+        textField.text = fileName;
+    }];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Rename", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *newName = alertController.textFields.firstObject.text;
+        [self renameFile:filePath toName:newName];
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)renameFile:(NSString*)filePath toName:(NSString*)newName {
@@ -319,39 +307,27 @@
 #pragma mark - Disk Image Creation
 
 - (void)createDiskImage {
-    if ([UIAlertController class]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Create Disk Image", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.placeholder = NSLocalizedString(@"name", nil);
-            [textField addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventAllEditingEvents];
-        }];
-        
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            [self _configureNewDiskSizeField:textField];
-        }];
-        
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
-        UIAlertAction *createAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Create", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSString *name = [self _newDiskImageName];
-            off_t size = [self _newDiskImageSize];
-            createDiskImageController = nil;
-            [self createDiskImageWithName:name size:size];
-        }];
-        [alertController addAction:createAction];
-        createAction.enabled = NO;
-        [self presentViewController:alertController animated:YES completion:nil];
-        createDiskImageController = alertController;
-    } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Create Disk Image", nil) message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Create", nil), nil];
-        alertView.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
-        nameTextField = [alertView textFieldAtIndex:0];
-        nameTextField.delegate = self;
-        nameTextField.placeholder = NSLocalizedString(@"name", nil);
-        [nameTextField addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventAllEditingEvents];
-        [self _configureNewDiskSizeField:[alertView textFieldAtIndex:1]];
-        createDiskImageAlert = alertView;
-        [alertView show];
-    }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Create Disk Image", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = NSLocalizedString(@"name", nil);
+        [textField addTarget:self action:@selector(validateCreateDiskImageInput:) forControlEvents:UIControlEventAllEditingEvents];
+    }];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        [self _configureNewDiskSizeField:textField];
+    }];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil]];
+    UIAlertAction *createAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Create", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *name = [self _newDiskImageName];
+        off_t size = [self _newDiskImageSize];
+        self->createDiskImageController = nil;
+        [self createDiskImageWithName:name size:size];
+    }];
+    [alertController addAction:createAction];
+    createAction.enabled = NO;
+    [self presentViewController:alertController animated:YES completion:nil];
+    createDiskImageController = alertController;
 }
 
 - (void)_configureNewDiskSizeField:(UITextField*)textField {
@@ -378,7 +354,7 @@
 
 - (BOOL)validateCreateDiskImageInput:(id)sender {
     BOOL valid = NO;
-    if (self.presentedViewController == createDiskImageController || createDiskImageAlert.visible) {
+    if (self.presentedViewController == createDiskImageController) {
         NSString *name = [self _newDiskImageName];
         BOOL nameIsValid = (name.length > 0) && ![name hasPrefix:@"."] && ![name containsString:@"/"] && ![name containsString:@"*"];
         
@@ -400,15 +376,13 @@
 - (NSString*)_newDiskImageName {
     if (createDiskImageController != nil) {
         return createDiskImageController.textFields[0].text;
-    } else if (createDiskImageAlert.visible) {
-        return nameTextField.text;
     } else {
         return nil;
     }
 }
 
 - (off_t)_newDiskImageSize {
-    if (createDiskImageController == nil && !createDiskImageAlert.visible) {
+    if (createDiskImageController == nil) {
         return 0;
     }
     UISegmentedControl *unitsControl = (UISegmentedControl*)sizeTextField.rightView;
@@ -429,29 +403,19 @@
     
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     activityIndicatorView.color = [UIColor blackColor];
-    if ([UIAlertController class]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Creating Disk Image", nil) message:@"\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
-        [self presentViewController:alertController animated:true completion:^{
-            UIView *alertView = alertController.view;
-            activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-            activityIndicatorView.center = CGPointMake(alertView.bounds.size.width / 2.0, alertView.bounds.size.height / 2.0 + 32.0);
-            [alertView addSubview:activityIndicatorView];
-            [activityIndicatorView startAnimating];
-            [self _writeNewDiskImage:fd size:size activityIndicator:activityIndicatorView progressAlert:alertController];
-        }];
-    } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Creating Disk Image", nil) message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Creating Disk Image", nil) message:@"\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:true completion:^{
+        UIView *alertView = alertController.view;
+        activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        activityIndicatorView.center = CGPointMake(alertView.bounds.size.width / 2.0, alertView.bounds.size.height / 2.0 + 32.0);
         [alertView addSubview:activityIndicatorView];
         [activityIndicatorView startAnimating];
-        [alertView setValue:activityIndicatorView forKey:@"accessoryView"];
-        [alertView show];
-        [self _writeNewDiskImage:fd size:size activityIndicator:activityIndicatorView progressAlert:alertView];
-    }
+        [self _writeNewDiskImage:fd size:size activityIndicator:activityIndicatorView];
+    }];
 }
 
-- (void)_writeNewDiskImage:(int)fd size:(off_t)size activityIndicator:(UIActivityIndicatorView*)activityIndicatorView progressAlert:(id)progressAlert {
-    long queue = NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_8_0 ? QOS_CLASS_USER_INITIATED : DISPATCH_QUEUE_PRIORITY_HIGH;
-    dispatch_async(dispatch_get_global_queue(queue, 0), ^{
+- (void)_writeNewDiskImage:(int)fd size:(off_t)size activityIndicator:(UIActivityIndicatorView*)activityIndicatorView {
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         int error = 0;
         if (ftruncate(fd, size)) {
             error = errno;
@@ -459,19 +423,11 @@
         close(fd);
         dispatch_async(dispatch_get_main_queue(), ^{
             [activityIndicatorView stopAnimating];
-            if ([progressAlert isKindOfClass:[UIAlertController class]]) {
-                [self dismissViewControllerAnimated:YES completion:^{
-                    if (error) {
-                        [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not create disk image", nil) message:[[NSString alloc] initWithUTF8String:strerror(error)]];
-                    }
-                }];
-            } else if ([progressAlert isKindOfClass:[UIAlertView class]]) {
-                UIAlertView *alert = progressAlert;
-                [alert dismissWithClickedButtonIndex:0 animated:NO];
+            [self dismissViewControllerAnimated:YES completion:^{
                 if (error) {
                     [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not create disk image", nil) message:[[NSString alloc] initWithUTF8String:strerror(error)]];
                 }
-            }
+            }];
             [self.tableView beginUpdates];
             [self loadDirectoryContents];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
@@ -508,27 +464,6 @@
         UITextRange *nameWithoutExtensionRange = [textField textRangeFromPosition:textField.beginningOfDocument toPosition:beforeExtensionPosition];
         [textField performSelector:@selector(setSelectedTextRange:) withObject:nameWithoutExtensionRange afterDelay:0.1];
     }
-}
-
-#pragma mark - Alert Delegate
-
-- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (fileToRename && buttonIndex == alertView.firstOtherButtonIndex) {
-        [self renameFile:fileToRename toName:nameTextField.text];
-        fileToRename = nil;
-    } else if (createDiskImageAlert != nil) {
-        NSString *name = [self _newDiskImageName];
-        off_t size = [self _newDiskImageSize];
-        createDiskImageAlert = nil;
-        [self createDiskImageWithName:name size:size];
-    }
-}
-
-- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView {
-    if (alertView == createDiskImageAlert) {
-        return [self validateCreateDiskImageInput:alertView];
-    }
-    return YES;
 }
 
 @end

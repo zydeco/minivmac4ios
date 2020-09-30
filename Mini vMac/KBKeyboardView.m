@@ -148,7 +148,7 @@
         fontScale *= [self isCompactKeyboardSize:selectedSize] ? 0.6 : 0.65;
     }
     key.label = label;
-    key.titleLabel.font = [UIFont systemFontOfSize:self->fontSize * fontScale weight:&UIFontWeightRegular ? UIFontWeightRegular : 1.0];
+    key.titleLabel.font = [UIFont systemFontOfSize:self->fontSize * fontScale weight:UIFontWeightRegular];
     [keyPlane addObject:key];
 }
 
