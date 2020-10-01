@@ -402,7 +402,11 @@
     }
     
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityIndicatorView.color = [UIColor blackColor];
+    if (@available(iOS 13, *)) {
+        activityIndicatorView.color = [UIColor labelColor];
+    } else {
+        activityIndicatorView.color = [UIColor blackColor];
+    }
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Creating Disk Image", nil) message:@"\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertController animated:true completion:^{
         UIView *alertView = alertController.view;
