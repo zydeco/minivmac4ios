@@ -11,7 +11,7 @@
 
 ## Requirements
 
-* iOS 8 or later
+* iOS 9 or later
 * ROM image from Mac Plus, Mac II and/or Mac 128K
 * Disk images with Mac software
 
@@ -54,12 +54,13 @@ shortcuts may interfere with iOS.
 
 You can choose to use the screen as a touchscreen, where tapping on the screen
 acts a mouse click, or as a trackpad. In trackpad mode, dragging is done by
-tapping twice fast and holding it down.
+tapping twice fast and holding it down. 3D touch can also be used for clicking and
+dragging on supported devices.
+
+If you use a mouse or trackpad on iPad OS 13.4 or newer, it will be used automatically.
 
 If you have a jailbroken device and [BTC Mouse & Trackpad](http://www.ringwald.ch/cydia/mouse/),
 Mini vMac will use your bluetooth mouse or trackpad.
-
-If you use a mouse or trackpad on iPad OS 13.4 or newer, it will be used automatically.
 
 ### Settings
 
@@ -69,12 +70,13 @@ the following:
 * **Speed:** make the emulated machine faster than a Mac Plus
 * **Mouse Type:** switch between touchscreen and trackpad mode
 * **Keyboard Layout:** change the layout of the emulated keyboard
-* **Emulated Machine:** for changes to take effect, close and relaunch Mini vMac
+* **Display Scaling:** choose how to scale the display
+* **Emulated Machine:** changes won't take effect if there are disks inserted
 
 ### Credits
 
 * Mini vMac for iOS by [Jesús A. Álvarez](https://github.com/zydeco)
-* [Mini vMac](http://gryphel.com/c/minivmac/) ©2001-2019 Paul C. Pratt
+* [Mini vMac](http://gryphel.com/c/minivmac/) ©2001-2020 Paul C. Pratt
 * [vMac](http://vmac.org/) ©1996-1999 Philip Cummins & al.
 * [hfsutils](http://www.mars.org/home/rob/proj/hfs/) ©1996-2000 Robert Leslie
 * [libmfs](https://github.com/zydeco/libmfs) and [libres](https://github.com/zydeco/libres) by [Jesús A. Álvarez](https://github.com/zydeco)
