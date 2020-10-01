@@ -13,7 +13,7 @@
 #import "KBKeyboardView.h"
 #import "KBKeyboardLayout.h"
 
-@interface ViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
+@interface ViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, UIAdaptivePresentationControllerDelegate>
 
 @end
 
@@ -74,6 +74,7 @@ API_AVAILABLE(ios(13.4))
         UISwipeGestureRecognizer *gestureRecognizer = (UISwipeGestureRecognizer*)sender;
         modalPanePresentationDirection = gestureRecognizer.direction;
         segue.destinationViewController.transitioningDelegate = self;
+        segue.destinationViewController.presentationController.delegate = self;
     } else if (self.presentedViewController != nil && [@[@"disk", @"settings"] containsObject:segue.identifier]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
@@ -114,6 +115,19 @@ API_AVAILABLE(ios(13.4))
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:finished];
     }];
+}
+
+- (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
+    // hack to fix the presenting view controller not returning back to normal size on iOS 13
+    // when the sheet is dismissed interactively (ie dragging it down) after a contextual menu
+    // has been shown, which breaks some autolayout constraints. when this happens, the
+    // presenting view controller won't resize back to normal during the interactive
+    // dismissing of the presented sheet
+    if (@available(iOS 14, *)) {
+        // it works correctly on iOS 14
+    } else {
+        self.view.superview.transform = CGAffineTransformIdentity;
+    }
 }
 
 - (BOOL)prefersStatusBarHidden {
