@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "UIImage+DiskImageIcon.h"
 
-@interface InsertDiskViewController () <UITextFieldDelegate>
+@interface InsertDiskViewController () <UITextFieldDelegate, UIContextMenuInteractionDelegate>
 
 @end
 
@@ -225,6 +225,9 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if (@available(iOS 13, *)) {
+        return NO;
+    }
     return [self fileAtIndexPath:indexPath] != nil;
 }
 
@@ -238,14 +241,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *filePath = [self fileAtIndexPath:indexPath];
-    if (filePath && ![[AppDelegate sharedEmulator] isDiskInserted:filePath]) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            [[AppDelegate sharedEmulator] insertDisk:filePath];
-        }];
+    if ([self insertDisk:filePath]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
 #pragma mark - File Actions
+
+- (BOOL)insertDisk:(NSString*)filePath {
+    id<Emulator> emulator = [AppDelegate sharedEmulator];
+    if (filePath && ![emulator isDiskInserted:filePath]) {
+        return [emulator insertDisk:filePath];
+    }
+    return NO;
+}
 
 - (void)deleteFile:(NSString*)filePath {
     NSError *error = nil;
@@ -401,21 +410,42 @@
         return;
     }
     
+    [self showFileActivityIndicatorWithTitle:NSLocalizedString(@"Creating Disk Image", nil) completion:^(UIActivityIndicatorView *activityIndicatorView) {
+        [self _writeNewDiskImage:fd size:size activityIndicator:activityIndicatorView];
+    }];
+}
+
+- (void)showFileActivityIndicatorWithTitle:(NSString*)title completion:(void (^_Nonnull)(UIActivityIndicatorView* activityIndicatorView))completionBlock {
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     if (@available(iOS 13, *)) {
         activityIndicatorView.color = [UIColor labelColor];
     } else {
         activityIndicatorView.color = [UIColor blackColor];
     }
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Creating Disk Image", nil) message:@"\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:@"\n\n\n" preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:alertController animated:true completion:^{
         UIView *alertView = alertController.view;
         activityIndicatorView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         activityIndicatorView.center = CGPointMake(alertView.bounds.size.width / 2.0, alertView.bounds.size.height / 2.0 + 32.0);
         [alertView addSubview:activityIndicatorView];
         [activityIndicatorView startAnimating];
-        [self _writeNewDiskImage:fd size:size activityIndicator:activityIndicatorView];
+        completionBlock(activityIndicatorView);
     }];
+}
+
+- (void)dismissFileActivityIndicator:(UIActivityIndicatorView*)activityIndicatorView withErrorTitle:(NSString*)errorTitle message:(NSString*)errorMessage {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [activityIndicatorView stopAnimating];
+        [self dismissViewControllerAnimated:YES completion:^{
+            if (errorTitle) {
+                [[AppDelegate sharedInstance] showAlertWithTitle:errorTitle message:errorMessage];
+            }
+        }];
+        [self.tableView beginUpdates];
+        [self loadDirectoryContents];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+    });
 }
 
 - (void)_writeNewDiskImage:(int)fd size:(off_t)size activityIndicator:(UIActivityIndicatorView*)activityIndicatorView {
@@ -425,11 +455,37 @@
             error = errno;
         }
         close(fd);
+        [self dismissFileActivityIndicator:activityIndicatorView
+                            withErrorTitle:error ? NSLocalizedString(@"Could not create disk image", nil) : nil
+                                   message:error ? @(strerror(error)) : nil];
+    });
+}
+
+- (NSString*)nameForDuplicatingPath:(NSString*)filePath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *fileName = filePath.lastPathComponent;
+    NSString *copyPath = [NSString stringWithFormat:@"%@/%@ copy.%@", filePath.stringByDeletingLastPathComponent, fileName.lastPathComponent.stringByDeletingPathExtension, fileName.pathExtension];
+    for (int copyNumber = 2; [fileManager fileExistsAtPath:copyPath]; copyNumber++) {
+        copyPath = [NSString stringWithFormat:@"%@/%@ copy %d.%@", filePath.stringByDeletingLastPathComponent, fileName.lastPathComponent.stringByDeletingPathExtension, copyNumber, fileName.pathExtension];
+    }
+    return copyPath;
+}
+
+- (void)duplicateDiskImage:(NSString*)filePath {
+    [self showFileActivityIndicatorWithTitle:NSLocalizedString(@"Duplicating disk image", nil) completion:^(UIActivityIndicatorView *activityIndicatorView) {
+        [self _duplicateDiskImage:filePath activityIndicator:activityIndicatorView];
+    }];
+}
+
+- (void)_duplicateDiskImage:(NSString*)filePath activityIndicator:(UIActivityIndicatorView*)activityIndicatorView {
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        NSError *error = nil;
+        [[NSFileManager defaultManager] copyItemAtPath:filePath toPath:[self nameForDuplicatingPath:filePath] error:&error];
         dispatch_async(dispatch_get_main_queue(), ^{
             [activityIndicatorView stopAnimating];
             [self dismissViewControllerAnimated:YES completion:^{
                 if (error) {
-                    [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not create disk image", nil) message:[[NSString alloc] initWithUTF8String:strerror(error)]];
+                    [[AppDelegate sharedInstance] showAlertWithTitle:NSLocalizedString(@"Could not duplicate disk image", nil) message:error.localizedDescription];
                 }
             }];
             [self.tableView beginUpdates];
@@ -439,6 +495,7 @@
         });
     });
 }
+
 #pragma mark - Text Field Delegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -468,6 +525,45 @@
         UITextRange *nameWithoutExtensionRange = [textField textRangeFromPosition:textField.beginningOfDocument toPosition:beforeExtensionPosition];
         [textField performSelector:@selector(setSelectedTextRange:) withObject:nameWithoutExtensionRange afterDelay:0.1];
     }
+}
+
+#pragma mark - Context Menu
+
+- (UIContextMenuConfiguration *)tableView:(UITableView *)tableView contextMenuConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point API_AVAILABLE(ios(13.0)) {
+    FileTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.filePath == nil) {
+        return nil;
+    }
+    
+    UIAction *insertAction = [UIAction actionWithTitle:@"Insert" image:[UIImage systemImageNamed:@"play.fill"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        [self insertDisk:cell.filePath];
+    }];
+    UIAction *deleteAction = [UIAction actionWithTitle:@"Delete" image:[UIImage systemImageNamed:@"trash"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        [cell delete:self];
+    }];
+    
+    deleteAction.attributes = UIMenuElementAttributesDestructive;
+    if ([[AppDelegate sharedEmulator] isDiskInserted:cell.filePath]) {
+        insertAction.attributes = UIMenuElementAttributesDisabled;
+        deleteAction.attributes = UIMenuElementAttributesDisabled;
+    }
+    
+    NSArray<UIAction*> *actions = @[
+        insertAction,
+        [UIAction actionWithTitle:@"Rename" image:[UIImage systemImageNamed:@"pencil"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+            [cell rename:self];
+        }],
+        [UIAction actionWithTitle:@"Duplicate" image:[UIImage systemImageNamed:@"plus.square.on.square"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+            [self duplicateDiskImage:cell.filePath];
+        }],
+        [UIAction actionWithTitle:@"Share" image:[UIImage systemImageNamed:@"square.and.arrow.up"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+            [cell share:self];
+        }],
+        deleteAction
+    ];
+    return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:nil actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
+        return [UIMenu menuWithTitle:@"" children:actions];
+    }];
 }
 
 @end
