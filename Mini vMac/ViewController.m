@@ -13,7 +13,7 @@
 #import "KBKeyboardView.h"
 #import "KBKeyboardLayout.h"
 
-@interface ViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, UIAdaptivePresentationControllerDelegate>
+@interface ViewController () <UIAdaptivePresentationControllerDelegate>
 
 @end
 
@@ -29,7 +29,6 @@ API_AVAILABLE(ios(13.4))
     KBKeyboardView *keyboardView;
     UISwipeGestureRecognizer *showKeyboardGesture, *hideKeyboardGesture, *insertDiskGesture, *showSettingsGesture;
     UIControl *pointingDeviceView;
-    UISwipeGestureRecognizerDirection modalPanePresentationDirection;
     id interaction;
 }
 
@@ -70,51 +69,12 @@ API_AVAILABLE(ios(13.4))
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [self cancelHelpPresentation];
-    if ([sender isKindOfClass:[UIGestureRecognizer class]]) {
-        UISwipeGestureRecognizer *gestureRecognizer = (UISwipeGestureRecognizer*)sender;
-        modalPanePresentationDirection = gestureRecognizer.direction;
-        segue.destinationViewController.transitioningDelegate = self;
+    if ([@[@"disk", @"settings"] containsObject:segue.identifier]) {
         segue.destinationViewController.presentationController.delegate = self;
-    } else if (self.presentedViewController != nil && [@[@"disk", @"settings"] containsObject:segue.identifier]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.presentedViewController != nil) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     }
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    return self;
-}
-
-- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    return 0.3;
-}
-
-- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-    UIView *containerView = [transitionContext containerView];
-    UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
-
-    [containerView addSubview:toView];
-    switch (modalPanePresentationDirection) {
-        case UISwipeGestureRecognizerDirectionLeft:
-            toView.transform = CGAffineTransformMakeTranslation(containerView.bounds.size.width, 0);
-            break;
-        case UISwipeGestureRecognizerDirectionRight:
-            toView.transform = CGAffineTransformMakeTranslation(-containerView.bounds.size.width, 0);
-            break;
-        case UISwipeGestureRecognizerDirectionDown:
-            toView.transform = CGAffineTransformMakeTranslation(0, -containerView.bounds.size.height);
-            break;
-        case UISwipeGestureRecognizerDirectionUp:
-            toView.transform = CGAffineTransformMakeTranslation(0, containerView.bounds.size.height);
-            break;
-        default:
-            break;
-    }
-
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        toView.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished) {
-        [transitionContext completeTransition:finished];
-    }];
 }
 
 - (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
