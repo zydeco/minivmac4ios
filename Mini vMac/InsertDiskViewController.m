@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "UIImage+DiskImageIcon.h"
 
-@interface InsertDiskViewController () <UITextFieldDelegate, UIContextMenuInteractionDelegate>
+@interface InsertDiskViewController () <UITextFieldDelegate>
 
 @end
 
@@ -241,9 +241,65 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *filePath = [self fileAtIndexPath:indexPath];
+    BOOL hadAnyDisksInserted = [AppDelegate sharedEmulator].anyDiskInserted;
     if ([self insertDisk:filePath]) {
         [self dismissViewControllerAnimated:YES completion:nil];
+        if (!hadAnyDisksInserted) {
+            // Add to quick actions if it was booted from (no disks inserted previously and still inserted after 10s)
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                id<Emulator> emulator = [AppDelegate sharedEmulator];
+                if (emulator.isRunning && [emulator isDiskInserted:filePath]) {
+                    [self updateApplicationShortcutsWithDisk:filePath];
+                }
+            });
+        }
     }
+}
+
+#pragma mark - Quick Actions
+
+- (void)updateApplicationShortcutsWithDisk:(NSString*)filePath {
+    // Update user defaults
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *fileName = filePath.lastPathComponent;
+    NSMutableArray *recentDisks = [userDefaults arrayForKey:@"recentDisks"].mutableCopy;
+    if ([recentDisks containsObject:fileName]) {
+        return;
+    }
+    [recentDisks insertObject:fileName atIndex:0];
+    if (recentDisks.count > 4) {
+        [recentDisks removeObjectsInRange:NSMakeRange(4, recentDisks.count - 4)];
+    }
+    [userDefaults setObject:recentDisks forKey:@"recentDisks"];
+    
+    // Update quick actions
+    NSMutableArray *shortcutItems = [NSMutableArray arrayWithCapacity:4];
+    for (NSString *diskName in recentDisks) {
+        UIApplicationShortcutItem *shortcutItem = [self shortcutItemForDisk:diskName];
+        if (shortcutItem) {
+            [shortcutItems addObject:shortcutItem];
+        }
+    }
+    [UIApplication sharedApplication].shortcutItems = shortcutItems;
+}
+
+- (nullable UIApplicationShortcutItem*)shortcutItemForDisk:(NSString*)fileName {
+    BOOL isDiskImage = [[AppDelegate sharedInstance].diskImageExtensions containsObject:fileName.pathExtension.lowercaseString];
+    if (!isDiskImage) {
+        return nil;
+    }
+    NSString *filePath = [basePath stringByAppendingPathComponent:fileName];
+    NSString *title = [fileName stringByDeletingPathExtension];
+    UIApplicationShortcutIcon *icon = nil;
+    NSDictionary *attributes = [[NSURL fileURLWithPath:filePath] resourceValuesForKeys:@[NSURLTotalFileSizeKey, NSURLFileSizeKey] error:NULL];
+    if (attributes && attributes[NSURLTotalFileSizeKey]) {
+        NSInteger fileSize = [attributes[NSURLTotalFileSizeKey] integerValue];
+        NSInteger numBlocks = fileSize / 512;
+        icon = [UIApplicationShortcutIcon iconWithTemplateImageName:numBlocks == 800 || numBlocks == 1600 ? @"floppy" : @"floppyV"];
+    } else {
+        return nil;
+    }
+    return [[UIApplicationShortcutItem alloc] initWithType:@"disk" localizedTitle:title localizedSubtitle:nil icon:icon userInfo:@{@"disk": fileName}];
 }
 
 #pragma mark - File Actions

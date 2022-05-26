@@ -61,7 +61,8 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
                                     @"runInBackground": @NO,
                                     @"autoSlow": @(sharedEmulator.initialAutoSlow),
                                     @"screenFilter": kCAFilterLinear,
-                                    @"autoShowGestureHelp": @YES
+                                    @"autoShowGestureHelp": @YES,
+                                    @"recentDisks": @[]
                                     };
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -173,6 +174,19 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         controller = controller.presentedViewController;
     }
     [controller presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    BOOL success = NO;
+    if ([shortcutItem.type isEqualToString:@"disk"] && sharedEmulator.isRunning) {
+        NSString *fileName = (NSString*)shortcutItem.userInfo[@"disk"];
+        NSString *filePath = [self.documentsPath stringByAppendingPathComponent:fileName];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath] && ![sharedEmulator isDiskInserted:filePath]) {
+            success = YES;
+            [sharedEmulator performSelector:@selector(insertDisk:) withObject:filePath afterDelay:1.0];
+        }
+    }
+    completionHandler(success);
 }
 
 #pragma mark - Settings / Insert Disk / Help
