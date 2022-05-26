@@ -215,7 +215,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSString *filePath = [self fileAtIndexPath:indexPath];
         if ([UIAlertController class]) {
-            [self askDeleteFile:filePath];
+            [self askDeleteFile:filePath sourceView:[tableView cellForRowAtIndexPath:indexPath]];
         } else {
             [self deleteFile:filePath];
         }
@@ -323,7 +323,7 @@
     }
 }
 
-- (void)askDeleteFile:(NSString*)filePath {
+- (void)askDeleteFile:(NSString*)filePath sourceView:(UIView*)sourceView {
     NSString *fileName = filePath.lastPathComponent;
     NSString *message = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete %@? This operation cannot be undone.", nil), fileName];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete File", nil) message:message preferredStyle:UIAlertControllerStyleActionSheet];
@@ -331,6 +331,7 @@
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [self deleteFile:filePath];
     }]];
+    alertController.popoverPresentationController.sourceView = sourceView;
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
@@ -696,7 +697,7 @@
 }
 
 - (void)delete:(id)sender {
-    [self.controller askDeleteFile:self.filePath];
+    [self.controller askDeleteFile:self.filePath sourceView:self];
 }
 
 @end
