@@ -100,7 +100,6 @@ static int8_t usb_to_adb_scancode[] = {
 }
 
 - (void)handleKeyUIEvent:(UIEvent *)event {
-    [super handleKeyUIEvent:event];
     static dispatch_once_t onceToken;
     static BOOL handleKeyboardEvents = YES;
     dispatch_once(&onceToken, ^{
@@ -113,6 +112,8 @@ static int8_t usb_to_adb_scancode[] = {
     BOOL emulatorIsFrontmost = [AppDelegate sharedEmulator].running && [AppDelegate sharedInstance].window.rootViewController.presentedViewController == nil;
     if ([event isKindOfClass:keyboardEventClass] && handleKeyboardEvents && emulatorIsFrontmost) {
         [self handleKeyboardEvent:(UIPhysicalKeyboardEvent*)event];
+    } else {
+        [super handleKeyUIEvent:event];
     }
 }
 
