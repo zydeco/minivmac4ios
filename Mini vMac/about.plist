@@ -18,7 +18,7 @@
 			<key>detailText</key>
 			<string>Jesús A. Álvarez</string>
 			<key>link</key>
-			<string>https://twitter.com/maczydeco</string>
+			<string>https://mastodon.social/@maczydeco</string>
 		</dict>
 		<dict>
 			<key>text</key>
@@ -39,7 +39,7 @@
 	</array>
 	<key>footer.html</key>
 	<string>Mini vMac for iOS&lt;br/&gt;
-©2008-2022 Jesús A. Álvarez&lt;br/&gt;
+©2008-2023 Jesús A. Álvarez&lt;br/&gt;
 &lt;a href=&quot;https://namedfork.net/minivmac&quot;&gt;namedfork.net/minivmac&lt;/a&gt;&lt;br/&gt;
 &lt;hr/&gt;
 based on Mini vMac $mnvmversion&lt;br/&gt;
