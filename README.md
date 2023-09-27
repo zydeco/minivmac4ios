@@ -73,7 +73,35 @@ the following:
 * **Display Scaling:** choose how to scale the display
 * **Emulated Machine:** changes won't take effect if there are disks inserted
 
-### Credits
+## Installation
+
+The easiest way is to install an IPA from [releases](https://github.com/zydeco/minivmac4ios/releases) with [AltStore](https://altstore.io).
+
+### Building from source
+
+To build the project, make sure you check out the repository and submodules:
+
+```
+git clone https://github.com/zydeco/minivmac4ios.git
+cd minivmac4ios
+git submodule update --init --recursive
+```
+
+The folders `minivmac`, `libmfs` and `libres` should not be empty. The source code zip file you can download from GitHub does not include all dependencies.
+
+To install run the app on your device with Xcode, you'll to perform some [additoinal steps](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device):
+
+* Pair the device with Xcode
+* Specify your Apple ID in the Account preferences in Xcode.
+* Change the Team (to your own) and Bundle Identifier (for example, change the `net.namedfork` prefix to your own) in the “Mini vMac” target, under the “Signing & Capabilities” tab.
+* Enable [Developer Mode](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device) on your device (iOS 16 and later).
+* On older iOS versions, trust your developer profile in the iOS Settings (under General > Device Management) after installing the app for the first time.
+
+## Adding new emulated machines
+
+See documentation [on the wiki](https://github.com/zydeco/minivmac4ios/wiki/Adding-a-new-emulated-machine).
+
+## Credits
 
 * Mini vMac for iOS by [Jesús A. Álvarez](https://github.com/zydeco)
 * [Mini vMac](http://gryphel.com/c/minivmac/) ©2001-2021 Paul C. Pratt
