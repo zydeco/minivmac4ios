@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -147,6 +147,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2834237D1CF9C4CB0088B634;
 			remoteInfo = MacII;
+		};
+		2872E19D2AC48D770014F276 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28F676B51CD15E0B00FC6FA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28BDBE9A1D230EEB0072ED5B;
+			remoteInfo = "MacII-640x480";
 		};
 		289710E01CFB126D0089D463 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -770,13 +777,14 @@
 				28F676B91CD15E0B00FC6FA6 /* Sources */,
 				28F676BA1CD15E0B00FC6FA6 /* Frameworks */,
 				28F676BB1CD15E0B00FC6FA6 /* Resources */,
-				28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */,
 				283422D61CF8EF8C0088B634 /* Embed Frameworks */,
 				283422F51CF9ACAD0088B634 /* Change emulator bundle extensions to mnvm */,
+				28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2872E19E2AC48D770014F276 /* PBXTargetDependency */,
 				289710E11CFB126D0089D463 /* PBXTargetDependency */,
 				283422D01CF8EF8C0088B634 /* PBXTargetDependency */,
 				283423A11CF9C5730088B634 /* PBXTargetDependency */,
@@ -957,6 +965,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		283422F51CF9ACAD0088B634 /* Change emulator bundle extensions to mnvm */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -971,21 +980,22 @@
 		};
 		28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
-				$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info.plist,
 			);
 			name = "Set Git version in Info.plist";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string $GIT_VERSION\nchmod 0644 \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info.plist\"\n";
+			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string \"$GIT_VERSION\"\nchmod 0644 \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info.plist\"\n";
 		};
 		28F8758E1D2936B5001E99EB /* Add capabilities to Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1000,6 +1010,7 @@
 		};
 		28F8758F1D293FF4001E99EB /* Add capabilities to Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1014,6 +1025,7 @@
 		};
 		28F875901D293FFB001E99EB /* Add capabilities to Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1028,6 +1040,7 @@
 		};
 		28F875911D294001001E99EB /* Add capabilities to Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1209,6 +1222,11 @@
 			target = 2834237D1CF9C4CB0088B634 /* MacII */;
 			targetProxy = 283423A01CF9C5730088B634 /* PBXContainerItemProxy */;
 		};
+		2872E19E2AC48D770014F276 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28BDBE9A1D230EEB0072ED5B /* MacII-640x480 */;
+			targetProxy = 2872E19D2AC48D770014F276 /* PBXContainerItemProxy */;
+		};
 		289710E11CFB126D0089D463 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 289710B81CFB11BF0089D463 /* Mac128K */;
@@ -1252,11 +1270,19 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macplus4m;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\"",
+					"\"$(SRCROOT)/Mini vMac/\"",
+					"\"$(SRCROOT)/minivmac/src\"",
+				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1279,11 +1305,19 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macplus4m;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\"",
+					"\"$(SRCROOT)/Mini vMac/\"",
+					"\"$(SRCROOT)/minivmac/src\"",
+				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1306,11 +1340,19 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macii;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\"",
+					"\"$(SRCROOT)/Mini vMac/\"",
+					"\"$(SRCROOT)/minivmac/src\"",
+				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1333,11 +1375,19 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.macii;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\"",
+					"\"$(SRCROOT)/Mini vMac/\"",
+					"\"$(SRCROOT)/minivmac/src\"",
+				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1360,11 +1410,19 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.mac128k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\"",
+					"\"$(SRCROOT)/Mini vMac/\"",
+					"\"$(SRCROOT)/minivmac/src\"",
+				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1387,11 +1445,19 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.mac128k;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\"",
+					"\"$(SRCROOT)/Mini vMac/\"",
+					"\"$(SRCROOT)/minivmac/src\"",
+				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1414,11 +1480,19 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-640x480";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\"",
+					"\"$(SRCROOT)/Mini vMac/\"",
+					"\"$(SRCROOT)/minivmac/src\"",
+				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1441,11 +1515,19 @@
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-640x480";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\" \"$(SRCROOT)/Mini vMac/\" \"$(SRCROOT)/minivmac/src\"";
+				USER_HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Mini vMac/$(PRODUCT_NAME)\"",
+					"\"$(SRCROOT)/Mini vMac/\"",
+					"\"$(SRCROOT)/minivmac/src\"",
+				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1569,7 +1651,10 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.5;
 				OTHER_CFLAGS = "-DUSE_LIBRES";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
@@ -1589,7 +1674,10 @@
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.5;
 				OTHER_CFLAGS = "-DUSE_LIBRES";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
