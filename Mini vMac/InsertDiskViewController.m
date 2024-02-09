@@ -473,7 +473,7 @@
 }
 
 - (void)showFileActivityIndicatorWithTitle:(NSString*)title completion:(void (^_Nonnull)(UIActivityIndicatorView* activityIndicatorView))completionBlock {
-    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleLarge];
     if (@available(iOS 13, *)) {
         activityIndicatorView.color = [UIColor labelColor];
     } else {

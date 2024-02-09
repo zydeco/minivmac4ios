@@ -38,6 +38,9 @@ typedef enum : NSInteger {
 @property (nonatomic, readonly) BOOL anyDiskInserted;
 @property (nonatomic, readonly) NSString *currentApplication;
 
+@property (nonatomic, strong) void (^showAlert)(NSString *title, NSString *message);
+@property (nonatomic, strong) UIViewController *rootViewController;
+
 - (void)run;
 - (void)reset;
 - (void)interrupt;

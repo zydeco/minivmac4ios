@@ -101,6 +101,10 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     NSBundle *emulatorBundle = [NSBundle bundleWithPath:emulatorBundlePath];
     [emulatorBundle load];
     sharedEmulator = [[emulatorBundle principalClass] new];
+    sharedEmulator.rootViewController = self.window.rootViewController;
+    sharedEmulator.showAlert = ^(NSString *title, NSString *message) {
+        [self showAlertWithTitle:title message:message];
+    };
     sharedEmulator.dataPath = self.documentsPath;
     return sharedEmulator != nil;
 }
@@ -167,8 +171,11 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         });
         return;
     }
+    BOOL wasRunning = sharedEmulator.isRunning;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [sharedEmulator setRunning:wasRunning];
+    }]];
     UIViewController *controller = self.window.rootViewController;
     while (controller.presentedViewController) {
         controller = controller.presentedViewController;

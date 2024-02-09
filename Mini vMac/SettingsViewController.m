@@ -372,7 +372,7 @@ typedef enum : NSInteger {
             // links in about
             NSString *linkURL = aboutItems[indexPath.row][@"link"];
             if (linkURL != nil) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkURL]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:linkURL] options:@{} completionHandler:nil];
             }
         }
     }

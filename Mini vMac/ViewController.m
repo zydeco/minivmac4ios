@@ -90,6 +90,7 @@ API_AVAILABLE(ios(13.4))
     }
 }
 
+#if !defined(TARGET_OS_VISION) || TARGET_OS_VISION == 0
 - (BOOL)prefersStatusBarHidden {
     UIScreen *screen = self.view.window.screen;
     return CGRectEqualToRect(screen.bounds, self.view.window.bounds);
@@ -98,6 +99,7 @@ API_AVAILABLE(ios(13.4))
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+#endif
 
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
     return UIRectEdgeAll;

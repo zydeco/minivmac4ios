@@ -1471,13 +1471,8 @@ LOCALPROC MacMsgDisplayOn() {
     if (SavedBriefMsg != nullpr) {
         NSString *title = NSStringCreateFromSubstCStr(SavedBriefMsg, falseblnr);
         NSString *message = NSStringCreateFromSubstCStr(SavedLongMsg, falseblnr);
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        blnr wasStopped = SpeedStopped;
-        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            SpeedStopped = wasStopped;
-        }]];
+        sharedEmulator.showAlert(title, message);
         SpeedStopped = trueblnr;
-        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
         SavedBriefMsg = nullpr;
         SavedLongMsg = nullpr;
     }
@@ -1642,6 +1637,8 @@ GLOBALPROC WaitForNextTick(void) {
 }
 
 @synthesize dataPath;
+@synthesize showAlert;
+@synthesize rootViewController;
 
 - (instancetype)init {
     if ((self = [super init])) {
@@ -1792,7 +1789,7 @@ GLOBALPROC WaitForNextTick(void) {
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Save", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self didMakeNewDisk:self->nameTextField.text size:size];
     }]];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+    [sharedEmulator.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)didMakeNewDisk:(NSString*)fileName size:(NSInteger)size {
