@@ -1747,7 +1747,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-640x480";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-512x384";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -1787,7 +1787,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-640x480";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.namedfork.minivmac.macii-512x384";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
