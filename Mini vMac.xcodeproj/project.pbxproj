@@ -62,6 +62,7 @@
 		28D3C6172B76B8970079E915 /* DefaultSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3C6162B76B8970079E915 /* DefaultSceneDelegate.swift */; };
 		28D3C61B2B7781700079E915 /* KeyboardSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3C61A2B7781700079E915 /* KeyboardSceneDelegate.swift */; };
 		28D3C61D2B7795060079E915 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3C61C2B7795060079E915 /* SettingsMenu.swift */; };
+		28D3C61F2B77B51D0079E915 /* PowerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3C61E2B77B51D0079E915 /* PowerMenu.swift */; };
 		28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */; };
 		28E3B7DF251D0F13007C273F /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CC251D0F12007C273F /* MOUSEMDV.c */; };
 		28E3B7E0251D0F13007C273F /* MOUSEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7CC251D0F12007C273F /* MOUSEMDV.c */; };
@@ -291,6 +292,7 @@
 		28D3C6162B76B8970079E915 /* DefaultSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSceneDelegate.swift; sourceTree = "<group>"; };
 		28D3C61A2B7781700079E915 /* KeyboardSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSceneDelegate.swift; sourceTree = "<group>"; };
 		28D3C61C2B7795060079E915 /* SettingsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		28D3C61E2B77B51D0079E915 /* PowerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerMenu.swift; sourceTree = "<group>"; };
 		28D5A3FB1CD6868E001A33F6 /* TouchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchScreen.h; sourceTree = "<group>"; };
 		28D5A3FC1CD6868E001A33F6 /* TouchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchScreen.m; sourceTree = "<group>"; };
 		28E3B7CC251D0F12007C273F /* MOUSEMDV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MOUSEMDV.c; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				28F676C71CD15E0B00FC6FA6 /* ViewController.m */,
 				28D3C6142B7681420079E915 /* VisionSupport.swift */,
 				28D3C61C2B7795060079E915 /* SettingsMenu.swift */,
+				28D3C61E2B77B51D0079E915 /* PowerMenu.swift */,
 				28848B601CDE97D600B86C45 /* InsertDiskViewController.h */,
 				28848B611CDE97D600B86C45 /* InsertDiskViewController.m */,
 				28848B631CDE97E900B86C45 /* SettingsViewController.h */,
@@ -1314,6 +1317,7 @@
 				28D3C61D2B7795060079E915 /* SettingsMenu.swift in Sources */,
 				28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */,
 				28D3C61B2B7781700079E915 /* KeyboardSceneDelegate.swift in Sources */,
+				28D3C61F2B77B51D0079E915 /* PowerMenu.swift in Sources */,
 				28848B621CDE97D600B86C45 /* InsertDiskViewController.m in Sources */,
 				28F676C81CD15E0B00FC6FA6 /* ViewController.m in Sources */,
 				28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */,

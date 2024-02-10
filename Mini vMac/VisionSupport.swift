@@ -20,6 +20,7 @@ extension ViewController {
                 VStack {
                     Spacer(minLength: 80.0)
                     HStack {
+                        PowerMenu().glassBackgroundEffect()
                         SettingsMenu().glassBackgroundEffect()
 
                         Button(action: {
