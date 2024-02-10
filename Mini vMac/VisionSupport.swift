@@ -21,13 +21,13 @@ extension ViewController {
                     Spacer(minLength: 80.0)
                     HStack {
                         Button(action: {
-                            AppDelegate.sharedInstance().showSettings(self)
+                            AppDelegate.shared.showSettings(self)
                         }, label: {
                             Image(systemName: "gear")
                         }).glassBackgroundEffect()
 
                         Button(action: {
-                            AppDelegate.sharedInstance().showInsertDisk(self)
+                            AppDelegate.shared.showInsertDisk(self)
                         }, label: {
                             Image(systemName: "opticaldiscdrive")
                         }).glassBackgroundEffect()
@@ -46,7 +46,7 @@ extension ViewController {
 
     @objc
     static func adjustToScreenSize() {
-        let screenSize = AppDelegate.sharedEmulator().screenSize
+        let screenSize = AppDelegate.emulator.screenSize
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
             return
         }

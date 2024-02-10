@@ -23,8 +23,8 @@ extern NSString *DocumentsChangedNotification;
 @property (readonly, nonatomic, getter = isSandboxed) BOOL sandboxed;
 @property (readonly, nonatomic) id<Emulator> sharedEmulator;
 
-+ (instancetype)sharedInstance;
-+ (id<Emulator>)sharedEmulator;
+@property (class, readonly, strong) AppDelegate *sharedInstance NS_SWIFT_NAME(shared);
+@property (class, readonly, strong) id<Emulator> sharedEmulator NS_SWIFT_NAME(emulator);
 - (void)loadAndStartEmulator;
 
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;

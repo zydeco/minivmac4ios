@@ -15,7 +15,7 @@ class KeyboardSceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else {
             fatalError("Expected scene of type UIWindowScene but got an unexpected type")
         }
-        guard let mainViewController = AppDelegate.sharedInstance().window.rootViewController as? ViewController else {
+        guard let mainViewController = AppDelegate.shared.window.rootViewController as? ViewController else {
             fatalError("No main view controller")
         }
 

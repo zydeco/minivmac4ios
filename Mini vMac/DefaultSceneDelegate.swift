@@ -15,7 +15,7 @@ class DefaultSceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else {
             fatalError("Expected scene of type UIWindowScene but got an unexpected type")
         }
-        guard let appDelegate = AppDelegate.sharedInstance() else {
+        guard let appDelegate = AppDelegate.shared else {
             fatalError("No app delegate")
         }
 
