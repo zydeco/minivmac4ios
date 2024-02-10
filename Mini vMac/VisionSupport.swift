@@ -20,11 +20,7 @@ extension ViewController {
                 VStack {
                     Spacer(minLength: 80.0)
                     HStack {
-                        Button(action: {
-                            AppDelegate.shared.showSettings(self)
-                        }, label: {
-                            Image(systemName: "gear")
-                        }).glassBackgroundEffect()
+                        SettingsMenu().glassBackgroundEffect()
 
                         Button(action: {
                             AppDelegate.shared.showInsertDisk(self)

@@ -10,7 +10,7 @@
 @import CoreGraphics;
 @import QuartzCore;
 
-typedef enum : NSInteger {
+typedef NS_ENUM(NSInteger, EmulatorSpeed) {
     EmulatorSpeedAllOut = -1,
     EmulatorSpeed1x = 0,
     EmulatorSpeed2x = 1,
@@ -18,7 +18,7 @@ typedef enum : NSInteger {
     EmulatorSpeed8x = 3,
     EmulatorSpeed16x = 4,
     EmulatorSpeed32x = 5
-} EmulatorSpeed;
+};
 
 @protocol Emulator <NSObject>
 

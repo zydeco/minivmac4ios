@@ -4,5 +4,6 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
+#import "EmulatorProtocol.h"
 #import "KBKeyboardView.h"
 #import "KBKeyboardLayout.h"
