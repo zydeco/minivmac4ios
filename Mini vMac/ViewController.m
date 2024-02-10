@@ -166,8 +166,12 @@ API_AVAILABLE(ios(13.4))
     }
 #endif
 
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+    Class pointingDeviceClass = [TouchScreen class];
+#else
     BOOL useTrackPad = [[NSUserDefaults standardUserDefaults] boolForKey:@"trackpad"];
     Class pointingDeviceClass = useTrackPad ? [TrackPad class] : [TouchScreen class];
+#endif
     pointingDeviceView = [[pointingDeviceClass alloc] initWithFrame:self.view.bounds];
     pointingDeviceView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view insertSubview:pointingDeviceView aboveSubview:self.screenView];
