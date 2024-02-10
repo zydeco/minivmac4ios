@@ -19,9 +19,17 @@ class KeyboardSceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError("No main view controller")
         }
 
-        let size = mainViewController.keyboardViewController.preferredContentSize
-        windowScene.sizeRestrictions?.minimumSize = size
-        windowScene.sizeRestrictions?.maximumSize = size
+        let defaultSize = mainViewController.keyboardViewController.preferredContentSize
+        let minSize = defaultSize.applying(.init(scaleX: 0.75, y: 0.75))
+        let maxSize = defaultSize.applying(.init(scaleX: 1.25, y: 1.25))
+        windowScene.sizeRestrictions?.minimumSize = minSize
+        windowScene.sizeRestrictions?.maximumSize = maxSize
+        windowScene.requestGeometryUpdate(UIWindowScene.GeometryPreferences.Vision(
+            size: defaultSize,
+            minimumSize: minSize,
+            maximumSize: maxSize,
+            resizingRestrictions: .uniform
+        ))
         window = UIWindow(windowScene: windowScene)
 
         if let window {

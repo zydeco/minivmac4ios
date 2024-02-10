@@ -16,19 +16,22 @@
 #define KC_CONTROL 59
 
 @implementation KBKeyboardView {
-    NSMutableArray *keyPlanes;
+    NSMutableArray *keyPlanes, *emptyKeyPlanes;
     NSMutableSet *modifiers;
     NSMutableIndexSet *keysDown;
     CGAffineTransform defaultKeyTransform;
     CGFloat fontSize;
     CGSize selectedSize;
     UIEdgeInsets safeAreaInsets;
+    CGSize intrinsicSize;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame safeAreaInsets:(UIEdgeInsets)insets {
     self = [super initWithFrame:frame];
     if (self) {
         safeAreaInsets = insets;
+        intrinsicSize = frame.size;
+#if !defined(TARGET_OS_VISION) || TARGET_OS_VISION == 0
         if (@available(iOS 13.0, *)) {
             self.backgroundColor = [UIColor clearColor];
             UIVisualEffectView *backgroundView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleSystemThickMaterial]];
@@ -37,8 +40,10 @@
         } else {
             self.backgroundColor = [UIColor colorWithRed:0xEB / 255.0 green:0xF0 / 255.0 blue:0xF7 / 255.0 alpha:0.9];
         }
+#endif
         modifiers = [NSMutableSet setWithCapacity:4];
         keysDown = [NSMutableIndexSet indexSet];
+        self.autoresizesSubviews = NO;
     }
     return self;
 }
@@ -47,9 +52,28 @@
     return [self initWithFrame:frame safeAreaInsets:UIEdgeInsetsZero];
 }
 
+- (CGSize)intrinsicContentSize {
+    return intrinsicSize;
+}
+
 - (BOOL)isCompactKeyboardSize:(CGSize)size {
     return size.width < 768.0;
 }
+
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+- (void)layoutSubviews {
+    // TODO: optimize this if needed
+    CGSize size = self.bounds.size;
+    CGFloat scale = size.width / intrinsicSize.width;
+    CGAffineTransform transform = CGAffineTransformMakeScale(scale, scale);
+    if (!CGAffineTransformEqualToTransform(transform, defaultKeyTransform)) {
+        defaultKeyTransform = transform;
+        keyPlanes = emptyKeyPlanes.mutableCopy;
+        fontSize = 30.0 * scale;
+        [self switchToKeyPlane:0];
+    }
+}
+#endif
 
 - (CGSize)findBestSizeForWidth:(CGFloat)preferredWidth inArray:(NSArray<NSValue*>*)sizes {
     CGSize selectedSize = CGSizeZero;
@@ -116,7 +140,8 @@
     for (int i = 0; i < numberOfKeyPlanes; i++) {
         [keyPlanes addObject:[NSNull null]];
     }
-    
+    emptyKeyPlanes = keyPlanes.mutableCopy;
+
     [self switchToKeyPlane:0];
 }
 
