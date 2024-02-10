@@ -112,6 +112,11 @@ API_AVAILABLE(ios(13.4))
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+    if ([segue.identifier isEqualToString:@"disk"]) {
+        [(UINavigationController*)segue.destinationViewController setToolbarHidden:YES];
+    }
+#endif
 }
 
 - (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
