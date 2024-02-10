@@ -29,6 +29,7 @@ API_AVAILABLE(ios(13.4))
     KBKeyboardView *keyboardView;
     UISwipeGestureRecognizer *showKeyboardGesture, *hideKeyboardGesture, *insertDiskGesture, *showSettingsGesture;
     UIControl *pointingDeviceView;
+    UIViewController *_keyboardViewController;
     id interaction;
 }
 
@@ -43,20 +44,55 @@ API_AVAILABLE(ios(13.4))
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emulatorDidShutDown:) name:[AppDelegate sharedEmulator].shutdownNotification object:nil];
+    
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+    [self initXr];
+#else
+    [self scheduleHelpPresentationIfNeededAfterDelay:6.0];
+    [self installGestures];
+#endif
+}
+
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+- (UIViewController *)keyboardViewController {
+    if (keyboardView == nil) {
+        [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"keyboardLayout" options:0 context:NULL];
+        KBKeyboardLayout *layout = [self keyboardLayout];
+        CGSize keyboardSize = CGSizeZero;
+        for (NSValue *size in layout.availableSizes) {
+            if (size.CGSizeValue.width > keyboardSize.width) {
+                keyboardSize = size.CGSizeValue;
+            }
+        }
+        keyboardView = [[KBKeyboardView alloc] initWithFrame:CGRectMake(0, 0, keyboardSize.width, keyboardSize.height)];
+        keyboardView.layout = layout;
+        keyboardView.delegate = self;
+    }
+    if (_keyboardViewController == nil) {
+        _keyboardViewController = [UIViewController alloc];
+        _keyboardViewController.view = keyboardView;
+        _keyboardViewController.preferredContentSize = keyboardView.frame.size;
+    } else if (_keyboardViewController.view != keyboardView) {
+        _keyboardViewController.view = keyboardView;
+    }
+    return _keyboardViewController;
+}
+#endif
+
+- (void)installGestures {
     [self installKeyboardGestures];
     insertDiskGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showInsertDisk:)];
     insertDiskGesture.direction = UISwipeGestureRecognizerDirectionLeft;
     insertDiskGesture.numberOfTouchesRequired = 2;
     [self.view addGestureRecognizer:insertDiskGesture];
-    
+
     showSettingsGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
     showSettingsGesture.direction = UISwipeGestureRecognizerDirectionRight;
     showSettingsGesture.numberOfTouchesRequired = 2;
     [self.view addGestureRecognizer:showSettingsGesture];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emulatorDidShutDown:) name:[AppDelegate sharedEmulator].shutdownNotification object:nil];
-    
-    [self scheduleHelpPresentationIfNeededAfterDelay:6.0];
+
 }
 
 - (void)showSettings:(id)sender {
@@ -149,6 +185,11 @@ API_AVAILABLE(ios(13.4))
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     if (object == [NSUserDefaults standardUserDefaults]) {
         if ([keyPath isEqualToString:@"keyboardLayout"] && keyboardView != nil) {
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+            // FIXME: do this nicelier
+            keyboardView = nil;
+            [self keyboardViewController];
+#else
             BOOL keyboardWasVisible = self.keyboardVisible;
             [self setKeyboardVisible:NO animated:NO];
             [keyboardView removeFromSuperview];
@@ -156,6 +197,7 @@ API_AVAILABLE(ios(13.4))
             if (keyboardWasVisible) {
                 [self setKeyboardVisible:YES animated:NO];
             }
+#endif
         } else if ([keyPath isEqualToString:@"trackpad"]) {
             [self setUpPointingDevice];
         }
@@ -215,7 +257,9 @@ API_AVAILABLE(ios(13.4))
 #pragma mark - Gesture Help
 
 - (void)showGestureHelp:(id)sender {
+#if !defined(TARGET_OS_VISION) || TARGET_OS_VISION == 0
     [self setGestureHelpHidden:NO];
+#endif
 }
 
 - (void)hideGestureHelp:(id)sender {
@@ -271,7 +315,11 @@ API_AVAILABLE(ios(13.4))
 }
 
 - (BOOL)isKeyboardVisible {
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+    return _keyboardViewController.view.window != nil;
+#else
     return keyboardView != nil && CGRectIntersectsRect(keyboardView.frame, self.view.bounds) && !keyboardView.hidden;
+#endif
 }
 
 - (void)setKeyboardVisible:(BOOL)keyboardVisible {
@@ -291,6 +339,13 @@ API_AVAILABLE(ios(13.4))
         return;
     }
     
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+    if (visible) {
+        UISceneSessionActivationRequest *request = [UISceneSessionActivationRequest requestWithRole:UIWindowSceneSessionRoleApplication];
+        request.userActivity = [[NSUserActivity alloc] initWithActivityType:@"net.namedfork.keyboard"];
+        [[UIApplication sharedApplication] activateSceneSessionForRequest:request errorHandler:nil];
+    } // only show, no hide
+#else
     if (visible) {
         [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"keyboardLayout" options:0 context:NULL];
         [self loadKeyboardView];
@@ -324,7 +379,7 @@ API_AVAILABLE(ios(13.4))
             keyboardView.hidden = YES;
         }
     }
-    
+#endif
 }
 
 - (void)loadKeyboardView {

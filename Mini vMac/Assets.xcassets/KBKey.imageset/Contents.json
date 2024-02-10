@@ -219,6 +219,25 @@
         "mode" : "9-part"
       },
       "scale" : "2x"
+    },
+    {
+      "filename" : "KBKey@2x~ipad-2 1.png",
+      "idiom" : "vision",
+      "resizing" : {
+        "cap-insets" : {
+          "bottom" : 32,
+          "left" : 32,
+          "right" : 32,
+          "top" : 32
+        },
+        "center" : {
+          "height" : 2,
+          "mode" : "tile",
+          "width" : 2
+        },
+        "mode" : "9-part"
+      },
+      "scale" : "2x"
     }
   ],
   "info" : {

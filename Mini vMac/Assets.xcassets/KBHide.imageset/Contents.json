@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "KBHide~ipad 2.png",
       "idiom" : "iphone",
       "scale" : "1x"
     },
@@ -22,6 +23,11 @@
     {
       "filename" : "KBHide~ipad@2x.png",
       "idiom" : "ipad",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "KBHide~ipad@2x 1.png",
+      "idiom" : "vision",
       "scale" : "2x"
     }
   ],

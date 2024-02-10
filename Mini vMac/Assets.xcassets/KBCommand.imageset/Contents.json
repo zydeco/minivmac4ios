@@ -23,6 +23,11 @@
       "filename" : "KBCommand@2x~ipad.png",
       "idiom" : "ipad",
       "scale" : "2x"
+    },
+    {
+      "filename" : "KBCommand@2x~ipad 1.png",
+      "idiom" : "vision",
+      "scale" : "2x"
     }
   ],
   "info" : {

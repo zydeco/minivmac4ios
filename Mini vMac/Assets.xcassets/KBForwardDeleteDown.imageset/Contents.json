@@ -23,6 +23,11 @@
       "filename" : "KBForwardDeleteDown~ipad@2x.png",
       "idiom" : "ipad",
       "scale" : "2x"
+    },
+    {
+      "filename" : "KBForwardDeleteDown~ipad@2x 1.png",
+      "idiom" : "vision",
+      "scale" : "2x"
     }
   ],
   "info" : {

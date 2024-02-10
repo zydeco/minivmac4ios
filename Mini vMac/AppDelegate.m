@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "SettingsViewController.h"
 #import "InsertDiskViewController.h"
+#import "ViewController.h"
 
 static AppDelegate *sharedAppDelegate = nil;
 static NSObject<Emulator> *sharedEmulator = nil;
@@ -106,6 +107,9 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         [self showAlertWithTitle:title message:message];
     };
     sharedEmulator.dataPath = self.documentsPath;
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+    [ViewController adjustToScreenSize];
+#endif
     return sharedEmulator != nil;
 }
 
@@ -309,6 +313,38 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         }
     }
     return YES;
+}
+
+#pragma mark - Making a Scene
+
+- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
+    for (NSUserActivity *activity in options.userActivities) {
+        if ([activity.activityType isEqualToString:@"net.namedfork.keyboard"]) {
+            return [UISceneConfiguration configurationWithName:@"Keyboard" sessionRole:UIWindowSceneSessionRoleApplication];
+        }
+    }
+    if (![self hasDefaultScene]) {
+        return [UISceneConfiguration configurationWithName:@"Default" sessionRole:UIWindowSceneSessionRoleApplication];
+    }
+    return nil;
+}
+
+
+- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
+    // if only keyboard is left, show default view again
+    if (![self hasDefaultScene]) {
+        UISceneSessionActivationRequest *request = [UISceneSessionActivationRequest requestWithRole:UIWindowSceneSessionRoleApplication];
+        [application activateSceneSessionForRequest:request errorHandler:nil];
+    }
+}
+
+- (BOOL)hasDefaultScene {
+    for (UIScene *scene in [UIApplication sharedApplication].connectedScenes) {
+        if ([scene.session.configuration.name isEqualToString:@"Default"]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end

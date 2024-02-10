@@ -18,6 +18,14 @@
 
 - (IBAction)showGestureHelp:(id)sender;
 - (IBAction)hideGestureHelp:(id)sender;
+- (void)showKeyboard:(id)sender;
 
 @end
 
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+@interface ViewController (VisionSupport)
+@property (nonatomic, readonly) UIViewController* keyboardViewController;
+- (void)initXr;
++ (void)adjustToScreenSize;
+@end
+#endif

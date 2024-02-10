@@ -177,7 +177,11 @@ typedef enum : NSInteger {
         case SettingsSectionMachine:
             return machineList.count;
         case SettingsSectionAbout:
+#if !defined(TARGET_OS_VISION) || TARGET_OS_VISION == 0
             return aboutItems.count + 1;
+#else
+            return aboutItems.count;
+#endif
         default:
             return 1;
     }
