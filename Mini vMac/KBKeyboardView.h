@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic, nullable) id<KBKeyboardViewDelegate> delegate;
 @property (nonatomic, strong, nullable) KBKeyboardLayout *layout;
+@property (nonatomic, strong, nullable) UIMenu *layoutMenu;
 
 @property (nonatomic, readonly, nonnull) NSArray<KBKey*>* keys;
 @property (nonatomic, readonly, nonnull) NSArray<KBKey*>* stickyKeys;

@@ -62,5 +62,21 @@ extension ViewController {
             resizingRestrictions: .uniform
         ))
     }
+
+    @objc
+    func keyboardLayoutMenu() -> UIMenu {
+        let layouts = AppDelegate.shared.keyboardLayoutPaths ?? []
+        let items: [UIMenuElement] = layouts.map({ path in
+            UIDeferredMenuElement.uncached { completion in
+                let layoutId = (path as NSString).lastPathComponent
+                let displayName = (layoutId as NSString).deletingPathExtension
+                let selected = UserDefaults.standard.string(forKey: "keyboardLayout") == layoutId
+                completion([UIAction(title: displayName, state: selected ? .on : .off) { _ in
+                    UserDefaults.standard.setValue(layoutId, forKey: "keyboardLayout")
+                }])
+            }
+        })
+        return UIMenu(title: "Layout", options: [], children: items)
+    }
 #endif
 }

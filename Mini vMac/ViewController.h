@@ -27,5 +27,6 @@
 @property (nonatomic, readonly) UIViewController* keyboardViewController;
 - (void)initXr;
 + (void)adjustToScreenSize;
+- (UIMenu*)keyboardLayoutMenu;
 @end
 #endif

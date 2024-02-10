@@ -126,11 +126,15 @@
         keyFrame.origin.x += safeAreaInsets.left;
     }
     if (scancode == VKC_HIDE) {
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
-        // close window to hide
-        return;
-#else
         key = [[KBHideKey alloc] initWithFrame:keyFrame];
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+        if (self.layoutMenu != nil) {
+            key.showsMenuAsPrimaryAction = YES;
+            key.menu = self.layoutMenu;
+        } else {
+            return;
+        }
+#else
         [key addTarget:self action:@selector(hideKeyboard:) forControlEvents:UIControlEventTouchUpInside];
 #endif
     } else if (scancode == VKC_SHIFT_CAPS) {

@@ -67,6 +67,7 @@ API_AVAILABLE(ios(13.4))
             }
         }
         keyboardView = [[KBKeyboardView alloc] initWithFrame:CGRectMake(0, 0, keyboardSize.width, keyboardSize.height)];
+        keyboardView.layoutMenu = [self keyboardLayoutMenu];
         keyboardView.layout = layout;
         keyboardView.delegate = self;
     }
