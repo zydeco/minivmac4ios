@@ -20,22 +20,23 @@ extension ViewController {
                 VStack {
                     Spacer(minLength: 80.0)
                     HStack {
-                        PowerMenu().glassBackgroundEffect()
-                        SettingsMenu().glassBackgroundEffect()
+                        PowerMenu()
+                        SettingsMenu()
 
                         Button(action: {
                             AppDelegate.shared.showInsertDisk(self)
                         }, label: {
                             Image(systemName: "opticaldiscdrive")
-                        }).glassBackgroundEffect()
+                        })
 
                         Button(action: {
                             self.showKeyboard(self)
                         }, label: {
                             Image(systemName: "keyboard")
-                        }).glassBackgroundEffect()
-                    }.padding(.all)
-                        .glassBackgroundEffect()
+                        })
+                    }
+                    .padding(.all)
+                    .glassBackgroundEffect()
                 }
             }
         ]
