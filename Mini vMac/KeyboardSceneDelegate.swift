@@ -8,6 +8,7 @@
 
 import UIKit
 
+#if os(visionOS)
 class KeyboardSceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
@@ -38,3 +39,4 @@ class KeyboardSceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 }
+#endif

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+#if os(visionOS)
 struct PowerMenu: View {
     var body: some View {
         Menu() {
@@ -31,3 +32,4 @@ struct PowerMenu: View {
 #Preview {
     PowerMenu()
 }
+#endif

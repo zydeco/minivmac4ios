@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-
+#if os(visionOS)
 struct SettingsMenu: View {
     var body: some View {
         Menu() {
@@ -146,3 +146,5 @@ struct DisplayScalingFilter {
     let filter: CALayerContentsFilter
     let name: String
 }
+
+#endif
