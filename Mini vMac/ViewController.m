@@ -43,16 +43,7 @@ static int8_t usb_to_adb_scancode[] = {
     UIControl *pointingDeviceView;
     UIViewController *_keyboardViewController;
     BOOL physicalCapsLocked;
-    id interaction;
-}
-
-- (Point)mouseLocForCGPoint:(CGPoint)point {
-    Point mouseLoc;
-    CGRect screenBounds = self.screenView.screenBounds;
-    CGSize screenSize = self.screenView.screenSize;
-    mouseLoc.h = (point.x - screenBounds.origin.x) * (screenSize.width/screenBounds.size.width);
-    mouseLoc.v = (point.y - screenBounds.origin.y) * (screenSize.height/screenBounds.size.height);
-    return mouseLoc;
+    UIPointerInteraction *pointerInteraction;
 }
 
 - (void)viewDidLoad {
@@ -168,31 +159,6 @@ static int8_t usb_to_adb_scancode[] = {
 
 - (void)viewDidDisappear:(BOOL)animated {
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"trackpad"];
-}
-
-- (void)setUpPointingDevice {
-    if (pointingDeviceView) {
-        [pointingDeviceView removeFromSuperview];
-        pointingDeviceView = nil;
-    }
-    
-    if (interaction == nil) {
-        interaction = [[UIPointerInteraction alloc] initWithDelegate: self];
-        [self.view addInteraction:interaction];
-    }
-
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
-    Class pointingDeviceClass = [TouchScreen class];
-#else
-    BOOL useTrackPad = [[NSUserDefaults standardUserDefaults] boolForKey:@"trackpad"];
-    Class pointingDeviceClass = useTrackPad ? [TrackPad class] : [TouchScreen class];
-#endif
-    pointingDeviceView = [[pointingDeviceClass alloc] initWithFrame:self.view.bounds];
-    pointingDeviceView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view insertSubview:pointingDeviceView aboveSubview:self.screenView];
-    if ([UIApplication instancesRespondToSelector:@selector(btcMouseSetRawMode:)]) {
-        [[UIApplication sharedApplication] btcMouseSetRawMode:YES];
-    }
 }
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
@@ -499,19 +465,57 @@ static int8_t usb_to_adb_scancode[] = {
         }
     }
 }
-@end
 
-@implementation ViewController (PointerInteraction)
-- (UIPointerRegion *)pointerInteraction:(UIPointerInteraction *)interaction regionForRequest:(UIPointerRegionRequest *)request defaultRegion:(UIPointerRegion *)defaultRegion {
-    if (request != nil) {
-        Point mouseLoc = [self mouseLocForCGPoint:request.location];
-        [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
+#pragma mark - Mouse
+
+- (void)setUpPointingDevice {
+    if (pointingDeviceView) {
+        [pointingDeviceView removeFromSuperview];
+        pointingDeviceView = nil;
     }
+
+    if (pointerInteraction == nil) {
+        pointerInteraction = [[UIPointerInteraction alloc] initWithDelegate: self];
+        [self.view addInteraction:pointerInteraction];
+        UIHoverGestureRecognizer *hoverGestureRecognizer = [[UIHoverGestureRecognizer alloc] initWithTarget:self action:@selector(hover:)];
+        [self.view addGestureRecognizer:hoverGestureRecognizer];
+    }
+
+
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
+    Class pointingDeviceClass = [TouchScreen class];
+#else
+    BOOL useTrackPad = [[NSUserDefaults standardUserDefaults] boolForKey:@"trackpad"];
+    Class pointingDeviceClass = useTrackPad ? [TrackPad class] : [TouchScreen class];
+#endif
+    pointingDeviceView = [[pointingDeviceClass alloc] initWithFrame:self.view.bounds];
+    pointingDeviceView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view insertSubview:pointingDeviceView aboveSubview:self.screenView];
+    if ([UIApplication instancesRespondToSelector:@selector(btcMouseSetRawMode:)]) {
+        [[UIApplication sharedApplication] btcMouseSetRawMode:YES];
+    }
+}
+
+- (Point)mouseLocForCGPoint:(CGPoint)point {
+    Point mouseLoc;
+    CGRect screenBounds = self.screenView.screenBounds;
+    CGSize screenSize = self.screenView.screenSize;
+    mouseLoc.h = (point.x - screenBounds.origin.x) * (screenSize.width/screenBounds.size.width);
+    mouseLoc.v = (point.y - screenBounds.origin.y) * (screenSize.height/screenBounds.size.height);
+    return mouseLoc;
+}
+
+- (UIPointerRegion *)pointerInteraction:(UIPointerInteraction *)interaction regionForRequest:(UIPointerRegionRequest *)request defaultRegion:(UIPointerRegion *)defaultRegion {
     return defaultRegion;
 }
 
 - (UIPointerStyle *)pointerInteraction:(UIPointerInteraction *)interaction styleForRegion:(UIPointerRegion *)region {
     return [UIPointerStyle hiddenPointerStyle];
+}
+
+- (void)hover:(UIHoverGestureRecognizer *)hoverGestureRecognizer {
+    Point mouseLoc = [self mouseLocForCGPoint:[hoverGestureRecognizer locationInView:self.screenView]];
+    [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
 }
 
 @end
