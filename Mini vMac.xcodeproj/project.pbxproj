@@ -30,7 +30,6 @@
 		28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89791CE7315400A98104 /* KBKeyboardView.m */; };
 		28BA89821CE7336500A98104 /* Keyboard Layouts in Resources */ = {isa = PBXBuildFile; fileRef = 28BA89811CE7336500A98104 /* Keyboard Layouts */; };
 		28BA89851CE73E7200A98104 /* TrackPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89841CE73E7200A98104 /* TrackPad.m */; };
-		28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89871CE73FBC00A98104 /* MNVMApplication.m */; };
 		28BDBEA01D230EEB0072ED5B /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
 		28BDBEB11D230EEB0072ED5B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EC1CFA329C0088B634 /* Icon.png */; };
 		28BDBEB21D230EEB0072ED5B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423ED1CFA329C0088B634 /* Icon@2x.png */; };
@@ -277,8 +276,6 @@
 		28BA89811CE7336500A98104 /* Keyboard Layouts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Keyboard Layouts"; sourceTree = "<group>"; };
 		28BA89831CE73E7200A98104 /* TrackPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackPad.h; sourceTree = "<group>"; };
 		28BA89841CE73E7200A98104 /* TrackPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackPad.m; sourceTree = "<group>"; };
-		28BA89861CE73FBC00A98104 /* MNVMApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNVMApplication.h; sourceTree = "<group>"; };
-		28BA89871CE73FBC00A98104 /* MNVMApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNVMApplication.m; sourceTree = "<group>"; };
 		28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MacII-640x480.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C67BEE2AC49E46000C7540 /* MacII-512x384.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MacII-512x384.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C67BF12AC49F0F000C7540 /* CNFUDALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
@@ -612,8 +609,6 @@
 			children = (
 				28F676C31CD15E0B00FC6FA6 /* AppDelegate.h */,
 				28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */,
-				28BA89861CE73FBC00A98104 /* MNVMApplication.h */,
-				28BA89871CE73FBC00A98104 /* MNVMApplication.m */,
 				28CE8ED41CD4F56C00FE25A8 /* ScreenView.h */,
 				28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */,
 				28D5A3FB1CD6868E001A33F6 /* TouchScreen.h */,
@@ -1311,7 +1306,6 @@
 				28D3C6172B76B8970079E915 /* DefaultSceneDelegate.swift in Sources */,
 				28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */,
 				28848B651CDE97E900B86C45 /* SettingsViewController.m in Sources */,
-				28BA89881CE73FBC00A98104 /* MNVMApplication.m in Sources */,
 				28F6B4CF1CF77099002D76D0 /* compat.m in Sources */,
 				28F6B4521CF07C48002D76D0 /* UIImage+DiskImageIcon.m in Sources */,
 				28D3C61D2B7795060079E915 /* SettingsMenu.swift in Sources */,

@@ -24,12 +24,32 @@ API_AVAILABLE(ios(13.4))
 @end
 #endif
 
+static int8_t usb_to_adb_scancode[] = {
+    -1, -1, -1, -1, 0, 11, 8, 2, 14, 3, 5, 4, 34, 38, 40, 37,
+    46, 45, 31, 35, 12, 15, 1, 17, 32, 9, 13, 7, 16, 6, 18, 19,
+    20, 21, 23, 22, 26, 28, 25, 29, 36, 53, 51, 48, 49, 27, 24, 33,
+    30, 42, 42, 41, 39, 10, 43, 47, 44, 57, 122, 120, 99, 118, 96, 97,
+    98, 100, 101, 109, 103, 111, 105, 107, 113, 114, 115, 116, 117, 119, 121, 60,
+    59, 61, 62, 71, 75, 67, 78, 69, 76, 83, 84, 85, 86, 87, 88, 89,
+    91, 92, 82, 65, 50, 55, 126, 81, 105, 107, 113, 106, 64, 79, 80, 90,
+    -1, -1, -1, -1, -1, 114, -1, -1, -1, -1, -1, -1, -1, -1, -1, 74,
+    72, 73, -1, -1, -1, 95, -1, 94, -1, 93, -1, -1, -1, -1, -1, -1,
+    104, 102, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    54, 56, 58, 55, 54, 56, 58, 55, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+};
+
 @implementation ViewController
 {
     KBKeyboardView *keyboardView;
     UISwipeGestureRecognizer *showKeyboardGesture, *hideKeyboardGesture, *insertDiskGesture, *showSettingsGesture;
     UIControl *pointingDeviceView;
     UIViewController *_keyboardViewController;
+    BOOL physicalCapsLocked;
     id interaction;
 }
 
@@ -431,6 +451,65 @@ API_AVAILABLE(ios(13.4))
     [[AppDelegate sharedEmulator] keyUp:scancode];
 }
 
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    for (UIPress *press in presses) {
+        [self handlePressEvent:press];
+    }
+}
+
+- (void)pressesChanged:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    for (UIPress *press in presses) {
+        [self handlePressEvent:press];
+    }
+}
+
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event {
+    for (UIPress *press in presses) {
+        [self handlePressEvent:press];
+    }
+}
+
+- (void)handlePressEvent:(UIPress *)event {
+    long keycode = event.key.keyCode;
+    int scancode = -1;
+
+    BOOL emulatorIsFrontmost = [AppDelegate sharedEmulator].running && [AppDelegate sharedInstance].window.rootViewController.presentedViewController == nil;
+    BOOL isKeyDown = (event.phase == UIPressPhaseBegan);
+
+    if (keycode >= 0 && keycode < sizeof(usb_to_adb_scancode)) {
+        scancode = usb_to_adb_scancode[keycode];
+    }
+
+    if (scancode == KC_CAPSLOCK) {
+        // caps lock
+        if (isKeyDown && !physicalCapsLocked) {
+            [[AppDelegate sharedEmulator] keyDown:KC_CAPSLOCK];
+            physicalCapsLocked = YES;
+        } else if (isKeyDown && physicalCapsLocked) {
+            [[AppDelegate sharedEmulator] keyUp:KC_CAPSLOCK];
+            physicalCapsLocked = NO;
+        }
+    } else if (scancode >= 0 && emulatorIsFrontmost) {
+        [self _updateCapsLockStatus:event];
+        if (isKeyDown) {
+            [[AppDelegate sharedEmulator] keyDown:scancode];
+        } else {
+            [[AppDelegate sharedEmulator] keyUp:scancode];
+        }
+    }
+}
+
+- (void)_updateCapsLockStatus:(UIPress *)event {
+    BOOL currentCapsLock = (event.key.modifierFlags & UIKeyModifierAlphaShift) != 0;
+    if (currentCapsLock != physicalCapsLocked) {
+        physicalCapsLocked = currentCapsLock;
+        if (physicalCapsLocked) {
+            [[AppDelegate sharedEmulator] keyDown:KC_CAPSLOCK];
+        } else {
+            [[AppDelegate sharedEmulator] keyUp:KC_CAPSLOCK];
+        }
+    }
+}
 @end
 
 #ifdef __IPHONE_13_4

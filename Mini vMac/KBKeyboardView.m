@@ -9,12 +9,6 @@
 #import "KBKeyboardView.h"
 #import "KBKey.h"
 
-#define KC_COMMAND 55
-#define KC_SHIFT 56
-#define KC_CAPSLOCK 57
-#define KC_OPTION 58
-#define KC_CONTROL 59
-
 @implementation KBKeyboardView {
     NSMutableArray *keyPlanes, *emptyKeyPlanes;
     NSMutableSet *modifiers;
