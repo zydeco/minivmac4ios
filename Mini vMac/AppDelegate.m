@@ -334,16 +334,20 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         }
     }
     if ([self sceneWithName:@"Default"] == nil) {
+        [[AppDelegate sharedEmulator] setRunning:YES];
         return [UISceneConfiguration configurationWithName:@"Default" sessionRole:UIWindowSceneSessionRoleApplication];
     }
     return nil;
 }
 
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
-    // if only keyboard is left, close it too
     if ([self sceneWithName:@"Default"] == nil) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"runInBackground"] == NO) {
+            [[AppDelegate sharedEmulator] setRunning:NO];
+        }
         UIScene *keyboardScene = [self sceneWithName:@"Keyboard"];
         if (keyboardScene != nil) {
+            // if only keyboard is left, close it too
             [application requestSceneSessionDestruction:keyboardScene.session options:nil errorHandler:nil];
         }
     }

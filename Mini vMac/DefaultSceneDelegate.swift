@@ -32,4 +32,14 @@ class DefaultSceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.makeKeyAndVisible()
         }
     }
+
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        if UserDefaults.standard.bool(forKey: "runInBackground") == false {
+            AppDelegate.emulator.isRunning = false
+        }
+    }
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        AppDelegate.emulator.isRunning = true
+    }
 }

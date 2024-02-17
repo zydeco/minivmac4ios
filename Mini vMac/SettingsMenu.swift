@@ -25,6 +25,7 @@ struct SettingsMenu: View {
 
 struct SpeedMenu: View {
     @AppStorage("speedValue") var currentSpeed: EmulatorSpeed = .speed1x
+    @AppStorage("runInBackground") var runInBackground: Bool = false
     private var currentSpeedImage: String {
         switch currentSpeed {
         case .speed1x:
@@ -54,6 +55,8 @@ struct SpeedMenu: View {
             SpeedButton(label: "16x", speed: .speed16x)
             SpeedButton(label: "32x", speed: .speed32x)
             SpeedButton(label: "Unlimited", speed: .speedAllOut)
+            Divider()
+            Toggle("Run in Background", isOn: $runInBackground)
         }.menuOrder(.fixed)
     }
 }
