@@ -340,10 +340,12 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 }
 
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
-    // if only keyboard is left, show default view again
-    if (![self hasDefaultScene]) {
-        UISceneSessionActivationRequest *request = [UISceneSessionActivationRequest requestWithRole:UIWindowSceneSessionRoleApplication];
-        [application activateSceneSessionForRequest:request errorHandler:nil];
+    // if only keyboard is left, close it too
+    if ([self sceneWithName:@"Default"] == nil) {
+        UIScene *keyboardScene = [self sceneWithName:@"Keyboard"];
+        if (keyboardScene != nil) {
+            [application requestSceneSessionDestruction:keyboardScene.session options:nil errorHandler:nil];
+        }
     }
 }
 
