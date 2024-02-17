@@ -20,6 +20,7 @@ class KeyboardSceneDelegate: UIResponder, UIWindowSceneDelegate {
             fatalError("No main view controller")
         }
 
+        scene.activationConditions.canActivateForTargetContentIdentifierPredicate = NSPredicate(format: "self == 'net.namedfork.keyboard'", argumentArray: nil)
         let defaultSize = mainViewController.keyboardViewController.preferredContentSize
         let minSize = defaultSize.applying(.init(scaleX: 0.75, y: 0.75))
         let maxSize = defaultSize.applying(.init(scaleX: 1.25, y: 1.25))
@@ -32,6 +33,14 @@ class KeyboardSceneDelegate: UIResponder, UIWindowSceneDelegate {
             resizingRestrictions: .uniform
         ))
         window = UIWindow(windowScene: windowScene)
+
+        // destroy existing keyboard window
+        if let oldWindow = mainViewController.keyboardViewController?.view?.window {
+            oldWindow.rootViewController = nil
+            if let oldScene = oldWindow.windowScene?.session.scene {
+                UIApplication.shared.requestSceneSessionDestruction(oldScene.session, options: nil)
+            }
+        }
 
         if let window {
             window.rootViewController = mainViewController.keyboardViewController

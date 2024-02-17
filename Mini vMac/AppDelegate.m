@@ -333,12 +333,11 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
             return [UISceneConfiguration configurationWithName:@"Keyboard" sessionRole:UIWindowSceneSessionRoleApplication];
         }
     }
-    if (![self hasDefaultScene]) {
+    if ([self sceneWithName:@"Default"] == nil) {
         return [UISceneConfiguration configurationWithName:@"Default" sessionRole:UIWindowSceneSessionRoleApplication];
     }
     return nil;
 }
-
 
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
     // if only keyboard is left, show default view again
@@ -348,13 +347,13 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     }
 }
 
-- (BOOL)hasDefaultScene {
+- (UIScene*)sceneWithName:(NSString*)name {
     for (UIScene *scene in [UIApplication sharedApplication].connectedScenes) {
-        if ([scene.session.configuration.name isEqualToString:@"Default"]) {
-            return YES;
+        if ([scene.session.configuration.name isEqualToString:name]) {
+            return scene;
         }
     }
-    return NO;
+    return nil;
 }
 
 @end

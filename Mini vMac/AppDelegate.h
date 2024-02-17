@@ -32,6 +32,7 @@ extern NSString *DocumentsChangedNotification;
 - (IBAction)showInsertDisk:(id)sender;
 - (IBAction)showSettings:(id)sender;
 - (IBAction)showGestureHelp:(id)sender;
+- (UIScene*)sceneWithName:(NSString*)name;
 
 @end
 

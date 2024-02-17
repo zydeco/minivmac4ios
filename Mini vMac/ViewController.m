@@ -320,17 +320,24 @@ static int8_t usb_to_adb_scancode[] = {
 }
 
 - (void)setKeyboardVisible:(BOOL)visible animated:(BOOL)animated {
-    if (self.keyboardVisible == visible) {
-        return;
-    }
-    
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
     if (visible) {
         UISceneSessionActivationRequest *request = [UISceneSessionActivationRequest requestWithRole:UIWindowSceneSessionRoleApplication];
         request.userActivity = [[NSUserActivity alloc] initWithActivityType:@"net.namedfork.keyboard"];
-        [[UIApplication sharedApplication] activateSceneSessionForRequest:request errorHandler:nil];
-    } // only show, no hide
+        request.userActivity.targetContentIdentifier = @"net.namedfork.keyboard";
+        [[UIApplication sharedApplication] activateSceneSessionForRequest:request errorHandler:^(NSError * _Nonnull error) {
+            NSLog(@"Activation error: %@", error);
+        }];
+    } else {
+        UIScene *keyboardScene = [[AppDelegate sharedInstance] sceneWithName:@"Keyboard"];
+        if (keyboardScene != nil) {
+            [[UIApplication sharedApplication] requestSceneSessionDestruction:keyboardScene.session options:nil errorHandler:nil];
+        }
+    }
 #else
+    if (self.keyboardVisible == visible) {
+        return;
+    }
     if (visible) {
         [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"keyboardLayout" options:0 context:NULL];
         [self loadKeyboardView];
