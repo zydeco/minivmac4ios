@@ -13,16 +13,9 @@
 #import "KBKeyboardView.h"
 #import "KBKeyboardLayout.h"
 
-@interface ViewController () <UIAdaptivePresentationControllerDelegate>
+@interface ViewController () <UIAdaptivePresentationControllerDelegate, UIPointerInteractionDelegate>
 
 @end
-
-#ifdef __IPHONE_13_4
-API_AVAILABLE(ios(13.4))
-@interface ViewController (PointerInteraction) <UIPointerInteractionDelegate>
-
-@end
-#endif
 
 static int8_t usb_to_adb_scancode[] = {
     -1, -1, -1, -1, 0, 11, 8, 2, 14, 3, 5, 4, 34, 38, 40, 37,
@@ -183,14 +176,10 @@ static int8_t usb_to_adb_scancode[] = {
         pointingDeviceView = nil;
     }
     
-#ifdef __IPHONE_13_4
-    if (@available(iOS 13.4, *)) {
-        if (interaction == nil) {
-            interaction = [[UIPointerInteraction alloc] initWithDelegate: self];
-            [self.view addInteraction:interaction];
-        }
+    if (interaction == nil) {
+        interaction = [[UIPointerInteraction alloc] initWithDelegate: self];
+        [self.view addInteraction:interaction];
     }
-#endif
 
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION == 1
     Class pointingDeviceClass = [TouchScreen class];
@@ -512,10 +501,8 @@ static int8_t usb_to_adb_scancode[] = {
 }
 @end
 
-#ifdef __IPHONE_13_4
-API_AVAILABLE(ios(13.4))
 @implementation ViewController (PointerInteraction)
-- (UIPointerRegion *)pointerInteraction:(UIPointerInteraction *)interaction regionForRequest:(UIPointerRegionRequest *)request defaultRegion:(UIPointerRegion *)defaultRegion  API_AVAILABLE(ios(13.4)){
+- (UIPointerRegion *)pointerInteraction:(UIPointerInteraction *)interaction regionForRequest:(UIPointerRegionRequest *)request defaultRegion:(UIPointerRegion *)defaultRegion {
     if (request != nil) {
         Point mouseLoc = [self mouseLocForCGPoint:request.location];
         [[AppDelegate sharedEmulator] setMouseX:mouseLoc.h Y:mouseLoc.v];
@@ -528,4 +515,3 @@ API_AVAILABLE(ios(13.4))
 }
 
 @end
-#endif

@@ -46,12 +46,7 @@
 }
 
 - (BOOL)isMouseEvent:(UIEvent *)event {
-#if __IPHONE_13_4
-    if (@available(iOS 13.4, *)) {
-        return event.buttonMask != 0;
-    }
-#endif
-    return NO;
+    return event.buttonMask != 0;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
