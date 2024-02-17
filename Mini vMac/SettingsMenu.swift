@@ -66,15 +66,13 @@ struct SpeedButton: View {
     let label: LocalizedStringKey
     let speed: EmulatorSpeed
     var body: some View {
-        if currentSpeed == speed {
-            Button(label, systemImage: "checkmark") {}
-        } else {
-            Button {
+        Toggle(label, isOn: Binding(get: {
+            currentSpeed == speed
+        }, set: { enable in
+            if enable {
                 currentSpeed = speed
-            } label: {
-                Text(label)
             }
-        }
+        }))
     }
 }
 
@@ -94,22 +92,16 @@ struct MachineButton: View {
     @AppStorage("machine") var currentMachine: String = "Plus4M"
     var bundle: Bundle
     var body: some View {
-        if currentMachine == bundle.name {
-            Label {
-                Text("\(bundle.displayName ?? bundle.name)\n\(bundle.getInfoString ?? "")")
-            } icon: {
-                Image(systemName: "checkmark")
+        Toggle(isOn: Binding(get: {
+            currentMachine == bundle.name
+        }, set: { enable in
+            if enable && !AppDelegate.emulator.anyDiskInserted {
+                currentMachine = bundle.name
+                AppDelegate.shared.loadAndStartEmulator()
             }
-        } else {
-            Button {
-                if !AppDelegate.emulator.anyDiskInserted {
-                    currentMachine = bundle.name
-                    AppDelegate.shared.loadAndStartEmulator()
-                }
-            } label: {
-                Text("\(bundle.displayName ?? bundle.name)\n\(bundle.getInfoString ?? "")")
-            }
-        }
+        }), label: {
+            Text("\(bundle.displayName ?? bundle.name)\n\(bundle.getInfoString ?? "")")
+        })
     }
 }
 
@@ -129,17 +121,13 @@ struct DisplayScalingMenu: View {
     var body: some View {
         Menu("Display Scaling", systemImage: "rectangle.and.text.magnifyingglass") {
             ForEach(DisplayScalingMenu.filters, id: \.filter) { filter in
-                if scalingFilter == filter.filter {
-                    Label {
-                        Text(filter.name)
-                    } icon: {
-                        Image(systemName: "checkmark")
-                    }
-                } else {
-                    Button(filter.name) {
+                Toggle(filter.name, isOn: Binding(get: {
+                    scalingFilter == filter.filter
+                }, set: { enable in
+                    if enable {
                         scalingFilter = filter.filter
                     }
-                }
+                }))
             }
         }.menuOrder(.fixed)
     }
