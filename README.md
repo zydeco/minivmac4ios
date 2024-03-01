@@ -5,13 +5,14 @@
 * Emulates Mac Plus, Mac II or Mac 128K
 * Full simulated keyboard (including all Mac keys)
 * Full sound output
-* Uses external keyboard if available
+* Uses external keyboard and mouse/trackpad if available
 * Regulable emulation speed
 * Easy(ish) to import/export disk images
 
 ## Requirements
 
-* iOS 9 or later
+* iOS/iPadOS 13.4 or later, or visionOS
+    * Previous versions support down to iOS 7
 * ROM image from Mac Plus, Mac II and/or Mac 128K
 * Disk images with Mac software
 
@@ -58,9 +59,6 @@ tapping twice fast and holding it down. 3D touch can also be used for clicking a
 dragging on supported devices.
 
 If you use a mouse or trackpad on iPad OS 13.4 or newer, it will be used automatically.
-
-If you have a jailbroken device and [BTC Mouse & Trackpad](http://www.ringwald.ch/cydia/mouse/),
-Mini vMac will use your bluetooth mouse or trackpad.
 
 ### Settings
 
