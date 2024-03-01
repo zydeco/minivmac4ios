@@ -161,6 +161,10 @@ static int8_t usb_to_adb_scancode[] = {
     [[NSUserDefaults standardUserDefaults] removeObserver:self forKeyPath:@"trackpad"];
 }
 
+- (BOOL)prefersHomeIndicatorAutoHidden {
+    return YES;
+}
+
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (motion == UIEventSubtypeMotionShake) {
         [[AppDelegate sharedInstance] showInsertDisk:self];
