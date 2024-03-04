@@ -42,4 +42,8 @@ class DefaultSceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         AppDelegate.emulator.isRunning = true
     }
+
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        AppDelegate.shared.application(UIApplication.shared, performActionFor: shortcutItem, completionHandler: completionHandler)
+    }
 }

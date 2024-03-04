@@ -189,7 +189,7 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
     BOOL success = NO;
-    if ([shortcutItem.type isEqualToString:@"disk"] && sharedEmulator.isRunning) {
+    if ([shortcutItem.type isEqualToString:@"disk"]) {
         NSString *fileName = (NSString*)shortcutItem.userInfo[@"disk"];
         NSString *filePath = [self.documentsPath stringByAppendingPathComponent:fileName];
         if ([[NSFileManager defaultManager] fileExistsAtPath:filePath] && ![sharedEmulator isDiskInserted:filePath]) {
