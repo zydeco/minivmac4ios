@@ -370,6 +370,7 @@
 		28F6B4C91CF1FA7A002D76D0 /* about.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = about.plist; sourceTree = "<group>"; };
 		28F6B4CE1CF77099002D76D0 /* compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = compat.m; sourceTree = "<group>"; };
 		28F875921D29402B001E99EB /* PlugIn-Capabilities.plist.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PlugIn-Capabilities.plist.xml"; sourceTree = "<group>"; };
+		CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CodeSigning.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -599,6 +600,7 @@
 		28F676BF1CD15E0B00FC6FA6 /* Mini vMac */ = {
 			isa = PBXGroup;
 			children = (
+				CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */,
 				28F676C31CD15E0B00FC6FA6 /* AppDelegate.h */,
 				28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */,
 				28BA89861CE73FBC00A98104 /* MNVMApplication.h */,
@@ -949,7 +951,6 @@
 					};
 					28F676BC1CD15E0B00FC6FA6 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = UJXNDZ5TNU;
 					};
 					28F6B48D1CF07DDD002D76D0 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1848,12 +1849,12 @@
 		};
 		28F676D51CD15E0B00FC6FA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = UJXNDZ5TNU;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1871,12 +1872,12 @@
 		};
 		28F676D61CD15E0B00FC6FA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = UJXNDZ5TNU;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

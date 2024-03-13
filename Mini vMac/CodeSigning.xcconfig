@@ -1,0 +1,11 @@
+//
+//  CodeSigning.xcconfig
+//  Mini vMac
+//
+//  Created by Lieven Dekeyser on 13/03/2024.
+//
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// You can find your Team ID on https://developer.apple.com/account#MembershipDetailsCard
+DEVELOPMENT_TEAM=UJXNDZ5TNU
