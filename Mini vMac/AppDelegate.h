@@ -32,5 +32,7 @@ extern NSString *DocumentsChangedNotification;
 - (IBAction)showSettings:(id)sender;
 - (IBAction)showGestureHelp:(id)sender;
 
+- (void)showBrowser;
+
 @end
 

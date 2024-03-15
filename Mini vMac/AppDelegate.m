@@ -7,16 +7,18 @@
 //
 
 @import AVFoundation;
+@import SafariServices;
 #import "AppDelegate.h"
 #import "SettingsViewController.h"
 #import "InsertDiskViewController.h"
+#import "HFSDiskImage.h"
 
 static AppDelegate *sharedAppDelegate = nil;
 static NSObject<Emulator> *sharedEmulator = nil;
 NSString *DocumentsChangedNotification = @"documentsChanged";
 
-@interface AppDelegate () <BTCMouseDelegate>
-
+@interface AppDelegate () <BTCMouseDelegate, SFSafariViewControllerDelegate>
+@property (nonatomic, strong) SFSafariViewController * browser;
 @end
 
 @implementation AppDelegate
@@ -281,7 +283,23 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+	[self.window.rootViewController dismissViewControllerAnimated:NO completion:nil];
+	
     if (url.fileURL) {
+    	
+    	// FIXME: detect file type of imported file
+    	// if archive first unarchive
+    	// - if the resulting file(s) contain ROM files, copy to Documents
+    	// - if the resulting file(s) contain disk images, copy those to Documents
+    	// - if the resulting file(s) contain other files, embed them in an HFS Disk Image and copy that to Documents
+    	
+    	// FIXME: this is temporary code to test importing files into disk images
+		HFSDiskImage * tempDiskImage = [HFSDiskImage importFileIntoTemporaryDiskImage:url.path];
+		if (tempDiskImage) {
+			[sharedEmulator insertDisk:tempDiskImage.path];
+			return YES;
+		}
+    	
         // opening file
         NSString *inboxPath = [self.documentsPath stringByAppendingPathComponent:@"Inbox"];
         if ([url.path.stringByStandardizingPath hasPrefix:inboxPath]) {
@@ -302,6 +320,35 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
         }
     }
     return YES;
+}
+
+- (void)showBrowser {
+	NSURL * url = [NSURL URLWithString:@"https://macintoshgarden.org"];
+	if (url == nil) {
+		return;
+	}
+	
+	if (self.window.rootViewController.presentedViewController) {
+		__weak typeof(self) weakSelf = self;
+		[self.window.rootViewController dismissViewControllerAnimated:NO completion:^{
+			[weakSelf showBrowser];
+		}];
+		return;
+	}
+	
+	SFSafariViewController * vc = self.browser;
+	if (vc == nil) {
+		vc = [[SFSafariViewController alloc] initWithURL:url];
+		vc.modalPresentationStyle = UIModalPresentationPageSheet;
+		vc.delegate = self;
+		self.browser = vc;
+	}
+	
+	[self.window.rootViewController presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+	[self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

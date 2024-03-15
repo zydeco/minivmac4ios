@@ -281,7 +281,11 @@ API_AVAILABLE(ios(13.4))
 }
 
 - (void)hideKeyboard:(id)sender {
-    [self setKeyboardVisible:NO animated:YES];
+	if (self.keyboardVisible) {
+		[self setKeyboardVisible:NO animated:YES];
+	} else {
+		[[AppDelegate sharedInstance] showBrowser];
+	}
 }
 
 - (void)setKeyboardVisible:(BOOL)visible animated:(BOOL)animated {
