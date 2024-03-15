@@ -153,6 +153,7 @@
 		28F6B4C21CF07F5C002D76D0 /* liblibres.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F6B4B61CF07F32002D76D0 /* liblibres.a */; };
 		28F6B4CA1CF1FA7A002D76D0 /* about.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28F6B4C91CF1FA7A002D76D0 /* about.plist */; };
 		28F6B4CF1CF77099002D76D0 /* compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4CE1CF77099002D76D0 /* compat.m */; };
+		CA06D3352BA25DC10019B7B7 /* HFSDiskImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CA06D3332BA25DC00019B7B7 /* HFSDiskImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -371,6 +372,8 @@
 		28F6B4CE1CF77099002D76D0 /* compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = compat.m; sourceTree = "<group>"; };
 		28F875921D29402B001E99EB /* PlugIn-Capabilities.plist.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PlugIn-Capabilities.plist.xml"; sourceTree = "<group>"; };
 		CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CodeSigning.xcconfig; sourceTree = "<group>"; };
+		CA06D3332BA25DC00019B7B7 /* HFSDiskImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFSDiskImage.m; sourceTree = "<group>"; };
+		CA06D3342BA25DC00019B7B7 /* HFSDiskImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFSDiskImage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -617,6 +620,8 @@
 				28848B611CDE97D600B86C45 /* InsertDiskViewController.m */,
 				28848B631CDE97E900B86C45 /* SettingsViewController.h */,
 				28848B641CDE97E900B86C45 /* SettingsViewController.m */,
+				CA06D3342BA25DC00019B7B7 /* HFSDiskImage.h */,
+				CA06D3332BA25DC00019B7B7 /* HFSDiskImage.m */,
 				28F676C91CD15E0B00FC6FA6 /* Main.storyboard */,
 				28F676CC1CD15E0B00FC6FA6 /* Assets.xcassets */,
 				28BA896E1CE7314500A98104 /* Keyboard */,
@@ -1301,6 +1306,7 @@
 				28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */,
 				28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */,
 				28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */,
+				CA06D3352BA25DC10019B7B7 /* HFSDiskImage.m in Sources */,
 				28F676C21CD15E0B00FC6FA6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
