@@ -8,3 +8,11 @@
 	path = minivmac
 	url = https://github.com/zydeco/minivmac.git
 	branch = wintergames
+[submodule "UniversalDetector"]
+	path = UniversalDetector
+	url = https://github.com/MacPaw/universal-detector.git
+	branch = master
+[submodule "XADMaster"]
+	path = XADMaster
+	url = https://github.com/MacPaw/XADMaster.git
+	branch = master

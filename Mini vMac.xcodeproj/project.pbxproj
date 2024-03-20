@@ -153,6 +153,12 @@
 		28F6B4C21CF07F5C002D76D0 /* liblibres.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F6B4B61CF07F32002D76D0 /* liblibres.a */; };
 		28F6B4CA1CF1FA7A002D76D0 /* about.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28F6B4C91CF1FA7A002D76D0 /* about.plist */; };
 		28F6B4CF1CF77099002D76D0 /* compat.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F6B4CE1CF77099002D76D0 /* compat.m */; };
+		CA06D3352BA25DC10019B7B7 /* HFSDiskImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CA06D3332BA25DC00019B7B7 /* HFSDiskImage.m */; };
+		CA7CFC9C2BA88DA800AAEC3B /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF1284E2BA4DE2F00E39C26 /* libUniversalDetector.ios.a */; };
+		CA7CFC9D2BA88DA800AAEC3B /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAF1282E2BA4DB9300E39C26 /* libXADMaster.ios.a */; };
+		CA7CFC9F2BA88E6B00AAEC3B /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7CFC9E2BA88E6B00AAEC3B /* libbz2.tbd */; };
+		CA7CFCA12BA88E7B00AAEC3B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7CFCA02BA88E7B00AAEC3B /* libc++.tbd */; };
+		CA7CFCA32BA88E8800AAEC3B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CA7CFCA22BA88E8800AAEC3B /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +196,118 @@
 			proxyType = 1;
 			remoteGlobalIDString = 28C67BD02AC49E46000C7540;
 			remoteInfo = "MacII-512x384";
+		};
+		CAF128272BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = XADMaster;
+		};
+		CAF128292BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B34A97511C2FD0500396C26;
+			remoteInfo = libXADMaster.a;
+		};
+		CAF1282B2BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B91CD5E11D97E7C0081E40A;
+			remoteInfo = libXADMaster.win.a;
+		};
+		CAF1282D2BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B467B0115CD9A73001AB1DD;
+			remoteInfo = libXADMaster.ios.a;
+		};
+		CAF1282F2BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B23DDC01185EBA300620319;
+			remoteInfo = unar;
+		};
+		CAF128312BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B91D18F11E1677B0081E40A;
+			remoteInfo = lsar;
+		};
+		CAF128332BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B91CDAC11D981E20081E40A;
+			remoteInfo = unar.exe;
+		};
+		CAF128352BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B91D2EE11E694860081E40A;
+			remoteInfo = lsar.exe;
+		};
+		CAF128372BA4DB9300E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 73DA3465206B6BF1006ADB42;
+			remoteInfo = XADMasterTests;
+		};
+		CAF128472BA4DE2F00E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = UniversalDetector;
+		};
+		CAF128492BA4DE2F00E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B23E0871190F29400620319;
+			remoteInfo = libUniversalDetector.a;
+		};
+		CAF1284B2BA4DE2F00E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B91CBE011D821A70081E40A;
+			remoteInfo = libUniversalDetector.win.a;
+		};
+		CAF1284D2BA4DE2F00E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B467B2615CD9B1F001AB1DD;
+			remoteInfo = libUniversalDetector.ios.a;
+		};
+		CAF1284F2BA4DE2F00E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1B0DDCAB0A2D0AD10009B697;
+			remoteInfo = DetectorTest;
+		};
+		CAF128552BA4DEE800E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B34A97411C2FD0500396C26;
+			remoteInfo = libXADMaster.a;
+		};
+		CAF128572BA4DF0600E39C26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B23E0861190F29400620319;
+			remoteInfo = libUniversalDetector.a;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -370,6 +488,14 @@
 		28F6B4C91CF1FA7A002D76D0 /* about.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = about.plist; sourceTree = "<group>"; };
 		28F6B4CE1CF77099002D76D0 /* compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = compat.m; sourceTree = "<group>"; };
 		28F875921D29402B001E99EB /* PlugIn-Capabilities.plist.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PlugIn-Capabilities.plist.xml"; sourceTree = "<group>"; };
+		CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = CodeSigning.xcconfig; sourceTree = "<group>"; };
+		CA06D3332BA25DC00019B7B7 /* HFSDiskImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFSDiskImage.m; sourceTree = "<group>"; };
+		CA06D3342BA25DC00019B7B7 /* HFSDiskImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFSDiskImage.h; sourceTree = "<group>"; };
+		CA7CFC9E2BA88E6B00AAEC3B /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		CA7CFCA02BA88E7B00AAEC3B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		CA7CFCA22BA88E8800AAEC3B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XADMaster.xcodeproj; path = XADMaster/XADMaster.xcodeproj; sourceTree = SOURCE_ROOT; };
+		CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UniversalDetector.xcodeproj; path = UniversalDetector/UniversalDetector.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,6 +538,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA7CFCA32BA88E8800AAEC3B /* libz.tbd in Frameworks */,
+				CA7CFCA12BA88E7B00AAEC3B /* libc++.tbd in Frameworks */,
+				CA7CFC9F2BA88E6B00AAEC3B /* libbz2.tbd in Frameworks */,
+				CA7CFC9C2BA88DA800AAEC3B /* libUniversalDetector.ios.a in Frameworks */,
+				CA7CFC9D2BA88DA800AAEC3B /* libXADMaster.ios.a in Frameworks */,
 				28F6B4C01CF07F5C002D76D0 /* liblibhfs.a in Frameworks */,
 				28F6B4C11CF07F5C002D76D0 /* liblibmfs.a in Frameworks */,
 				28F6B4C21CF07F5C002D76D0 /* liblibres.a in Frameworks */,
@@ -577,6 +708,7 @@
 			children = (
 				28F676BF1CD15E0B00FC6FA6 /* Mini vMac */,
 				28F676BE1CD15E0B00FC6FA6 /* Products */,
+				CAF1283B2BA4DBB400E39C26 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -599,6 +731,7 @@
 		28F676BF1CD15E0B00FC6FA6 /* Mini vMac */ = {
 			isa = PBXGroup;
 			children = (
+				CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */,
 				28F676C31CD15E0B00FC6FA6 /* AppDelegate.h */,
 				28F676C41CD15E0B00FC6FA6 /* AppDelegate.m */,
 				28BA89861CE73FBC00A98104 /* MNVMApplication.h */,
@@ -615,6 +748,8 @@
 				28848B611CDE97D600B86C45 /* InsertDiskViewController.m */,
 				28848B631CDE97E900B86C45 /* SettingsViewController.h */,
 				28848B641CDE97E900B86C45 /* SettingsViewController.m */,
+				CA06D3342BA25DC00019B7B7 /* HFSDiskImage.h */,
+				CA06D3332BA25DC00019B7B7 /* HFSDiskImage.m */,
 				28F676C91CD15E0B00FC6FA6 /* Main.storyboard */,
 				28F676CC1CD15E0B00FC6FA6 /* Assets.xcassets */,
 				28BA896E1CE7314500A98104 /* Keyboard */,
@@ -637,6 +772,8 @@
 				28F6B4551CF07C9A002D76D0 /* libhfs */,
 				28F6B4541CF07C8D002D76D0 /* libmfs */,
 				28F6B4531CF07C83002D76D0 /* libres */,
+				CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */,
+				CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */,
 				28F676C11CD15E0B00FC6FA6 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -708,6 +845,44 @@
 				28F6B4751CF07CC9002D76D0 /* unix.c */,
 			);
 			path = os;
+			sourceTree = "<group>";
+		};
+		CAF1281A2BA4DB9300E39C26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAF128282BA4DB9300E39C26 /* XADMaster.framework */,
+				CAF1282A2BA4DB9300E39C26 /* libXADMaster.a */,
+				CAF1282C2BA4DB9300E39C26 /* libXADMaster.win.a */,
+				CAF1282E2BA4DB9300E39C26 /* libXADMaster.ios.a */,
+				CAF128302BA4DB9300E39C26 /* unar */,
+				CAF128322BA4DB9300E39C26 /* lsar */,
+				CAF128342BA4DB9300E39C26 /* unar.exe */,
+				CAF128362BA4DB9300E39C26 /* lsar.exe */,
+				CAF128382BA4DB9300E39C26 /* XADMasterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAF1283B2BA4DBB400E39C26 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA7CFCA22BA88E8800AAEC3B /* libz.tbd */,
+				CA7CFCA02BA88E7B00AAEC3B /* libc++.tbd */,
+				CA7CFC9E2BA88E6B00AAEC3B /* libbz2.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CAF128402BA4DE2F00E39C26 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAF128482BA4DE2F00E39C26 /* UniversalDetector.framework */,
+				CAF1284A2BA4DE2F00E39C26 /* libUniversalDetector.a */,
+				CAF1284C2BA4DE2F00E39C26 /* libUniversalDetector.win.a */,
+				CAF1284E2BA4DE2F00E39C26 /* libUniversalDetector.ios.a */,
+				CAF128502BA4DE2F00E39C26 /* DetectorTest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -863,6 +1038,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				CAF128582BA4DF0600E39C26 /* PBXTargetDependency */,
+				CAF128562BA4DEE800E39C26 /* PBXTargetDependency */,
 				28C67BF52AC49F8D000C7540 /* PBXTargetDependency */,
 				2872E19E2AC48D770014F276 /* PBXTargetDependency */,
 				289710E11CFB126D0089D463 /* PBXTargetDependency */,
@@ -949,7 +1126,6 @@
 					};
 					28F676BC1CD15E0B00FC6FA6 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = UJXNDZ5TNU;
 					};
 					28F6B48D1CF07DDD002D76D0 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -973,6 +1149,16 @@
 			mainGroup = 28F676B41CD15E0B00FC6FA6;
 			productRefGroup = 28F676BE1CD15E0B00FC6FA6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CAF128402BA4DE2F00E39C26 /* Products */;
+					ProjectRef = CAF1283F2BA4DE2F00E39C26 /* UniversalDetector.xcodeproj */;
+				},
+				{
+					ProductGroup = CAF1281A2BA4DB9300E39C26 /* Products */;
+					ProjectRef = CAF128192BA4DB9300E39C26 /* XADMaster.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				28F676BC1CD15E0B00FC6FA6 /* Mini vMac */,
@@ -987,6 +1173,107 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CAF128282BA4DB9300E39C26 /* XADMaster.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = XADMaster.framework;
+			remoteRef = CAF128272BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF1282A2BA4DB9300E39C26 /* libXADMaster.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libXADMaster.a;
+			remoteRef = CAF128292BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF1282C2BA4DB9300E39C26 /* libXADMaster.win.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libXADMaster.win.a;
+			remoteRef = CAF1282B2BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF1282E2BA4DB9300E39C26 /* libXADMaster.ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libXADMaster.ios.a;
+			remoteRef = CAF1282D2BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF128302BA4DB9300E39C26 /* unar */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = unar;
+			remoteRef = CAF1282F2BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF128322BA4DB9300E39C26 /* lsar */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = lsar;
+			remoteRef = CAF128312BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF128342BA4DB9300E39C26 /* unar.exe */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = unar.exe;
+			remoteRef = CAF128332BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF128362BA4DB9300E39C26 /* lsar.exe */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = lsar.exe;
+			remoteRef = CAF128352BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF128382BA4DB9300E39C26 /* XADMasterTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = XADMasterTests.xctest;
+			remoteRef = CAF128372BA4DB9300E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF128482BA4DE2F00E39C26 /* UniversalDetector.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UniversalDetector.framework;
+			remoteRef = CAF128472BA4DE2F00E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF1284A2BA4DE2F00E39C26 /* libUniversalDetector.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libUniversalDetector.a;
+			remoteRef = CAF128492BA4DE2F00E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF1284C2BA4DE2F00E39C26 /* libUniversalDetector.win.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libUniversalDetector.win.a;
+			remoteRef = CAF1284B2BA4DE2F00E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF1284E2BA4DE2F00E39C26 /* libUniversalDetector.ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libUniversalDetector.ios.a;
+			remoteRef = CAF1284D2BA4DE2F00E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAF128502BA4DE2F00E39C26 /* DetectorTest */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = DetectorTest;
+			remoteRef = CAF1284F2BA4DE2F00E39C26 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		283422C81CF8EF8C0088B634 /* Resources */ = {
@@ -1300,6 +1587,7 @@
 				28D5A3FD1CD6868F001A33F6 /* TouchScreen.m in Sources */,
 				28F676C51CD15E0B00FC6FA6 /* AppDelegate.m in Sources */,
 				28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */,
+				CA06D3352BA25DC10019B7B7 /* HFSDiskImage.m in Sources */,
 				28F676C21CD15E0B00FC6FA6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1367,6 +1655,16 @@
 			isa = PBXTargetDependency;
 			target = 28C67BD02AC49E46000C7540 /* MacII-512x384 */;
 			targetProxy = 28C67BF42AC49F8D000C7540 /* PBXContainerItemProxy */;
+		};
+		CAF128562BA4DEE800E39C26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libXADMaster.a;
+			targetProxy = CAF128552BA4DEE800E39C26 /* PBXContainerItemProxy */;
+		};
+		CAF128582BA4DF0600E39C26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libUniversalDetector.a;
+			targetProxy = CAF128572BA4DF0600E39C26 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1848,12 +2146,12 @@
 		};
 		28F676D51CD15E0B00FC6FA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = UJXNDZ5TNU;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1863,6 +2161,7 @@
 				);
 				MARKETING_VERSION = 2.5;
 				OTHER_CFLAGS = "-DUSE_LIBRES";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1871,12 +2170,12 @@
 		};
 		28F676D61CD15E0B00FC6FA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA06D3322BA255830019B7B7 /* CodeSigning.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 14;
-				DEVELOPMENT_TEAM = UJXNDZ5TNU;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1886,6 +2185,7 @@
 				);
 				MARKETING_VERSION = 2.5;
 				OTHER_CFLAGS = "-DUSE_LIBRES";
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
