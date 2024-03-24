@@ -68,7 +68,14 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults registerDefaults:defaultValues];
-    [defaults addObserver:self forKeyPath:@"speedValue" options:0 context:NULL];
+    for (NSString *key in @[@"speedValue", @"autoSlow", @"localTalkServer"]) {
+        [defaults addObserver:self forKeyPath:key options:0 context:NULL];
+    }
+
+    NSString *localTalkServer = [defaults valueForKey:@"localTalkServer"];
+    if (localTalkServer.length > 0) {
+        setenv("LTOVRTCP_SERVER", localTalkServer.UTF8String, 1);
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -78,6 +85,13 @@ NSString *DocumentsChangedNotification = @"documentsChanged";
             sharedEmulator.speed = [defaults integerForKey:@"speedValue"];
         } else if ([keyPath isEqualToString:@"autoSlow"]) {
             sharedEmulator.autoSlow = [defaults integerForKey:@"autoSlow"];
+        } else if ([keyPath isEqualToString:@"localTalkServer"]) {
+            NSString *localTalkServer = [defaults stringForKey:@"localTalkServer"];
+            if (localTalkServer.length > 0) {
+                setenv("LTOVRTCP_SERVER", localTalkServer.UTF8String, 1);
+            } else {
+                unsetenv("LTOVRTCP_SERVER");
+            }
         }
     }
 }

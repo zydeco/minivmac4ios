@@ -107,6 +107,12 @@ LOCALPROC dbglog_close0(void) {
 #include "COMOSGLU.h"
 #include "PBUFSTDC.h"
 
+#if EmLocalTalk
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include "LTOVRTCP.h"
+#endif
+
 #pragma mark - Cocoa Stuff
 
 LOCALFUNC blnr FindNamedChildFilePath(NSString *parentPath, char *ChildName, NSString **childPath) {
@@ -1492,10 +1498,14 @@ LOCALFUNC blnr InitOSGLU(void) {
 #endif
                         if (LoadInitialImages())
                             if (LoadMacRom())
-                                if (InitLocationDat()) {
-                                    InitKeyCodes();
-                                    IsOk = trueblnr;
-                                }
+                                if (InitLocationDat())
+#if EmLocalTalk
+                                if (InitLocalTalk())
+#endif
+                                    if (true) {
+                                        InitKeyCodes();
+                                        IsOk = trueblnr;
+                                    }
     }
 
     return IsOk;
@@ -1508,6 +1518,9 @@ LOCALPROC CheckSavedMacMsg(void) {
 }
 
 LOCALPROC UnInitOSGLU(void) {
+#if EmLocalTalk
+    UnInitLocalTalk();
+#endif
 #if MySoundEnabled
     MySound_Stop();
 #endif

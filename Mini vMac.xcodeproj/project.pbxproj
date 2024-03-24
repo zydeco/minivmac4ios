@@ -244,6 +244,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2834204B2B96558700D7DB68 /* LTOVRUDP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LTOVRUDP.h; sourceTree = "<group>"; };
 		283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacPlus4M.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		283422D71CF8EFD80088B634 /* EmulatorProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmulatorProtocol.h; sourceTree = "<group>"; };
 		283422E71CF8F1C80088B634 /* CNFUDOSG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
@@ -257,6 +258,7 @@
 		283423EE1CFA329C0088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
 		283CA9821DF47AF300B33D5E /* BTCMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCMouse.h; sourceTree = "<group>"; };
 		285A8C901D05AFD3002993DE /* PlugIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlugIn-Info.plist"; sourceTree = "<group>"; };
+		287006E92BB032E300A5EB51 /* LTOVRTCP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LTOVRTCP.h; sourceTree = "<group>"; };
 		28848B601CDE97D600B86C45 /* InsertDiskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertDiskViewController.h; sourceTree = "<group>"; };
 		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
 		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 			isa = PBXGroup;
 			children = (
 				28E3B831251D195D007C273F /* PICOMMON.h */,
+				2834204B2B96558700D7DB68 /* LTOVRUDP.h */,
 				28E3B7D2251D0F13007C273F /* ADBEMDEV.c */,
 				28E3B7DE251D0F13007C273F /* ASCEMDEV.c */,
 				28E3B7CE251D0F12007C273F /* GLOBGLUE.c */,
@@ -638,6 +641,7 @@
 				283422EF1CF8F33A0088B634 /* Emulator Bundles */,
 				28D3C6162B76B8970079E915 /* DefaultSceneDelegate.swift */,
 				28D3C61A2B7781700079E915 /* KeyboardSceneDelegate.swift */,
+				287006E92BB032E300A5EB51 /* LTOVRTCP.h */,
 			);
 			path = "Mini vMac";
 			sourceTree = "<group>";

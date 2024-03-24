@@ -35,7 +35,8 @@
 
 #define IncludeHostTextClipExchange 1
 #define EnableAutoSlow 1
-#define EmLocalTalk 0
+#define EmLocalTalk 1
+#define LT_MayHaveEcho 0
 #define AutoLocation 1
 #define AutoTimeZone 1
 

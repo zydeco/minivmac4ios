@@ -19,7 +19,9 @@ typedef enum : NSInteger {
     SettingsSectionKeyboard,
     SettingsSectionDisplay,
     SettingsSectionMachine,
-    SettingsSectionAbout
+    SettingsSectionNetwork,
+    SettingsSectionAbout,
+    SettingsSectionCount
 } SettingsSection;
 
 @implementation SettingsViewController
@@ -154,10 +156,21 @@ typedef enum : NSInteger {
     }
 }
 
+- (void)changeLocaltalkServer:(UITextField*)sender {
+    if ([sender isKindOfClass:[UITextField class]]) {
+        NSLog(@"Changed server to %@", sender.text);
+        if (sender.text.length == 0) {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"localTalkServer"];
+        } else {
+            [[NSUserDefaults standardUserDefaults] setValue:sender.text forKey:@"localTalkServer"];
+        }
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 6;
+    return SettingsSectionCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -196,6 +209,8 @@ typedef enum : NSInteger {
             return NSLocalizedString(@"Display Scaling", nil);
         case SettingsSectionAbout:
             return aboutTitle;
+        case SettingsSectionNetwork:
+            return NSLocalizedString(@"Network", nil);
         default:return nil;
     }
 }
@@ -269,7 +284,7 @@ typedef enum : NSInteger {
             cell.textLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
             cell.detailTextLabel.text = [bundle objectForInfoDictionaryKey:@"CFBundleGetInfoString"];
         }
-        
+
         if (rowHasHeader) {
             cell.imageView.image = nil;
             cell.indentationLevel = 1;
@@ -297,6 +312,9 @@ typedef enum : NSInteger {
         } else {
             filterControl.selectedSegmentIndex = 1;
         }
+    } else if (section == SettingsSectionNetwork) {
+        cell = [self fieldCellForTableView:tableView indexPath:indexPath action:@selector(changeLocaltalkServer:) placeholder:@"address:port" text:[defaults valueForKey:@"localTalkServer"]];
+        cell.textLabel.text = @"LocalTalk Server";
     }
     return cell;
 }
@@ -388,6 +406,24 @@ typedef enum : NSInteger {
     }
     cellSwitch.on = on;
     [cellSwitch addTarget:self action:action forControlEvents:UIControlEventValueChanged];
+    return cell;
+}
+
+- (UITableViewCell*)fieldCellForTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath action:(SEL)action placeholder:(NSString*)placeholder text:(NSString*)text {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"field" forIndexPath:indexPath];
+    UITextField *cellField = (UITextField*)cell.accessoryView;
+    if (cellField == nil) {
+        CGRect bounds = cell.bounds;
+        bounds.size.width /= 2;
+        cellField = [[UITextField alloc] initWithFrame:bounds];
+        cell.accessoryView = cellField;
+    } else {
+        [cellField removeTarget:nil action:nil forControlEvents:UIControlEventAllEvents];
+    }
+    cellField.text = text;
+    cellField.placeholder = placeholder;
+    cellField.textAlignment = NSTextAlignmentRight;
+    [cellField addTarget:self action:action forControlEvents:UIControlEventEditingDidEnd|UIControlEventEditingDidEndOnExit];
     return cell;
 }
 
