@@ -25,11 +25,15 @@
  */
 
 @import UIKit;
-@import AudioUnit;
-@import AudioToolbox;
+
 #include "OSGCOMUI.h"
 #include "OSGCOMUD.h"
 #import "EmulatorProtocol.h"
+
+#if MySoundEnabled
+@import AudioUnit;
+@import AudioToolbox;
+#endif
 
 #define kRAM_Size (kRAMa_Size + kRAMb_Size)
 EXPORTVAR(ui3p, RAM)
@@ -37,10 +41,10 @@ EXPORTVAR(ui3p, VidROM)
 EXPORTVAR(ui3p, VidMem)
 
 @interface MNVMBundleClassName : NSObject <Emulator>
-
+#if IncludeSonyNew
 - (void)makeNewDisk:(NSString*)name size:(NSInteger)size;
+#endif
 - (void)updateScreen:(CGImageRef)screenImage;
-
 @end
 
 static __weak MNVMBundleClassName *sharedEmulator = nil;
@@ -1646,7 +1650,9 @@ GLOBALPROC WaitForNextTick(void) {
 
 @implementation MNVMBundleClassName
 {
+#if IncludeSonyNew
     __block __weak UITextField *nameTextField;
+#endif
 }
 
 @synthesize dataPath;
@@ -1760,9 +1766,13 @@ GLOBALPROC WaitForNextTick(void) {
 }
 
 - (void)updateScreen:(CGImageRef)screenImage {
+#if TARGET_OS_WATCH
+    [screenLayer setContents:(__bridge id)screenImage];
+#else
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         screenLayer.contents = (__bridge id)screenImage;
     }
+#endif
 }
 
 #pragma mark - Disk
@@ -1789,6 +1799,7 @@ GLOBALPROC WaitForNextTick(void) {
     return @"didEjectDisk";
 }
 
+#if IncludeSonyNew
 - (void)makeNewDisk:(NSString*)name size:(NSInteger)size {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Export File", nil) message:NSLocalizedString(@"Enter new name", nil) preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -1819,6 +1830,7 @@ GLOBALPROC WaitForNextTick(void) {
     vSonyNewDiskWanted = falseblnr;
     SpeedStopped = falseblnr;
 }
+#endif
 
 #pragma mark - Keyboard
 

@@ -8,7 +8,15 @@
 
 @import Foundation;
 @import CoreGraphics;
+#if TARGET_OS_WATCH
+#define CALayer NSObject
+#define UIViewController NSObject
+@interface NSObject (CALayer)
+- (void)setContents:(id)contents;
+@end
+#else
 @import QuartzCore;
+#endif
 
 typedef NS_ENUM(NSInteger, EmulatorSpeed) {
     EmulatorSpeedAllOut = -1,
