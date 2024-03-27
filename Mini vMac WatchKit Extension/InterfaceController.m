@@ -126,7 +126,7 @@
     emulator.screenLayer = [[self fullScreenView] layer];
     emulator.speed = emulator.initialSpeed;
     [emulator.screenLayer setContentsGravity:@"CAGravityResizeAspectFill"];
-    [emulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(-M_PI_2), 0.375, 0.375)];
+    [emulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), 0.375, 0.375)];
     [emulator.screenLayer setMinificationFilter:@"CAFilterTrilinear"];
     [emulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
 }
