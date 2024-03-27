@@ -7,8 +7,14 @@
 //
 
 #import "TrackPad.h"
+#if TARGET_OS_WATCH
+#import "InterfaceController.h"
+#define AppDelegate InterfaceController
+#define AudioServicesPlaySystemSound 
+#else
 #import "AppDelegate.h"
 @import AudioToolbox;
+#endif
 
 #define TRACKPAD_ACCEL_N 1
 #define TRACKPAD_ACCEL_T 0.2
@@ -36,6 +42,7 @@
     return self;
 }
 
+#if !TARGET_OS_WATCH
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     [super willMoveToSuperview:newSuperview];
     @try {
@@ -44,9 +51,14 @@
         supportsForceTouch = NO;
     }
 }
+#endif
 
 - (BOOL)isMouseEvent:(UIEvent *)event {
+#if TARGET_OS_WATCH
+    return NO;
+#else
     return event.buttonMask != 0;
+#endif
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -54,7 +66,7 @@
         [self startDragging];
         return;
     }
-    
+
     [currentTouches unionSet:touches];
     if (currentTouches.count == 1) {
         [self firstTouchBegan:touches.anyObject withEvent:event];

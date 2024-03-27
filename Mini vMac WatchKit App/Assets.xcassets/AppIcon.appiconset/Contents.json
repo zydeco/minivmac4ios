@@ -15,12 +15,14 @@
       "subtype" : "42mm"
     },
     {
+      "filename" : "Icon 7.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
+      "filename" : "Icon 6.png",
       "idiom" : "watch",
       "role" : "companionSettings",
       "scale" : "3x",

@@ -9,10 +9,13 @@
 #import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
+#import "EmulatorProtocol.h"
 
 @class WCSession;
 
 @interface InterfaceController : WKInterfaceController
+
+@property (class, readonly, strong) id<Emulator> sharedEmulator NS_SWIFT_NAME(emulator);
 
 - (void)sessionReachabilityDidChange:(WCSession *)session;
 

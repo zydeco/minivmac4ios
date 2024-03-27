@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#if TARGET_OS_WATCH
+#import "UIKit+Watch.h"
+@interface TrackPad : UIView
+#else
 @interface TrackPad : UIControl
+#endif
 
 @end

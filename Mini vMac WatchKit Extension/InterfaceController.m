@@ -11,8 +11,10 @@
 @import ObjectiveC.runtime;
 @import WatchConnectivity;
 
+#import "UIKit+Watch.h"
 #import "InterfaceController.h"
 #import "EmulatorProtocol.h"
+#import "TrackPad.h"
 
 @interface NSObject (fs_override)
 +(id)sharedApplication;
@@ -32,15 +34,19 @@
 -(void)setContentsScale:(CGFloat)value;
 -(void)setContentsGravity:(NSString*)gravity;
 -(void)setMinificationFilter:(NSString*)filter;
+-(void)addTarget:(nullable id)target action:(SEL)action forControlEvents:(NSUInteger)controlEvents;
+-(void)setIdleTimerDisabled:(BOOL)disabled;
 @end
 
 @interface InterfaceController ()
 
 @end
 
+static NSObject<Emulator> *sharedEmulator = nil;
+
 @implementation InterfaceController
 {
-    NSObject<Emulator> *emulator;
+
 }
 
 + (void)load {
@@ -50,6 +56,10 @@
         Method m = class_getInstanceMethod(CLKTimeFormatter, @selector(timeText));
         method_setImplementation(m, imp_implementationWithBlock(^NSString*(id self, SEL _cmd) { return @" "; }));
     }
+}
+
++ (id<Emulator>)sharedEmulator {
+    return sharedEmulator;
 }
 
 - (void)awakeWithContext:(id)context {
@@ -71,7 +81,7 @@
 
 }
 
-- (id)fullScreenView {
+- (UIView*)fullScreenView {
     id parentView = [[[[[[NSClassFromString(@"UIApplication") sharedApplication] keyWindow] rootViewController] viewControllers] firstObject] view];
     id view = [self findDescendantViewOfClass:NSClassFromString(@"SPFullScreenView") inView:parentView]; // watchOS 5
     if (view == nil) {
@@ -94,21 +104,23 @@
 
 - (void)didAppear {
     [self hideTimeLabel];
-    if (emulator == nil) {
+    if (sharedEmulator == nil) {
         [self loadAndStartEmulator];
+    } else {
+        sharedEmulator.running = YES;
     }
 }
 
 - (void)willActivate {
     if ([WKExtension sharedExtension].applicationState == WKApplicationStateActive) {
-        emulator.running = YES;
+        sharedEmulator.running = YES;
     }
 }
 
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
-    emulator.running = NO;
+    sharedEmulator.running = NO;
 }
 
 - (void)sessionReachabilityDidChange:(WCSession *)session {
@@ -116,18 +128,26 @@
 }
 
 - (void)loadAndStartEmulator {
+    UIView *fullScreenView = [self fullScreenView];
     Class emulatorClass = NSClassFromString(@"MacPlus4MEmulator");
-    emulator = [emulatorClass new];
-    emulator.rootViewController = nil;
-    emulator.showAlert = ^(NSString *title, NSString *message) {
+    sharedEmulator = [emulatorClass new];
+    sharedEmulator.rootViewController = nil;
+    sharedEmulator.showAlert = ^(NSString *title, NSString *message) {
         NSLog(@"Alert: %@ - %@", title, message);
     };
-    emulator.dataPath = [NSBundle mainBundle].resourcePath;
-    emulator.screenLayer = [[self fullScreenView] layer];
-    emulator.speed = emulator.initialSpeed;
-    [emulator.screenLayer setContentsGravity:@"CAGravityResizeAspectFill"];
-    [emulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), 0.375, 0.375)];
-    [emulator.screenLayer setMinificationFilter:@"CAFilterTrilinear"];
-    [emulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
+    sharedEmulator.dataPath = [NSBundle mainBundle].resourcePath;
+    sharedEmulator.screenLayer = fullScreenView.layer;
+    sharedEmulator.speed = sharedEmulator.initialSpeed;
+    [sharedEmulator.screenLayer setContentsGravity:@"CAGravityResizeAspectFill"];
+    [sharedEmulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), 0.375, 0.375)];
+    [sharedEmulator.screenLayer setMinificationFilter:@"CAFilterTrilinear"];
+    [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
+
+    id app = [NSClassFromString(@"UIApplication") sharedApplication];
+    [app setIdleTimerDisabled:YES];
+
+    TrackPad *trackpad = [[TrackPad alloc] initWithFrame:fullScreenView.bounds];
+    [fullScreenView addSubview:trackpad];
 }
+
 @end
