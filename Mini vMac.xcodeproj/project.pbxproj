@@ -35,6 +35,16 @@
 		2896735B2BB20A0E0014D8E7 /* SONYEMDV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7D1251D0F12007C273F /* SONYEMDV.c */; };
 		2896735C2BB20A0E0014D8E7 /* ROMEMDEV.c in Sources */ = {isa = PBXBuildFile; fileRef = 28E3B7DA251D0F13007C273F /* ROMEMDEV.c */; };
 		2896735D2BB20A190014D8E7 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
+		289673872BB4938C0014D8E7 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 289673852BB4937D0014D8E7 /* Interface.storyboard */; };
+		289673892BB493A20014D8E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 289673832BB4937D0014D8E7 /* Assets.xcassets */; };
+		2896738A2BB493A90014D8E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2896737B2BB4937D0014D8E7 /* Assets.xcassets */; };
+		2896738B2BB493AF0014D8E7 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289673802BB4937D0014D8E7 /* InterfaceController.m */; };
+		2896738C2BB493AF0014D8E7 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2896737D2BB4937D0014D8E7 /* ExtensionDelegate.m */; };
+		2896738D2BB493B20014D8E7 /* vMac.rom in Resources */ = {isa = PBXBuildFile; fileRef = 289673812BB4937D0014D8E7 /* vMac.rom */; };
+		289673902BB4947A0014D8E7 /* MacPlus4M_WatchOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289673422BB209DB0014D8E7 /* MacPlus4M_WatchOS.framework */; };
+		289673912BB4947A0014D8E7 /* MacPlus4M_WatchOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289673422BB209DB0014D8E7 /* MacPlus4M_WatchOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		289673942BB494FB0014D8E7 /* Mini vMac WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2896738E2BB493F80014D8E7 /* Mini vMac WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		289673972BB4958D0014D8E7 /* Mini vMac WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 289673742BB492400014D8E7 /* Mini vMac WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		289710C31CFB11BF0089D463 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
 		289710DC1CFB12240089D463 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710D81CFB121F0089D463 /* Icon.png */; };
 		289710DD1CFB12240089D463 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710D91CFB121F0089D463 /* Icon@2x.png */; };
@@ -196,6 +206,27 @@
 			remoteGlobalIDString = 28BDBE9A1D230EEB0072ED5B;
 			remoteInfo = "MacII-640x480";
 		};
+		289673922BB4947A0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28F676B51CD15E0B00FC6FA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 289673412BB209DB0014D8E7;
+			remoteInfo = "MacPlus4M-WatchOS";
+		};
+		289673952BB494FB0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28F676B51CD15E0B00FC6FA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28E020F12173E0EC00C556D6;
+			remoteInfo = "Mini vMac WatchKit Extension";
+		};
+		289673982BB4958D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28F676B51CD15E0B00FC6FA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28E020E22173E0EC00C556D6;
+			remoteInfo = "Mini vMac WatchKit App";
+		};
 		289710E01CFB126D0089D463 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 28F676B51CD15E0B00FC6FA6 /* Project object */;
@@ -209,6 +240,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 28C67BD02AC49E46000C7540;
 			remoteInfo = "MacII-512x384";
+		};
+		28E020F42173E0EC00C556D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28F676B51CD15E0B00FC6FA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28E020F12173E0EC00C556D6;
+			remoteInfo = "Mini vMac WatchKit Extension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -226,6 +264,39 @@
 				283422D21CF8EF8C0088B634 /* MacPlus4M.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		289673372BB208BA0014D8E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				289673912BB4947A0014D8E7 /* MacPlus4M_WatchOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2896739A2BB4958E0014D8E7 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				289673972BB4958D0014D8E7 /* Mini vMac WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E021052173E0ED00C556D6 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				289673942BB494FB0014D8E7 /* Mini vMac WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		28F6B48C1CF07DDD002D76D0 /* CopyFiles */ = {
@@ -282,6 +353,18 @@
 		289673492BB209E90014D8E7 /* CNFUDOSG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
 		2896734D2BB209E90014D8E7 /* CNFUDPIC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDPIC.h; sourceTree = "<group>"; };
 		2896734E2BB209E90014D8E7 /* CNFUDALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
+		289673742BB492400014D8E7 /* Mini vMac WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mini vMac WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2896737B2BB4937D0014D8E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2896737C2BB4937D0014D8E7 /* ExtensionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionDelegate.h; sourceTree = "<group>"; };
+		2896737D2BB4937D0014D8E7 /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
+		2896737E2BB4937D0014D8E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2896737F2BB4937D0014D8E7 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
+		289673802BB4937D0014D8E7 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
+		289673812BB4937D0014D8E7 /* vMac.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = vMac.rom; sourceTree = "<group>"; };
+		289673832BB4937D0014D8E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		289673842BB4937D0014D8E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		289673852BB4937D0014D8E7 /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
+		2896738E2BB493F80014D8E7 /* Mini vMac WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Mini vMac WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		289710D41CFB11BF0089D463 /* Mac128K.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mac128K.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		289710D61CFB121F0089D463 /* CNFUDOSG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
 		289710D71CFB121F0089D463 /* CNFUDALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
@@ -444,6 +527,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28E020EF2173E0EC00C556D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				289673902BB4947A0014D8E7 /* MacPlus4M_WatchOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F676BA1CD15E0B00FC6FA6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -475,6 +566,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4259EE64740C16BAEA209B84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -494,9 +592,9 @@
 		283422EF1CF8F33A0088B634 /* Emulator Bundles */ = {
 			isa = PBXGroup;
 			children = (
-				289673432BB209DB0014D8E7 /* MacPlus4M-WatchOS */,
 				283422F01CF8F3530088B634 /* Shared */,
 				283422CB1CF8EF8C0088B634 /* MacPlus4M */,
+				289673432BB209DB0014D8E7 /* MacPlus4M-WatchOS */,
 				283423981CF9C5380088B634 /* MacII */,
 				28C67BF02AC49F0F000C7540 /* MacII-512x384 */,
 				28BDBEB91D230F280072ED5B /* MacII-640x480 */,
@@ -542,6 +640,37 @@
 				2896734D2BB209E90014D8E7 /* CNFUDPIC.h */,
 			);
 			path = "MacPlus4M-WatchOS";
+			sourceTree = "<group>";
+		};
+		289673822BB4937D0014D8E7 /* Mini vMac WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2896737B2BB4937D0014D8E7 /* Assets.xcassets */,
+				2896737C2BB4937D0014D8E7 /* ExtensionDelegate.h */,
+				2896737D2BB4937D0014D8E7 /* ExtensionDelegate.m */,
+				2896737E2BB4937D0014D8E7 /* Info.plist */,
+				2896737F2BB4937D0014D8E7 /* InterfaceController.h */,
+				289673802BB4937D0014D8E7 /* InterfaceController.m */,
+				289673812BB4937D0014D8E7 /* vMac.rom */,
+			);
+			path = "Mini vMac WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		289673862BB4937D0014D8E7 /* Mini vMac WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				289673832BB4937D0014D8E7 /* Assets.xcassets */,
+				289673842BB4937D0014D8E7 /* Info.plist */,
+				289673852BB4937D0014D8E7 /* Interface.storyboard */,
+			);
+			path = "Mini vMac WatchKit App";
+			sourceTree = "<group>";
+		};
+		2896738F2BB4947A0014D8E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		289710D51CFB11D90089D463 /* Mac128K */ = {
@@ -624,7 +753,10 @@
 			isa = PBXGroup;
 			children = (
 				28F676BF1CD15E0B00FC6FA6 /* Mini vMac */,
+				289673862BB4937D0014D8E7 /* Mini vMac WatchKit App */,
+				289673822BB4937D0014D8E7 /* Mini vMac WatchKit Extension */,
 				28F676BE1CD15E0B00FC6FA6 /* Products */,
+				2896738F2BB4947A0014D8E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -641,6 +773,8 @@
 				28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */,
 				28C67BEE2AC49E46000C7540 /* MacII-512x384.framework */,
 				289673422BB209DB0014D8E7 /* MacPlus4M_WatchOS.framework */,
+				289673742BB492400014D8E7 /* Mini vMac WatchKit App.app */,
+				2896738E2BB493F80014D8E7 /* Mini vMac WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -928,6 +1062,44 @@
 			productReference = 28C67BEE2AC49E46000C7540 /* MacII-512x384.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		28E020E22173E0EC00C556D6 /* Mini vMac WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28E021062173E0ED00C556D6 /* Build configuration list for PBXNativeTarget "Mini vMac WatchKit App" */;
+			buildPhases = (
+				28E020E12173E0EC00C556D6 /* Resources */,
+				28E021052173E0ED00C556D6 /* Embed App Extensions */,
+				4259EE64740C16BAEA209B84 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28E020F52173E0EC00C556D6 /* PBXTargetDependency */,
+				289673962BB494FB0014D8E7 /* PBXTargetDependency */,
+			);
+			name = "Mini vMac WatchKit App";
+			productName = "Mini vMac WatchKit App";
+			productReference = 289673742BB492400014D8E7 /* Mini vMac WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		28E020F12173E0EC00C556D6 /* Mini vMac WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28E021022173E0ED00C556D6 /* Build configuration list for PBXNativeTarget "Mini vMac WatchKit Extension" */;
+			buildPhases = (
+				28E020EE2173E0EC00C556D6 /* Sources */,
+				28E020EF2173E0EC00C556D6 /* Frameworks */,
+				28E020F02173E0EC00C556D6 /* Resources */,
+				289673372BB208BA0014D8E7 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				289673932BB4947A0014D8E7 /* PBXTargetDependency */,
+			);
+			name = "Mini vMac WatchKit Extension";
+			productName = "Mini vMac WatchKit Extension";
+			productReference = 2896738E2BB493F80014D8E7 /* Mini vMac WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		28F676BC1CD15E0B00FC6FA6 /* Mini vMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28F676D41CD15E0B00FC6FA6 /* Build configuration list for PBXNativeTarget "Mini vMac" */;
@@ -938,6 +1110,7 @@
 				283422D61CF8EF8C0088B634 /* Embed Frameworks */,
 				283422F51CF9ACAD0088B634 /* Change emulator bundle extensions to mnvm */,
 				28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */,
+				2896739A2BB4958E0014D8E7 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -947,6 +1120,7 @@
 				289710E11CFB126D0089D463 /* PBXTargetDependency */,
 				283422D01CF8EF8C0088B634 /* PBXTargetDependency */,
 				283423A11CF9C5730088B634 /* PBXTargetDependency */,
+				289673992BB4958D0014D8E7 /* PBXTargetDependency */,
 			);
 			name = "Mini vMac";
 			productName = "Mini vMac";
@@ -1068,6 +1242,8 @@
 				28BDBE9A1D230EEB0072ED5B /* MacII-640x480 */,
 				28C67BD02AC49E46000C7540 /* MacII-512x384 */,
 				289673412BB209DB0014D8E7 /* MacPlus4M-WatchOS */,
+				28E020E22173E0EC00C556D6 /* Mini vMac WatchKit App */,
+				28E020F12173E0EC00C556D6 /* Mini vMac WatchKit Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -1127,6 +1303,24 @@
 				28C67BE72AC49E46000C7540 /* Icon.png in Resources */,
 				28C67BE82AC49E46000C7540 /* Icon@2x.png in Resources */,
 				28C67BE92AC49E46000C7540 /* Icon@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E020E12173E0EC00C556D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				289673872BB4938C0014D8E7 /* Interface.storyboard in Resources */,
+				289673892BB493A20014D8E7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E020F02173E0EC00C556D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2896738A2BB493A90014D8E7 /* Assets.xcassets in Resources */,
+				2896738D2BB493B20014D8E7 /* vMac.rom in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1396,6 +1590,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		28E020EE2173E0EC00C556D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2896738B2BB493AF0014D8E7 /* InterfaceController.m in Sources */,
+				2896738C2BB493AF0014D8E7 /* ExtensionDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F676B91CD15E0B00FC6FA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1475,6 +1678,21 @@
 			target = 28BDBE9A1D230EEB0072ED5B /* MacII-640x480 */;
 			targetProxy = 2872E19D2AC48D770014F276 /* PBXContainerItemProxy */;
 		};
+		289673932BB4947A0014D8E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 289673412BB209DB0014D8E7 /* MacPlus4M-WatchOS */;
+			targetProxy = 289673922BB4947A0014D8E7 /* PBXContainerItemProxy */;
+		};
+		289673962BB494FB0014D8E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28E020F12173E0EC00C556D6 /* Mini vMac WatchKit Extension */;
+			targetProxy = 289673952BB494FB0014D8E7 /* PBXContainerItemProxy */;
+		};
+		289673992BB4958D0014D8E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28E020E22173E0EC00C556D6 /* Mini vMac WatchKit App */;
+			targetProxy = 289673982BB4958D0014D8E7 /* PBXContainerItemProxy */;
+		};
 		289710E11CFB126D0089D463 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 289710B81CFB11BF0089D463 /* Mac128K */;
@@ -1484,6 +1702,11 @@
 			isa = PBXTargetDependency;
 			target = 28C67BD02AC49E46000C7540 /* MacII-512x384 */;
 			targetProxy = 28C67BF42AC49F8D000C7540 /* PBXContainerItemProxy */;
+		};
+		28E020F52173E0EC00C556D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28E020F12173E0EC00C556D6 /* Mini vMac WatchKit Extension */;
+			targetProxy = 28E020F42173E0EC00C556D6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2016,6 +2239,92 @@
 			};
 			name = Release;
 		};
+		28E021032173E0ED00C556D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UJXNDZ5TNU;
+				INFOPLIST_FILE = "Mini vMac WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				TARGETED_DEVICE_FAMILY = 4;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../Mini vMac\"";
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Debug;
+		};
+		28E021042173E0ED00C556D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UJXNDZ5TNU;
+				INFOPLIST_FILE = "Mini vMac WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				TARGETED_DEVICE_FAMILY = 4;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../Mini vMac\"";
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Release;
+		};
+		28E021072173E0ED00C556D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UJXNDZ5TNU;
+				IBSC_MODULE = Minivmac_WatchKit_Extension;
+				INFOPLIST_FILE = "Mini vMac WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Debug;
+		};
+		28E021082173E0ED00C556D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UJXNDZ5TNU;
+				IBSC_MODULE = Minivmac_WatchKit_Extension;
+				INFOPLIST_FILE = "Mini vMac WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = net.namedfork.minivmac.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+			};
+			name = Release;
+		};
 		28F676D21CD15E0B00FC6FA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2326,6 +2635,24 @@
 			buildConfigurations = (
 				28C67BEC2AC49E46000C7540 /* Debug */,
 				28C67BED2AC49E46000C7540 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28E021022173E0ED00C556D6 /* Build configuration list for PBXNativeTarget "Mini vMac WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E021032173E0ED00C556D6 /* Debug */,
+				28E021042173E0ED00C556D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28E021062173E0ED00C556D6 /* Build configuration list for PBXNativeTarget "Mini vMac WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E021072173E0ED00C556D6 /* Debug */,
+				28E021082173E0ED00C556D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

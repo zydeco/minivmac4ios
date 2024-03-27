@@ -18,7 +18,7 @@
                BlueprintIdentifier = "28E020E22173E0EC00C556D6"
                BuildableName = "Mini vMac WatchKit App.app"
                BlueprintName = "Mini vMac WatchKit App"
-               ReferencedContainer = "container:Micro vMac.xcodeproj">
+               ReferencedContainer = "container:Mini vMac.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "28E020E22173E0EC00C556D6"
             BuildableName = "Mini vMac WatchKit App.app"
             BlueprintName = "Mini vMac WatchKit App"
-            ReferencedContainer = "container:Micro vMac.xcodeproj">
+            ReferencedContainer = "container:Mini vMac.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "28E020E22173E0EC00C556D6"
             BuildableName = "Mini vMac WatchKit App.app"
             BlueprintName = "Mini vMac WatchKit App"
-            ReferencedContainer = "container:Micro vMac.xcodeproj">
+            ReferencedContainer = "container:Mini vMac.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
