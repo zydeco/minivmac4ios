@@ -6,10 +6,13 @@
 //  Copyright © 2018 namedfork. All rights reserved.
 //
 
-#import "InterfaceController.h"
-
+@import Foundation;
+@import UIKit;
 @import ObjectiveC.runtime;
 @import WatchConnectivity;
+
+#import "InterfaceController.h"
+#import "EmulatorProtocol.h"
 
 @interface NSObject (fs_override)
 +(id)sharedApplication;
@@ -25,6 +28,10 @@
 -(NSString*)timeText;
 -(id)sharedPUICApplication;
 -(void)_setStatusBarTimeHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(void))completion;
+-(void)setAffineTransform:(CGAffineTransform)transform;
+-(void)setContentsScale:(CGFloat)value;
+-(void)setContentsGravity:(NSString*)gravity;
+-(void)setMinificationFilter:(NSString*)filter;
 @end
 
 @interface InterfaceController ()
@@ -33,6 +40,7 @@
 
 @implementation InterfaceController
 {
+    NSObject<Emulator> *emulator;
 }
 
 + (void)load {
@@ -55,7 +63,7 @@
         [[[fullScreenView timeLabel] layer] setOpacity:0];
     }
 
-    /* Hack to make the digital time overlay disappear (on watchOS 7) */
+    /* Hack to make the digital time overlay disappear (on watchOS 7 and 8) */
     Class PUICApplication = NSClassFromString(@"PUICApplication");
     if ([PUICApplication instancesRespondToSelector:@selector(_setStatusBarTimeHidden:animated:completion:)]) {
         [[PUICApplication sharedApplication] _setStatusBarTimeHidden:YES animated:NO completion:nil];
@@ -86,26 +94,39 @@
 
 - (void)didAppear {
     [self hideTimeLabel];
-    /*if (runtime == nil) {
-        [self loadWatchface];
-    }*/
+    if (emulator == nil) {
+        [self loadAndStartEmulator];
+    }
 }
-
 
 - (void)willActivate {
     if ([WKExtension sharedExtension].applicationState == WKApplicationStateActive) {
-        //[runtime resume];
+        emulator.running = YES;
     }
 }
 
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
-    //[runtime pause];
+    emulator.running = NO;
 }
 
 - (void)sessionReachabilityDidChange:(WCSession *)session {
-    uint32_t connected = session.activationState == WCSessionActivationStateActivated && session.reachable;
+    //uint32_t connected = session.activationState == WCSessionActivationStateActivated && session.reachable;
 }
 
+- (void)loadAndStartEmulator {
+    Class emulatorClass = NSClassFromString(@"MacPlus4MEmulator");
+    emulator = [emulatorClass new];
+    emulator.rootViewController = nil;
+    emulator.showAlert = ^(NSString *title, NSString *message) {
+        NSLog(@"Alert: %@ - %@", title, message);
+    };
+    emulator.dataPath = [NSBundle mainBundle].resourcePath;
+    emulator.screenLayer = [[self fullScreenView] layer];
+    [emulator.screenLayer setContentsGravity:@"CAGravityResizeAspectFill"];
+    [emulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(-M_PI_2), 0.375, 0.375)];
+    [emulator.screenLayer setMinificationFilter:@"CAFilterTrilinear"];
+    [emulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
+}
 @end

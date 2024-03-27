@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2887384A2190D22D00E24DC3 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288738492190D22D00E24DC3 /* Interface.storyboard */; };
+		2896735E2BB20BEB0014D8E7 /* MacPlus4M_WatchOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2896734C2BB209E90014D8E7 /* MacPlus4M_WatchOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		289673622BB21E700014D8E7 /* vMac.rom in Resources */ = {isa = PBXBuildFile; fileRef = 289673612BB21E700014D8E7 /* vMac.rom */; };
+		289673632BB21F3E0014D8E7 /* MacPlus4M_WatchOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2896734C2BB209E90014D8E7 /* MacPlus4M_WatchOS.framework */; };
 		28E020EC2173E0EC00C556D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28E020EB2173E0EC00C556D6 /* Assets.xcassets */; };
 		28E020F32173E0EC00C556D6 /* Mini vMac WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 28E020F22173E0EC00C556D6 /* Mini vMac WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		28E020F92173E0EC00C556D6 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E020F82173E0EC00C556D6 /* InterfaceController.m */; };
@@ -16,6 +19,83 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		289673232BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28F676BD1CD15E0B00FC6FA6;
+			remoteInfo = "Mini vMac";
+		};
+		289673252BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28F6B48E1CF07DDD002D76D0;
+			remoteInfo = libhfs;
+		};
+		289673272BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28F6B4A81CF07EC9002D76D0;
+			remoteInfo = libmfs;
+		};
+		289673292BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28F6B4B61CF07F32002D76D0;
+			remoteInfo = libres;
+		};
+		2896732B2BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 283422CA1CF8EF8C0088B634;
+			remoteInfo = MacPlus4M;
+		};
+		2896732D2BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 283423961CF9C4CB0088B634;
+			remoteInfo = MacII;
+		};
+		2896732F2BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 289710D41CFB11BF0089D463;
+			remoteInfo = Mac128K;
+		};
+		289673312BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28BDBEB71D230EEB0072ED5B;
+			remoteInfo = "MacII-640x480";
+		};
+		289673332BB2087D0014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28C67BEE2AC49E46000C7540;
+			remoteInfo = "MacII-512x384";
+		};
+		2896734B2BB209E90014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 289673422BB209DB0014D8E7;
+			remoteInfo = "MacPlus4M-WatchOS";
+		};
+		2896735F2BB20BF20014D8E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 289673412BB209DB0014D8E7;
+			remoteInfo = "MacPlus4M-WatchOS";
+		};
 		28E020F42173E0EC00C556D6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 28E020C52173E0EB00C556D6 /* Project object */;
@@ -26,6 +106,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		289673372BB208BA0014D8E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2896735E2BB20BEB0014D8E7 /* MacPlus4M_WatchOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28E021052173E0ED00C556D6 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -41,6 +132,8 @@
 
 /* Begin PBXFileReference section */
 		288738492190D22D00E24DC3 /* Interface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
+		289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Mini vMac.xcodeproj"; path = "../Mini vMac.xcodeproj"; sourceTree = "<group>"; };
+		289673612BB21E700014D8E7 /* vMac.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = vMac.rom; sourceTree = SOURCE_ROOT; };
 		28BF818F25338E0C007341A3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		28E020E32173E0EC00C556D6 /* Mini vMac WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mini vMac WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E020EB2173E0EC00C556D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289673632BB21F3E0014D8E7 /* MacPlus4M_WatchOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,9 +166,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		289673182BB2087C0014D8E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				289673242BB2087D0014D8E7 /* Mini vMac.app */,
+				289673262BB2087D0014D8E7 /* liblibhfs.a */,
+				289673282BB2087D0014D8E7 /* liblibmfs.a */,
+				2896732A2BB2087D0014D8E7 /* liblibres.a */,
+				2896732C2BB2087D0014D8E7 /* MacPlus4M.framework */,
+				2896732E2BB2087D0014D8E7 /* MacII.framework */,
+				289673302BB2087D0014D8E7 /* Mac128K.framework */,
+				289673322BB2087D0014D8E7 /* MacII-640x480.framework */,
+				289673342BB2087D0014D8E7 /* MacII-512x384.framework */,
+				2896734C2BB209E90014D8E7 /* MacPlus4M_WatchOS.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		28E020C42173E0EB00C556D6 = {
 			isa = PBXGroup;
 			children = (
+				289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */,
 				28E020E72173E0EC00C556D6 /* Mini vMac WatchKit App */,
 				28E020F62173E0EC00C556D6 /* Mini vMac WatchKit Extension */,
 				28E020CE2173E0EB00C556D6 /* Products */,
@@ -104,6 +216,7 @@
 		28E020F62173E0EC00C556D6 /* Mini vMac WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				289673612BB21E700014D8E7 /* vMac.rom */,
 				28E020F72173E0EC00C556D6 /* InterfaceController.h */,
 				28E020F82173E0EC00C556D6 /* InterfaceController.m */,
 				28E020FA2173E0EC00C556D6 /* ExtensionDelegate.h */,
@@ -150,10 +263,12 @@
 				28E020EE2173E0EC00C556D6 /* Sources */,
 				28E020EF2173E0EC00C556D6 /* Frameworks */,
 				28E020F02173E0EC00C556D6 /* Resources */,
+				289673372BB208BA0014D8E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				289673602BB20BF20014D8E7 /* PBXTargetDependency */,
 			);
 			name = "Mini vMac WatchKit Extension";
 			productName = "Mini vMac WatchKit Extension";
@@ -189,6 +304,12 @@
 			mainGroup = 28E020C42173E0EB00C556D6;
 			productRefGroup = 28E020CE2173E0EB00C556D6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 289673182BB2087C0014D8E7 /* Products */;
+					ProjectRef = 289673172BB2087C0014D8E7 /* Mini vMac.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				28E020E22173E0EC00C556D6 /* Mini vMac WatchKit App */,
@@ -196,6 +317,79 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		289673242BB2087D0014D8E7 /* Mini vMac.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Mini vMac.app";
+			remoteRef = 289673232BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		289673262BB2087D0014D8E7 /* liblibhfs.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibhfs.a;
+			remoteRef = 289673252BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		289673282BB2087D0014D8E7 /* liblibmfs.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibmfs.a;
+			remoteRef = 289673272BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2896732A2BB2087D0014D8E7 /* liblibres.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibres.a;
+			remoteRef = 289673292BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2896732C2BB2087D0014D8E7 /* MacPlus4M.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MacPlus4M.framework;
+			remoteRef = 2896732B2BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2896732E2BB2087D0014D8E7 /* MacII.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MacII.framework;
+			remoteRef = 2896732D2BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		289673302BB2087D0014D8E7 /* Mac128K.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Mac128K.framework;
+			remoteRef = 2896732F2BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		289673322BB2087D0014D8E7 /* MacII-640x480.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = "MacII-640x480.framework";
+			remoteRef = 289673312BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		289673342BB2087D0014D8E7 /* MacII-512x384.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = "MacII-512x384.framework";
+			remoteRef = 289673332BB2087D0014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2896734C2BB209E90014D8E7 /* MacPlus4M_WatchOS.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MacPlus4M_WatchOS.framework;
+			remoteRef = 2896734B2BB209E90014D8E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		28E020E12173E0EC00C556D6 /* Resources */ = {
@@ -212,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28E020FE2173E0ED00C556D6 /* Assets.xcassets in Resources */,
+				289673622BB21E700014D8E7 /* vMac.rom in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +425,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		289673602BB20BF20014D8E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "MacPlus4M-WatchOS";
+			targetProxy = 2896735F2BB20BF20014D8E7 /* PBXContainerItemProxy */;
+		};
 		28E020F52173E0EC00C556D6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 28E020F12173E0EC00C556D6 /* Mini vMac WatchKit Extension */;
@@ -371,6 +571,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../Mini vMac\"";
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
@@ -394,6 +595,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../Mini vMac\"";
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
