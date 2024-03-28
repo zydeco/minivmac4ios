@@ -133,7 +133,8 @@ static NSObject<Emulator> *sharedEmulator = nil;
     sharedEmulator = [emulatorClass new];
     sharedEmulator.rootViewController = nil;
     sharedEmulator.showAlert = ^(NSString *title, NSString *message) {
-        NSLog(@"Alert: %@ - %@", title, message);
+        [self presentAlertControllerWithTitle:title message:message preferredStyle:WKAlertControllerStyleAlert actions:@[
+            [WKAlertAction actionWithTitle:@"OK" style:WKAlertActionStyleDefault handler:^{}]]];
     };
     sharedEmulator.dataPath = [NSBundle mainBundle].resourcePath;
     sharedEmulator.screenLayer = fullScreenView.layer;
