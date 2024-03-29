@@ -112,8 +112,7 @@ LOCALPROC dbglog_close0(void) {
 #include "PBUFSTDC.h"
 
 #if EmLocalTalk
-#include <sys/socket.h>
-#include <arpa/inet.h>
+#import <Network/Network.h>
 #include "LTOVRTCP.h"
 #endif
 
