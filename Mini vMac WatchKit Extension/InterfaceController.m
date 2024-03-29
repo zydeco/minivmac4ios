@@ -10,6 +10,7 @@
 @import UIKit;
 @import ObjectiveC.runtime;
 @import WatchConnectivity;
+@import AVFAudio;
 
 #import "UIKit+Watch.h"
 #import "InterfaceController.h"
@@ -38,7 +39,7 @@
 -(void)setIdleTimerDisabled:(BOOL)disabled;
 @end
 
-@interface InterfaceController ()
+@interface InterfaceController () <WKExtendedRuntimeSessionDelegate>
 
 @end
 
@@ -46,7 +47,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
 
 @implementation InterfaceController
 {
-
+    WKExtendedRuntimeSession *runtimeSession;
 }
 
 + (void)load {
@@ -128,27 +129,66 @@ static NSObject<Emulator> *sharedEmulator = nil;
 }
 
 - (void)loadAndStartEmulator {
+#ifdef LTOVRTCP_SERVER
+    setenv("LTOVRTCP_SERVER", LTOVRTCP_SERVER, 1);
+#endif
     UIView *fullScreenView = [self fullScreenView];
     Class emulatorClass = NSClassFromString(@"MacPlus4MEmulator");
     sharedEmulator = [emulatorClass new];
-    sharedEmulator.rootViewController = nil;
+    sharedEmulator.rootViewController = self;
     sharedEmulator.showAlert = ^(NSString *title, NSString *message) {
         [self presentAlertControllerWithTitle:title message:message preferredStyle:WKAlertControllerStyleAlert actions:@[
             [WKAlertAction actionWithTitle:@"OK" style:WKAlertActionStyleDefault handler:^{}]]];
     };
-    sharedEmulator.dataPath = [NSBundle mainBundle].resourcePath;
+
+    NSString *documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject.stringByStandardizingPath;
+    NSString *resourcePath = [NSBundle mainBundle].resourcePath;
+    NSFileManager *fm = [NSFileManager defaultManager];
+    for (NSString *fileName in @[@"vMac.rom", @"disk1.dsk"]) {
+        NSString *srcPath = [resourcePath stringByAppendingPathComponent:fileName];
+        NSString *dstPath = [documentsPath stringByAppendingPathComponent:fileName];
+        if ([fm fileExistsAtPath:srcPath] && ![fm fileExistsAtPath:dstPath]) {
+            [fm copyItemAtPath:srcPath toPath:dstPath error:NULL];
+        }
+    }
+    sharedEmulator.dataPath = documentsPath;
     sharedEmulator.screenLayer = fullScreenView.layer;
     sharedEmulator.speed = sharedEmulator.initialSpeed;
     [sharedEmulator.screenLayer setContentsGravity:@"CAGravityResizeAspectFill"];
     [sharedEmulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), 0.375, 0.375)];
     [sharedEmulator.screenLayer setMinificationFilter:@"CAFilterTrilinear"];
+#if TARGET_OS_SIMULATOR
     [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
-
-    id app = [NSClassFromString(@"UIApplication") sharedApplication];
-    [app setIdleTimerDisabled:YES];
+#endif
 
     TrackPad *trackpad = [[TrackPad alloc] initWithFrame:fullScreenView.bounds];
     [fullScreenView addSubview:trackpad];
+
+    runtimeSession = [WKExtendedRuntimeSession new];
+    runtimeSession.delegate = self;
+    [runtimeSession start];
+}
+
+- (void)extendedRuntimeSessionDidStart:(WKExtendedRuntimeSession *)extendedRuntimeSession {
+#if TARGET_OS_SIMULATOR == 0
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
+                                            mode:AVAudioSessionModeDefault
+                              routeSharingPolicy:AVAudioSessionRouteSharingPolicyLongFormAudio
+                                         options:0
+                                           error:NULL];
+    [[AVAudioSession sharedInstance] activateWithOptions:0 completionHandler:^(BOOL activated, NSError * _Nullable error) {
+        // network only works on watchOS when there's an active audio session
+        [sharedEmulator performSelectorOnMainThread:@selector(run) withObject:nil waitUntilDone:NO];
+    }];
+#endif
+}
+
+- (void)extendedRuntimeSession:(WKExtendedRuntimeSession *)extendedRuntimeSession didInvalidateWithReason:(WKExtendedRuntimeSessionInvalidationReason)reason error:(NSError *)error {
+    NSLog(@"Runtime session invalidated: %@", error);
+}
+
+- (void)extendedRuntimeSessionWillExpire:(WKExtendedRuntimeSession *)extendedRuntimeSession {
+    NSLog(@"Extended runtime session will expire");
 }
 
 @end

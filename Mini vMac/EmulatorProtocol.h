@@ -10,7 +10,8 @@
 @import CoreGraphics;
 #if TARGET_OS_WATCH
 #define CALayer NSObject
-#define UIViewController NSObject
+@class InterfaceController;
+#define UIViewController InterfaceController
 @interface NSObject (CALayer)
 - (void)setContents:(id)contents;
 @end
