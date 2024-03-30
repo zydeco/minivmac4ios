@@ -41,6 +41,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UIScreen : NSObject
+
+@property(nonatomic, readonly) CGRect bounds;
+
++ (instancetype)mainScreen;
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 #endif /* UIKit_h */

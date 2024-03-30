@@ -162,7 +162,8 @@ static NSObject<Emulator> *sharedEmulator = nil;
     sharedEmulator.screenLayer = fullScreenView.layer;
     sharedEmulator.speed = sharedEmulator.initialSpeed;
     [sharedEmulator.screenLayer setContentsGravity:@"CAGravityResizeAspectFill"];
-    [sharedEmulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), 0.375, 0.375)];
+    CGFloat scale = [self bestScaleForScreen];
+    [sharedEmulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), scale, scale)];
     [sharedEmulator.screenLayer setMinificationFilter:@"CAFilterTrilinear"];
 #if TARGET_OS_SIMULATOR
     [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
@@ -174,6 +175,28 @@ static NSObject<Emulator> *sharedEmulator = nil;
     runtimeSession = [WKExtendedRuntimeSession new];
     runtimeSession.delegate = self;
     [runtimeSession start];
+}
+
+- (CGFloat)bestScaleForScreen {
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    NSInteger screenWidthAndHeight = (NSInteger)(screenSize.width) * 1000 + (NSInteger)(screenSize.height);
+    // manually selected scales to account for non-square screens
+    switch (screenWidthAndHeight) {
+            // 38 40 41 42 44 45 49
+        case 136170: // 38mm
+            return 0.33;
+        case 176215: // 41mm
+            return 0.40;
+        case 184224: // 44mm
+            return 0.42;
+        case 198242: // 45mm
+        case 205251: // 49mm
+            return 0.455;
+        case 162197: // 40mm
+        case 156195: // 42mm
+        default:
+            return 0.375;
+    }
 }
 
 - (void)extendedRuntimeSessionDidStart:(WKExtendedRuntimeSession *)extendedRuntimeSession {
