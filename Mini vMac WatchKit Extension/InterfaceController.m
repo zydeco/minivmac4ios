@@ -49,6 +49,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
 @implementation InterfaceController
 {
     WKExtendedRuntimeSession *runtimeSession;
+    BOOL hasStartedEmulator;
 }
 
 + (void)load {
@@ -121,18 +122,34 @@ static NSObject<Emulator> *sharedEmulator = nil;
 
 - (void)willActivate {
     if ([WKExtension sharedExtension].applicationState == WKApplicationStateActive) {
-        sharedEmulator.running = YES;
+        [self startRuntimeSession];
     }
 }
 
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
+    [runtimeSession invalidate];
     sharedEmulator.running = NO;
 }
 
 - (void)sessionReachabilityDidChange:(WCSession *)session {
     //uint32_t connected = session.activationState == WCSessionActivationStateActivated && session.reachable;
+}
+
+- (void)startRuntimeSession {
+    runtimeSession = [WKExtendedRuntimeSession new];
+    runtimeSession.delegate = self;
+    [runtimeSession start];
+}
+
+- (void)startOrResumeEmulator {
+    if (!hasStartedEmulator) {
+        hasStartedEmulator = YES;
+        [sharedEmulator performSelectorOnMainThread:@selector(run) withObject:nil waitUntilDone:NO];
+    } else {
+        sharedEmulator.running = YES;
+    }
 }
 
 - (void)loadAndStartEmulator {
@@ -165,16 +182,11 @@ static NSObject<Emulator> *sharedEmulator = nil;
     CGFloat scale = [self bestScaleForScreen];
     [sharedEmulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), scale, scale)];
     [sharedEmulator.screenLayer setMinificationFilter:@"CAFilterTrilinear"];
-#if TARGET_OS_SIMULATOR
-    [sharedEmulator performSelector:@selector(run) withObject:nil afterDelay:0.1];
-#endif
 
     TrackPad *trackpad = [[TrackPad alloc] initWithFrame:fullScreenView.bounds];
     [fullScreenView addSubview:trackpad];
 
-    runtimeSession = [WKExtendedRuntimeSession new];
-    runtimeSession.delegate = self;
-    [runtimeSession start];
+    [self startRuntimeSession];
 }
 
 - (CGFloat)bestScaleForScreen {
@@ -208,8 +220,10 @@ static NSObject<Emulator> *sharedEmulator = nil;
                                            error:NULL];
     [[AVAudioSession sharedInstance] activateWithOptions:0 completionHandler:^(BOOL activated, NSError * _Nullable error) {
         // network only works on watchOS when there's an active audio session
-        [sharedEmulator performSelectorOnMainThread:@selector(run) withObject:nil waitUntilDone:NO];
+        [self startOrResumeEmulator];
     }];
+#else
+    [self startOrResumeEmulator];
 #endif
 }
 
