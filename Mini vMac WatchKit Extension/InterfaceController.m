@@ -37,6 +37,7 @@
 -(void)setMinificationFilter:(NSString*)filter;
 -(void)addTarget:(nullable id)target action:(SEL)action forControlEvents:(NSUInteger)controlEvents;
 -(void)setIdleTimerDisabled:(BOOL)disabled;
+-(BOOL)prefersStatusBarHidden;
 @end
 
 @interface InterfaceController () <WKExtendedRuntimeSessionDelegate>
@@ -56,6 +57,12 @@ static NSObject<Emulator> *sharedEmulator = nil;
     if ([CLKTimeFormatter instancesRespondToSelector:@selector(timeText)]) {
         Method m = class_getInstanceMethod(CLKTimeFormatter, @selector(timeText));
         method_setImplementation(m, imp_implementationWithBlock(^NSString*(id self, SEL _cmd) { return @" "; }));
+    }
+    /* hide status bar on watchOS 10 */
+    Class clsUIViewController = NSClassFromString(@"UIViewController");
+    if ([clsUIViewController instancesRespondToSelector:@selector(prefersStatusBarHidden)]) {
+        Method m = class_getInstanceMethod(clsUIViewController, @selector(prefersStatusBarHidden));
+        method_setImplementation(m, imp_implementationWithBlock(^BOOL(id self, SEL _cmd) { return YES; }));
     }
 }
 
