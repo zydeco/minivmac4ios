@@ -33,6 +33,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
 {
     WKExtendedRuntimeSession *runtimeSession;
     BOOL hasStartedEmulator;
+    AVAudioEngine *audioEngine;
 }
 
 + (void)load {
@@ -114,8 +115,7 @@ static NSObject<Emulator> *sharedEmulator = nil;
 - (void)didDeactivate {
     // This method is called when watch view controller is no longer visible
     [super didDeactivate];
-    [runtimeSession invalidate];
-    sharedEmulator.running = NO;
+    //sharedEmulator.running = NO;
 }
 
 - (void)sessionReachabilityDidChange:(WCSession *)session {
@@ -123,19 +123,26 @@ static NSObject<Emulator> *sharedEmulator = nil;
 }
 
 - (void)startRuntimeSession {
-    runtimeSession = [WKExtendedRuntimeSession new];
-    runtimeSession.delegate = self;
-    [runtimeSession start];
+    if (runtimeSession == nil || runtimeSession.state == WKExtendedRuntimeSessionStateInvalid) {
+        runtimeSession = [WKExtendedRuntimeSession new];
+        runtimeSession.delegate = self;
+    }
+    if (runtimeSession.state == WKExtendedRuntimeSessionStateNotStarted) {
+        [runtimeSession start];
+    }
 }
 
 - (void)startOrResumeEmulator {
     if (!hasStartedEmulator) {
         hasStartedEmulator = YES;
         [sharedEmulator performSelectorOnMainThread:@selector(run) withObject:nil waitUntilDone:NO];
+        [self startAudioEngine];
     } else {
         sharedEmulator.running = YES;
     }
 }
+
+#define LTOVRTCP_SERVER "37.187.76.115:1984"
 
 - (void)loadAndStartEmulator {
 #ifdef LTOVRTCP_SERVER
@@ -208,12 +215,13 @@ static NSObject<Emulator> *sharedEmulator = nil;
 
 - (void)extendedRuntimeSessionDidStart:(WKExtendedRuntimeSession *)extendedRuntimeSession {
 #if TARGET_OS_SIMULATOR == 0
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
-                                            mode:AVAudioSessionModeDefault
-                              routeSharingPolicy:AVAudioSessionRouteSharingPolicyLongFormAudio
-                                         options:0
-                                           error:NULL];
-    [[AVAudioSession sharedInstance] activateWithOptions:0 completionHandler:^(BOOL activated, NSError * _Nullable error) {
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback
+                         mode:AVAudioSessionModeDefault
+           routeSharingPolicy:AVAudioSessionRouteSharingPolicyLongFormAudio
+                      options:0
+                        error:NULL];
+    [audioSession activateWithOptions:0 completionHandler:^(BOOL activated, NSError * _Nullable error) {
         // network only works on watchOS when there's an active audio session
         [self startOrResumeEmulator];
     }];
@@ -223,11 +231,27 @@ static NSObject<Emulator> *sharedEmulator = nil;
 }
 
 - (void)extendedRuntimeSession:(WKExtendedRuntimeSession *)extendedRuntimeSession didInvalidateWithReason:(WKExtendedRuntimeSessionInvalidationReason)reason error:(NSError *)error {
-    NSLog(@"Runtime session invalidated: %@", error);
+    NSLog(@"Runtime session inv alidated (%d): %@", (int)reason, error);
+    sharedEmulator.showAlert(@"Runtime session invalidated", [NSString stringWithFormat:@"reason=%d, error=%@", (int)reason, error]);
 }
 
 - (void)extendedRuntimeSessionWillExpire:(WKExtendedRuntimeSession *)extendedRuntimeSession {
     NSLog(@"Extended runtime session will expire");
 }
 
+- (void)startAudioEngine {
+    NSError *error = nil;
+    audioEngine = [AVAudioEngine new];
+    AVAudioFormat *audioFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:22255 channels:1];
+    [audioEngine enableManualRenderingMode:AVAudioEngineManualRenderingModeRealtime
+                                    format:audioFormat
+                         maximumFrameCount:3 // DesiredMinFilledSoundBuffs
+                                     error:&error];
+    if (error == nil) {
+        [audioEngine startAndReturnError:&error];
+    }
+    if (error != nil) {
+        NSLog(@"Error starting audioEngine: %@", error);
+    }
+}
 @end
