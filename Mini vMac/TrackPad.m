@@ -10,10 +10,11 @@
 #if TARGET_OS_WATCH
 #import "InterfaceController.h"
 #define AppDelegate InterfaceController
-#define AudioServicesPlaySystemSound 
+#define PlayHapticFeedback
 #else
 #import "AppDelegate.h"
 @import AudioToolbox;
+#define PlayHapticFeedback AudioServicesPlaySystemSound(1519)
 #endif
 
 #define TRACKPAD_ACCEL_N 1
@@ -121,7 +122,7 @@
     if (currentTouches.count > 0) {
         return;
     } else if (didForceClick) {
-        AudioServicesPlaySystemSound(1519);
+        PlayHapticFeedback;
         didForceClick = NO;
         [self cancelScheduledClick];
         [self mouseUp];
@@ -163,7 +164,7 @@
 
 - (void)handleForceClick:(UITouch *)touch {
     if (touch.force > 3.0 && !didForceClick) {
-        AudioServicesPlaySystemSound(1519);
+        PlayHapticFeedback;
         didForceClick = YES;
         [self startDragging];
     }

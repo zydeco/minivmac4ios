@@ -1950,6 +1950,7 @@
 					"\"$(SRCROOT)/minivmac/src/\"",
 					"\"$(SRCROOT)/Mini vMac/\"",
 					"\"$(SRCROOT)/Mini vMac/MacPlus4M-WatchOS\"",
+					"\"$(SRCROOT)/Mini vMac WatchKit Extension\"",
 				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2003,6 +2004,7 @@
 					"\"$(SRCROOT)/minivmac/src/\"",
 					"\"$(SRCROOT)/Mini vMac/\"",
 					"\"$(SRCROOT)/Mini vMac/MacPlus4M-WatchOS\"",
+					"\"$(SRCROOT)/Mini vMac WatchKit Extension\"",
 				);
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";

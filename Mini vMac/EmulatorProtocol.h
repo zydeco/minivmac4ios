@@ -9,13 +9,14 @@
 @import Foundation;
 @import CoreGraphics;
 #if TARGET_OS_WATCH
-#define CALayer NSObject
+#import "UIKit+Watch.h"
 @class InterfaceController;
-#define UIViewController InterfaceController
+#define RootViewControllerClass InterfaceController
 @interface NSObject (CALayer)
 - (void)setContents:(id)contents;
 @end
 #else
+#define RootViewControllerClass UIViewController
 @import QuartzCore;
 #endif
 
@@ -48,7 +49,7 @@ typedef NS_ENUM(NSInteger, EmulatorSpeed) {
 @property (nonatomic, readonly) NSString *currentApplication;
 
 @property (nonatomic, strong) void (^showAlert)(NSString *title, NSString *message);
-@property (nonatomic, strong) UIViewController *rootViewController;
+@property (nonatomic, strong) RootViewControllerClass *rootViewController;
 
 - (void)run;
 - (void)reset;

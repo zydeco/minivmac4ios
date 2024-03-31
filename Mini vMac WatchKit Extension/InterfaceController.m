@@ -17,27 +17,10 @@
 #import "EmulatorProtocol.h"
 #import "TrackPad.h"
 
-@interface NSObject (fs_override)
-+(id)sharedApplication;
--(id)keyWindow;
--(id)rootViewController;
--(NSArray *)viewControllers;
--(id)view;
--(NSArray *)subviews;
--(id)timeLabel;
--(id)layer;
--(void)addSubview:(id)subview;
--(CGPoint)center;
--(NSString*)timeText;
--(id)sharedPUICApplication;
--(void)_setStatusBarTimeHidden:(BOOL)hidden animated:(BOOL)animated completion:(void (^)(void))completion;
--(void)setAffineTransform:(CGAffineTransform)transform;
--(void)setContentsScale:(CGFloat)value;
--(void)setContentsGravity:(NSString*)gravity;
--(void)setMinificationFilter:(NSString*)filter;
--(void)addTarget:(nullable id)target action:(SEL)action forControlEvents:(NSUInteger)controlEvents;
--(void)setIdleTimerDisabled:(BOOL)disabled;
--(BOOL)prefersStatusBarHidden;
+@interface NSObject ()
+@property(nonatomic, copy) NSArray<__kindof UIViewController *> *viewControllers;
+- (UIView*)timeLabel;
+- (NSString*)timeText;
 @end
 
 @interface InterfaceController () <WKExtendedRuntimeSessionDelegate>
@@ -77,22 +60,24 @@ static NSObject<Emulator> *sharedEmulator = nil;
 
 - (void)hideTimeLabel {
     /* Hack to make the digital time overlay disappear (on watchOS 5) */
-    id fullScreenView = [self fullScreenView];
+    UIView *fullScreenView = [self fullScreenView];
     if ([fullScreenView respondsToSelector:@selector(timeLabel)]) {
-        [[[fullScreenView timeLabel] layer] setOpacity:0];
+        fullScreenView.timeLabel.layer.opacity = 0.0;
     }
 
     /* Hack to make the digital time overlay disappear (on watchOS 7 and 8) */
-    Class PUICApplication = NSClassFromString(@"PUICApplication");
-    if ([PUICApplication instancesRespondToSelector:@selector(_setStatusBarTimeHidden:animated:completion:)]) {
-        [[PUICApplication sharedApplication] _setStatusBarTimeHidden:YES animated:NO completion:nil];
+    Class clsPUICApplication = NSClassFromString(@"PUICApplication");
+    if ([clsPUICApplication instancesRespondToSelector:@selector(_setStatusBarTimeHidden:animated:completion:)]) {
+        PUICApplication *app = (PUICApplication*)[clsPUICApplication sharedApplication];
+        [app _setStatusBarTimeHidden:YES animated:NO completion:nil];
     }
 
 }
 
 - (UIView*)fullScreenView {
-    id parentView = [[[[[[NSClassFromString(@"UIApplication") sharedApplication] keyWindow] rootViewController] viewControllers] firstObject] view];
-    id view = [self findDescendantViewOfClass:NSClassFromString(@"SPFullScreenView") inView:parentView]; // watchOS 5
+    UIApplication *app = [NSClassFromString(@"UIApplication") sharedApplication];
+    UIView *parentView = app.keyWindow.rootViewController.viewControllers.firstObject.view;
+    UIView *view = [self findDescendantViewOfClass:NSClassFromString(@"SPFullScreenView") inView:parentView]; // watchOS 5
     if (view == nil) {
         view = [self findDescendantViewOfClass:NSClassFromString(@"SPInterfaceRemoteView") inView:parentView]; // watchOS 6
     }
@@ -176,15 +161,25 @@ static NSObject<Emulator> *sharedEmulator = nil;
         }
     }
     sharedEmulator.dataPath = documentsPath;
-    sharedEmulator.screenLayer = fullScreenView.layer;
-    sharedEmulator.speed = sharedEmulator.initialSpeed;
-    [sharedEmulator.screenLayer setContentsGravity:@"CAGravityResizeAspectFill"];
-    CGFloat scale = [self bestScaleForScreen];
-    [sharedEmulator.screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), scale, scale)];
-    [sharedEmulator.screenLayer setMinificationFilter:@"CAFilterTrilinear"];
 
-    TrackPad *trackpad = [[TrackPad alloc] initWithFrame:fullScreenView.bounds];
+    // screen
+    CALayer *screenLayer = [NSClassFromString(@"CALayer") layer];
+    [fullScreenView.layer addSublayer:screenLayer];
+    screenLayer.frame = fullScreenView.layer.bounds;
+    sharedEmulator.screenLayer = screenLayer;
+    sharedEmulator.speed = sharedEmulator.initialSpeed;
+    [screenLayer setContentsGravity:@"CAGravityResizeAspectFill"];
+    CGFloat scale = [self bestScaleForScreen];
+    [screenLayer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), scale, scale)];
+    [screenLayer setMinificationFilter:@"CAFilterTrilinear"];
+
+    // trackpad
+    TrackPad *trackpad = [[TrackPad alloc] initWithFrame:CGRectMake(0, 0, 512, 342)];
     [fullScreenView addSubview:trackpad];
+    trackpad.center = fullScreenView.center;
+    [trackpad.layer setAffineTransform:CGAffineTransformScale(CGAffineTransformMakeRotation(M_PI_2), 0.5, 0.5)];
+    trackpad.layer.masksToBounds = YES;
+    fullScreenView.clipsToBounds = NO;
 
     [self startRuntimeSession];
 }
