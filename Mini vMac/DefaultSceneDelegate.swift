@@ -61,4 +61,10 @@ class DefaultSceneDelegate: UIResponder, UIWindowSceneDelegate {
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         AppDelegate.shared.application(UIApplication.shared, performActionFor: shortcutItem, completionHandler: completionHandler)
     }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        for ctx in URLContexts {
+            AppDelegate.shared.application(UIApplication.shared, open: ctx.url, options: [:])
+        }
+    }
 }
