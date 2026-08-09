@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		281BB6C91D231F7700BF87B0 /* MacII-640x480.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		283422D21CF8EF8C0088B634 /* MacPlus4M.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		281BB6C91D231F7700BF87B0 /* MacII-640x480.mnvm in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28BDBEB71D230EEB0072ED5B /* MacII-640x480.mnvm */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		283422D21CF8EF8C0088B634 /* MacPlus4M.mnvm in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283422CA1CF8EF8C0088B634 /* MacPlus4M.mnvm */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		283422EE1CF8F2210088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
 		283423881CF9C4CB0088B634 /* MYOSGLUE.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */; };
-		283423A31CF9C5880088B634 /* MacII.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283423961CF9C4CB0088B634 /* MacII.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		283423A31CF9C5880088B634 /* MacII.mnvm in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 283423961CF9C4CB0088B634 /* MacII.mnvm */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		283423E91CFA32870088B634 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E31CFA32800088B634 /* Icon.png */; };
 		283423EA1CFA32870088B634 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E41CFA32800088B634 /* Icon@2x.png */; };
 		283423EB1CFA32870088B634 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423E51CFA32800088B634 /* Icon@3x.png */; };
@@ -24,7 +24,7 @@
 		289710DC1CFB12240089D463 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710D81CFB121F0089D463 /* Icon.png */; };
 		289710DD1CFB12240089D463 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710D91CFB121F0089D463 /* Icon@2x.png */; };
 		289710DE1CFB12240089D463 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 289710DA1CFB121F0089D463 /* Icon@3x.png */; };
-		289710DF1CFB12660089D463 /* Mac128K.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289710D41CFB11BF0089D463 /* Mac128K.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		289710DF1CFB12660089D463 /* Mac128K.mnvm in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289710D41CFB11BF0089D463 /* Mac128K.mnvm */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28BA897E1CE7315400A98104 /* KBKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89751CE7315400A98104 /* KBKey.m */; };
 		28BA897F1CE7315400A98104 /* KBKeyboardLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89771CE7315400A98104 /* KBKeyboardLayout.m */; };
 		28BA89801CE7315400A98104 /* KBKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BA89791CE7315400A98104 /* KBKeyboardView.m */; };
@@ -55,7 +55,7 @@
 		28C67BE72AC49E46000C7540 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EC1CFA329C0088B634 /* Icon.png */; };
 		28C67BE82AC49E46000C7540 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423ED1CFA329C0088B634 /* Icon@2x.png */; };
 		28C67BE92AC49E46000C7540 /* Icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283423EE1CFA329C0088B634 /* Icon@3x.png */; };
-		28C67BF62AC49FA1000C7540 /* MacII-512x384.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28C67BEE2AC49E46000C7540 /* MacII-512x384.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		28C67BF62AC49FA1000C7540 /* MacII-512x384.mnvm in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 28C67BEE2AC49E46000C7540 /* MacII-512x384.mnvm */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28CE8ED61CD4F56C00FE25A8 /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28CE8ED51CD4F56C00FE25A8 /* ScreenView.m */; };
 		28D3C6152B7681420079E915 /* VisionSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3C6142B7681420079E915 /* VisionSupport.swift */; };
 		28D3C6172B76B8970079E915 /* DefaultSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D3C6162B76B8970079E915 /* DefaultSceneDelegate.swift */; };
@@ -204,11 +204,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				28C67BF62AC49FA1000C7540 /* MacII-512x384.framework in Embed Frameworks */,
-				281BB6C91D231F7700BF87B0 /* MacII-640x480.framework in Embed Frameworks */,
-				289710DF1CFB12660089D463 /* Mac128K.framework in Embed Frameworks */,
-				283423A31CF9C5880088B634 /* MacII.framework in Embed Frameworks */,
-				283422D21CF8EF8C0088B634 /* MacPlus4M.framework in Embed Frameworks */,
+				28C67BF62AC49FA1000C7540 /* MacII-512x384.mnvm in Embed Frameworks */,
+				281BB6C91D231F7700BF87B0 /* MacII-640x480.mnvm in Embed Frameworks */,
+				289710DF1CFB12660089D463 /* Mac128K.mnvm in Embed Frameworks */,
+				283423A31CF9C5880088B634 /* MacII.mnvm in Embed Frameworks */,
+				283422D21CF8EF8C0088B634 /* MacPlus4M.mnvm in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,11 +244,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacPlus4M.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		283422CA1CF8EF8C0088B634 /* MacPlus4M.mnvm */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacPlus4M.mnvm; sourceTree = BUILT_PRODUCTS_DIR; };
 		283422D71CF8EFD80088B634 /* EmulatorProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmulatorProtocol.h; sourceTree = "<group>"; };
 		283422E71CF8F1C80088B634 /* CNFUDOSG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
 		283422E91CF8F1C80088B634 /* CNFUDALL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
-		283423961CF9C4CB0088B634 /* MacII.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacII.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		283423961CF9C4CB0088B634 /* MacII.mnvm */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacII.mnvm; sourceTree = BUILT_PRODUCTS_DIR; };
 		283423E31CFA32800088B634 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		283423E41CFA32800088B634 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		283423E51CFA32800088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
@@ -256,12 +256,12 @@
 		283423ED1CFA329C0088B634 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		283423EE1CFA329C0088B634 /* Icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@3x.png"; sourceTree = "<group>"; };
 		283CA9821DF47AF300B33D5E /* BTCMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCMouse.h; sourceTree = "<group>"; };
-		285A8C901D05AFD3002993DE /* PlugIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlugIn-Info.plist"; sourceTree = "<group>"; };
+		285A8C901D05AFD3002993DE /* PlugIn-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlugIn-Info.plist"; sourceTree = "<group>"; usesTabs = 1; };
 		28848B601CDE97D600B86C45 /* InsertDiskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsertDiskViewController.h; sourceTree = "<group>"; };
 		28848B611CDE97D600B86C45 /* InsertDiskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertDiskViewController.m; sourceTree = "<group>"; };
 		28848B631CDE97E900B86C45 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		28848B641CDE97E900B86C45 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		289710D41CFB11BF0089D463 /* Mac128K.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mac128K.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		289710D41CFB11BF0089D463 /* Mac128K.mnvm */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mac128K.mnvm; sourceTree = BUILT_PRODUCTS_DIR; };
 		289710D61CFB121F0089D463 /* CNFUDOSG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
 		289710D71CFB121F0089D463 /* CNFUDALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
 		289710D81CFB121F0089D463 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -276,8 +276,8 @@
 		28BA89811CE7336500A98104 /* Keyboard Layouts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Keyboard Layouts"; sourceTree = "<group>"; };
 		28BA89831CE73E7200A98104 /* TrackPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackPad.h; sourceTree = "<group>"; };
 		28BA89841CE73E7200A98104 /* TrackPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackPad.m; sourceTree = "<group>"; };
-		28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MacII-640x480.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		28C67BEE2AC49E46000C7540 /* MacII-512x384.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MacII-512x384.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28BDBEB71D230EEB0072ED5B /* MacII-640x480.mnvm */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MacII-640x480.mnvm"; sourceTree = BUILT_PRODUCTS_DIR; };
+		28C67BEE2AC49E46000C7540 /* MacII-512x384.mnvm */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MacII-512x384.mnvm"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C67BF12AC49F0F000C7540 /* CNFUDALL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDALL.h; sourceTree = "<group>"; };
 		28C67BF22AC49F0F000C7540 /* CNFUDPIC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDPIC.h; sourceTree = "<group>"; };
 		28C67BF32AC49F0F000C7540 /* CNFUDOSG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNFUDOSG.h; sourceTree = "<group>"; };
@@ -377,7 +377,6 @@
 		28F6B4B61CF07F32002D76D0 /* liblibres.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibres.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F6B4C91CF1FA7A002D76D0 /* about.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = about.plist; sourceTree = "<group>"; };
 		28F6B4CE1CF77099002D76D0 /* compat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = compat.m; sourceTree = "<group>"; };
-		28F875921D29402B001E99EB /* PlugIn-Capabilities.plist.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PlugIn-Capabilities.plist.xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -483,7 +482,6 @@
 				283422D71CF8EFD80088B634 /* EmulatorProtocol.h */,
 				28CE8ECB1CD4CDC500FE25A8 /* MYOSGLUE.m */,
 				285A8C901D05AFD3002993DE /* PlugIn-Info.plist */,
-				28F875921D29402B001E99EB /* PlugIn-Capabilities.plist.xml */,
 				28E3B82C251D1255007C273F /* CNFUIALL.h */,
 				28E3B82B251D10A8007C273F /* CNFUIOSG.h */,
 				28E3B830251D18D9007C273F /* CNFUIPIC.h */,
@@ -595,11 +593,11 @@
 				28F6B48E1CF07DDD002D76D0 /* liblibhfs.a */,
 				28F6B4A81CF07EC9002D76D0 /* liblibmfs.a */,
 				28F6B4B61CF07F32002D76D0 /* liblibres.a */,
-				283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */,
-				283423961CF9C4CB0088B634 /* MacII.framework */,
-				289710D41CFB11BF0089D463 /* Mac128K.framework */,
-				28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */,
-				28C67BEE2AC49E46000C7540 /* MacII-512x384.framework */,
+				283422CA1CF8EF8C0088B634 /* MacPlus4M.mnvm */,
+				283423961CF9C4CB0088B634 /* MacII.mnvm */,
+				289710D41CFB11BF0089D463 /* Mac128K.mnvm */,
+				28BDBEB71D230EEB0072ED5B /* MacII-640x480.mnvm */,
+				28C67BEE2AC49E46000C7540 /* MacII-512x384.mnvm */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -774,7 +772,6 @@
 				283422C61CF8EF8C0088B634 /* Frameworks */,
 				283422C71CF8EF8C0088B634 /* Headers */,
 				283422C81CF8EF8C0088B634 /* Resources */,
-				28F8758E1D2936B5001E99EB /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -782,7 +779,7 @@
 			);
 			name = MacPlus4M;
 			productName = "minivmac-plus4m";
-			productReference = 283422CA1CF8EF8C0088B634 /* MacPlus4M.framework */;
+			productReference = 283422CA1CF8EF8C0088B634 /* MacPlus4M.mnvm */;
 			productType = "com.apple.product-type.framework";
 		};
 		2834237D1CF9C4CB0088B634 /* MacII */ = {
@@ -793,7 +790,6 @@
 				283423901CF9C4CB0088B634 /* Frameworks */,
 				283423911CF9C4CB0088B634 /* Headers */,
 				283423921CF9C4CB0088B634 /* Resources */,
-				28F8758F1D293FF4001E99EB /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -801,7 +797,7 @@
 			);
 			name = MacII;
 			productName = "minivmac-plus4m";
-			productReference = 283423961CF9C4CB0088B634 /* MacII.framework */;
+			productReference = 283423961CF9C4CB0088B634 /* MacII.mnvm */;
 			productType = "com.apple.product-type.framework";
 		};
 		289710B81CFB11BF0089D463 /* Mac128K */ = {
@@ -812,7 +808,6 @@
 				289710CB1CFB11BF0089D463 /* Frameworks */,
 				289710CC1CFB11BF0089D463 /* Headers */,
 				289710CD1CFB11BF0089D463 /* Resources */,
-				28F875901D293FFB001E99EB /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -820,7 +815,7 @@
 			);
 			name = Mac128K;
 			productName = "minivmac-plus4m";
-			productReference = 289710D41CFB11BF0089D463 /* Mac128K.framework */;
+			productReference = 289710D41CFB11BF0089D463 /* Mac128K.mnvm */;
 			productType = "com.apple.product-type.framework";
 		};
 		28BDBE9A1D230EEB0072ED5B /* MacII-640x480 */ = {
@@ -831,7 +826,6 @@
 				28BDBEAE1D230EEB0072ED5B /* Frameworks */,
 				28BDBEAF1D230EEB0072ED5B /* Headers */,
 				28BDBEB01D230EEB0072ED5B /* Resources */,
-				28F875911D294001001E99EB /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -839,7 +833,7 @@
 			);
 			name = "MacII-640x480";
 			productName = "minivmac-plus4m";
-			productReference = 28BDBEB71D230EEB0072ED5B /* MacII-640x480.framework */;
+			productReference = 28BDBEB71D230EEB0072ED5B /* MacII-640x480.mnvm */;
 			productType = "com.apple.product-type.framework";
 		};
 		28C67BD02AC49E46000C7540 /* MacII-512x384 */ = {
@@ -850,7 +844,6 @@
 				28C67BE42AC49E46000C7540 /* Frameworks */,
 				28C67BE52AC49E46000C7540 /* Headers */,
 				28C67BE62AC49E46000C7540 /* Resources */,
-				28C67BEA2AC49E46000C7540 /* Add capabilities to Info.plist */,
 			);
 			buildRules = (
 			);
@@ -858,7 +851,7 @@
 			);
 			name = "MacII-512x384";
 			productName = "minivmac-plus4m";
-			productReference = 28C67BEE2AC49E46000C7540 /* MacII-512x384.framework */;
+			productReference = 28C67BEE2AC49E46000C7540 /* MacII-512x384.mnvm */;
 			productType = "com.apple.product-type.framework";
 		};
 		28F676BC1CD15E0B00FC6FA6 /* Mini vMac */ = {
@@ -869,7 +862,6 @@
 				28F676BA1CD15E0B00FC6FA6 /* Frameworks */,
 				28F676BB1CD15E0B00FC6FA6 /* Resources */,
 				283422D61CF8EF8C0088B634 /* Embed Frameworks */,
-				283422F51CF9ACAD0088B634 /* Change emulator bundle extensions to mnvm */,
 				28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */,
 			);
 			buildRules = (
@@ -943,7 +935,8 @@
 		28F676B51CD15E0B00FC6FA6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1200;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2700;
 				ORGANIZATIONNAME = namedfork;
 				TargetAttributes = {
 					283422C91CF8EF8C0088B634 = {
@@ -1067,36 +1060,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		283422F51CF9ACAD0088B634 /* Change emulator bundle extensions to mnvm */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Change emulator bundle extensions to mnvm";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd \"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH\"\nrm -rf *.mnvm\nfor name in *.framework\ndo\n  mv \"$name\" \"${name%.framework}.mnvm\"\ndone\n";
-		};
-		28C67BEA2AC49E46000C7540 /* Add capabilities to Info.plist */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Add capabilities to Info.plist";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
-		};
 		28F6B4CD1CF76D88002D76D0 /* Set Git version in Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -1111,66 +1074,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "GIT=`which git`\nif [ \"$GIT\" -a -d .git ]; then\nGIT_VERSION=`$GIT describe --tags --always`\nelse\nGIT_VERSION=unknown\nfi\ndefaults write \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info\" GitVersion -string \"$GIT_VERSION\"\nchmod 0644 \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Info.plist\"\n";
-		};
-		28F8758E1D2936B5001E99EB /* Add capabilities to Info.plist */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Add capabilities to Info.plist";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
-		};
-		28F8758F1D293FF4001E99EB /* Add capabilities to Info.plist */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Add capabilities to Info.plist";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
-		};
-		28F875901D293FFB001E99EB /* Add capabilities to Info.plist */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Add capabilities to Info.plist";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
-		};
-		28F875911D294001001E99EB /* Add capabilities to Info.plist */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Add capabilities to Info.plist";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "PlistBuddy=/usr/libexec/PlistBuddy\ncc \"-D$INFOPLIST_PREPROCESSOR_DEFINITIONS\" -P -E -x c -include \"$INFOPLIST_PREFIX_HEADER\" \"$SRCROOT/Mini vMac/PlugIn-Capabilities.plist.xml\" -o \"$TARGET_TEMP_DIR/Capabilities.plist\"\n$PlistBuddy -c \"Merge '$TARGET_TEMP_DIR/Capabilities.plist'\" \"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1422,7 +1325,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1444,6 +1347,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Debug;
 		};
@@ -1462,7 +1366,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1484,6 +1388,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Release;
 		};
@@ -1502,7 +1407,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1524,6 +1429,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Debug;
 		};
@@ -1542,7 +1448,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1564,6 +1470,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Release;
 		};
@@ -1582,7 +1489,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1604,6 +1511,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Debug;
 		};
@@ -1622,7 +1530,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1644,6 +1552,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Release;
 		};
@@ -1662,7 +1571,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1684,6 +1593,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Debug;
 		};
@@ -1702,7 +1612,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1724,6 +1634,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Release;
 		};
@@ -1742,7 +1653,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1764,6 +1675,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Debug;
 		};
@@ -1782,7 +1694,7 @@
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = PLIST_PREPROCESSOR;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1804,6 +1716,7 @@
 				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = mnvm;
 			};
 			name = Release;
 		};
@@ -1841,6 +1754,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1855,10 +1769,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1898,6 +1813,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1906,10 +1822,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1926,7 +1844,7 @@
 				DEVELOPMENT_TEAM = UJXNDZ5TNU;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1957,7 +1875,7 @@
 				DEVELOPMENT_TEAM = UJXNDZ5TNU;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
 				INFOPLIST_FILE = "Mini vMac/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1981,7 +1899,7 @@
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CLANG_ENABLE_MODULES = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1996,7 +1914,7 @@
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				CLANG_ENABLE_MODULES = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2012,7 +1930,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				OTHER_CFLAGS = "-DUSE_LIBRES";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2028,7 +1946,7 @@
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				OTHER_CFLAGS = "-DUSE_LIBRES";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2042,7 +1960,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2055,7 +1973,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
