@@ -1,0 +1,82 @@
+name: Build unsigned IPA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Mini vMac/**"
+      - "Mini vMac.xcodeproj/**"
+      - "libhfs/**"
+      - "libmfs"
+      - "libres"
+      - "minivmac"
+      - ".gitmodules"
+      - ".github/workflows/build-ipa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Mini vMac for iOS
+    runs-on: xcode-27
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Verify Xcode and submodules
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          git submodule status --recursive
+          test -f minivmac/src/MINEM68K.c || test -d minivmac/src
+          test -d libmfs
+          test -d libres
+
+      - name: Build unsigned iOS app
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project "Mini vMac.xcodeproj" \
+            -scheme "Mini vMac" \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$RUNNER_TEMP/MiniVMacDerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            DEVELOPMENT_TEAM="" \
+            build
+
+      - name: Package IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+          APP="$RUNNER_TEMP/MiniVMacDerivedData/Build/Products/Release-iphoneos/Mini vMac.app"
+          test -d "$APP"
+          mkdir -p "$RUNNER_TEMP/ipa/Payload"
+          cp -R "$APP" "$RUNNER_TEMP/ipa/Payload/"
+          (
+            cd "$RUNNER_TEMP/ipa"
+            /usr/bin/ditto -c -k --keepParent Payload \
+              "$GITHUB_WORKSPACE/Mini-vMac-unsigned.ipa"
+          )
+          ls -lh "$GITHUB_WORKSPACE/Mini-vMac-unsigned.ipa"
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mini-vMac-unsigned-ipa
+          path: Mini-vMac-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 30
